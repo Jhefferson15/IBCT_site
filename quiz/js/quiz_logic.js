@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
             mapInstance.remove();
             mapInstance = null;
         }
-        
         setTimeout(() => {
             const question = quizData[index];
             verseRefHeader.textContent = question.verseRef;
