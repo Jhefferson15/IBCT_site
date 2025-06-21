@@ -48,7 +48,7 @@ function generateRecurringEvents(year) {
                 addEvent(currentDate, { type: 'curso', time: '20:00', title: 'Cursos (Mulher Única/CROWN)' });
             }
             if (dayOfWeek === 3) { // Quarta-feira
-                addEvent(currentDate, { type: 'culto', time: '20:00', title: 'Culto de Oração' });
+                addEvent(currentDate, { type: 'oracao', time: '20:00', title: 'Culto de Oração' });
                 if (currentDate >= semesterStart && currentDate <= semesterEnd) {
                     addEvent(currentDate, { type: 'curso', time: '20:00', title: 'Cursos (Homem ao Máximo)' });
                 }
@@ -70,11 +70,10 @@ function generateRecurringEvents(year) {
 }
 
 // Junta os eventos específicos com os recorrentes
-const allEvents = { ...generateRecurringEvents(2025), ...specificEvents };
+const allEvents = { ...generateRecurringEvents(2025) };
 Object.keys(specificEvents).forEach(date => {
-    if (allEvents[date] && generateRecurringEvents(2025)[date]) {
-        allEvents[date] = [...generateRecurringEvents(2025)[date], ...specificEvents[date]];
-    }
+    if (!allEvents[date]) allEvents[date] = [];
+    allEvents[date].push(...specificEvents[date]);
 });
 
 
@@ -115,17 +114,8 @@ if (lessonsScroller) {
 // --- 4. LÓGICA DOS MODAIS ---
 const lessonModal = document.getElementById('lesson-modal'), calendarModal = document.getElementById('calendar-modal'), externalContentModal = document.getElementById('external-content-modal'), modalExtraContent = document.getElementById('modal-extra-content');
 
-async function loadExternalContent(url, targetElement) {
-    targetElement.innerHTML = '<p>Carregando material...</p>';
-    try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`Erro: ${response.statusText}`);
-        targetElement.innerHTML = await response.text();
-    } catch (error) {
-        console.error("Falha ao carregar conteúdo:", error);
-        targetElement.innerHTML = `<p style="color:red;">Não foi possível carregar o material.</p>`;
-    }
-}
+// REMOVIDO: loadExternalContent (agora usamos iframe para o quiz)
+// async function loadExternalContent(url, targetElement) { ... }
 
 document.querySelectorAll('.lesson-card').forEach(card => {
     card.addEventListener('click', () => {
@@ -139,11 +129,14 @@ document.querySelectorAll('.lesson-card').forEach(card => {
         if (externalContentUrl) {
             const button = document.createElement('button');
             button.className = 'material-button';
-            button.textContent = 'Ver Material de Apoio';
+            // MUDANÇA: Texto do botão alterado e agora abre um iframe para o quiz
+            button.textContent = 'Iniciar Quiz de Apoio';
             button.onclick = () => {
                 closeAnyModal(lessonModal);
                 openAnyModal(externalContentModal);
-                loadExternalContent(externalContentUrl, document.getElementById('external-content-body'));
+                const contentBody = document.getElementById('external-content-body');
+                // A mágica acontece aqui: criamos um iframe para o quiz
+                contentBody.innerHTML = `<iframe src="${externalContentUrl}" frameborder="0" style="width: 100%; height: 80vh; border-radius: 8px;"></iframe>`;
             };
             modalExtraContent.appendChild(button);
         }
@@ -166,7 +159,8 @@ function closeAnyModal(modal) { modal.classList.remove('active'); if (!navLinks.
 let currentDateCalendar = new Date();
 const monthYearEl = document.getElementById('month-year'), calendarDaysEl = document.getElementById('calendar-days'), eventDetailsEl = document.getElementById('event-details'), eventDetailsTitle = document.getElementById('event-details-title');
 
-const eventIcons = { ebd: '📖', culto: '✝️', curso: '✍️', oracao: '🙏', food: '🍴', evento: '🎉' };
+// ÍCONES PROFISSIONAIS (FONT AWESOME)
+const eventIcons = { ebd: 'fa-solid fa-book-open', culto: 'fa-solid fa-cross', curso: 'fa-solid fa-graduation-cap', oracao: 'fa-solid fa-hands-praying', food: 'fa-solid fa-utensils', evento: 'fa-solid fa-star' };
 
 function renderCalendar() {
     const month = currentDateCalendar.getMonth(), year = currentDateCalendar.getFullYear();
@@ -193,9 +187,10 @@ function renderCalendar() {
         calendarDaysEl.appendChild(dayCell);
     }
     // Seleciona o dia atual por padrão ao renderizar o mês atual
-    if (month === new Date().getMonth() && year === new Date().getFullYear()) {
+    const today = new Date();
+    if (month === today.getMonth() && year === today.getFullYear()) {
         const todayCell = calendarDaysEl.querySelector('.current-day');
-        if (todayCell) todayCell.click();
+        if (todayCell) setTimeout(() => todayCell.click(), 100); // Pequeno atraso para garantir renderização
     } else {
          eventDetailsTitle.textContent = 'Eventos do Dia';
          eventDetailsEl.innerHTML = '<p>Selecione um dia para ver os eventos.</p>';
@@ -214,7 +209,7 @@ function showEvents(dateStr, cell) {
         events.sort((a,b) => a.time.localeCompare(b.time)).forEach(event => {
             eventDetailsEl.innerHTML += `
                 <div class="event-item">
-                    <div class="event-icon">${eventIcons[event.type] || '📅'}</div>
+                    <div class="event-icon"><i class="${eventIcons[event.type] || 'fa-solid fa-calendar-day'}"></i></div>
                     <div class="event-info">
                         <strong>${event.title}</strong>
                         <span>${event.time}</span>
@@ -243,3 +238,77 @@ const observerFadeIn = new IntersectionObserver((entries, observer) => {
     });
 }, { threshold: 0.1 });
 fadeElements.forEach(el => observerFadeIn.observe(el));
+
+
+// --- 8. NOVA FUNÇÃO: ATUALIZAÇÃO DINÂMICA DOS STATUS DAS AULAS ---
+function updateLessonStatuses() {
+    const lessonCards = document.querySelectorAll('.lesson-card');
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Normaliza para comparar apenas a data
+
+    const monthMap = { 'janeiro': 0, 'fevereiro': 1, 'março': 2, 'abril': 3, 'maio': 4, 'junho': 5, 'julho': 6, 'agosto': 7, 'setembro': 8, 'outubro': 9, 'novembro': 10, 'dezembro': 11 };
+    
+    function parsePtBrDate(dateString) {
+        // Ex: "15 de Junho, 2025" -> "15 de Junho 2025"
+        const cleanDateString = dateString.replace(/,/g, ''); 
+        const parts = cleanDateString.split(' '); 
+        
+        const day = parseInt(parts[0], 10);
+        // parts[1] é "de", parts[2] é o mês.
+        const month = monthMap[parts[2].toLowerCase()];
+        const year = parseInt(parts[3], 10);
+        
+        return new Date(year, month, day);
+    }
+
+    let currentLessonIndex = -1;
+
+    // Encontra o índice da primeira aula cuja data é igual ou posterior à data de hoje
+    lessonCards.forEach((card, index) => {
+        const lessonDate = parsePtBrDate(card.dataset.date);
+        if (lessonDate >= today && currentLessonIndex === -1) {
+            currentLessonIndex = index;
+        }
+    });
+
+    // Função para adicionar o status ao card
+    function setStatus(card, text, className) {
+        const container = card.querySelector('.date-container');
+        if (!container) return;
+        
+        // Remove status antigo, se houver
+        const oldStatus = container.querySelector('.date-status');
+        if (oldStatus) oldStatus.remove();
+
+        const statusSpan = document.createElement('span');
+        statusSpan.className = `date-status ${className || ''}`;
+        statusSpan.textContent = text;
+        container.prepend(statusSpan); // Adiciona no início do container
+    }
+
+    // Aplica os status com base no índice encontrado
+    if (currentLessonIndex !== -1) {
+        // Aula Atual
+        setStatus(lessonCards[currentLessonIndex], 'AULA ATUAL', '');
+
+        // Próxima Semana
+        if (lessonCards[currentLessonIndex + 1]) {
+            setStatus(lessonCards[currentLessonIndex + 1], 'PRÓXIMA SEMANA', 'status-proxima');
+        }
+        
+        // Em 2 Semanas
+        if (lessonCards[currentLessonIndex + 2]) {
+            setStatus(lessonCards[currentLessonIndex + 2], 'EM 2 SEMANAS', 'status-proxima');
+        }
+    }
+    
+    // Garante que a Prova Final sempre tenha o status correto e sobrescreva outros se necessário
+    lessonCards.forEach(card => {
+        if (card.dataset.title.includes('Prova Final')) {
+            setStatus(card, 'AVALIAÇÃO FINAL', 'status-prova');
+        }
+    });
+}
+
+// Executa a nova função quando o documento estiver pronto
+document.addEventListener('DOMContentLoaded', updateLessonStatuses);
