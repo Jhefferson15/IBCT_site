@@ -64,7 +64,7 @@ a:hover { opacity: 0.7; }
 .countdown-block span { display: block; font-size: 40px; font-weight: 700; }
 .countdown-block p { font-size: 14px; margin: 0; opacity: 0.8; text-transform: uppercase; }
 
-/* 5. SEÇÃO DE AULAS (Volta ao estilo original dos cards) */
+/* 5. SEÇÃO DE AULAS */
 .lessons-wrapper { position: relative; }
 .lessons-scroller { display: flex; gap: 30px; overflow-x: auto; scroll-behavior: smooth; padding: 20px 5px; scrollbar-width: none; }
 .lessons-scroller::-webkit-scrollbar { display: none; }
@@ -74,15 +74,15 @@ a:hover { opacity: 0.7; }
 }
 .lesson-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12); }
 .lesson-card-image {
-    height: 180px; background-color: var(--cor-rosa-suave); /* Cor padrão para imagem */
+    height: 180px; background-color: var(--cor-rosa-suave);
     display: flex; align-items: center; justify-content: center;
     font-family: var(--fonte-titulo); color: var(--cor-vinho); font-size: 20px;
 }
-/* Estilos específicos para o card de prova, como nas imagens originais */
 .lesson-card-image.prova-final { background-color: var(--cor-vinho); color: var(--cor-branco); }
-
 .lesson-card-content { padding: 25px; text-align: left; }
-.lesson-card .date { font-size: 14px; font-weight: 700; color: var(--cor-rosa-suave); margin-bottom: 10px; }
+.lesson-card-content .date { font-size: 14px; font-weight: 700; color: var(--cor-grafite-texto); margin-bottom: 10px; opacity: 0.6; }
+.lesson-card-content .date.status-proxima { color: var(--cor-rosa-suave); opacity: 1; }
+.lesson-card-content .date.status-prova { color: var(--cor-vinho); opacity: 1; }
 .lesson-card h3 { font-size: 22px; font-family: var(--fonte-titulo); color: var(--cor-vinho); margin-bottom: 10px; }
 .scroll-button {
     position: absolute; top: 50%; transform: translateY(-50%); background-color: var(--cor-branco);
@@ -115,6 +115,15 @@ a:hover { opacity: 0.7; }
     position: absolute; top: 15px; right: 20px; font-size: 30px;
     color: var(--cor-grafite-texto); cursor: pointer; border: none; background: none;
 }
+.modal-content-large { max-width: 800px; }
+#modal-extra-content { margin-top: 25px; }
+.material-button {
+    display: inline-block; background-color: var(--cor-rosa-suave); color: var(--cor-vinho) !important;
+    padding: 12px 30px; border-radius: 50px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px; box-shadow: var(--sombra-suave);
+    transition: opacity 0.3s ease; border: none; cursor: pointer;
+}
+.material-button:hover { opacity: 0.8; }
 
 /* 8. MODAL DE CALENDÁRIO */
 .calendar-modal-content {
@@ -126,16 +135,21 @@ a:hover { opacity: 0.7; }
 .calendar-nav-btn { background: none; border: none; font-size: 24px; color: var(--cor-vinho); cursor: pointer; }
 .calendar-grid, .weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
 .weekdays div { text-align: center; font-weight: 700; color: var(--cor-rosa-suave); }
-.day-cell { text-align: center; padding: 10px 5px; cursor: pointer; border-radius: 50%; transition: background-color 0.2s, color 0.2s; position: relative; }
-.day-cell.prev-next-month-day { color: #ccc; }
+.day-cell {
+    display: flex; align-items: center; justify-content: center;
+    aspect-ratio: 1 / 1; cursor: pointer; border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s; position: relative;
+}
+.day-cell.prev-next-month-day { color: #ccc; cursor: default;}
 .day-cell:not(.prev-next-month-day):hover { background-color: var(--cor-creme-fundo); }
 .day-cell.current-day { background-color: var(--cor-rosa-suave); color: var(--cor-branco); }
 .day-cell.selected-day { background-color: var(--cor-vinho); color: var(--cor-branco); }
 .day-cell.event-day::after {
-    content: ''; position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%);
+    content: ''; position: absolute; bottom: 15%;
+    left: 50%; transform: translateX(-50%);
     width: 5px; height: 5px; border-radius: 50%; background-color: var(--cor-vinho);
 }
-.day-cell.selected-day.event-day::after { background-color: var(--cor-branco); } /* Ponto de evento em branco quando o dia está selecionado */
+.day-cell.selected-day.event-day::after { background-color: var(--cor-branco); }
 #event-details { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--cor-creme-fundo); min-height: 50px; text-align: left; }
 #event-details h4 { font-size: 18px; margin-bottom: 10px; color: var(--cor-vinho); }
 .event-item { margin-bottom: 8px; font-size: 15px; }
@@ -147,7 +161,7 @@ a:hover { opacity: 0.7; }
 
 /* 10. RODAPÉ */
 .footer { background-color: var(--cor-vinho); color: var(--cor-creme-fundo); padding: 50px 0; text-align: center; margin-top: 60px; }
-.footer .logo { color: var(--cor-branco); } /* Corrigido para ser visível */
+.footer .logo { color: var(--cor-branco); }
 .footer .logo span { color: var(--cor-rosa-suave); }
 
 /* 11. BOTÃO VOLTAR AO TOPO */
@@ -164,12 +178,12 @@ a:hover { opacity: 0.7; }
         position: absolute; top: 100%; right: 0; width: 100%;
         background-color: var(--cor-branco);
         flex-direction: column; padding: 10px 0 20px 0;
-        max-height: 0; overflow: hidden; /* Controlado por JS para transição suave */
+        max-height: 0; overflow: hidden;
         transition: max-height 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
         border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;
         box-shadow: 0 10px 20px rgba(0,0,0,0.05);
     }
-    .nav-links.active { max-height: 500px; /* Altura suficiente para o conteúdo */ }
+    .nav-links.active { max-height: 500px; }
     .nav-links a { margin: 15px 20px; text-align: left; }
     .hamburger { display: block; z-index: 1001; }
     .hamburger.toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
@@ -178,8 +192,8 @@ a:hover { opacity: 0.7; }
 
     .hero h1 { font-size: 36px; }
     .countdown-block { flex-basis: calc(50% - 10px); }
-    #prev-btn, #next-btn { display: none; } /* Esconde botões no mobile, pois o scroll touch é nativo */
+    #prev-btn, #next-btn { display: none; }
     .lesson-card { flex-basis: 260px; }
     .calendar-header h2 { font-size: 22px; }
-    .day-cell { padding: 8px 2px; }
+    .day-cell { padding: 0; } /* Padding é removido para o aspect-ratio funcionar bem */
 }
