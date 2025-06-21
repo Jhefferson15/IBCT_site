@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escola Bíblica Dominical - IBCT</title>
-    
-    <!-- Link para a folha de estilos externa -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -52,7 +50,7 @@
                 <div class="lessons-wrapper">
                     <button id="prev-btn" class="scroll-button"><</button>
                     <div class="lessons-scroller">
-                        <!-- Aulas Concluídas -->
+                        <!-- Aulas com datas corrigidas -->
                         <div class="lesson-card" data-date="13 de Abril, 2025" data-title="Material de Apoio" data-teacher="Pr. Juliano Santos" data-scripture="Filipenses 1:1-2" data-description="Iniciamos nossa jornada por Filipenses com um material de apoio especial preparado pelo Pr. Juliano Santos, estabelecendo as bases para nosso estudo.">
                             <div class="lesson-card-image">Lição 01</div><div class="lesson-card-content"><div class="date">13/04/2025</div><h3>Material de Apoio</h3></div>
                         </div>
@@ -71,12 +69,10 @@
                         <div class="lesson-card" data-date="08 de Junho, 2025" data-title="Filipenses 4:1-5" data-teacher="Pr. Matheus Guerra" data-scripture="Filipenses 4:1" data-description="Retomamos nosso estudo com foco na unidade da igreja, na alegria constante e na moderação que deve ser conhecida por todos.">
                             <div class="lesson-card-image">Lição 05</div><div class="lesson-card-content"><div class="date">08/06/2025</div><h3>Filipenses 4:1-5</h3></div>
                         </div>
-                        
-                        <!-- Aulas Futuras -->
                         <div class="lesson-card" data-date="15 de Junho, 2025" data-title="Recapitulação (Parte 1)" data-teacher="Professores da EBD" data-scripture="Filipenses 1-2" data-description="Iniciamos a revisão dos principais pontos estudados nos capítulos 1 e 2 de Filipenses, nos preparando para a avaliação final.">
                             <div class="lesson-card-image">REVISÃO</div><div class="lesson-card-content"><div class="date status-proxima">AULA ATUAL</div><h3>Recapitulação (Parte 1)</h3></div>
                         </div>
-                         <div class="lesson-card" data-date="22 de Junho, 2025" data-title="Recapitulação (Parte 2)" data-teacher="Professores da EBD" data-scripture="Filipenses 3" data-description="Segunda parte da nossa recapitulação, com foco nos temas do capítulo 3. Contaremos com um material de apoio especial do Jhefferson." data-external-content="materiais/jhefferson_atos_16.html">
+                        <div class="lesson-card" data-date="22 de Junho, 2025" data-title="Recapitulação (Parte 2)" data-teacher="Professores da EBD" data-scripture="Filipenses 3" data-description="Segunda parte da nossa recapitulação, com foco nos temas do capítulo 3. Contaremos com um material de apoio especial do Jhefferson." data-external-content="materiais/jhefferson_atos_16.html">
                             <div class="lesson-card-image">REVISÃO</div><div class="lesson-card-content"><div class="date status-proxima">PRÓXIMA SEMANA</div><h3>Recapitulação (Parte 2)</h3></div>
                         </div>
                         <div class="lesson-card" data-date="29 de Junho, 2025" data-title="Recapitulação (Parte 3)" data-teacher="Professores da EBD" data-scripture="Filipenses 4" data-description="Concluímos nossa revisão com os ensinamentos do capítulo 4, focando na paz de Deus e no contentamento em todas as circunstâncias.">
@@ -95,22 +91,12 @@
             <div class="container">
                 <h2>Avisos Importantes</h2>
                 <div class="avisos-grid">
-                    <div class="aviso-card">
-                        <h3>Mutirão de Limpeza</h3>
-                        <p>No próximo sábado, teremos nosso mutirão de limpeza e organização da igreja. Contamos com a sua ajuda a partir das 8h!</p>
-                    </div>
-                    <div class="aviso-card">
-                        <h3>Campanha do Agasalho</h3>
-                        <p>As doações para a campanha do agasalho podem ser entregues na secretaria até o final do mês. Aqueça o inverno de quem precisa.</p>
-                    </div>
-                     <div class="aviso-card">
-                        <h3>Inscrições para Batismo</h3>
-                        <p>As inscrições para a próxima turma de batismo já estão abertas. Procure a secretaria para mais informações.</p>
-                    </div>
+                    <div class="aviso-card"><h3>Mutirão de Limpeza</h3><p>No próximo sábado, teremos nosso mutirão de limpeza e organização da igreja. Contamos com a sua ajuda a partir das 8h!</p></div>
+                    <div class="aviso-card"><h3>Campanha do Agasalho</h3><p>As doações para a campanha do agasalho podem ser entregues na secretaria até o final do mês. Aqueça o inverno de quem precisa.</p></div>
+                    <div class="aviso-card"><h3>Inscrições para Batismo</h3><p>As inscrições para a próxima turma de batismo já estão abertas. Procure a secretaria para mais informações.</p></div>
                 </div>
             </div>
         </section>
-
     </main>
 
     <footer class="footer">
@@ -120,7 +106,7 @@
         </div>
     </footer>
 
-    <!-- MODAL DE DETALHES DA AULA (com espaço para o botão extra) -->
+    <!-- MODAIS -->
     <div class="modal-overlay" id="lesson-modal">
         <div class="modal-content">
             <button class="modal-close">×</button>
@@ -128,12 +114,10 @@
             <p id="modal-teacher">com Professor</p>
             <p id="modal-description">Descrição detalhada da lição...</p>
             <p id="modal-scripture">"Versículo-chave"</p>
-            <!-- O botão de material extra será inserido aqui pelo JavaScript -->
             <div id="modal-extra-content"></div>
         </div>
     </div>
     
-    <!-- MODAL DE CALENDÁRIO -->
     <div class="modal-overlay" id="calendar-modal">
         <div class="calendar-modal-content">
             <button class="modal-close">×</button>
@@ -146,27 +130,23 @@
                 <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
             </div>
             <div class="calendar-grid" id="calendar-days"></div>
-            <div id="event-details">
-                <p>Selecione um dia para ver os eventos.</p>
+            <div id="event-details-wrapper">
+                <h3 id="event-details-title">Eventos do Dia</h3>
+                <div id="event-details">
+                    <p>Selecione um dia para ver os eventos.</p>
+                </div>
             </div>
         </div>
     </div>
     
-    <!-- NOVO MODAL PARA CONTEÚDO EXTERNO -->
     <div class="modal-overlay" id="external-content-modal">
         <div class="modal-content modal-content-large">
             <button class="modal-close">×</button>
-            <div id="external-content-body">
-                <!-- O conteúdo de jhefferson_atos_16.html será carregado aqui -->
-                <p>Carregando material...</p>
-            </div>
+            <div id="external-content-body"><p>Carregando material...</p></div>
         </div>
     </div>
     
-    <!-- BOTÃO VOLTAR AO TOPO -->
     <a class="scroll-to-top">▲</a>
-
-    <!-- Link para o script externo -->
     <script src="js/script.js" defer></script>
 </body>
 </html>
