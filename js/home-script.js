@@ -1,18 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- DADOS DE EVENTOS (MESMA FONTE DA EBD PARA CONSISTÊNCIA) ---
-    // ... (código de eventos inalterado) ...
+    // --- 0. LÓGICA DO CALENDÁRIO ---
     const specificEvents = {
-        "2025-04-13": [{ type: 'ebd', time: '09:00', title: 'EBD: Material de Apoio (Filipenses)' }],
-        "2025-04-27": [{ type: 'ebd', time: '09:00', title: 'EBD: Aula 5/14 de Filipenses' }],
-        "2025-05-18": [{ type: 'ebd', time: '09:00', title: 'EBD: Estudo de Filipenses 3:12-16' }],
-        "2025-05-25": [{ type: 'ebd', time: '09:00', title: 'EBD: Estudo de Filipenses 3:17-21' }],
-        "2025-06-01": [{ type: 'ebd', time: '09:00', title: 'EBD: Aula Temática "No Jardim com Jesus"' }],
-        "2025-06-08": [{ type: 'ebd', time: '09:00', title: 'EBD: Estudo de Filipenses 4:1-5' }],
-        "2025-06-15": [{ type: 'ebd', time: '09:00', title: 'EBD: Recapitulação para Prova (Parte 1)' }],
-        "2025-06-22": [{ type: 'ebd', time: '09:00', title: 'EBD: Recapitulação para Prova (Parte 2)' }],
-        "2025-06-29": [{ type: 'ebd', time: '09:00', title: 'EBD: Recapitulação para Prova (Parte 3)' }],
-        "2025-07-06": [{ type: 'ebd', time: '09:00', title: 'Prova Final da EBD (Filipenses)' }],
+        "2025-04-13": [{ type: 'ebd', time: '09:00', title: 'EBD' }],
+        "2025-04-27": [{ type: 'ebd', time: '09:00', title: 'EBD' }],
+        "2025-05-18": [{ type: 'ebd', time: '09:00', title: 'EBD' }],
+        "2025-05-25": [{ type: 'ebd', time: '09:00', title: 'EBD' }],
+        "2025-06-01": [{ type: 'ebd', time: '09:00', title: 'EBD' }],
+        "2025-06-08": [{ type: 'ebd', time: '09:00', title: 'EBD' }],
+        "2025-06-15": [{ type: 'ebd', time: '09:00', title: 'EBD' }],
+        "2025-06-22": [{ type: 'ebd', time: '09:00', title: 'EBD' }],
+        "2025-06-29": [{ type: 'ebd', time: '09:00', title: 'EBD' }],
+        "2025-07-06": [{ type: 'ebd', time: '09:00', title: 'EBD' }],
     };
 
     function generateRecurringEvents(year) {
