@@ -28,8 +28,8 @@
     </header>
 
     <main>
-        <!-- 1. SEÇÃO DE BOAS-VINDAS (HERO) -->
-        <section id="inicio" class="home-hero">
+        <!-- ... (seções 1 e 2 inalteradas) ... -->
+        <section id="inicio" class="home-hero fade-in">
              <div class="container">
                 <h1>Uma família para pertencer</h1>
                 <p>Crescendo juntos na graça e no conhecimento de nosso Senhor Jesus Cristo.</p>
@@ -37,28 +37,13 @@
             </div>
         </section>
 
-        <!-- 2. SEÇÃO DE CALENDÁRIO E VERSÍCULO DO DIA -->
-        <section id="agenda-versiculo" class="content-section">
+        <section id="agenda-versiculo" class="content-section fade-in">
             <div class="container dual-column-container">
-                <!-- Coluna do Calendário -->
-                <div class="calendar-widget">
-                    <h2 class="section-title">Nossa Agenda</h2>
-                    <div class="calendar-header">
-                        <i class="fas fa-chevron-left"></i>
-                        <span>Junho 2025</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="calendar-grid">
-                        <div class="weekday">D</div><div class="weekday">S</div><div class="weekday">T</div><div class="weekday">Q</div><div class="weekday">Q</div><div class="weekday">S</div><div class="weekday">S</div>
-                        <div class="day event">1</div><div class="day">2</div><div class="day">3</div><div class="day event">4</div><div class="day">5</div><div class="day">6</div><div class="day event">7</div>
-                        <div class="day event">8</div><div class="day">9</div><div class="day">10</div><div class="day event">11</div><div class="day">12</div><div class="day">13</div><div class="day event">14</div>
-                        <div class="day event today">15</div><div class="day">16</div><div class="day">17</div><div class="day event">18</div><div class="day">19</div><div class="day">20</div><div class="day">21</div>
-                        <div class="day event">22</div><div class="day">23</div><div class="day">24</div><div class="day event">25</div><div class="day">26</div><div class="day">27</div><div class="day event">28</div>
-                        <div class="day event">29</div><div class="day">30</div>
-                    </div>
-                    <a href="departamentos/hodos/ebd/hodos_ebd.html" class="widget-button">Ver Calendário Completo</a>
+                <div class="events-widget">
+                    <h2 class="section-title">Próximos Eventos</h2>
+                    <div id="next-events-list"></div>
+                    <button id="open-calendar-btn" class="widget-button">Ver Calendário Completo</button>
                 </div>
-                <!-- Coluna do Versículo do Dia -->
                 <div class="verse-widget">
                     <h2 class="section-title">Versículo do Dia</h2>
                     <blockquote>
@@ -70,104 +55,67 @@
         </section>
 
         <!-- 3. SEÇÃO DE MINISTÉRIOS (DEPARTAMENTOS) -->
-        <section id="ministerios" class="content-section bg-light">
+        <section id="ministerios" class="content-section bg-light fade-in">
             <div class="container">
                 <h2 class="section-title">Nossos Ministérios</h2>
                 <p class="section-subtitle">Grupos dedicados a servir, ensinar e promover a comunhão em todas as fases da vida.</p>
                 <div class="ministerios-grid">
-                    <div class="ministerio-card">
-                        <i class="fas fa-child-reaching"></i>
-                        <h3>Hodos (Jovens)</h3>
-                        <p>Um ministério dinâmico para jovens, focado em discipulado, comunhão e serviço através de encontros, PGMs e acampamentos.</p>
+                    <!-- MUDANÇA AQUI: Adicionados data-link-url e data-link-text -->
+                    <div class="ministerio-card clickable-card" 
+                         data-title="Hodos (Jovens)" 
+                         data-description="Um ministério dinâmico para jovens, focado em discipulado, comunhão e serviço através de encontros, PGMs e acampamentos."
+                         data-link-url="departamentos/hodos/ebd/hodos_ebd.html"
+                         data-link-text="Visitar EBD dos Jovens">
+                        <i class="fas fa-child-reaching"></i><h3>Hodos (Jovens)</h3><p>Discipulado, comunhão e serviço para a juventude.</p>
                     </div>
-                    <div class="ministerio-card">
-                        <i class="fas fa-heart"></i>
-                        <h3>Ministério da Família</h3>
-                        <p>Fortalece os laços familiares através de cursos, encontros e eventos que promovem os valores cristãos no lar.</p>
+                    <!-- ... (outros cards de ministério inalterados) ... -->
+                    <div class="ministerio-card clickable-card" data-title="Ministério da Família" data-description="Fortalece os laços familiares através de cursos, encontros e eventos que promovem os valores cristãos no lar. Oferecemos cursos como 'Homem ao Máximo' e 'Mulher Única'.">
+                        <i class="fas fa-heart"></i><h3>Ministério da Família</h3><p>Fortalecendo os laços familiares à luz da Palavra.</p>
                     </div>
-                    <div class="ministerio-card">
-                        <i class="fas fa-people-group"></i>
-                        <h3>Embaixadores do Rei</h3>
-                        <p>Organização missionária que treina meninos e rapazes para serem líderes e testemunhas de Cristo em seu dia a dia.</p>
+                    <div class="ministerio-card clickable-card" data-title="Embaixadores do Rei" data-description="Organização missionária que treina meninos e rapazes (9 a 16 anos) para serem líderes e testemunhas de Cristo em seu dia a dia, através de atividades práticas e estudo bíblico.">
+                        <i class="fas fa-people-group"></i><h3>Embaixadores do Rei</h3><p>Treinando meninos para serem líderes cristãos.</p>
                     </div>
-                    <div class="ministerio-card">
-                        <i class="fas fa-crown"></i>
-                        <h3>Mensageiras do Rei</h3>
-                        <p>Prepara meninas e moças para o serviço cristão, com foco em missões, oração e desenvolvimento de talentos.</p>
+                    <div class="ministerio-card clickable-card" data-title="Mensageiras do Rei" data-description="Prepara meninas e moças (9 a 16 anos) para o serviço cristão, com foco em missões, oração, desenvolvimento de talentos e o estudo da biografia de missionários.">
+                        <i class="fas fa-crown"></i><h3>Mensageiras do Rei</h3><p>Formando meninas para o serviço do Reino.</p>
                     </div>
-                    <div class="ministerio-card">
-                        <i class="fas fa-cross"></i>
-                        <h3>Ministério CROSS</h3>
-                        <p>Um grupo de serviço e apoio que atua em diversas frentes da igreja, organizando eventos e promovendo a integração.</p>
+                    <div class="ministerio-card clickable-card" data-title="Ministério CROSS" data-description="Um grupo de serviço e apoio que atua em diversas frentes da igreja, organizando eventos, recepção, e promovendo a integração entre os membros e visitantes.">
+                        <i class="fas fa-cross"></i><h3>Ministério CROSS</h3><p>Serviço, apoio e organização de eventos na igreja.</p>
                     </div>
-                    <div class="ministerio-card">
-                        <i class="fas fa-link"></i>
-                        <h3>Ministério da LIGA</h3>
-                        <p>Focado em conectar pessoas e ministérios, fortalecendo a unidade e a colaboração dentro da comunidade da igreja.</p>
+                    <div class="ministerio-card clickable-card" data-title="Ministério da LIGA" data-description="Focado em conectar pessoas e ministérios, fortalecendo a unidade e a colaboração dentro da comunidade da igreja. A LIGA ajuda a divulgar e integrar as diversas atividades.">
+                        <i class="fas fa-link"></i><h3>Ministério da LIGA</h3><p>Conectando pessoas e ministérios para fortalecer a união.</p>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- 4. SEÇÃO DE PROJETOS MISSIONÁRIOS -->
-        <section id="missoes" class="content-section">
+        <!-- ... (seções 4 e 5 inalteradas) ... -->
+        <section id="missoes" class="content-section fade-in">
             <div class="container">
                 <h2 class="section-title">Projetos e Missões</h2>
                 <p class="section-subtitle">Levando o amor de Cristo além das quatro paredes, servindo à comunidade e ao mundo.</p>
                 <div class="missoes-grid">
-                    <div class="missao-card">
+                    <div class="missao-card clickable-card" data-title="Projeto Viver" data-image="https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=1740" data-description="Uma iniciativa de ação social que serve nossa comunidade local através da arrecadação e distribuição de alimentos, organização de almoços beneficentes e apoio direto a famílias necessitadas em Taguatinga e arredores.">
                         <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=1740" alt="Voluntários servindo comida">
-                        <div class="missao-content">
-                            <h3>Projeto Viver</h3>
-                            <p>Uma iniciativa de ação social que serve nossa comunidade através da arrecadação de alimentos, almoços beneficentes e apoio a famílias necessitadas.</p>
-                        </div>
+                        <div class="missao-content"><h3>Projeto Viver</h3><p>Ação social que serve nossa comunidade com alimentos e apoio.</p></div>
                     </div>
-                    <div class="missao-card">
+                    <div class="missao-card clickable-card" data-title="Parceria com a CRU" data-image="https://images.unsplash.com/photo-1542626991-a2f572a1e896?q=80&w=1740" data-description="Apoiamos e recebemos missionários da CRU (anteriormente conhecida como Cruzada Estudantil e Profissional para Cristo) para o trabalho de evangelismo em ambientes universitários. Oferecemos suporte logístico e um lar espiritual durante suas missões em Brasília.">
                         <img src="https://images.unsplash.com/photo-1542626991-a2f572a1e896?q=80&w=1740" alt="Jovens universitários em uma conferência">
-                        <div class="missao-content">
-                            <h3>Parceria com a CRU</h3>
-                            <p>Apoiamos e recebemos missionários da CRU (Cruzada Estudantil) para evangelismo universitário, oferecendo suporte e um lar espiritual durante suas missões.</p>
-                        </div>
+                        <div class="missao-content"><h3>Parceria com a CRU</h3><p>Apoio ao evangelismo universitário com a Cruzada Estudantil.</p></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. SEÇÃO DE CONTATO -->
-        <section id="contato" class="content-section bg-light">
+        <section id="contato" class="content-section bg-light fade-in">
             <div class="container">
                 <h2 class="section-title">Fale Conosco</h2>
                 <p class="section-subtitle">Estamos de portas abertas para receber você. Venha nos visitar!</p>
                 <div class="contato-wrapper">
                     <div class="contato-info">
-                        <div class="info-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <strong>Nosso Endereço</strong>
-                                <p>Templo EPTG (e outras localidades), Taguatinga, DF</p>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <i class="fab fa-whatsapp"></i>
-                            <div>
-                                <strong>Secretaria Administrativa</strong>
-                                <p>(61) 99286-9501</p>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-clock"></i>
-                            <div>
-                                <strong>Horário de Atendimento</strong>
-                                <p>Segunda a Sexta: 8h-12h e 13h-17h</p>
-                            </div>
-                        </div>
-                         <div class="info-item">
-                            <i class="fas fa-calendar-alt"></i>
-                            <div>
-                                <strong>Nossos Cultos</strong>
-                                <p>Domingos: 10h30 e 18h<br>Quartas: 20h</p>
-                            </div>
-                        </div>
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i><div><strong>Nosso Endereço</strong><p>Templo EPTG (e outras localidades), Taguatinga, DF</p></div></div>
+                        <div class="info-item"><i class="fab fa-whatsapp"></i><div><strong>Secretaria</strong><p>(61) 99286-9501</p></div></div>
+                        <div class="info-item"><i class="fas fa-clock"></i><div><strong>Atendimento</strong><p>Segunda a Sexta: 8h-12h e 13h-17h</p></div></div>
+                         <div class="info-item"><i class="fas fa-calendar-alt"></i><div><strong>Nossos Cultos</strong><p>Domingos: 10h30 e 18h<br>Quartas: 20h</p></div></div>
                     </div>
                     <div class="map-container">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3839.231718916362!2d-48.05948308898165!3d-15.791980823419515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935a33758913a047%3A0x62887652759902bd!2sIgreja%20Batista%20Central%20de%20Taguatinga!5e0!3m2!1spt-BR!2sbr!4v1716309854721" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -184,27 +132,42 @@
         </div>
     </footer>
 
+    <!-- MODAIS -->
+    <div class="modal-overlay" id="info-modal">
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <img id="modal-image" src="" alt="Imagem do Ministério" style="display:none; width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 20px;">
+            <h2 id="modal-title">Título</h2>
+            <p id="modal-description">Descrição detalhada...</p>
+            <!-- MUDANÇA AQUI: Container para o botão dinâmico -->
+            <div id="modal-link-container"></div>
+        </div>
+    </div>
+    
+    <!-- ... (outro modal inalterado) ... -->
+    <div class="modal-overlay" id="calendar-modal">
+        <div class="calendar-modal-content">
+            <button class="modal-close">×</button>
+            <div class="calendar-main">
+                <div class="calendar-header">
+                    <button id="prev-month" class="calendar-nav-btn"><i class="fas fa-chevron-left"></i></button>
+                    <h2 id="month-year"></h2>
+                    <button id="next-month" class="calendar-nav-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="weekdays">
+                    <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
+                </div>
+                <div class="calendar-grid" id="calendar-days"></div>
+            </div>
+            <div id="event-details-wrapper">
+                <h3 id="event-details-title">Eventos do Dia</h3>
+                <div id="event-details"><p>Selecione um dia para ver os eventos.</p></div>
+            </div>
+        </div>
+    </div>
+
     <a class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
     
-    <script>
-        // Lógica do Menu Hamburger
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        hamburger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navLinks.classList.toggle('active');
-            hamburger.classList.toggle('toggle');
-        });
-        
-        // Lógica do Botão Voltar ao Topo
-        const scrollToTopBtn = document.querySelector('.scroll-to-top');
-        window.addEventListener('scroll', () => {
-            scrollToTopBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
-        });
-        scrollToTopBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    </script>
+    <script src="js/home-script.js" defer></script>
 </body>
 </html>
