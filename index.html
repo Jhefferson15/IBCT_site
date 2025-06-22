@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escola Bíblica Dominical - IBCT</title>
-    <!-- Adicionado Font Awesome para ícones profissionais -->
+    <title>Igreja Batista Central em Taguatinga - Home</title>
+    <!-- Font Awesome para ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <!-- Link para o novo arquivo de estilo da home -->
+    <link rel="stylesheet" href="css/home-style.css">
 </head>
 <body>
 
     <header class="header">
         <div class="container">
-            <div class="logo">IBCT <span>EBD</span></div>
+            <div class="logo">IBCT <span>Home</span></div>
             <nav class="nav-links">
-                <a href="#aulas">Aulas</a>
-                <a id="open-calendar-link">Calendário</a>
-                <a href="#avisos">Avisos</a>
+                <a href="#inicio">Início</a>
+                <a href="#ministerios">Ministérios</a>
+                <a href="#missoes">Missões</a>
+                <a href="departamentos/hodos/ebd/hodos_ebd.html">EBD</a> <!-- Link para a página da EBD -->
+                <a href="#contato">Contato</a>
             </nav>
             <div class="hamburger">
                 <div class="line1"></div><div class="line2"></div><div class="line3"></div>
@@ -25,77 +28,150 @@
     </header>
 
     <main>
-        <section class="hero fade-in">
+        <!-- 1. SEÇÃO DE BOAS-VINDAS (HERO) -->
+        <section id="inicio" class="home-hero">
              <div class="container">
-                <h1>Escola Bíblica Dominical</h1>
-                <p>Um espaço de aprendizado, comunhão e crescimento na Palavra de Deus.</p>
-                <a href="#aulas" class="cta-button">Ver Aulas do Trimestre</a>
+                <h1>Uma família para pertencer</h1>
+                <p>Crescendo juntos na graça e no conhecimento de nosso Senhor Jesus Cristo.</p>
+                <a href="#ministerios" class="cta-button">Conheça nossos ministérios</a>
             </div>
         </section>
 
-        <section id="countdown-section" class="content-section fade-in">
-            <div class="container">
-                <h2>Prova Final do Trimestre</h2>
-                <p>Prepare-se! O conhecimento adquirido será celebrado em nossa avaliação final.</p>
-                <div class="countdown-timer">
-                    <div class="countdown-block"><span id="days">00</span><p>Dias</p></div>
-                    <div class="countdown-block"><span id="hours">00</span><p>Horas</p></div>
-                    <div class="countdown-block"><span id="mins">00</span><p>Minutos</p></div>
-                    <div class="countdown-block"><span id="secs">00</span><p>Segundos</p></div>
+        <!-- 2. SEÇÃO DE CALENDÁRIO E VERSÍCULO DO DIA -->
+        <section id="agenda-versiculo" class="content-section">
+            <div class="container dual-column-container">
+                <!-- Coluna do Calendário -->
+                <div class="calendar-widget">
+                    <h2 class="section-title">Nossa Agenda</h2>
+                    <div class="calendar-header">
+                        <i class="fas fa-chevron-left"></i>
+                        <span>Junho 2025</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="weekday">D</div><div class="weekday">S</div><div class="weekday">T</div><div class="weekday">Q</div><div class="weekday">Q</div><div class="weekday">S</div><div class="weekday">S</div>
+                        <div class="day event">1</div><div class="day">2</div><div class="day">3</div><div class="day event">4</div><div class="day">5</div><div class="day">6</div><div class="day event">7</div>
+                        <div class="day event">8</div><div class="day">9</div><div class="day">10</div><div class="day event">11</div><div class="day">12</div><div class="day">13</div><div class="day event">14</div>
+                        <div class="day event today">15</div><div class="day">16</div><div class="day">17</div><div class="day event">18</div><div class="day">19</div><div class="day">20</div><div class="day">21</div>
+                        <div class="day event">22</div><div class="day">23</div><div class="day">24</div><div class="day event">25</div><div class="day">26</div><div class="day">27</div><div class="day event">28</div>
+                        <div class="day event">29</div><div class="day">30</div>
+                    </div>
+                    <a href="departamentos/hodos/ebd/hodos_ebd.html" class="widget-button">Ver Calendário Completo</a>
+                </div>
+                <!-- Coluna do Versículo do Dia -->
+                <div class="verse-widget">
+                    <h2 class="section-title">Versículo do Dia</h2>
+                    <blockquote>
+                        "Portanto, sejam fortes e corajosos, todos vocês que põem sua esperança no Senhor!"
+                    </blockquote>
+                    <cite>Salmos 31:24</cite>
                 </div>
             </div>
         </section>
 
-        <section id="aulas" class="content-section fade-in">
+        <!-- 3. SEÇÃO DE MINISTÉRIOS (DEPARTAMENTOS) -->
+        <section id="ministerios" class="content-section bg-light">
             <div class="container">
-                <h2>Aulas do Trimestre: O Livro de Filipenses</h2>
-                <div class="lessons-wrapper">
-                    <button id="prev-btn" class="scroll-button"><</button>
-                    <div class="lessons-scroller">
-                        <!-- Aulas com datas corretas e sem status estáticos (serão adicionados por JS) -->
-                        <div class="lesson-card" data-date="13 de Abril, 2025" data-title="Material de Apoio" data-teacher="Pr. Juliano Santos" data-scripture="Filipenses 1:1-2" data-description="Iniciamos nossa jornada por Filipenses com um material de apoio especial preparado pelo Pr. Juliano Santos, estabelecendo as bases para nosso estudo.">
-                            <div class="lesson-card-image">Lição 01</div><div class="lesson-card-content"><div class="date-container"><span class="date-value">13/04/2025</span></div><h3>Material de Apoio</h3></div>
-                        </div>
-                        <div class="lesson-card" data-date="27 de Abril, 2025" data-title="Filipenses - Aula 5/14" data-teacher="Pr. Matheus Guerra" data-scripture="Filipenses 2" data-description="Continuamos nosso estudo aprofundado, chegando à quinta aula da série sobre a carta aos Filipenses.">
-                            <div class="lesson-card-image">Lição 02</div><div class="lesson-card-content"><div class="date-container"><span class="date-value">27/04/2025</span></div><h3>Filipenses - Aula 5/14</h3></div>
-                        </div>
-                        <div class="lesson-card" data-date="18 de Maio, 2025" data-title="Filipenses 3:12-16" data-teacher="Pr. Matheus Guerra" data-scripture="Filipenses 3:12-16" data-description="Nesta aula, exploramos o chamado à maturidade cristã, prosseguindo para o alvo sem olhar para trás, conforme descrito por Paulo.">
-                            <div class="lesson-card-image">Lição 03</div><div class="lesson-card-content"><div class="date-container"><span class="date-value">18/05/2025</span></div><h3>Filipenses 3:12-16</h3></div>
-                        </div>
-                        <div class="lesson-card" data-date="25 de Maio, 2025" data-title="Filipenses 3:17-21" data-teacher="Pr. Alexandre Coelho" data-scripture="Filipenses 3:20" data-description="O Pastor Alexandre nos guiou por uma reflexão sobre nossa cidadania celestial e a esperança da vinda de Cristo.">
-                            <div class="lesson-card-image">Lição 04</div><div class="lesson-card-content"><div class="date-container"><span class="date-value">25/05/2025</span></div><h3>Filipenses 3:17-21</h3></div>
-                        </div>
-                        <div class="lesson-card" data-date="01 de Junho, 2025" data-title="No Jardim com Jesus" data-teacher="Ministério Infantil" data-scripture="João 20:15-17" data-description="Uma aula temática especial que nos levou a uma jornada com Jesus no jardim, trazendo uma pausa revigorante no estudo de Filipenses.">
-                            <div class="lesson-card-image">TEMÁTICA</div><div class="lesson-card-content"><div class="date-container"><span class="date-value">01/06/2025</span></div><h3>No Jardim com Jesus</h3></div>
-                        </div>
-                        <div class="lesson-card" data-date="08 de Junho, 2025" data-title="Filipenses 4:1-5" data-teacher="Pr. Matheus Guerra" data-scripture="Filipenses 4:1" data-description="Retomamos nosso estudo com foco na unidade da igreja, na alegria constante e na moderação que deve ser conhecida por todos.">
-                            <div class="lesson-card-image">Lição 05</div><div class="lesson-card-content"><div class="date-container"><span class="date-value">08/06/2025</span></div><h3>Filipenses 4:1-5</h3></div>
-                        </div>
-                        <div class="lesson-card" data-date="15 de Junho, 2025" data-title="Recapitulação (Parte 1)" data-teacher="Professores da EBD" data-scripture="Filipenses 1-2" data-description="Iniciamos a revisão dos principais pontos estudados nos capítulos 1 e 2 de Filipenses, nos preparando para a avaliação final.">
-                            <div class="lesson-card-image">REVISÃO</div><div class="lesson-card-content"><div class="date-container"><span class="date-value">15/06/2025</span></div><h3>Recapitulação (Parte 1)</h3></div>
-                        </div>
-                        <div class="lesson-card" data-date="22 de Junho, 2025" data-title="Recapitulação (Parte 2)" data-teacher="Professores da EBD" data-scripture="Filipenses 3" data-description="Segunda parte da nossa recapitulação, com foco nos temas do capítulo 3. Contaremos com um material de apoio especial do Jhefferson." data-external-content="quiz/quiz_atos_16.html">
-                            <div class="lesson-card-image">REVISÃO</div><div class="lesson-card-content"><div class="date-container"><span class="date-value">22/06/2025</span></div><h3>Recapitulação (Parte 2)</h3></div>
-                        </div>
-                        <div class="lesson-card" data-date="29 de Junho, 2025" data-title="Recapitulação (Parte 3)" data-teacher="Professores da EBD" data-scripture="Filipenses 4" data-description="Concluímos nossa revisão com os ensinamentos do capítulo 4, focando na paz de Deus e no contentamento em todas as circunstâncias.">
-                            <div class="lesson-card-image">REVISÃO</div><div class="lesson-card-content"><div class="date-container"><span class="date-value">29/06/2025</span></div><h3>Recapitulação (Parte 3)</h3></div>
-                        </div>
-                        <div class="lesson-card" data-date="06 de Julho, 2025" data-title="Prova Final do Trimestre" data-teacher="Todos os Professores" data-scripture="2 Timóteo 2:15" data-description="Chegou o dia de celebrarmos o conhecimento! A prova cobrirá todos os tópicos estudados neste trimestre sobre o livro de Filipenses.">
-                            <div class="lesson-card-image prova-final">AVALIAÇÃO</div><div class="lesson-card-content"><div class="date-container"><span class="date-value">06/07/2025</span></div><h3>Prova Final</h3></div>
-                        </div>
+                <h2 class="section-title">Nossos Ministérios</h2>
+                <p class="section-subtitle">Grupos dedicados a servir, ensinar e promover a comunhão em todas as fases da vida.</p>
+                <div class="ministerios-grid">
+                    <div class="ministerio-card">
+                        <i class="fas fa-child-reaching"></i>
+                        <h3>Hodos (Jovens)</h3>
+                        <p>Um ministério dinâmico para jovens, focado em discipulado, comunhão e serviço através de encontros, PGMs e acampamentos.</p>
                     </div>
-                    <button id="next-btn" class="scroll-button">></button>
+                    <div class="ministerio-card">
+                        <i class="fas fa-heart"></i>
+                        <h3>Ministério da Família</h3>
+                        <p>Fortalece os laços familiares através de cursos, encontros e eventos que promovem os valores cristãos no lar.</p>
+                    </div>
+                    <div class="ministerio-card">
+                        <i class="fas fa-people-group"></i>
+                        <h3>Embaixadores do Rei</h3>
+                        <p>Organização missionária que treina meninos e rapazes para serem líderes e testemunhas de Cristo em seu dia a dia.</p>
+                    </div>
+                    <div class="ministerio-card">
+                        <i class="fas fa-crown"></i>
+                        <h3>Mensageiras do Rei</h3>
+                        <p>Prepara meninas e moças para o serviço cristão, com foco em missões, oração e desenvolvimento de talentos.</p>
+                    </div>
+                    <div class="ministerio-card">
+                        <i class="fas fa-cross"></i>
+                        <h3>Ministério CROSS</h3>
+                        <p>Um grupo de serviço e apoio que atua em diversas frentes da igreja, organizando eventos e promovendo a integração.</p>
+                    </div>
+                    <div class="ministerio-card">
+                        <i class="fas fa-link"></i>
+                        <h3>Ministério da LIGA</h3>
+                        <p>Focado em conectar pessoas e ministérios, fortalecendo a unidade e a colaboração dentro da comunidade da igreja.</p>
+                    </div>
                 </div>
             </div>
         </section>
         
-        <section id="avisos" class="content-section fade-in">
+        <!-- 4. SEÇÃO DE PROJETOS MISSIONÁRIOS -->
+        <section id="missoes" class="content-section">
             <div class="container">
-                <h2>Avisos Importantes</h2>
-                <div class="avisos-grid">
-                    <div class="aviso-card"><h3>Mutirão de Limpeza</h3><p>No próximo sábado, teremos nosso mutirão de limpeza e organização da igreja. Contamos com a sua ajuda a partir das 8h!</p></div>
-                    <div class="aviso-card"><h3>Campanha do Agasalho</h3><p>As doações para a campanha do agasalho podem ser entregues na secretaria até o final do mês. Aqueça o inverno de quem precisa.</p></div>
-                    <div class="aviso-card"><h3>Inscrições para Batismo</h3><p>As inscrições para a próxima turma de batismo já estão abertas. Procure a secretaria para mais informações.</p></div>
+                <h2 class="section-title">Projetos e Missões</h2>
+                <p class="section-subtitle">Levando o amor de Cristo além das quatro paredes, servindo à comunidade e ao mundo.</p>
+                <div class="missoes-grid">
+                    <div class="missao-card">
+                        <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=1740" alt="Voluntários servindo comida">
+                        <div class="missao-content">
+                            <h3>Projeto Viver</h3>
+                            <p>Uma iniciativa de ação social que serve nossa comunidade através da arrecadação de alimentos, almoços beneficentes e apoio a famílias necessitadas.</p>
+                        </div>
+                    </div>
+                    <div class="missao-card">
+                        <img src="https://images.unsplash.com/photo-1542626991-a2f572a1e896?q=80&w=1740" alt="Jovens universitários em uma conferência">
+                        <div class="missao-content">
+                            <h3>Parceria com a CRU</h3>
+                            <p>Apoiamos e recebemos missionários da CRU (Cruzada Estudantil) para evangelismo universitário, oferecendo suporte e um lar espiritual durante suas missões.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. SEÇÃO DE CONTATO -->
+        <section id="contato" class="content-section bg-light">
+            <div class="container">
+                <h2 class="section-title">Fale Conosco</h2>
+                <p class="section-subtitle">Estamos de portas abertas para receber você. Venha nos visitar!</p>
+                <div class="contato-wrapper">
+                    <div class="contato-info">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Nosso Endereço</strong>
+                                <p>Templo EPTG (e outras localidades), Taguatinga, DF</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <div>
+                                <strong>Secretaria Administrativa</strong>
+                                <p>(61) 99286-9501</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Horário de Atendimento</strong>
+                                <p>Segunda a Sexta: 8h-12h e 13h-17h</p>
+                            </div>
+                        </div>
+                         <div class="info-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div>
+                                <strong>Nossos Cultos</strong>
+                                <p>Domingos: 10h30 e 18h<br>Quartas: 20h</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3839.231718916362!2d-48.05948308898165!3d-15.791980823419515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935a33758913a047%3A0x62887652759902bd!2sIgreja%20Batista%20Central%20de%20Taguatinga!5e0!3m2!1spt-BR!2sbr!4v1716309854721" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
                 </div>
             </div>
         </section>
@@ -104,54 +180,31 @@
     <footer class="footer">
         <div class="container">
              <div class="logo">Igreja Batista Central <span>em Taguatinga</span></div>
-             <p>© 2024 IBCT. Todos os direitos reservados. <br> Um ministério dedicado ao ensino da Palavra.</p>
+             <p>© 2024 IBCT. Todos os direitos reservados. <br> Um ministério dedicado ao ensino e serviço da Palavra.</p>
         </div>
     </footer>
 
-    <!-- MODAIS -->
-    <div class="modal-overlay" id="lesson-modal">
-        <div class="modal-content">
-            <button class="modal-close">×</button>
-            <h2 id="modal-title">Título da Lição</h2>
-            <p id="modal-teacher">com Professor</p>
-            <p id="modal-description">Descrição detalhada da lição...</p>
-            <p id="modal-scripture">"Versículo-chave"</p>
-            <div id="modal-extra-content"></div>
-        </div>
-    </div>
-    
-    <div class="modal-overlay" id="calendar-modal">
-        <div class="calendar-modal-content">
-            <button class="modal-close">×</button>
-            <div class="calendar-main">
-                <div class="calendar-header">
-                    <button id="prev-month" class="calendar-nav-btn"><i class="fas fa-chevron-left"></i></button>
-                    <h2 id="month-year"></h2>
-                    <button id="next-month" class="calendar-nav-btn"><i class="fas fa-chevron-right"></i></button>
-                </div>
-                <div class="weekdays">
-                    <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
-                </div>
-                <div class="calendar-grid" id="calendar-days"></div>
-            </div>
-            <div id="event-details-wrapper">
-                <h3 id="event-details-title">Eventos do Dia</h3>
-                <div id="event-details">
-                    <p>Selecione um dia para ver os eventos.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="modal-overlay" id="external-content-modal">
-        <div class="modal-content modal-content-large">
-            <button class="modal-close">×</button>
-            <div id="external-content-body"><p>Carregando material...</p></div>
-        </div>
-    </div>
-    
-    <!-- MUDANÇA: Troca de '▲' por um ícone do Font Awesome para um visual mais limpo -->
     <a class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
-    <script src="js/script.js" defer></script>
+    
+    <script>
+        // Lógica do Menu Hamburger
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('toggle');
+        });
+        
+        // Lógica do Botão Voltar ao Topo
+        const scrollToTopBtn = document.querySelector('.scroll-to-top');
+        window.addEventListener('scroll', () => {
+            scrollToTopBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+        });
+        scrollToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
 </body>
 </html>
