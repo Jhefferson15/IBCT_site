@@ -53,6 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const eventsTitle = document.getElementById('events-title');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
+    const instaScroller = document.querySelector('.instagram-scroller');
+    const prevInstaBtn = document.getElementById('prev-insta-btn');
+    const nextInstaBtn = document.getElementById('next-insta-btn');
     
     let showingFutureEvents = true;
 
@@ -159,8 +162,15 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.classList.toggle('toggle');
     });
 
+    // Scroller de Eventos
     prevBtn.addEventListener('click', () => lessonsScroller.scrollBy({ left: -330, behavior: 'smooth' }));
     nextBtn.addEventListener('click', () => lessonsScroller.scrollBy({ left: 330, behavior: 'smooth' }));
+
+    // Scroller do Instagram
+    if (instaScroller && prevInstaBtn && nextInstaBtn) {
+        prevInstaBtn.addEventListener('click', () => instaScroller.scrollBy({ left: -300, behavior: 'smooth' }));
+        nextInstaBtn.addEventListener('click', () => instaScroller.scrollBy({ left: 300, behavior: 'smooth' }));
+    }
     
     function openAnyModal(modal) { modal.classList.add('active'); document.body.classList.add('modal-open'); }
     function closeAnyModal(modal) { 

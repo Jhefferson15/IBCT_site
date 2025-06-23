@@ -118,8 +118,8 @@ a:hover { opacity: 0.7; }
     border-radius: 50%; font-size: 24px; cursor: pointer; z-index: 10; box-shadow: var(--sombra-suave);
     display: flex; align-items: center; justify-content: center;
 }
-#prev-btn { left: -25px; }
-#next-btn { right: -25px; }
+#prev-btn, #prev-insta-btn { left: -25px; }
+#next-btn, #next-insta-btn { right: -25px; }
 
 /* 6. SEÇÃO SOBRE & JUNTE-SE */
 #sobre, #junte-se { background-color: var(--cor-branco); }
@@ -248,6 +248,88 @@ a:hover { opacity: 0.7; }
 .scroll-to-top:hover { transform: translateY(-3px); }
 .scroll-to-top.visible { display: flex; opacity: 1; }
 
+/* 11.5 SEÇÃO INSTAGRAM FEED (NOVO) */
+#instagram-feed {
+    background-color: var(--cor-vinho);
+}
+#instagram-feed h2, #instagram-feed p {
+    color: var(--cor-branco);
+}
+#instagram-feed h2 a {
+    color: var(--cor-rosa-suave);
+    text-decoration: none;
+    font-family: var(--fonte-corpo);
+    font-weight: 500;
+    font-size: 0.8em;
+}
+#instagram-feed h2 a:hover {
+    text-decoration: underline;
+    opacity: 1;
+}
+
+.instagram-wrapper {
+    position: relative;
+    margin-top: 30px;
+}
+.instagram-scroller {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px 5px;
+    scrollbar-width: none; /* Firefox */
+}
+.instagram-scroller::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+.insta-card {
+    flex: 0 0 280px;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    display: block; /* Garante que a tag <a> se comporte como bloco */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+.insta-card:hover {
+    transform: scale(1.03);
+    opacity: 1;
+}
+.insta-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+.insta-card:hover img {
+    transform: scale(1.1);
+}
+.insta-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cor-branco);
+    font-size: 50px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    cursor: pointer;
+}
+.insta-card:hover .insta-overlay {
+    opacity: 1;
+}
+
+/* Ajusta botões para o novo carrossel */
+.instagram-wrapper .scroll-button {
+    top: calc(50% - 5px); /* Ajuste vertical para alinhar com os cards */
+}
+
 /* 12. RESPONSIVIDADE MOBILE */
 @media (max-width: 920px) {
     .calendar-modal-content { flex-direction: column; max-height: 90vh; overflow-y: auto; }
@@ -273,8 +355,9 @@ a:hover { opacity: 0.7; }
     .hamburger.toggle .line2 { opacity: 0; }
     .hamburger.toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
     .hero h1 { font-size: 36px; }
-    #prev-btn, #next-btn { display: none; }
+    .scroll-button { display: none; } /* Esconde todos os botões de scroll em mobile */
     .event-card { flex-basis: 260px; }
+    .insta-card { flex: 0 0 240px; } /* Diminui os cards do insta em mobile */
     .calendar-main { min-width: unset; width: 100%; }
     .calendar-header h2 { font-size: 22px; }
 }
