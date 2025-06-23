@@ -15,10 +15,10 @@ const romanRoadsData = {
     maritime_route: {
         name: 'Rota Marítima (Trôade a Neápolis)',
         color: '#1E88E5', // Azul
-        path: [[39.9575, 26.2386], [40.475, 25.510], [24.411, 40.938]], // Trôade -> Samotrácia -> Neápolis
+        path: [[26.2386, 39.9575], [25.510, 40.475], [24.411, 40.938]], // Trôade -> Samotrácia -> Neápolis (Corrigido para [lon, lat])
         cities: [
-            { ancientName: 'Trôade', modernName: 'Dalyan', coords: [39.9575, 26.2386] },
-            { ancientName: 'Samotrácia', modernName: 'Samothrace', coords: [40.475, 25.510] },
+            { ancientName: 'Trôade', modernName: 'Dalyan', coords: [26.2386, 39.9575] },
+            { ancientName: 'Samotrácia', modernName: 'Samothrace', coords: [25.510, 40.475] },
             { ancientName: 'Neápolis', modernName: 'Kavala', coords: [24.411, 40.938] }
         ]
     },
@@ -38,143 +38,105 @@ const romanRoadsData = {
         ]
     },
     via_apia_original: {
-        name: 'Via Ápia (Original)',
-        color: '#FDD835', // Amarelo
-        path: [[12.4923, 41.8902], [12.671, 41.767], [13.243, 41.285], [13.426, 41.356], [13.606, 41.258], [13.766, 41.241], [13.883, 41.100], [14.253, 41.106], [14.777, 41.131], [15.811, 40.973], [17.240, 40.471], [17.633, 40.500], [17.942, 40.632]],
-        cities: [
-            { ancientName: 'Roma', modernName: 'Roma', coords: [12.4923, 41.8902] },
-            { ancientName: 'Capua', modernName: 'S. M. Capua Vetere', coords: [14.253, 41.106] },
-            { ancientName: 'Beneventum', modernName: 'Benevento', coords: [14.777, 41.131] },
-            { ancientName: 'Tarentum', modernName: 'Taranto', coords: [17.240, 40.471] },
-            { ancientName: 'Brundisium', modernName: 'Brindisi', coords: [17.942, 40.632] }
-        ]
+        name: 'Via Ápia (Original)', color: '#FDD835', // Amarelo
+        path: [[12.4923, 41.8902], [14.253, 41.106], [14.777, 41.131], [17.240, 40.471], [17.942, 40.632]],
+        cities: [ { ancientName: 'Roma', modernName: 'Roma', coords: [12.4923, 41.8902] }, { ancientName: 'Capua', modernName: 'S. M. Capua Vetere', coords: [14.253, 41.106] }, { ancientName: 'Beneventum', modernName: 'Benevento', coords: [14.777, 41.131] }, { ancientName: 'Tarentum', modernName: 'Taranto', coords: [17.240, 40.471] }, { ancientName: 'Brundisium', modernName: 'Brindisi', coords: [17.942, 40.632] } ]
     },
-     via_apia_traiana: {
-        name: 'Via Ápia Traiana',
-        color: '#FFA726', // Laranja
-        path: [[14.777, 41.131], [15.300, 41.366], [15.716, 41.316], [16.066, 41.216], [16.866, 41.116], [17.383, 40.883], [17.942, 40.632]],
-        cities: [
-            { ancientName: 'Beneventum', modernName: 'Benevento', coords: [14.777, 41.131] },
-            { ancientName: 'Canusium', modernName: 'Canosa di Puglia', coords: [16.066, 41.216] },
-            { ancientName: 'Barium', modernName: 'Bari', coords: [16.866, 41.116] },
-            { ancientName: 'Brundisium', modernName: 'Brindisi', coords: [17.942, 40.632] }
-        ]
+    via_apia_traiana: {
+        name: 'Via Ápia Traiana', color: '#FFA726', // Laranja
+        path: [[14.777, 41.131], [16.066, 41.216], [16.866, 41.116], [17.942, 40.632]],
+        cities: [ { ancientName: 'Beneventum', modernName: 'Benevento', coords: [14.777, 41.131] }, { ancientName: 'Canusium', modernName: 'Canosa di Puglia', coords: [16.066, 41.216] }, { ancientName: 'Barium', modernName: 'Bari', coords: [16.866, 41.116] }, { ancientName: 'Brundisium', modernName: 'Brindisi', coords: [17.942, 40.632] } ]
     },
     via_claudia_augusta: {
-        name: 'Via Cláudia Augusta',
-        color: '#8E24AA', // Roxo
-        path: [[12.385, 45.508], [11.9059, 46.019], [11.1211, 46.0679], [11.4323, 46.8929], [10.8978, 48.3707], [10.784, 48.710]],
-        cities: [
-            { ancientName: 'Altinum', modernName: 'Altino', coords: [12.385, 45.508] },
-            { ancientName: 'Tridentum', modernName: 'Trento', coords: [11.1211, 46.0679] },
-            { ancientName: 'Augusta Vindelicorum', modernName: 'Augsburg', coords: [10.8978, 48.3707] }
-        ]
+        name: 'Via Cláudia Augusta', color: '#8E24AA', // Roxo
+        path: [[12.385, 45.508], [11.1211, 46.0679], [10.8978, 48.3707]],
+        cities: [ { ancientName: 'Altinum', modernName: 'Altino', coords: [12.385, 45.508] }, { ancientName: 'Tridentum', modernName: 'Trento', coords: [11.1211, 46.0679] }, { ancientName: 'Augusta Vindelicorum', modernName: 'Augsburg', coords: [10.8978, 48.3707] } ]
     }
 };
 
 const quizData = [
+    // --- NÍVEL FÁCIL ---
     {
-        verseRef: "Atos 16:6-12",
-        verseText: "E, passando pela Frígia e pela província da Galácia, foram impedidos pelo Espírito Santo de anunciar a palavra na Ásia... E de noite apareceu a Paulo uma visão... E, logo depois desta visão, procuramos partir para a Macedônia... e dali para Filipos...",
-        media: {
-            type: 'map',
-            config: {
-                provider: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                // Chaves das rotas definidas em romanRoadsData que devem ser exibidas
-                displayRoutes: ['via_sebaste', 'maritime_route', 'via_egnatia', 'via_apia_original', 'via_apia_traiana', 'via_claudia_augusta'],
-                // Marcadores específicos para esta pergunta (serão coloridos com base na rota associada)
-                markers: [
-                    { coords: [31.1894, 38.3072], routeId: 'via_sebaste', popup: '<b>Antioquia da Pisídia:</b> Paulo percorre a região da Galácia (Via Sebaste).' },
-                    { coords: [39.9575, 26.2386], routeId: 'maritime_route', popup: '<b>Trôade:</b> Ponto da visão e partida para a Europa.' },
-                    { coords: [24.2858, 41.0128], routeId: 'via_egnatia', popup: '<b>Filipos:</b> Destino na Macedônia, sobre a Via Egnácia.' }
-                ]
-            }
-        },
-        prompt: "A jornada de Paulo em Atos 16:6-12 envolve duas fases distintas: uma terrestre frustrada na Ásia Menor e uma marítima/terrestre decisiva para a Europa. Com base no mapa e no conhecimento das rotas romanas, qual combinação descreve corretamente a infraestrutura usada?",
-        alternatives: [
-            "Ele usou a Via Ápia (amarela/laranja) para atravessar a Ásia e a Via Egnácia (verde) para chegar a Filipos.",
-            "A jornada na Ásia foi pela Via Sebaste (vermelha), seguida pela rota marítima (azul) até Neápolis, e então um curto trajeto pela Via Egnácia (verde) até Filipos.",
-            "Ele viajou pela Via Cláudia Augusta (roxa) até Trôade e depois pegou um barco direto para Filipos.",
-            "A jornada inteira, tanto na Ásia quanto na Macedônia, foi feita pela Via Egnácia (verde)."
-        ],
-        correctAnswerIndex: 1,
-        difficulty: "Avançado",
-        explanation: "A Via Sebaste era a principal rede de estradas na província da Galácia, onde Paulo foi 'impedido de pregar'. A Via Egnácia era a grande artéria que ligava o Mar Adriático a Bizâncio, passando por Filipos. A resposta correta exige a identificação de ambas as vias em suas respectivas regiões geográficas, conectadas pela rota marítima."
+        verseRef: "Atos 16:14",
+        verseText: "E uma certa mulher, chamada Lídia, vendedora de púrpura, da cidade de Tiatira, e que servia a Deus, nos ouvia...",
+        media: { type: 'image', src: 'https://i.imgur.com/r6tM0J.jpg', alt: 'Molusco Murex, fonte da púrpura.' },
+        prompt: "Quem foi a primeira pessoa convertida na Europa, conforme o relato em Filipos?",
+        alternatives: ["A jovem com espírito de Píton", "O carcereiro de Filipos", "Lídia, a vendedora de púrpura", "Silas, companheiro de Paulo"],
+        correctAnswerIndex: 2,
+        difficulty: "Fácil",
+        explanation: "Lídia, uma mulher de negócios da cidade de Tiatira, foi a primeira convertida documentada na missão de Paulo na Europa. Sua casa se tornou a base para a igreja em Filipos."
     },
     {
+        verseRef: "Atos 16:25-26",
+        verseText: "Pela meia-noite, Paulo e Silas oravam e cantavam hinos a Deus... De repente, sobreveio um terremoto tão grande que os alicerces do cárcere se moveram...",
+        media: { type: 'image', src: 'https://i.imgur.com/gK9pZkH.jpg', alt: 'Estrutura identificada como a prisão em Filipos.'},
+        prompt: "O que aconteceu de extraordinário enquanto Paulo e Silas estavam na prisão?",
+        alternatives: ["Um anjo apareceu e os libertou", "Houve um grande terremoto que abriu as portas", "Os outros prisioneiros se rebelaram", "Os magistrados se arrependeram e os soltaram"],
+        correctAnswerIndex: 1,
+        difficulty: "Fácil",
+        explanation: "O texto descreve um terremoto milagroso que abalou a prisão, abrindo todas as portas e soltando as correntes de todos os prisioneiros, o que levou à conversão do carcereiro."
+    },
+    // --- NÍVEL NORMAL ---
+    {
+        verseRef: "Atos 16:12",
+        verseText: "...e dali para Filipos, que é a primeira cidade daquela parte da Macedônia, e é uma colônia...",
+        media: { type: 'image', src: 'https://i.imgur.com/gU9lX8q.jpg', alt: 'Ruínas do Fórum de Filipos.' },
+        prompt: "Lucas destaca que Filipos era uma 'colônia' romana. Qual era a principal implicação desse status para seus habitantes?",
+        alternatives: ["Eles eram obrigados a servir no exército romano.", "Eles possuíam cidadania romana e se orgulhavam de seus costumes latinos.", "Eles não pagavam impostos ao império.", "A cidade era governada diretamente por um parente do imperador."],
+        correctAnswerIndex: 1,
+        difficulty: "Normal",
+        explanation: "Uma colônia romana era um posto avançado de cultura e lei romana. Seus cidadãos livres geralmente possuíam cidadania romana, o que lhes conferia direitos e privilégios especiais. Isso explica a acusação em 16:21 sobre 'costumes não lícitos a nós, romanos'."
+    },
+    {
+        verseRef: "Atos 16:9-12",
+        verseText: "E, de noite, apareceu a Paulo uma visão... E, logo depois desta visão, procuramos partir para a Macedônia... e dali para Filipos...",
+        media: { type: 'map', config: { displayRoutes: ['via_sebaste', 'maritime_route', 'via_egnatia'], markers: [{ coords: [31.1894, 38.3072], routeId: 'via_sebaste', popup: 'Antioquia da Pisídia' }, { coords: [26.2386, 39.9575], routeId: 'maritime_route', popup: 'Trôade' }, { coords: [24.2858, 41.0128], routeId: 'via_egnatia', popup: 'Filipos' }] }},
+        prompt: "A jornada de Paulo envolveu rotas terrestres e marítimas. Observando o mapa, qual via principal ele usou ao chegar na Macedônia e ir para Filipos?",
+        alternatives: ["Via Sebaste (vermelha)", "Via Ápia (amarela)", "Via Egnácia (verde)", "Rota Marítima (azul)"],
+        correctAnswerIndex: 2,
+        difficulty: "Normal",
+        explanation: "Após desembarcar em Neápolis, o porto da região, Paulo e seus companheiros viajaram pela Via Egnácia, a principal estrada romana que cruzava a Macedônia, para chegar a Filipos."
+    },
+    // --- NÍVEL AVANÇADO ---
+    {
         verseRef: "Atos 16:20-21",
-        verseText: "E, apresentando-os aos magistrados, disseram: Estes homens, sendo judeus, perturbam a nossa cidade, e nos expõem costumes que não nos é lícito receber nem praticar, visto que somos romanos.",
-        media: {
-            type: 'image',
-            src: 'https://i.imgur.com/gU9lX8q.jpg', // Ruínas do Fórum de Filipos
-            alt: 'Ruínas do Fórum (Ágora) de Filipos, onde a acusação pública ocorreu.'
-        },
-        prompt: "A acusação contra Paulo e Silas é uma peça de retórica legal. Qual análise, baseada na lei e sociedade romana, explica melhor sua eficácia perante os magistrados de uma colônia?",
-        alternatives: [
-            "A acusação era fraca, pois o Judaísmo era uma 'religio licita' (religião permitida) e os magistrados sabiam disso.",
-            "Ela habilmente conectou xenofobia ('sendo judeus'), com a ameaça à ordem pública ('perturbam a cidade') e a violação da identidade cívica ('costumes não lícitos a nós, romanos'), tornando a intervenção uma necessidade política.",
-            "O problema principal era a falta de uma licença comercial para pregar, algo que os donos da escrava poderiam ter facilmente provado.",
-            "A acusação focava na blasfêmia contra os deuses gregos, especialmente Apolo, o que era um crime capital em Filipos."
-        ],
+        verseText: "Estes homens, sendo judeus, perturbam a nossa cidade, e nos expõem costumes que não nos é lícito receber nem praticar, visto que somos romanos.",
+        media: { type: 'image', src: 'https://i.imgur.com/gU9lX8q.jpg', alt: 'Ruínas do Fórum de Filipos.'},
+        prompt: "A acusação contra Paulo e Silas é uma peça de retórica legal. Qual análise, baseada na lei e sociedade romana, explica melhor sua eficácia perante os magistrados?",
+        alternatives: ["A acusação era fraca, pois o Judaísmo era uma 'religio licita' (religião permitida).", "Ela conectou xenofobia ('sendo judeus') à ameaça à ordem ('perturbam a cidade') e à violação da identidade cívica ('costumes não lícitos a nós, romanos').", "O problema principal era a falta de uma licença comercial para pregar.", "A acusação focava na blasfêmia contra os deuses gregos, um crime capital."],
         correctAnswerIndex: 1,
         difficulty: "Avançado",
-        explanation: "A força da acusação não estava em um único ponto, mas na fusão de preconceito, política e lei. Ao destacar a identidade 'judaica' (estrangeira) versus a 'romana' (cívica), e alegar perturbação da paz, os acusadores criaram um cenário onde os magistrados se sentiram pressionados a agir para afirmar a ordem e a identidade romana da colônia, independentemente dos méritos teológicos."
+        explanation: "A força da acusação não estava em um único ponto, mas na fusão de preconceito, política e lei. Ao destacar a identidade 'judaica' (estrangeira) versus a 'romana' (cívica), e alegar perturbação da paz, os acusadores criaram um cenário onde os magistrados se sentiram pressionados a agir."
     },
     {
         verseRef: "Atos 16:14",
         verseText: "E uma certa mulher, chamada Lídia, vendedora de púrpura, da cidade de Tiatira...",
-        media: {
-            type: 'image',
-            src: 'https://i.imgur.com/r6tM0J.jpg', // Molusco Murex
-            alt: 'Molusco Murex, fonte do caríssimo corante púrpura.'
-        },
-        prompt: "Plínio, o Velho, em 'História Natural' (Livro 9), descreve o preço da púrpura de Tiro como 'valendo seu peso em prata'. Como essa informação extra-bíblica redefine nossa compreensão do papel de Lídia?",
-        alternatives: [
-            "Ela era provavelmente pobre, vendendo tecidos de baixa qualidade tingidos com imitações baratas de púrpura.",
-            "Mostra que ela pertencia a uma guilda comercial que detinha o monopólio religioso da venda de púrpura na Macedônia.",
-            "Confirma seu status como uma empresária de elite, com capital significativo e conexões comerciais internacionais, tornando sua casa uma base de operações formidável e estratégica para a missão de Paulo.",
-            "Sugere que seu negócio era ilegal, pois o uso de púrpura era restrito por lei apenas a senadores e ao imperador."
-        ],
+        media: { type: 'image', src: 'https://i.imgur.com/r6tM0J.jpg', alt: 'Molusco Murex, fonte do corante púrpura.' },
+        prompt: "Plínio, o Velho, em 'História Natural', descreve o preço da púrpura como 'valendo seu peso em prata'. Como essa informação extra-bíblica redefine nossa compreensão de Lídia?",
+        alternatives: [ "Ela era pobre, vendendo imitações baratas de púrpura.", "Ela pertencia a uma guilda que detinha o monopólio religioso da venda de púrpura.", "Confirma seu status como uma empresária de elite, com capital e conexões internacionais, tornando sua casa uma base estratégica para a missão.", "Sugere que seu negócio era ilegal, pois o uso de púrpura era restrito por lei apenas a senadores e ao imperador."],
         correctAnswerIndex: 2,
         difficulty: "Avançado",
-        explanation: "Fontes como Plínio confirmam que o comércio de púrpura era um negócio de altíssimo luxo. Isso eleva Lídia de uma simples 'vendedora' para uma patrona rica e influente. Sua conversão não foi apenas espiritual; foi um ganho logístico e financeiro massivo para a igreja primitiva na Europa, oferecendo um local seguro e recursos."
+        explanation: "Fontes como Plínio confirmam que o comércio de púrpura era de altíssimo luxo. Isso eleva Lídia de 'vendedora' para uma patrona rica e influente. Sua conversão foi um ganho logístico e financeiro massivo para a igreja na Europa, oferecendo um local seguro e recursos."
     },
+    // --- NÍVEL ESPECIALISTA ---
     {
         verseRef: "Atos 16:16",
         verseText: "...uma jovem, que tinha um espírito de Píton (pneuma pythona)...",
-        media: {
-            type: 'image',
-            src: 'https://i.imgur.com/JzS1W1J.jpg',
-            alt: 'Ruínas do Templo de Apolo em Delfos, centro do culto pítio.'
-        },
-        prompt: "Estudos como o de Kaefer (2024) enfatizam que 'pneuma pythona' é uma referência técnica ao culto de Apolo em Delfos. Se a libertação da jovem não é apenas um exorcismo genérico, mas uma confrontação direta com este culto específico, qual a implicação teológica mais profunda?",
-        alternatives: [
-            "Que Paulo estava tentando purificar o culto de Apolo, removendo seus elementos demoníacos.",
-            "Que o poder de Cristo é apresentado como superior não a um 'demônio' qualquer, mas a uma das mais antigas, respeitadas e politicamente influentes instituições religiosas do mundo greco-romano.",
-            "Que a jovem era uma sacerdotisa oficial enviada por Delfos para espionar as atividades de Paulo em Filipos.",
-            "Que todos os casos de adivinhação no Novo Testamento estão, na verdade, ligados ao Oráculo de Delfos."
-        ],
+        media: { type: 'image', src: 'https://i.imgur.com/JzS1W1J.jpg', alt: 'Ruínas do Templo de Apolo em Delfos.'},
+        prompt: "A expressão 'pneuma pythona' é uma referência técnica ao culto de Apolo em Delfos. Se a libertação da jovem é uma confrontação direta com este culto, qual a implicação teológica mais profunda?",
+        alternatives: ["Paulo estava tentando purificar o culto de Apolo de seus elementos demoníacos.", "O poder de Cristo é superior não a um 'demônio' qualquer, mas a uma das mais influentes instituições religiosas do mundo greco-romano.", "A jovem era uma sacerdotisa oficial enviada por Delfos para espionar Paulo.", "Todos os casos de adivinhação no NT estão, na verdade, ligados a Delfos."],
         correctAnswerIndex: 1,
         difficulty: "Especialista",
-        explanation: "Ao usar uma terminologia tão específica, Lucas (o autor de Atos) enquadra o evento não como um incidente local, mas como uma batalha cósmica. O poder manifesto em Jesus, através de Paulo, não apenas cura um indivíduo, mas demonstra autoridade sobre as forças espirituais que sustentavam o próprio coração da religião e política grega. É uma declaração de soberania."
+        explanation: "Ao usar uma terminologia tão específica, Lucas enquadra o evento não como um incidente local, mas como uma batalha cósmica. O poder manifesto em Jesus demonstra autoridade sobre as forças espirituais que sustentavam o próprio coração da religião e política grega. É uma declaração de soberania."
     },
     {
         verseRef: "Atos 16:37",
         verseText: "Mas Paulo replicou: Açoitaram-nos publicamente e, sem sermos condenados, sendo homens romanos...",
-        media: {
-            type: 'image',
-            src: 'https://i.imgur.com/gK9pZkH.jpg',
-            alt: 'Estrutura em Filipos tradicionalmente identificada como a prisão.'
-        },
-        prompt: "A revelação tardia da cidadania romana por Paulo é uma manobra jurídica. A Lex Valeria e a Lex Porcia eram pilares da lei romana que protegiam os cidadãos. Qual direito fundamental, articulado por Cícero em 'Contra Verres', os magistrados violaram, crime que poderia encerrar suas carreiras?",
-        alternatives: [
-            "O direito a um julgamento por um júri de seus pares.",
-            "O direito de não ser preso dentro dos limites da cidade (pomerium).",
-            "O direito de apelação ao imperador (provocatio ad populum) e a imunidade contra açoitamento sumário (verberatio) sem um julgamento formal.",
-            "O direito a ter um advogado fornecido pelo estado."
-        ],
+        media: { type: 'image', src: 'https://i.imgur.com/gK9pZkH.jpg', alt: 'Prisão em Filipos.'},
+        prompt: "A Lex Valeria e a Lex Porcia protegiam cidadãos romanos. Qual direito fundamental, articulado por Cícero em 'Contra Verres', os magistrados violaram, crime que poderia encerrar suas carreiras?",
+        alternatives: ["O direito a um julgamento por um júri de seus pares.", "O direito de não ser preso dentro dos limites da cidade (pomerium).", "O direito de apelação ao imperador (provocatio) e a imunidade contra açoitamento sumário (verberatio).", "O direito a ter um advogado fornecido pelo estado."],
         correctAnswerIndex: 2,
         difficulty: "Especialista",
-        explanation: "Cícero famosamente bradou que as palavras 'Civis Romanus sum' ('Eu sou um cidadão romano') deveriam parar qualquer ação de um magistrado. O açoitamento (verberatio) de um cidadão sem julgamento e sem a chance de apelar (provocatio) era uma ofensa gravíssima. Ao revelar o fato depois, Paulo não só se protegeu, mas colocou os magistrados em uma posição de ilegalidade, forçando-os a uma retratação pública que legitimou a presença cristã."
+        explanation: "Cícero famosamente bradou que as palavras 'Civis Romanus sum' ('Eu sou um cidadão romano') deveriam parar qualquer ação. O açoitamento (verberatio) de um cidadão sem julgamento e sem a chance de apelar (provocatio) era uma ofensa gravíssima. Paulo usou isso para forçar uma retratação pública que legitimou a presença cristã."
     }
 ];

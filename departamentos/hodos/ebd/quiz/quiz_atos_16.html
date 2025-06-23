@@ -18,10 +18,22 @@
 <body>
 
     <div id="quiz-container">
+        <!-- Seleção de Dificuldade (Inicialmente Visível) -->
+        <div id="difficulty-selection">
+            <h3>Selecione a Dificuldade:</h3>
+            <button data-difficulty="Fácil">Fácil (Modo Estudo)</button>
+            <button data-difficulty="Normal">Normal (Modo Desafio)</button>
+            <button data-difficulty="Especialista">Especialista (Modo Teste)</button>
+        </div>
+
         <!-- 1. Corpo do Quiz (Será atualizado dinamicamente) -->
-        <div id="quiz-body">
-            <!-- Cabeçalho da Questão (Trecho Bíblico) -->
+        <div id="quiz-body" class="hidden">
+            <!-- Cabeçalho da Questão (Trecho Bíblico e Cronômetro) -->
             <div class="question-header">
+                <div id="timer-container" class="hidden">
+                    <i class="fa-solid fa-hourglass-half"></i>
+                    <span id="timer-text">30</span>
+                </div>
                 <h3 id="verse-ref-header"></h3>
                 <blockquote id="verse-text-header"></blockquote>
             </div>
@@ -51,8 +63,8 @@
     </div>
     
     <!-- 3. Setas de Navegação Flutuantes -->
-    <button id="prev-q-btn" class="nav-arrow prev"><i class="fas fa-chevron-left"></i></button>
-    <button id="next-q-btn" class="nav-arrow next"><i class="fas fa-chevron-right"></i></button>
+    <button id="prev-q-btn" class="nav-arrow prev hidden"><i class="fas fa-chevron-left"></i></button>
+    <button id="next-q-btn" class="nav-arrow next hidden"><i class="fas fa-chevron-right"></i></button>
 
     <!-- Scripts do Quiz -->
     <script src="js/quiz_atos_16_data.js"></script>
