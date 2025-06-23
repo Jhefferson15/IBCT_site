@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBCT - Ministério HODOS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/hodos_style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo">IBCT <span>HODOS</span></div>
+            <nav class="nav-links">
+                <a href="#eventos">Eventos</a>
+                <a href="#sobre">Sobre Nós</a>
+                <a id="open-calendar-link">Calendário</a>
+            </nav>
+            <div class="hamburger">
+                <div class="line1"></div><div class="line2"></div><div class="line3"></div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero fade-in">
+             <div class="container">
+                <h1>Ministério HODOS</h1>
+                <p>O caminho que leva a Cristo. Junte-se aos jovens da Igreja Batista Central de Taguatinga. <br><strong>#VivaAVerdade</strong></p>
+                <a href="#eventos" class="cta-button">Ver Próximos Eventos</a>
+            </div>
+        </section>
+
+        <section id="eventos" class="content-section fade-in">
+            <div class="container">
+                <div class="section-header-with-button">
+                    <h2 id="events-title">Nossos Próximos Encontros</h2>
+                    <button id="toggle-events-btn" class="toggle-events-button">Ver Eventos Passados</button>
+                </div>
+                <div class="lessons-wrapper">
+                    <button id="prev-btn" class="scroll-button"><i class="fas fa-chevron-left"></i></button>
+                    <div class="lessons-scroller"></div>
+                    <button id="next-btn" class="scroll-button"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+        
+        <section id="sobre" class="content-section fade-in">
+            <div class="container">
+                <h2>Os Pilares do HODOS</h2>
+                <p>Nosso ministério se baseia em quatro pilares essenciais para o crescimento cristão.</p>
+                <div class="avisos-grid">
+                    <div class="aviso-card"><h3><i class="fas fa-book-open-reader icon-pillar"></i> Palavra</h3><p>Estudamos a Bíblia juntos aos domingos na EBD e nos aprofundamos nos PGMs, buscando sempre viver a verdade do Evangelho.</p></div>
+                    <div class="aviso-card"><h3><i class="fas fa-people-group icon-pillar"></i> Comunhão</h3><p>Fortalecemos nossos laços através dos PGMs, Hodos Day e encontros informais. Somos uma família que se apoia e caminha junta.</p></div>
+                    <div class="aviso-card"><h3><i class="fas fa-music icon-pillar"></i> Adoração</h3><p>O Hodos Meet é nosso principal ponto de encontro para louvar a Deus com liberdade e alegria, celebrando quem Ele é e o que Ele faz.</p></div>
+                    <div class="aviso-card"><h3><i class="fas fa-hand-holding-heart icon-pillar"></i> Serviço</h3><p>Colocamos nossa fé em prática servindo à igreja e à comunidade, como no apoio aos missionários da CRU e em outras ações.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="junte-se" class="content-section fade-in">
+            <div class="container">
+                <h2>Junte-se a Nós!</h2>
+                 <p>Você é nosso convidado especial para fazer parte da nossa família.</p>
+                <div class="avisos-grid">
+                    <div class="aviso-card"><h3>Participe de um PGM</h3><p>Toda sexta-feira temos um lugar para você. É a melhor forma de se conectar e fazer amigos. Fale com a gente!</p></div>
+                    <div class="aviso-card"><h3>Venha ao Hodos Meet</h3><p>Fique de olho no grupo para a data do nosso próximo encontro de louvor. Traga um amigo e venha adorar a Deus conosco!</p></div>
+                    <div class="aviso-card"><h3>Acompanhe no Grupo</h3><p>Todas as informações, devocionais e pedidos de oração são compartilhados em nosso grupo de WhatsApp. Peça o link de convite!</p></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+             <div class="logo">IBCT <span>Ministério HODOS</span></div>
+             <p>© 2025 Igreja Batista Central em Taguatinga. Todos os direitos reservados. <br> #VivaAVerdade</p>
+        </div>
+    </footer>
+
+    <!-- MODAIS -->
+    <div class="modal-overlay" id="lesson-modal">
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <h2 id="modal-title">Título do Evento</h2>
+            <p id="modal-location"><strong>Local:</strong> <span></span></p>
+            <p id="modal-description">Descrição detalhada do evento...</p>
+        </div>
+    </div>
+    
+    <!-- NOVO MODAL PARA CARREGAR PÁGINAS EXTERNAS -->
+    <div class="modal-overlay" id="external-page-modal">
+        <div class="modal-content-external">
+            <button class="modal-close">×</button>
+            <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="calendar-modal">
+        <div class="calendar-modal-content">
+            <button class="modal-close">×</button>
+            <div class="calendar-main">
+                <div class="calendar-header">
+                    <button id="prev-month" class="calendar-nav-btn"><i class="fas fa-chevron-left"></i></button>
+                    <h2 id="month-year"></h2>
+                    <button id="next-month" class="calendar-nav-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="weekdays">
+                    <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
+                </div>
+                <div class="calendar-grid" id="calendar-days"></div>
+            </div>
+            <div id="event-details-wrapper">
+                <h3 id="event-details-title">Eventos do Dia</h3>
+                <div id="event-details">
+                    <p>Selecione um dia para ver os eventos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <a class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
+    <script src="js/hodos_script.js" defer></script>
+</body>
+</html>
