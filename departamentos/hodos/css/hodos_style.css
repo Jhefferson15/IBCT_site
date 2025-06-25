@@ -38,7 +38,17 @@ a:hover { opacity: 0.7; }
     position: sticky; top: 0; z-index: 1000;
 }
 .header .container { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-family: var(--fonte-titulo); font-size: 24px; color: var(--cor-vinho); }
+.logo { 
+    font-family: var(--fonte-titulo); 
+    font-size: 24px; 
+    color: var(--cor-vinho); 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.logo img {
+    height: 35px;
+}
 .logo span { font-family: var(--fonte-corpo); font-size: 16px; color: var(--cor-rosa-suave); }
 .nav-links { display: flex; }
 .nav-links a { margin-left: 25px; font-weight: 500; cursor: pointer; text-decoration: none; color: var(--cor-grafite-texto);}
