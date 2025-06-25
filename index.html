@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -13,12 +14,18 @@
 
     <header class="header">
         <div class="container">
-            <div class="logo">IBCT <span>Home</span></div>
+            <!-- MUDANÇA AQUI: Logo substituída por uma imagem simples e confiável -->
+            <a href="#inicio" class="logo-link">
+                <div class="logo">
+                    <img src="img/logo.png" alt="Logo IBCT" class="header-logo-img">
+                    <span>Home</span>
+                </div>
+            </a>
             <nav class="nav-links">
                 <a href="#inicio">Início</a>
                 <a href="#ministerios">Ministérios</a>
                 <a href="#missoes">Missões</a>
-                <a href="departamentos/hodos/ebd/hodos_ebd.html">EBD</a> <!-- Link para a página da EBD -->
+                <a href="departamentos/hodos/ebd/hodos_ebd.html">EBD</a>
                 <a href="#contato">Contato</a>
             </nav>
             <div class="hamburger">
@@ -28,9 +35,15 @@
     </header>
 
     <main>
-        <!-- ... (seções 1 e 2 inalteradas) ... -->
+        <!-- MUDANÇA AQUI: Estrutura do Hero totalmente refeita para usar camadas -->
         <section id="inicio" class="home-hero fade-in">
-             <div class="container">
+            <div class="hero-background-layer"></div>
+            
+            <div id="animated-logo-container" class="hero-animation-layer">
+                <!-- A animação da logo será injetada aqui pelo JS -->
+            </div>
+            
+            <div class="container hero-content-layer">
                 <h1>Uma família para pertencer</h1>
                 <p>Crescendo juntos na graça e no conhecimento de nosso Senhor Jesus Cristo.</p>
                 <a href="#ministerios" class="cta-button">Conheça nossos ministérios</a>
@@ -54,22 +67,35 @@
             </div>
         </section>
 
-        <!-- 3. SEÇÃO DE MINISTÉRIOS (DEPARTAMENTOS) -->
         <section id="ministerios" class="content-section bg-light fade-in">
             <div class="container">
                 <h2 class="section-title">Nossos Ministérios</h2>
                 <p class="section-subtitle">Grupos dedicados a servir, ensinar e promover a comunhão em todas as fases da vida.</p>
                 <div class="ministerios-grid">
-                    <!-- MUDANÇA AQUI: Adicionados data-link-url e data-link-text -->
+                     <!-- MUDANÇA AQUI: Textos dos botões ajustados conforme solicitado -->
                     <div class="ministerio-card clickable-card" 
                          data-title="Hodos (Jovens)" 
                          data-description="Um ministério dinâmico para jovens, focado em discipulado, comunhão e serviço através de encontros, PGMs e acampamentos."
                          data-link-url="departamentos/hodos/ebd/hodos_ebd.html"
-                         data-link-text="Visitar EBD dos Jovens">
+                         data-link-text="EBD - HODOS"
+                         data-link2-url="departamentos/hodos/hodos_home.html"
+                         data-link2-text="Visitar Página Hodos">
                         
                         <i class="fas fa-child-reaching"></i><h3>Hodos (Jovens)</h3><p>Discipulado, comunhão e serviço para a juventude.</p>
                     </div>
-                    <!-- ... (outros cards de ministério inalterados) ... -->
+                    <!-- OUTROS CARDS DE MINISTÉRIOS (COMPLETO) -->
+                    <div class="ministerio-card clickable-card" data-title="Ministério Infantil" data-description="Proporciona um ambiente seguro e divertido onde crianças aprendem sobre Jesus através de histórias bíblicas, músicas e atividades interativas.">
+                        <i class="fas fa-children"></i><h3>Ministério Infantil</h3><p>Ensinando a Palavra para as novas gerações.</p>
+                    </div>
+                    <div class="ministerio-card clickable-card" data-title="Ministério de Louvor e Adoração" data-description="Lidera a igreja em adoração através da música, desenvolvendo talentos e servindo com excelência para a glória de Deus.">
+                        <i class="fas fa-music"></i><h3>Louvor e Adoração</h3><p>Conduzindo a igreja em cânticos de adoração a Deus.</p>
+                    </div>
+                    <div class="ministerio-card clickable-card" data-title="Diaconia" data-description="Serve às necessidades práticas da igreja e da comunidade, prestando assistência, organizando o templo e cuidando dos membros.">
+                        <i class="fas fa-hand-holding-heart"></i><h3>Diaconia</h3><p>Cuidado e serviço prático para a comunidade da fé.</p>
+                    </div>
+                    <div class="ministerio-card clickable-card" data-title="Ministério de Casais" data-description="Fortalece casamentos e relacionamentos através de aconselhamento, estudos bíblicos e eventos sociais, promovendo a união e o amor conjugal.">
+                        <i class="fas fa-ring"></i><h3>Ministério de Casais</h3><p>Apoio e edificação para a vida a dois.</p>
+                    </div>
                     <div class="ministerio-card clickable-card" data-title="Ministério da Família" data-description="Fortalece os laços familiares através de cursos, encontros e eventos que promovem os valores cristãos no lar. Oferecemos cursos como 'Homem ao Máximo' e 'Mulher Única'.">
                         <i class="fas fa-heart"></i><h3>Ministério da Família</h3><p>Fortalecendo os laços familiares à luz da Palavra.</p>
                     </div>
@@ -89,7 +115,6 @@
             </div>
         </section>
         
-        <!-- ... (seções 4 e 5 inalteradas) ... -->
         <section id="missoes" class="content-section fade-in">
             <div class="container">
                 <h2 class="section-title">Projetos e Missões</h2>
@@ -129,7 +154,7 @@
     <footer class="footer">
         <div class="container">
              <div class="logo">Igreja Batista Central <span>em Taguatinga</span></div>
-             <p>© 2024 IBCT. Todos os direitos reservados. <br> Um ministério dedicado ao ensino e serviço da Palavra.</p>
+             <p>© 2025 IBCT. Todos os direitos reservados. <br> Um ministério dedicado ao ensino e serviço da Palavra.</p>
         </div>
     </footer>
 
@@ -140,15 +165,13 @@
             <img id="modal-image" src="" alt="Imagem do Ministério" style="display:none; width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 20px;">
             <h2 id="modal-title">Título</h2>
             <p id="modal-description">Descrição detalhada...</p>
-            <!-- MUDANÇA AQUI: Container para o botão dinâmico -->
             <div id="modal-link-container"></div>
         </div>
     </div>
     
-    <!-- ... (outro modal inalterado) ... -->
     <div class="modal-overlay" id="calendar-modal">
         <div class="calendar-modal-content">
-            <button class="modal-close">×</button>
+             <button class="modal-close">×</button>
             <div class="calendar-main">
                 <div class="calendar-header">
                     <button id="prev-month" class="calendar-nav-btn"><i class="fas fa-chevron-left"></i></button>
