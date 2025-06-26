@@ -11,10 +11,12 @@
 
     <header class="header">
         <div class="container">
-            <div class="logo">
+            <!-- ALTERAÇÃO AQUI: O <div> foi trocado por um <a> com o link -->
+            <a href="https://jhefferson15.github.io/IBCT_site/index" class="logo">
                 <img src="https://raw.githubusercontent.com/Jhefferson15/IBCT_site/main/img/logo.png" alt="Logo IBCT">
                 <span>HODOS</span>
-            </div>
+            </a>
+            <!-- FIM DA ALTERAÇÃO -->
             <nav class="nav-links">
                 <a href="#eventos">Eventos</a>
                 <a href="#sobre">Sobre Nós</a>
@@ -28,9 +30,18 @@
 
     <main>
         <section class="hero fade-in">
+             <!-- ===== LOGO ANIMADA EM BACKGROUND (IFRAME) ===== -->
+             <iframe 
+                src="./tools/logo_igreja.html" 
+                class="hero-background-logo" 
+                frameborder="0" 
+                scrolling="no" 
+                title="Logo animada da IBCT como fundo">
+            </iframe>
+            
              <div class="container">
-                <h1>Ministério HODOS</h1>
-                <p>O caminho que leva a Cristo. Junte-se aos jovens da Igreja Batista Central de Taguatinga. <br><strong>#VivaAVerdade</strong></p>
+                <h1>HODOS</h1>
+                <p>O caminho que leva a Cristo. <br><strong>#VivaAVerdade</strong></p>
                 <a href="#eventos" class="cta-button">Ver Próximos Eventos</a>
             </div>
         </section>

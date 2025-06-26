@@ -1,20 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Igreja Batista Central em Taguatinga - Home</title>
-    <!-- Font Awesome para ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <!-- Link para o novo arquivo de estilo da home -->
     <link rel="stylesheet" href="css/home-style.css">
 </head>
 <body>
 
     <header class="header">
         <div class="container">
-            <!-- MUDANÇA AQUI: Logo substituída por uma imagem simples e confiável -->
             <a href="#inicio" class="logo-link">
                 <div class="logo">
                     <img src="img/logo.png" alt="Logo IBCT" class="header-logo-img">
@@ -35,12 +31,20 @@
     </header>
 
     <main>
-        <!-- MUDANÇA AQUI: Estrutura do Hero totalmente refeita para usar camadas -->
         <section id="inicio" class="home-hero fade-in">
             <div class="hero-background-layer"></div>
             
-            <div id="animated-logo-container" class="hero-animation-layer">
-                <!-- A animação da logo será injetada aqui pelo JS -->
+            <!-- MODIFICAÇÃO AQUI: A camada de animação agora contém um iframe -->
+            <div class="hero-animation-layer">
+                <iframe 
+                    src="/departamentos/hodos/tools/logo_igreja.html" 
+                    width="100%" 
+                    height="100%"
+                    class="hero-logo-iframe"
+                    frameborder="0" 
+                    scrolling="no" 
+                    title="Animação da logo da Igreja Batista Central em Taguatinga">
+                </iframe>
             </div>
             
             <div class="container hero-content-layer">
@@ -50,6 +54,8 @@
             </div>
         </section>
 
+        <!-- O RESTANTE DO SEU CONTEÚDO HTML PERMANECE O MESMO... -->
+        
         <section id="agenda-versiculo" class="content-section fade-in">
             <div class="container dual-column-container">
                 <div class="events-widget">
@@ -72,7 +78,6 @@
                 <h2 class="section-title">Nossos Ministérios</h2>
                 <p class="section-subtitle">Grupos dedicados a servir, ensinar e promover a comunhão em todas as fases da vida.</p>
                 <div class="ministerios-grid">
-                     <!-- MUDANÇA AQUI: Textos dos botões ajustados conforme solicitado -->
                     <div class="ministerio-card clickable-card" 
                          data-title="Hodos (Jovens)" 
                          data-description="Um ministério dinâmico para jovens, focado em discipulado, comunhão e serviço através de encontros, PGMs e acampamentos."
@@ -80,10 +85,8 @@
                          data-link-text="EBD - HODOS"
                          data-link2-url="departamentos/hodos/hodos_home.html"
                          data-link2-text="Visitar Página Hodos">
-                        
                         <i class="fas fa-child-reaching"></i><h3>Hodos (Jovens)</h3><p>Discipulado, comunhão e serviço para a juventude.</p>
                     </div>
-                    <!-- OUTROS CARDS DE MINISTÉRIOS (COMPLETO) -->
                     <div class="ministerio-card clickable-card" data-title="Ministério Infantil" data-description="Proporciona um ambiente seguro e divertido onde crianças aprendem sobre Jesus através de histórias bíblicas, músicas e atividades interativas.">
                         <i class="fas fa-children"></i><h3>Ministério Infantil</h3><p>Ensinando a Palavra para as novas gerações.</p>
                     </div>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo Animada - IBTC</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap');
+        
+        :root {
+            /* Variáveis da Logo (controladas via JS) */
+            --main-color: #720005;
+            --bg-color: #ffffff;
+            --logo-width: 980px;
+            --logo-height: 580px;
+            
+            /* Variáveis de Animação (controladas via JS) */
+            --loop-distance: 25px;
+            --loop-scale: 1.03;
+        }
+        
+        body {
+            /* Alterado para um método de centralização mais robusto */
+            position: relative; 
+            height: 100vh;
+            margin: 0;
+            background-color: var(--bg-color);
+            overflow: hidden;
+            /* Padding para dar um respiro em telas pequenas */
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+        
+        .logo-container {
+            /* Alterado para posicionamento absoluto para garantir a centralização */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            /* A transformação (translate + scale) será aplicada via JS */
+
+            width: var(--logo-width);
+            height: var(--logo-height);
+            font-family: 'Cinzel', serif;
+            color: var(--main-color);
+            background-color: var(--bg-color);
+            overflow: hidden;
+            
+            /* Transição suave ao redimensionar a janela */
+            transition: transform 0.2s ease-out;
+        }
+
+        /* --- BIBLIOTECA DE ANIMAÇÕES --- */
+        @keyframes anim-draw { to { stroke-dashoffset: 0; } }
+        @keyframes anim-fill { to { fill: var(--main-color); } }
+        @keyframes anim-fade-in { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes anim-slide-in-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes anim-slide-in-down { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes anim-slide-out-left { from { opacity: 0; transform: translateX(0); } to { opacity: 1; transform: translateX(-30px); } }
+        @keyframes anim-slide-out-right { from { opacity: 0; transform: translateX(0); } to { opacity: 1; transform: translateX(30px); } }
+        @keyframes anim-zoom-in { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+        @keyframes anim-cross-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(calc(-1 * var(--loop-distance))); } }
+        @keyframes anim-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(var(--loop-scale)); } }
+
+        /* --- ELEMENTOS DA LOGO --- */
+        .animatable { opacity: 0; animation: none; transform-origin: center center; }
+        #variable-ellipse.animatable { transform-origin: 50% 50%; }
+        .shape-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        #variable-ellipse { stroke: var(--main-color); fill: transparent; }
+        .cross { position: absolute; z-index: 2; }
+        .top-text, .bottom-text, .central-word span { position: absolute; z-index: 3; }
+        .cross-h, .cross-v { position: absolute; background-color: var(--main-color); }
+    </style>
+</head>
+<body>
+    <div class="logo-container" id="logo-container">
+        <span class="top-text text-element animatable">IGREJA BATISTA</span>
+        <span class="bottom-text text-element animatable">DE TAGUATINGA</span>
+        <div class="central-word">
+            <span class="letter-c text-element animatable" data-group="left">C</span><span class="letter-e text-element animatable" data-group="left">E</span><span class="letter-n text-element animatable" data-group="left">N</span>
+            <span class="letter-r text-element animatable" data-group="right">R</span><span class="letter-a text-element animatable" data-group="right">A</span><span class="letter-l text-element animatable" data-group="right">L</span>
+        </div>
+        <div class="cross animatable"><div class="cross-h"></div><div class="cross-v"></div></div>
+        <svg class="shape-svg" id="logo-svg"><path id="variable-ellipse" class="animatable"></path></svg>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- CONFIGURAÇÃO FINAL BASEADA NOS SEUS DADOS ---
+        const finalConfig = {
+            global: { mainColor: '#720005', bgColor: '#ffffff', width: 980, height: 580 },
+            animations: {
+                ellipse:    { type: 'zoom-in', duration: 1.2, delay: 0.1 },
+                cross:      { type: 'zoom-in', duration: 1.0, delay: 0.5 },
+                topText:    { type: 'slide-in-down', duration: 0.8, delay: 1.0 },
+                centralText:{ duration: 0.8, delay: 1.3, stagger: 0.1 },
+                bottomText: { type: 'slide-in-up', duration: 0.8, delay: 1.0 },
+                loop: {
+                    cross:   { enabled: true,  duration: 4.0, delay: 3.0, distance: 25 },
+                    ellipse: { enabled: false, duration: 3.0, delay: 3.5, scale: 1.03 }
+                }
+            },
+            ellipse: { rx: 336, ry: 154, rotation: -23, minThickness: 3, maxThickness: 29, numPoints: 85 },
+            cross: { left: 369, top: 67, width: 270, height: 363, v_thick: 35, h_thick: 35, h_pos: 25 },
+            central: { fontSize: 190, letterSpacing: 21, gap: 59, top: 177, left: 35, letterOffsets: [0, 130, 240, 435, 545, 660] },
+            topText: { fontSize: 36, letterSpacing: 2, top: 156, left: 19 },
+            bottomText: { fontSize: 35, letterSpacing: 1, bottom: 145, right: 41 },
+        };
+
+        const root = document.documentElement;
+        const logoContainer = document.getElementById('logo-container');
+        const animatableElements = Array.from(logoContainer.querySelectorAll('.animatable'));
+        
+        // --- LÓGICA ORIGINAL (INTACTA) ---
+
+        function playAnimations() {
+            animatableElements.forEach(el => {
+                el.style.animation = 'none';
+                el.style.opacity = '0';
+                // Reset a transformação de posição absoluta, mas mantém a escala inicial se houver
+                const currentTransform = el.style.transform;
+                const scaleMatch = currentTransform.match(/scale\([0-9.]+\)/);
+                el.style.transform = scaleMatch ? scaleMatch[0] : '';
+            });
+
+            void logoContainer.offsetWidth; // Força reflow
+            
+            const a = finalConfig.animations;
+            
+            applyAnimation(document.querySelector('#variable-ellipse'), a.ellipse, true);
+            applyAnimation(document.querySelector('.cross'), a.cross);
+            applyAnimation(document.querySelector('.top-text'), a.topText);
+            applyAnimation(document.querySelector('.bottom-text'), a.bottomText);
+
+            const centralConfig = a.centralText;
+            document.querySelectorAll('.central-word .text-element[data-group="left"]').forEach((letter, i) => {
+                const animConfig = { ...centralConfig, type: 'slide-out-left', delay: centralConfig.delay + i * centralConfig.stagger };
+                applyAnimation(letter, animConfig);
+            });
+            document.querySelectorAll('.central-word .text-element[data-group="right"]').forEach((letter, i) => {
+                const animConfig = { ...centralConfig, type: 'slide-out-right', delay: centralConfig.delay + i * centralConfig.stagger };
+                applyAnimation(letter, animConfig);
+            });
+            
+            if (a.loop.cross.enabled) {
+                const cross = document.querySelector('.cross');
+                setTimeout(() => {
+                    cross.style.opacity = '1';
+                    cross.style.animation = `anim-cross-bob ${a.loop.cross.duration}s ease-in-out infinite`;
+                }, a.loop.cross.delay * 1000);
+            }
+        }
+        
+        function applyAnimation(element, animConfig, isEllipse = false) {
+            if (!element) return;
+            let animationShorthand;
+            const fillDelay = animConfig.delay + animConfig.duration;
+
+            if (isEllipse) {
+                const entryAnimation = `anim-${animConfig.type} ${animConfig.duration}s ease-out ${animConfig.delay}s forwards`;
+                const fillAnimation = `anim-fill 0.5s ease-out ${fillDelay}s forwards`;
+                if (animConfig.type === 'draw') {
+                    const fadeInAnimation = `anim-fade-in 0.1s ease-out ${animConfig.delay}s forwards`;
+                    const drawAnimation = `anim-draw ${animConfig.duration}s ease-out ${animConfig.delay}s forwards`;
+                    animationShorthand = `${fadeInAnimation}, ${drawAnimation}, ${fillAnimation}`;
+                } else {
+                    animationShorthand = `${entryAnimation}, ${fillAnimation}`;
+                }
+            } else {
+                animationShorthand = `anim-${animConfig.type} ${animConfig.duration}s ease-out ${animConfig.delay}s forwards`;
+            }
+            element.style.animation = animationShorthand;
+        }
+
+        function updateStaticStyles() {
+            const cfg = finalConfig;
+            root.style.setProperty('--main-color', cfg.global.mainColor);
+            root.style.setProperty('--bg-color', cfg.global.bgColor);
+            root.style.setProperty('--logo-width', cfg.global.width + 'px');
+            root.style.setProperty('--logo-height', cfg.global.height + 'px');
+            root.style.setProperty('--loop-distance', cfg.animations.loop.cross.distance + 'px');
+            root.style.setProperty('--loop-scale', cfg.animations.loop.ellipse.scale);
+
+            createVariableEllipse();
+
+            const applyStyles = (selector, styles) => { const el = document.querySelector(selector); if (el) Object.assign(el.style, styles); };
+            applyStyles('.top-text', { fontSize: cfg.topText.fontSize + 'px', letterSpacing: cfg.topText.letterSpacing + 'px', top: cfg.topText.top + 'px', left: cfg.topText.left + 'px' });
+            applyStyles('.bottom-text', { fontSize: cfg.bottomText.fontSize + 'px', letterSpacing: cfg.bottomText.letterSpacing + 'px', bottom: cfg.bottomText.bottom + 'px', right: cfg.bottomText.right + 'px' });
+            
+            const { fontSize, letterSpacing, top, left, letterOffsets, gap } = cfg.central;
+            document.querySelectorAll('.central-word span').forEach((letter, i) => {
+                const group = letter.dataset.group;
+                const baseOffset = group === 'left' ? i : i - 3;
+                let finalLeft = left + letterOffsets[i] + (baseOffset * letterSpacing);
+                if (group === 'right') finalLeft += gap;
+                
+                Object.assign(letter.style, { left: finalLeft + 'px', fontSize: fontSize + 'px', top: top + 'px' });
+                letter.style.transformOrigin = group === 'left' ? 'right center' : 'left center';
+            });
+            const c = cfg.cross;
+            applyStyles('.cross', { top: c.top + 'px', left: c.left + 'px', width: c.width + 'px', height: c.height + 'px' });
+            applyStyles('.cross-h', { height: c.h_thick + 'px', top: c.h_pos + '%', width: '100%' });
+            applyStyles('.cross-v', { width: c.v_thick + 'px', left: `calc(50% - ${c.v_thick / 2}px)`, height: '100%' });
+        }
+
+        function createVariableEllipse() {
+            const pathElement = document.getElementById('variable-ellipse');
+            const svgElement = document.getElementById('logo-svg');
+            const { global, ellipse } = finalConfig;
+            svgElement.setAttribute('viewBox', `0 0 ${global.width} ${global.height}`);
+            const { rx, ry, rotation, minThickness, maxThickness, numPoints } = ellipse;
+            const CX = global.width / 2, CY = global.height / 2;
+            const rotationRad = rotation * (Math.PI / 180), outerPoints = [], innerPoints = [];
+            for (let i = 0; i <= numPoints; i++) {
+                const angle = (i / numPoints) * 2 * Math.PI, baseX = rx * Math.cos(angle), baseY = ry * Math.sin(angle);
+                const rotatedX = baseX * Math.cos(rotationRad) - baseY * Math.sin(rotationRad), rotatedY = baseX * Math.sin(rotationRad) + baseY * Math.cos(rotationRad);
+                const finalX = CX + rotatedX, finalY = CY + rotatedY;
+                const thickness = minThickness + (finalY / global.height) * (maxThickness - minThickness);
+                let normalX = ry * Math.cos(angle), normalY = rx * Math.sin(angle);
+                const len = Math.sqrt(normalX*normalX + normalY*normalY) || 1;
+                normalX /= len; normalY /= len;
+                const rotatedNormalX = normalX * Math.cos(rotationRad) - normalY * Math.sin(rotationRad), rotatedNormalY = normalX * Math.sin(rotationRad) + normalY * Math.cos(rotationRad);
+                const halfThickness = thickness / 2;
+                outerPoints.push({ x: finalX + rotatedNormalX * halfThickness, y: finalY + rotatedNormalY * halfThickness });
+                innerPoints.push({ x: finalX - rotatedNormalX * halfThickness, y: finalY - rotatedNormalY * halfThickness });
+            }
+            pathElement.setAttribute('d', `M ${outerPoints.map(p => `${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(' L ')} L ${innerPoints.reverse().map(p => `${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(' L ')} Z`);
+            const pathLength = pathElement.getTotalLength();
+            pathElement.style.strokeDasharray = pathLength;
+            pathElement.style.strokeDashoffset = pathLength;
+        }
+
+        // --- LÓGICA DE RESPONSIVIDADE E CENTRALIZAÇÃO MELHORADA ---
+        function makeLogoResponsive() {
+            if (!logoContainer || !finalConfig) {
+                console.error("Erro Crítico: O contêiner do logo ou a configuração não foram encontrados.");
+                return;
+            }
+
+            const nativeWidth = finalConfig.global.width;
+            const nativeHeight = finalConfig.global.height;
+            
+            // Usar o espaço do body, descontando o padding
+            const parent = logoContainer.parentElement;
+            const availableWidth = parent.clientWidth - (parseFloat(getComputedStyle(parent).paddingLeft) * 2);
+            const availableHeight = parent.clientHeight - (parseFloat(getComputedStyle(parent).paddingTop) * 2);
+
+            const scaleX = availableWidth / nativeWidth;
+            const scaleY = availableHeight / nativeHeight;
+            const scale = Math.min(scaleX, scaleY);
+            const finalScale = Math.min(scale, 1.0);
+            
+            // ATUALIZADO: Aplica a translação para centralizar e a escala para redimensionar
+            logoContainer.style.transform = `translate(-50%, -50%) scale(${finalScale})`;
+
+            // VERIFICADOR (LOG)
+            console.log(`--- Verificador de Centralização e Responsividade ---
+- Fator de Escala Final: ${finalScale.toFixed(4)}
+- Transformação Aplicada: ${logoContainer.style.transform}`);
+        }
+        
+        // --- INICIALIZAÇÃO ---
+        updateStaticStyles();
+        playAnimations();
+        
+        // Ativa a lógica de responsividade na carga e no redimensionamento da janela
+        makeLogoResponsive();
+        window.addEventListener('resize', makeLogoResponsive);
+    });
+    </script>
+</body>
+</html>
