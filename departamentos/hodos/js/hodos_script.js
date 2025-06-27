@@ -35,7 +35,17 @@ document.addEventListener('DOMContentLoaded', () => {
         { date: '07 de Junho, 2025', category: 'LOUVOR', title: 'Hodos Meet', location: 'IBCT', description: 'Mais um encontro para adorarmos juntos. Traga um amigo e venha cultuar conosco!' },
         { date: '14 de Junho, 2025', category: 'ESPECIAL', title: 'Hodos In Love', location: 'IBCT', description: 'Uma noite especial com tema de Dia dos Namorados para celebrar o amor de forma cristã, seja entre casais ou entre amigos.' },
         { date: '18 de Junho, 2025', category: 'MISSÕES', title: 'Evangelismo com CRU', location: 'Parque de Águas Claras', description: 'Nos unimos aos missionários da CRU para um tempo de evangelismo e serviço a Deus em nossa cidade, compartilhando as boas novas.' },
-        { date: 'Sextas-feiras', category: 'PGM', title: 'PGMs Semanais', location: 'IBCT e Lares', description: 'Nossos Pequenos Grupos de Multiplicação acontecem toda sexta! Temos PGMs para jovens, casais, \'Sis & Bros\' e \'Delas 30+\'. É o nosso principal momento de comunhão e estudo em grupos menores.', recurring: true },
+        // ***** ALTERAÇÃO ABAIXO *****
+        { 
+            date: 'Sextas-feiras', 
+            category: 'PGM', 
+            title: 'PGMs Semanais', 
+            location: 'IBCT e Lares', 
+            description: 'Nossos Pequenos Grupos de Multiplicação acontecem toda sexta! Temos PGMs para jovens, casais, \'Sis & Bros\' e \'Delas 30+\'. É o nosso principal momento de comunhão e estudo em grupos menores.', 
+            recurring: true,
+            externalPage: './eventos/hodos_pgm.html' // <-- ESSA LINHA FOI ADICIONADA
+        },
+        // ***** FIM DA ALTERAÇÃO *****
         { date: 'Agosto de 2025', category: 'ACAMPA', title: 'Hodos Camp 2025', location: 'A definir', description: 'O evento mais esperado do ano! Serão dias de imersão total na Palavra, louvor, dinâmicas e comunhão. O tema deste ano é \'Viva a Verdade\'. Clique para mais detalhes!',
           externalPage: './eventos/hodos_camp_2025.html',
           cardContentHTML: logoAnimadoHTML,
