@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Componente: PGM Logo Animado (Final)</title>
+    <!-- Dependências de fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@800&family=Inter:wght@500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 
+         * ESTILOS DO COMPONENTE FINAL DA LOGO PGM
+         * Todas as configurações foram definidas com base nos seus ajustes finos.
+         * O painel de controle e o JavaScript foram removidos para a versão de produção.
+        */
+
+        :root {
+            /* --- CONFIGURAÇÕES FINAIS --- */
+            --bg-color: #ffffff;             /* Fundo totalmente branco */
+            --icon-color: #f5a623;           /* Cor padrão do ícone */
+            --text-color: #1a1a1a;           /* Cor padrão do texto */
+            
+            --icon-size: 80px;               /* Tamanho Ícone */
+            --title-font-size: 3rem;         /* Tamanho Título */
+            --subtitle-font-size: 0.6rem;    /* Tamanho Subtítulo (padrão) */
+            --gap: 8px;                      /* Espaçamento */
+            --subtitle-letter-spacing: 0.15em; /* Espaçamento do subtítulo (padrão) */
+
+            --animation-duration: 7s;        /* Duração Ciclo */
+            --animation-delay: 1s;           /* Atraso Inicial */
+            --grow-factor: 1.6;              /* Fator de Crescimento */
+            --travel-distance: 120px;        /* Distância de Viagem */
+        }
+
+        /* --- Estilo base para visualização standalone --- */
+        body.logo-standalone-preview {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            display: grid;
+            place-content: center;
+            min-height: 100vh;
+        }
+
+        /* --- ESTILOS DA LOGO --- */
+        .pgm-logo-container {
+            display: flex;
+            align-items: center;
+            gap: var(--gap);
+            position: relative;
+        }
+
+        .pgm-logo-icon {
+            width: var(--icon-size);
+            height: var(--icon-size);
+            background-color: var(--icon-color);
+            border-radius: 50%;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1; /* Fica atrás do texto */
+            animation: swap-icon var(--animation-duration) ease-in-out var(--animation-delay) infinite;
+        }
+        
+        .pgm-logo-text {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            position: relative;
+            z-index: 2; /* Fica na frente do ícone */
+            animation: swap-text var(--animation-duration) ease-in-out var(--animation-delay) infinite;
+        }
+
+        .pgm-logo-text .title {
+            font-family: 'Playfair Display', serif;
+            font-size: var(--title-font-size);
+            line-height: 1;
+            color: var(--text-color);
+        }
+
+        .pgm-logo-text .subtitle {
+            font-size: var(--subtitle-font-size);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: var(--subtitle-letter-spacing);
+            color: var(--text-color);
+        }
+        
+        /* --- KEYFRAMES DA ANIMAÇÃO (CALCULADOS E FIXOS) --- */
+        /* Baseado no "Tempo de Pausa" de 5% */
+        @keyframes swap-icon {
+            0%, 5% { 
+                transform: translateX(0px) scale(1); 
+            }
+            27.5% { /* Ponto médio da ida */
+                transform: translateX(calc(var(--travel-distance) / 2)) scale(var(--grow-factor));
+            }
+            50%, 55% { 
+                transform: translateX(var(--travel-distance)) scale(1); 
+            }
+            77.5% { /* Ponto médio da volta */
+                transform: translateX(calc(var(--travel-distance) / 2)) scale(var(--grow-factor));
+            }
+            100% { 
+                transform: translateX(0px) scale(1);
+            }
+        }
+        
+        @keyframes swap-text {
+            0%, 5% { 
+                transform: translateX(0px); 
+            }
+            50%, 55% { 
+                transform: translateX(calc(-1 * (var(--icon-size) + var(--gap)))); 
+            }
+            100% { 
+                transform: translateX(0px); 
+            }
+        }
+    </style>
+</head>
+<body class="logo-standalone-preview">
+
+    <div class="pgm-logo-container">
+        <div class="pgm-logo-icon"></div>
+        <div class="pgm-logo-text">
+            <span class="title">PGM</span>
+            <span class="subtitle">Rede de Jovens</span>
+        </div>
+    </div>
+
+</body>
+</html>

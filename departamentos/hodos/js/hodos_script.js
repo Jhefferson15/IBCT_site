@@ -43,7 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'IBCT e Lares', 
             description: 'Nossos Pequenos Grupos de Multiplicação acontecem toda sexta! Temos PGMs para jovens, casais, \'Sis & Bros\' e \'Delas 30+\'. É o nosso principal momento de comunhão e estudo em grupos menores.', 
             recurring: true,
-            externalPage: './eventos/hodos_pgm.html' // <-- ESSA LINHA FOI ADICIONADA
+            externalPage: './eventos/hodos_pgm.html',
+            // ALTERAÇÃO: Adicionada a capa animada do PGM via iframe
+            cardContentHTML: `<iframe src="./tools/logo_pgm.html" style="width:100%; height:100%; border:none; overflow:hidden; background-color: var(--cor-branco);" scrolling="no" title="Animação da logo PGM"></iframe>`
         },
         // ***** FIM DA ALTERAÇÃO *****
         { date: 'Agosto de 2025', category: 'ACAMPA', title: 'Hodos Camp 2025', location: 'A definir', description: 'O evento mais esperado do ano! Serão dias de imersão total na Palavra, louvor, dinâmicas e comunhão. O tema deste ano é \'Viva a Verdade\'. Clique para mais detalhes!',

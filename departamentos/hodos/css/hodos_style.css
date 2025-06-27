@@ -124,7 +124,8 @@ a:hover { opacity: 0.7; }
 .lesson-card-image.special-content-container {
     padding: 0;
     overflow: hidden;
-    background-color: #fdf6ec;
+    /* ALTERAÇÃO: Fundo do card especial alterado para branco */
+    background-color: var(--cor-branco);
     position: relative;
     display: block;
 }
