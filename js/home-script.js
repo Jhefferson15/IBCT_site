@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     const infoModal = document.getElementById('info-modal');
-    const calendarModal = document.getElementById('calendar-modal');
+    // MUDANÇA: Remoção da variável do modal do calendário
+    // const calendarModal = document.getElementById('calendar-modal');
     const scrollToTopBtn = document.querySelector('.scroll-to-top');
     const fadeElements = document.querySelectorAll('.fade-in');
 
@@ -41,13 +42,15 @@ document.addEventListener('DOMContentLoaded', () => {
         allEvents[date].push(...specificEvents[date]);
     });
 
+    // MUDANÇA: Expondo os dados de eventos para o componente de calendário global.
+    window.CALENDAR_EVENTS = allEvents;
+
     // --- 3. LÓGICA DO MENU HAMBÚRGUER ---
     if (hamburger && navLinks) {
         hamburger.addEventListener('click', (e) => {
             e.stopPropagation();
             navLinks.classList.toggle('active');
             hamburger.classList.toggle('toggle');
-            // Impede o scroll do body quando o menu mobile está aberto
             document.body.classList.toggle('modal-open', navLinks.classList.contains('active'));
         });
     }
@@ -62,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeAnyModal(modal) {
         if (modal) {
             modal.classList.remove('active');
-            // Só remove a classe do body se o menu mobile não estiver ativo
             if (!navLinks.classList.contains('active')) {
                 document.body.classList.remove('modal-open');
             }
@@ -72,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', e => closeAnyModal(e.target.closest('.modal-overlay')));
     });
 
-    // Lógica para cards clicáveis que abrem o modal de informações
     document.querySelectorAll('.clickable-card').forEach(card => {
         card.addEventListener('click', () => {
             const modalTitle = infoModal.querySelector('#modal-title');
@@ -87,8 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (card.dataset.image) modalImg.src = card.dataset.image;
             
             modalLinkContainer.innerHTML = '';
-
-            // Adiciona o segundo link/botão (principal) primeiro, se existir
+            
             if (card.dataset.link2Url && card.dataset.link2Text) {
                 const linkButton2 = document.createElement('a');
                 linkButton2.href = card.dataset.link2Url;
@@ -97,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 modalLinkContainer.appendChild(linkButton2);
             }
             
-            // Adiciona o primeiro link/botão (discreto) depois, se existir
             if (card.dataset.linkUrl && card.dataset.linkText) {
                 const linkButton = document.createElement('a');
                 linkButton.href = card.dataset.linkUrl;
@@ -148,84 +147,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     populateNextEvents();
 
-    // --- 6. LÓGICA DO CALENDÁRIO COMPLETO (MODAL) ---
-    const openCalendarBtn = document.getElementById('open-calendar-btn');
-    if (openCalendarBtn) {
-        openCalendarBtn.addEventListener('click', () => {
-            currentDateCalendar = new Date();
-            renderCalendar();
-            openAnyModal(calendarModal);
-        });
-    }
-
-    let currentDateCalendar = new Date();
-    const monthYearEl = document.getElementById('month-year');
-    const calendarDaysEl = document.getElementById('calendar-days');
-    const eventDetailsEl = document.getElementById('event-details');
-    const eventDetailsTitle = document.getElementById('event-details-title');
-    const eventIcons = { ebd: 'fa-solid fa-book-open', culto: 'fa-solid fa-cross', curso: 'fa-solid fa-graduation-cap', oracao: 'fa-solid fa-hands-praying', evento: 'fa-solid fa-star' };
-
-    function renderCalendar() {
-        const month = currentDateCalendar.getMonth();
-        const year = currentDateCalendar.getFullYear();
-        monthYearEl.textContent = `${currentDateCalendar.toLocaleString('pt-BR', { month: 'long' })} ${year}`;
-        calendarDaysEl.innerHTML = '';
-        const firstDay = new Date(year, month, 1).getDay();
-        const lastDate = new Date(year, month + 1, 0).getDate();
-        const prevLastDate = new Date(year, month, 0).getDate();
-
-        for (let i = firstDay; i > 0; i--) {
-            calendarDaysEl.innerHTML += `<div class="day-cell prev-next-month-day">${prevLastDate - i + 1}</div>`;
-        }
-
-        for (let i = 1; i <= lastDate; i++) {
-            const today = new Date();
-            let classes = 'day-cell';
-            if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
-                classes += ' current-day';
-            }
-            const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
-            if (allEvents[dateStr]) {
-                classes += ' event-day';
-            }
-            const dayCell = document.createElement('div');
-            dayCell.className = classes;
-            dayCell.textContent = i;
-            dayCell.onclick = () => showEventsForDate(dateStr, dayCell);
-            calendarDaysEl.appendChild(dayCell);
-        }
-
-        const today = new Date();
-        if (month === today.getMonth() && year === today.getFullYear()) {
-            const todayCell = calendarDaysEl.querySelector('.current-day');
-            if (todayCell) setTimeout(() => todayCell.click(), 100);
-        } else {
-             eventDetailsTitle.textContent = 'Eventos do Dia';
-             eventDetailsEl.innerHTML = '<p>Selecione um dia para ver os eventos.</p>';
-        }
-    }
-
-    function showEventsForDate(dateStr, cell) {
-        document.querySelectorAll('.day-cell.selected-day').forEach(c => c.classList.remove('selected-day'));
-        cell.classList.add('selected-day');
-        const formattedDate = new Date(dateStr + 'T00:00:00').toLocaleDateString('pt-BR', { day: '2-digit', month: 'long' });
-        eventDetailsTitle.textContent = `Eventos de ${formattedDate}`;
-        const events = allEvents[dateStr];
-        if (events && events.length > 0) {
-            eventDetailsEl.innerHTML = events.sort((a, b) => a.time.localeCompare(b.time)).map(event => `
-                <div class="event-item">
-                    <div class="event-icon"><i class="${eventIcons[event.type] || 'fa-solid fa-calendar-day'}"></i></div>
-                    <div class="event-info">
-                        <strong>${event.title}</strong>
-                        <span>${event.time}</span>
-                    </div>
-                </div>`).join('');
-        } else {
-            eventDetailsEl.innerHTML = '<p>Nenhum evento agendado para este dia.</p>';
-        }
-    }
-    document.getElementById('prev-month').addEventListener('click', () => { currentDateCalendar.setMonth(currentDateCalendar.getMonth() - 1); renderCalendar(); });
-    document.getElementById('next-month').addEventListener('click', () => { currentDateCalendar.setMonth(currentDateCalendar.getMonth() + 1); renderCalendar(); });
+    // --- 6. MUDANÇA: LÓGICA DO CALENDÁRIO COMPLETO (MODAL) REMOVIDA ---
+    // Toda a lógica que estava aqui (renderCalendar, showEventsForDate, listeners dos botões, etc.)
+    // foi movida para o componente 'componentes/calendario/calendario.js'.
 
     // --- 7. BOTÃO VOLTAR AO TOPO & ANIMAÇÃO DE SCROLL ---
     if (scrollToTopBtn) {

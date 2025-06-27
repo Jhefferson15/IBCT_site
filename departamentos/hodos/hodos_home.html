@@ -6,21 +6,22 @@
     <title>IBCT - Ministério HODOS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="css/hodos_style.css">
+    <!-- MUDANÇA: Adicionado o CSS do componente de calendário com caminho relativo ajustado -->
+    <link rel="stylesheet" href="../../componentes/calendario/calendario.css">
 </head>
 <body>
 
     <header class="header">
         <div class="container">
-            <!-- ALTERAÇÃO AQUI: O <div> foi trocado por um <a> com o link -->
-            <a href="https://jhefferson15.github.io/IBCT_site/index" class="logo">
-                <img src="https://raw.githubusercontent.com/Jhefferson15/IBCT_site/main/img/logo.png" alt="Logo IBCT">
+            <a href="../../index.html" class="logo">
+                <img src="../../img/logo.png" alt="Logo IBCT">
                 <span>HODOS</span>
             </a>
-            <!-- FIM DA ALTERAÇÃO -->
             <nav class="nav-links">
                 <a href="#eventos">Eventos</a>
                 <a href="#sobre">Sobre Nós</a>
-                <a id="open-calendar-link">Calendário</a>
+                <!-- MUDANÇA: O link agora usa 'data-action' e o ID foi removido -->
+                <a data-action="open-calendar">Calendário</a>
             </nav>
             <div class="hamburger">
                 <div class="line1"></div><div class="line2"></div><div class="line3"></div>
@@ -30,7 +31,6 @@
 
     <main>
         <section class="hero fade-in">
-             <!-- ===== LOGO ANIMADA EM BACKGROUND (IFRAME) ===== -->
              <iframe 
                 src="./tools/logo_igreja.html" 
                 class="hero-background-logo" 
@@ -46,10 +46,7 @@
             </div>
         </section>
 
-        <!-- ====================================================== -->
-        <!-- ===== INÍCIO DA NOVA SEÇÃO DO FEED DO INSTAGRAM ===== -->
-        <!-- ====================================================== -->
-
+        <!-- O RESTANTE DO CONTEÚDO HTML PERMANECE IGUAL -->
         <section id="instagram-feed" class="content-section fade-in">
             <div class="container">
                 <h2>Siga-nos no Instagram <a href="https://www.instagram.com/hodosmj/" target="_blank" rel="noopener noreferrer">@hodosmj</a></h2>
@@ -57,7 +54,6 @@
                 <div class="instagram-wrapper">
                     <button id="prev-insta-btn" class="scroll-button"><i class="fas fa-chevron-left"></i></button>
                     <div class="instagram-scroller">
-                        <!-- Posts do Instagram -->
                         <a href="https://www.instagram.com/hodosmj/" target="_blank" rel="noopener noreferrer" class="insta-card">
                             <img src="instagram/hodos_camp.webp" alt="Post do Instagram sobre o Hodos Camp">
                             <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
@@ -87,10 +83,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- ==================================================== -->
-        <!-- ===== FIM DA NOVA SEÇÃO DO FEED DO INSTAGRAM ===== -->
-        <!-- ==================================================== -->
 
         <section id="eventos" class="content-section fade-in">
             <div class="container">
@@ -139,7 +131,7 @@
         </div>
     </footer>
 
-    <!-- MODAIS -->
+    <!-- MODAIS (EXCETO O DO CALENDÁRIO) -->
     <div class="modal-overlay" id="lesson-modal">
         <div class="modal-content">
             <button class="modal-close">×</button>
@@ -149,7 +141,6 @@
         </div>
     </div>
     
-    <!-- NOVO MODAL PARA CARREGAR PÁGINAS EXTERNAS -->
     <div class="modal-overlay" id="external-page-modal">
         <div class="modal-content-external">
             <button class="modal-close">×</button>
@@ -157,30 +148,11 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="calendar-modal">
-        <div class="calendar-modal-content">
-            <button class="modal-close">×</button>
-            <div class="calendar-main">
-                <div class="calendar-header">
-                    <button id="prev-month" class="calendar-nav-btn"><i class="fas fa-chevron-left"></i></button>
-                    <h2 id="month-year"></h2>
-                    <button id="next-month" class="calendar-nav-btn"><i class="fas fa-chevron-right"></i></button>
-                </div>
-                <div class="weekdays">
-                    <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
-                </div>
-                <div class="calendar-grid" id="calendar-days"></div>
-            </div>
-            <div id="event-details-wrapper">
-                <h3 id="event-details-title">Eventos do Dia</h3>
-                <div id="event-details">
-                    <p>Selecione um dia para ver os eventos.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- MUDANÇA: O modal do calendário foi completamente removido daqui -->
         
     <a class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
     <script src="js/hodos_script.js" defer></script>
+    <!-- MUDANÇA: Adicionado o script do componente de calendário com caminho relativo ajustado -->
+    <script src="../../componentes/calendario/calendario.js" defer></script>
 </body>
 </html>

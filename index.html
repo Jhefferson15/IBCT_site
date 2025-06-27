@@ -6,6 +6,8 @@
     <title>Igreja Batista Central em Taguatinga - Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="css/home-style.css">
+    <!-- MUDANÇA: Adicionado o CSS do componente de calendário -->
+    <link rel="stylesheet" href="componentes/calendario/calendario.css">
 </head>
 <body>
 
@@ -34,7 +36,6 @@
         <section id="inicio" class="home-hero fade-in">
             <div class="hero-background-layer"></div>
             
-            <!-- MODIFICAÇÃO AQUI: A camada de animação agora contém um iframe -->
             <div class="hero-animation-layer">
                 <iframe 
                     src="./departamentos/hodos/tools/logo_igreja.html" 
@@ -53,15 +54,14 @@
                 <a href="#ministerios" class="cta-button">Conheça nossos ministérios</a>
             </div>
         </section>
-
-        <!-- O RESTANTE DO SEU CONTEÚDO HTML PERMANECE O MESMO... -->
         
         <section id="agenda-versiculo" class="content-section fade-in">
             <div class="container dual-column-container">
                 <div class="events-widget">
                     <h2 class="section-title">Próximos Eventos</h2>
                     <div id="next-events-list"></div>
-                    <button id="open-calendar-btn" class="widget-button">Ver Calendário Completo</button>
+                    <!-- MUDANÇA: O botão agora usa 'data-action' para ser detectado pelo script do componente -->
+                    <button data-action="open-calendar" class="widget-button">Ver Calendário Completo</button>
                 </div>
                 <div class="verse-widget">
                     <h2 class="section-title">Versículo do Dia</h2>
@@ -73,6 +73,7 @@
             </div>
         </section>
 
+        <!-- O RESTANTE DO SEU CONTEÚDO HTML PERMANECE IGUAL -->
         <section id="ministerios" class="content-section bg-light fade-in">
             <div class="container">
                 <h2 class="section-title">Nossos Ministérios</h2>
@@ -161,7 +162,7 @@
         </div>
     </footer>
 
-    <!-- MODAIS -->
+    <!-- MODAL DE INFORMAÇÃO (Ainda necessário para os cards) -->
     <div class="modal-overlay" id="info-modal">
         <div class="modal-content">
             <button class="modal-close">×</button>
@@ -172,29 +173,13 @@
         </div>
     </div>
     
-    <div class="modal-overlay" id="calendar-modal">
-        <div class="calendar-modal-content">
-             <button class="modal-close">×</button>
-            <div class="calendar-main">
-                <div class="calendar-header">
-                    <button id="prev-month" class="calendar-nav-btn"><i class="fas fa-chevron-left"></i></button>
-                    <h2 id="month-year"></h2>
-                    <button id="next-month" class="calendar-nav-btn"><i class="fas fa-chevron-right"></i></button>
-                </div>
-                <div class="weekdays">
-                    <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
-                </div>
-                <div class="calendar-grid" id="calendar-days"></div>
-            </div>
-            <div id="event-details-wrapper">
-                <h3 id="event-details-title">Eventos do Dia</h3>
-                <div id="event-details"><p>Selecione um dia para ver os eventos.</p></div>
-            </div>
-        </div>
-    </div>
+    <!-- MUDANÇA: O modal do calendário foi completamente removido daqui.
+         O script 'calendario.js' irá injetá-lo dinamicamente. -->
 
     <a class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
     
     <script src="js/home-script.js" defer></script>
+    <!-- MUDANÇA: Adicionado o script do componente de calendário -->
+    <script src="componentes/calendario/calendario.js" defer></script>
 </body>
 </html>

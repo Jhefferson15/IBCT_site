@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- ARTE HTML DO ACAMPAMENTO ---
-    // Injetar o HTML diretamente evita problemas de segurança do navegador ao carregar arquivos locais.
-    // As classes e keyframes foram renomeados (ex: float_card) para evitar conflitos de CSS global.
     const logoAnimadoHTML = `
         <div style="font-family: 'Montserrat', sans-serif; color: #91452b; display: grid; place-items: center; height: 100%;">
             <style>
@@ -38,10 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
         { date: '14 de Junho, 2025', category: 'ESPECIAL', title: 'Hodos In Love', location: 'IBCT', description: 'Uma noite especial com tema de Dia dos Namorados para celebrar o amor de forma cristã, seja entre casais ou entre amigos.' },
         { date: '18 de Junho, 2025', category: 'MISSÕES', title: 'Evangelismo com CRU', location: 'Parque de Águas Claras', description: 'Nos unimos aos missionários da CRU para um tempo de evangelismo e serviço a Deus em nossa cidade, compartilhando as boas novas.' },
         { date: 'Sextas-feiras', category: 'PGM', title: 'PGMs Semanais', location: 'IBCT e Lares', description: 'Nossos Pequenos Grupos de Multiplicação acontecem toda sexta! Temos PGMs para jovens, casais, \'Sis & Bros\' e \'Delas 30+\'. É o nosso principal momento de comunhão e estudo em grupos menores.', recurring: true },
-        // Alterado: 'cardContentHTML' agora contém a arte animada para exibição no card.
         { date: 'Agosto de 2025', category: 'ACAMPA', title: 'Hodos Camp 2025', location: 'A definir', description: 'O evento mais esperado do ano! Serão dias de imersão total na Palavra, louvor, dinâmicas e comunhão. O tema deste ano é \'Viva a Verdade\'. Clique para mais detalhes!',
-          externalPage: './eventos/hodos_camp_2025.html', // Mantido para o popup (precisa de servidor)
-          cardContentHTML: logoAnimadoHTML, // Novo: HTML para o card
+          externalPage: './eventos/hodos_camp_2025.html',
+          cardContentHTML: logoAnimadoHTML,
           recurring: true },
     ];
 
@@ -65,9 +62,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!dateString || typeof dateString !== 'string') return null;
         const monthMap = { 'janeiro': 0, 'fevereiro': 1, 'março': 2, 'abril': 3, 'maio': 4, 'junho': 5, 'julho': 6, 'agosto': 7, 'setembro': 8, 'outubro': 9, 'novembro': 10, 'dezembro': 11 };
         const parts = dateString.toLowerCase().replace(',', '').split(' ');
-        if (parts.length < 3) return null;
-        const day = parseInt(parts[0], 10), month = monthMap[parts[1]], year = parseInt(parts[2], 10);
-        return (!isNaN(day) && month !== undefined && !isNaN(year)) ? new Date(year, month, day) : null;
+        // Tratamento para datas sem dia específico, como "Agosto de 2025"
+        if (parts.length === 3 && parts[0].match(/^\d+$/)) { // Ex: 12 de Abril, 2025
+             const day = parseInt(parts[0], 10), month = monthMap[parts[1]], year = parseInt(parts[2], 10);
+             return (!isNaN(day) && month !== undefined && !isNaN(year)) ? new Date(year, month, day) : null;
+        } else if (parts.length === 3 && monthMap[parts[0]] !== undefined) { // Ex: Agosto de 2025
+            const month = monthMap[parts[0]], year = parseInt(parts[2], 10);
+            return (month !== undefined && !isNaN(year)) ? new Date(year, month, 1) : null; // Usa o dia 1 como padrão
+        }
+        return null;
     }
 
     function renderEvents(filter) {
@@ -90,15 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
         filteredEvents.forEach(event => {
             const card = document.createElement('div');
             card.className = 'event-card';
-            // Adiciona todos os dados necessários ao dataset do card, excluindo o HTML da arte
             Object.keys(event).forEach(key => {
                 if(event[key] !== undefined && key !== 'cardContentHTML') card.dataset[key] = event[key];
             });
 
-            // Condicional para renderizar o HTML customizado ou a categoria
             const cardImageContent = event.cardContentHTML || event.category;
-
-            // Define a classe do container da imagem
             const imageContainerClass = event.cardContentHTML
                 ? "lesson-card-image special-content-container"
                 : "lesson-card-image";
@@ -120,18 +119,15 @@ document.addEventListener('DOMContentLoaded', () => {
         addModalListeners();
     }
     
-    // addModalListeners agora abre o modal correto
     function addModalListeners() {
         document.querySelectorAll('.event-card').forEach(card => {
             card.addEventListener('click', () => {
-                // Se o card tiver um link para uma página externa (para o pop-up)
                 if (card.dataset.externalPage) {
                     const externalPageModal = document.getElementById('external-page-modal');
                     const iframe = document.getElementById('modal-iframe');
-                    iframe.src = card.dataset.externalPage; // Define o src do iframe do modal
+                    iframe.src = card.dataset.externalPage;
                     openAnyModal(externalPageModal);
                 } else {
-                    // Lógica original para o modal de texto
                     const lessonModal = document.getElementById('lesson-modal');
                     document.getElementById('modal-title').innerText = card.dataset.title;
                     document.querySelector('#modal-location span').innerText = card.dataset.location;
@@ -162,11 +158,9 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.classList.toggle('toggle');
     });
 
-    // Scroller de Eventos
     prevBtn.addEventListener('click', () => lessonsScroller.scrollBy({ left: -330, behavior: 'smooth' }));
     nextBtn.addEventListener('click', () => lessonsScroller.scrollBy({ left: 330, behavior: 'smooth' }));
 
-    // Scroller do Instagram
     if (instaScroller && prevInstaBtn && nextInstaBtn) {
         prevInstaBtn.addEventListener('click', () => instaScroller.scrollBy({ left: -300, behavior: 'smooth' }));
         nextInstaBtn.addEventListener('click', () => instaScroller.scrollBy({ left: 300, behavior: 'smooth' }));
@@ -175,10 +169,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function openAnyModal(modal) { modal.classList.add('active'); document.body.classList.add('modal-open'); }
     function closeAnyModal(modal) { 
         modal.classList.remove('active');
-        // Limpa o src do iframe ao fechar para parar a animação/vídeo
         const iframe = modal.querySelector('iframe');
         if (iframe) iframe.src = "";
-        // Remove a classe do body apenas se nenhum outro modal estiver ativo
         if (!document.querySelector('.modal-overlay.active')) {
             document.body.classList.remove('modal-open');
         }
@@ -195,19 +187,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.1 });
     fadeElements.forEach(el => observerFadeIn.observe(el));
 
-    // --- LÓGICA DO CALENDÁRIO ---
-    let currentDateCalendar = new Date();
-    const monthYearEl = document.getElementById('month-year'), calendarDaysEl = document.getElementById('calendar-days'), eventDetailsEl = document.getElementById('event-details'), eventDetailsTitle = document.getElementById('event-details-title');
-    const eventIcons = { ebd: 'fa-solid fa-book-open', culto: 'fa-solid fa-cross', pgm: 'fa-solid fa-people-group', oracao: 'fa-solid fa-hands-praying', evento: 'fa-solid fa-star', missões: 'fa-solid fa-globe', especial: 'fa-solid fa-gift', acampa: 'fa-solid fa-campground' }; // Adicionado ícone para 'acampa'
+    // --- MUDANÇA: LÓGICA DO CALENDÁRIO REESTRUTURADA ---
+    // Apenas preparamos os dados para o componente global.
     
-    // Função para gerar o objeto de eventos para o calendário a partir da base de dados
     function generateCalendarEvents() {
         const calendarEvents = {};
         eventsData.forEach(event => {
-            // Incluir eventos recorrentes se tiverem uma data específica para aparecer no calendário
-            // Por enquanto, apenas eventos com data única
-            if (event.recurring && !parseDate(event.date)) return; 
-            
+            // Ignora eventos recorrentes sem uma data específica (ex: "Sextas-feiras")
             const eventDate = parseDate(event.date);
             if (eventDate) {
                 const dateStr = eventDate.toISOString().slice(0, 10);
@@ -215,88 +201,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 calendarEvents[dateStr].push({ 
                     type: event.category.toLowerCase(), 
                     title: event.title, 
-                    location: event.location 
+                    location: event.location // O componente usa 'location' para a segunda linha
                 });
             }
         });
         return calendarEvents;
     }
-    const allCalendarEvents = generateCalendarEvents();
-
-    function renderCalendar() {
-        const month = currentDateCalendar.getMonth(), year = currentDateCalendar.getFullYear();
-        monthYearEl.textContent = `${currentDateCalendar.toLocaleString('pt-BR', { month: 'long' })} ${year}`;
-        calendarDaysEl.innerHTML = '';
-        const firstDay = new Date(year, month, 1).getDay();
-        const lastDate = new Date(year, month + 1, 0).getDate();
-        // Ajuste para não adicionar dias do próximo mês no início
-        const prevLastDate = new Date(year, month, 0).getDate();
-
-        // Dias do mês anterior
-        for (let i = firstDay; i > 0; i--) calendarDaysEl.innerHTML += `<div class="day-cell prev-next-month-day">${prevLastDate - i + 1}</div>`;
-        
-        // Dias do mês atual
-        for (let i = 1; i <= lastDate; i++) {
-            const today = new Date();
-            let classes = 'day-cell';
-            if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) classes += ' current-day';
-            const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
-            if (allCalendarEvents[dateStr]) classes += ' event-day';
-            
-            const dayCell = document.createElement('div');
-            dayCell.className = classes;
-            dayCell.textContent = i;
-            dayCell.onclick = () => showCalendarEvents(dateStr, dayCell);
-            calendarDaysEl.appendChild(dayCell);
-        }
-
-        // Dias do próximo mês (para preencher a última semana)
-        const totalCells = firstDay + lastDate;
-        const remainingCells = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
-        for (let i = 1; i <= remainingCells; i++) {
-            calendarDaysEl.innerHTML += `<div class="day-cell prev-next-month-day">${i}</div>`;
-        }
-
-        const today = new Date();
-        if (month === today.getMonth() && year === today.getFullYear()) {
-            const todayCell = calendarDaysEl.querySelector('.current-day');
-            if (todayCell) setTimeout(() => todayCell.click(), 100);
-        } else {
-             eventDetailsTitle.textContent = 'Eventos do Dia';
-             eventDetailsEl.innerHTML = '<p>Selecione um dia para ver os eventos.</p>';
-        }
-    }
-
-    function showCalendarEvents(dateStr, cell) {
-        document.querySelectorAll('.day-cell.selected-day').forEach(c => c.classList.remove('selected-day'));
-        cell.classList.add('selected-day');
-        const formattedDate = new Date(dateStr + 'T00:00:00').toLocaleDateString('pt-BR', { day: '2-digit', month: 'long' });
-        eventDetailsTitle.textContent = `Eventos de ${formattedDate}`;
-        const events = allCalendarEvents[dateStr];
-        if (events && events.length > 0) {
-            eventDetailsEl.innerHTML = '';
-            events.forEach(event => {
-                eventDetailsEl.innerHTML += `
-                    <div class="event-item">
-                        <div class="event-icon"><i class="${eventIcons[event.type] || 'fa-solid fa-calendar-day'}"></i></div>
-                        <div class="event-info">
-                            <strong>${event.title}</strong>
-                            <span>${event.location || 'Local a confirmar'}</span>
-                        </div>
-                    </div>`;
-            });
-        } else {
-            eventDetailsEl.innerHTML = '<p>Nenhum evento específico agendado para este dia.</p>';
-        }
-    }
-
-    document.getElementById('prev-month').addEventListener('click', () => { currentDateCalendar.setMonth(currentDateCalendar.getMonth() - 1); renderCalendar(); });
-    document.getElementById('next-month').addEventListener('click', () => { currentDateCalendar.setMonth(currentDateCalendar.getMonth() + 1); renderCalendar(); });
-    document.getElementById('open-calendar-link').addEventListener('click', () => { 
-        renderCalendar(); // Renderiza o calendário ao abrir o modal
-        openAnyModal(document.getElementById('calendar-modal')); 
-    });
-
+    
+    // Expõe os dados dos eventos do Hodos para o componente de calendário.
+    window.CALENDAR_EVENTS = generateCalendarEvents();
+    
+    // A lógica de renderização, navegação de meses e abertura/fechamento do modal
+    // foi removida e agora é gerenciada por 'componentes/calendario/calendario.js'.
 
     // --- INICIALIZAÇÃO ---
     renderEvents('future');
