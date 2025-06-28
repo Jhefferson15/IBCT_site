@@ -6,7 +6,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function initializeCalendarComponent() {
         try {
             // Carrega o HTML do componente e injeta no body
-            const response = await fetch(componentUrl);
+            
+            try{
+                const response = await fetch(componentUrl);
+            }catch{
+                const response = await fetch("../../componentes/calendario/calendario.html");
+            }
             if (!response.ok) throw new Error(`Não foi possível carregar o componente: ${response.statusText}`);
             const html = await response.text();
             document.body.insertAdjacentHTML('beforeend', html);
