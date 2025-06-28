@@ -1,0 +1,230 @@
+/* 1. ESTILOS DA PÁGINA DA LOJA HODOS */
+
+/* A grade que segura os produtos */
+.product-grid {
+    display: grid;
+    /* Cria colunas que se ajustam automaticamente ao tamanho da tela */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+/* O card individual de cada produto */
+.product-card {
+    background-color: var(--cor-branco);
+    border-radius: 8px;
+    box-shadow: var(--sombra-suave);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* A área da imagem do produto */
+.product-image {
+    width: 100%;
+    /* Mantém a proporção da imagem */
+    aspect-ratio: 1 / 1;
+    background-color: #f0e9e1; /* Um fundo suave caso a imagem demore a carregar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+}
+
+/* A área de informações do produto (título, descrição, preço) */
+.product-info {
+    padding: 25px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Faz com que esta área cresça para preencher o espaço, alinhando os preços */
+}
+
+.product-info h3 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-vinho);
+    font-size: 22px;
+}
+
+.product-description {
+    font-size: 15px;
+    color: var(--cor-grafite-texto);
+    margin-top: 10px;
+    flex-grow: 1; /* Empurra o preço para baixo */
+}
+
+/* Estilo do preço */
+.product-price {
+    font-family: var(--fonte-corpo);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--cor-vinho);
+    margin-top: 20px;
+    text-align: right;
+}
+/* Adicione este código ao FINAL do seu arquivo loja.css */
+
+/* 2. VISUAL DA SEÇÃO DE PRODUTOS */
+#produtos {
+    background-color: var(--cor-branco);
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+.product-card {
+    cursor: pointer; /* Indica que o card é clicável */
+}
+.product-info h3 {
+    flex-grow: 1; /* Alinha os preços quando os títulos têm tamanhos diferentes */
+}
+.product-price {
+    text-align: left;
+}
+
+
+/* 3. ESTILOS DO MODAL DE PRODUTO */
+.product-modal-content {
+    background: var(--cor-creme-fundo);
+    border-radius: 12px;
+    width: 90%;
+    max-width: 900px;
+    position: relative;
+    box-shadow: var(--sombra-modal);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .product-modal-content {
+    transform: scale(1);
+}
+
+.modal-product-image {
+    background-color: #fff;
+}
+.modal-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-product-details {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-product-details h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-vinho);
+    font-size: 32px;
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+.modal-product-details p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    flex-grow: 1; /* Empurra preço e botões para baixo */
+}
+
+.modal-product-price {
+    font-family: var(--fonte-corpo);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--cor-vinho);
+    margin-bottom: 30px;
+}
+
+.modal-action-buttons {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--cor-branco);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+}
+.action-btn i {
+    margin-right: 10px;
+}
+.action-btn:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+}
+
+.pix-btn { background-color: #32a14b; }
+.form-btn { background-color: #6c757d; }
+.whatsapp-btn { background-color: #25D366; }
+
+.pix-info {
+    background-color: #e9e2d9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    display: none; /* Começa escondido */
+    animation: fadeIn 0.5s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.pix-key-box {
+    display: flex;
+    align-items: center;
+    background-color: var(--cor-branco);
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin: 5px 0 10px 0;
+}
+.pix-key-box span {
+    flex-grow: 1;
+    font-weight: 500;
+    color: var(--cor-grafite-texto);
+}
+#copy-pix-key-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--cor-vinho);
+}
+
+.product-modal-content .modal-close {
+    z-index: 10;
+}
+
+/* RESPONSIVIDADE DO MODAL */
+@media (max-width: 768px) {
+    .product-modal-content {
+        grid-template-columns: 1fr; /* Coluna única em telas menores */
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    .modal-product-details {
+        padding: 30px;
+    }
+    .modal-product-details h2 {
+        font-size: 26px;
+    }
+}

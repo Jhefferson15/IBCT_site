@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
 
-
     // --- BASE DE DADOS DOS EVENTOS ---
     const eventsData = [
         { date: '12 de Abril, 2025', category: 'LOUVOR', title: 'Hodos Meet', location: 'IBCT', description: 'Um ambiente jovem de louvor, adoração e palavra. Uma oportunidade para nos reunirmos como um grande grupo para cultuar a Deus com intensidade e alegria.' },
@@ -35,61 +34,38 @@ document.addEventListener('DOMContentLoaded', () => {
         { date: '07 de Junho, 2025', category: 'LOUVOR', title: 'Hodos Meet', location: 'IBCT', description: 'Mais um encontro para adorarmos juntos. Traga um amigo e venha cultuar conosco!' },
         { date: '14 de Junho, 2025', category: 'ESPECIAL', title: 'Hodos In Love', location: 'IBCT', description: 'Uma noite especial com tema de Dia dos Namorados para celebrar o amor de forma cristã, seja entre casais ou entre amigos.' },
         { date: '18 de Junho, 2025', category: 'MISSÕES', title: 'Evangelismo com CRU', location: 'Parque de Águas Claras', description: 'Nos unimos aos missionários da CRU para um tempo de evangelismo e serviço a Deus em nossa cidade, compartilhando as boas novas.' },
-        // ***** ALTERAÇÃO ABAIXO *****
-        { 
-            date: 'Sextas-feiras', 
-            category: 'PGM', 
-            title: 'PGMs Semanais', 
-            location: 'IBCT e Lares', 
-            description: 'Nossos Pequenos Grupos de Multiplicação acontecem toda sexta! Temos PGMs para jovens, casais, \'Sis & Bros\' e \'Delas 30+\'. É o nosso principal momento de comunhão e estudo em grupos menores.', 
-            recurring: true,
-            externalPage: './eventos/hodos_pgm.html',
-            // ALTERAÇÃO: Adicionada a capa animada do PGM via iframe
-            cardContentHTML: `<iframe src="./tools/logo_pgm.html" style="width:100%; height:100%; border:none; overflow:hidden; background-color: var(--cor-branco);" scrolling="no" title="Animação da logo PGM"></iframe>`
-        },
-        // ***** FIM DA ALTERAÇÃO *****
-        { date: 'Agosto de 2025', category: 'ACAMPA', title: 'Hodos Camp 2025', location: 'A definir', description: 'O evento mais esperado do ano! Serão dias de imersão total na Palavra, louvor, dinâmicas e comunhão. O tema deste ano é \'Viva a Verdade\'. Clique para mais detalhes!',
-          externalPage: './eventos/hodos_camp_2025.html',
-          cardContentHTML: logoAnimadoHTML,
-          recurring: true },
+        { date: 'Sextas-feiras', category: 'PGM', title: 'PGMs Semanais', location: 'IBCT e Lares', description: 'Nossos Pequenos Grupos de Multiplicação acontecem toda sexta! Temos PGMs para jovens, casais, \'Sis & Bros\' e \'Delas 30+\'. É o nosso principal momento de comunhão e estudo em grupos menores.', recurring: true, externalPage: './eventos/hodos_pgm.html', cardContentHTML: `<iframe src="./tools/logo_pgm.html" style="width:100%; height:100%; border:none; overflow:hidden; background-color: var(--cor-branco);" scrolling="no" title="Animação da logo PGM"></iframe>` },
+        { date: 'Agosto de 2025', category: 'ACAMPA', title: 'Hodos Camp 2025', location: 'A definir', description: 'O evento mais esperado do ano! Serão dias de imersão total na Palavra, louvor, dinâmicas e comunhão. O tema deste ano é \'Viva a Verdade\'. Clique para mais detalhes!', externalPage: './eventos/hodos_camp_2025.html', cardContentHTML: logoAnimadoHTML, recurring: true },
     ];
 
-    // --- ELEMENTOS DO DOM ---
+    // --- ELEMENTOS DO DOM (GERAIS) ---
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-    const lessonsScroller = document.querySelector('.lessons-scroller');
-    const toggleBtn = document.getElementById('toggle-events-btn');
-    const eventsTitle = document.getElementById('events-title');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const instaScroller = document.querySelector('.instagram-scroller');
-    const prevInstaBtn = document.getElementById('prev-insta-btn');
-    const nextInstaBtn = document.getElementById('next-insta-btn');
-    
+
     let showingFutureEvents = true;
 
     // --- FUNÇÕES ---
-
     function parseDate(dateString) {
         if (!dateString || typeof dateString !== 'string') return null;
         const monthMap = { 'janeiro': 0, 'fevereiro': 1, 'março': 2, 'abril': 3, 'maio': 4, 'junho': 5, 'julho': 6, 'agosto': 7, 'setembro': 8, 'outubro': 9, 'novembro': 10, 'dezembro': 11 };
         const parts = dateString.toLowerCase().replace(',', '').split(' ');
-        // Tratamento para datas sem dia específico, como "Agosto de 2025"
-        if (parts.length === 3 && parts[0].match(/^\d+$/)) { // Ex: 12 de Abril, 2025
+        if (parts.length === 3 && parts[0].match(/^\d+$/)) {
              const day = parseInt(parts[0], 10), month = monthMap[parts[1]], year = parseInt(parts[2], 10);
              return (!isNaN(day) && month !== undefined && !isNaN(year)) ? new Date(year, month, day) : null;
-        } else if (parts.length === 3 && monthMap[parts[0]] !== undefined) { // Ex: Agosto de 2025
+        } else if (parts.length === 3 && monthMap[parts[0]] !== undefined) {
             const month = monthMap[parts[0]], year = parseInt(parts[2], 10);
-            return (month !== undefined && !isNaN(year)) ? new Date(year, month, 1) : null; // Usa o dia 1 como padrão
+            return (month !== undefined && !isNaN(year)) ? new Date(year, month, 1) : null;
         }
         return null;
     }
 
     function renderEvents(filter) {
+        const lessonsScroller = document.querySelector('.lessons-scroller');
+        if (!lessonsScroller) return; // Se não houver scroller, não faz nada
+        
         lessonsScroller.innerHTML = '';
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-
         const filteredEvents = eventsData.filter(event => {
             if (event.recurring) return filter === 'future';
             const eventDate = parseDate(event.date);
@@ -105,29 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
         filteredEvents.forEach(event => {
             const card = document.createElement('div');
             card.className = 'event-card';
-            Object.keys(event).forEach(key => {
-                if(event[key] !== undefined && key !== 'cardContentHTML') card.dataset[key] = event[key];
-            });
-
+            Object.keys(event).forEach(key => { if(event[key] !== undefined && key !== 'cardContentHTML') card.dataset[key] = event[key]; });
             const cardImageContent = event.cardContentHTML || event.category;
-            const imageContainerClass = event.cardContentHTML
-                ? "lesson-card-image special-content-container"
-                : "lesson-card-image";
-
-            card.innerHTML = `
-                <div class="${imageContainerClass}">
-                    ${cardImageContent}
-                </div>
-                <div class="lesson-card-content">
-                    <div class="date-container">
-                        <span class="date-value">${event.date}</span>
-                    </div>
-                    <h3>${event.title}</h3>
-                </div>
-            `;
+            const imageContainerClass = event.cardContentHTML ? "lesson-card-image special-content-container" : "lesson-card-image";
+            card.innerHTML = `<div class="${imageContainerClass}">${cardImageContent}</div><div class="lesson-card-content"><div class="date-container"><span class="date-value">${event.date}</span></div><h3>${event.title}</h3></div>`;
             lessonsScroller.appendChild(card);
         });
-
         addModalListeners();
     }
     
@@ -149,63 +108,77 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-
-    toggleBtn.addEventListener('click', () => {
-        showingFutureEvents = !showingFutureEvents;
-        if (showingFutureEvents) {
-            eventsTitle.textContent = 'Nossos Próximos Encontros';
-            toggleBtn.textContent = 'Ver Eventos Passados';
-            renderEvents('future');
-        } else {
-            eventsTitle.textContent = 'Eventos que já Aconteceram';
-            toggleBtn.textContent = 'Ver Próximos Eventos';
-            renderEvents('past');
-        }
-    });
-
-    // --- LÓGICA DO MENU, MODAIS E SCROLL ---
-    hamburger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        navLinks.classList.toggle('active');
-        hamburger.classList.toggle('toggle');
-    });
-
-    prevBtn.addEventListener('click', () => lessonsScroller.scrollBy({ left: -330, behavior: 'smooth' }));
-    nextBtn.addEventListener('click', () => lessonsScroller.scrollBy({ left: 330, behavior: 'smooth' }));
-
-    if (instaScroller && prevInstaBtn && nextInstaBtn) {
-        prevInstaBtn.addEventListener('click', () => instaScroller.scrollBy({ left: -300, behavior: 'smooth' }));
-        nextInstaBtn.addEventListener('click', () => instaScroller.scrollBy({ left: 300, behavior: 'smooth' }));
-    }
     
-    function openAnyModal(modal) { modal.classList.add('active'); document.body.classList.add('modal-open'); }
+    // --- LÓGICA DO MENU, MODAIS E SCROLL (GERAL) ---
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('toggle');
+        });
+    }
+
+    function openAnyModal(modal) { if(modal) { modal.classList.add('active'); document.body.classList.add('modal-open'); } }
     function closeAnyModal(modal) { 
-        modal.classList.remove('active');
-        const iframe = modal.querySelector('iframe');
-        if (iframe) iframe.src = "";
-        if (!document.querySelector('.modal-overlay.active')) {
-            document.body.classList.remove('modal-open');
+        if(modal) {
+            modal.classList.remove('active');
+            const iframe = modal.querySelector('iframe');
+            if (iframe) iframe.src = "";
+            if (!document.querySelector('.modal-overlay.active')) {
+                document.body.classList.remove('modal-open');
+            }
         }
     }
     document.querySelectorAll('.modal-close').forEach(btn => btn.addEventListener('click', (e) => closeAnyModal(e.target.closest('.modal-overlay'))));
     
     const scrollToTopBtn = document.querySelector('.scroll-to-top');
-    window.addEventListener('scroll', () => scrollToTopBtn.classList.toggle('visible', window.scrollY > 300));
-    scrollToTopBtn.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    if (scrollToTopBtn) {
+        window.addEventListener('scroll', () => scrollToTopBtn.classList.toggle('visible', window.scrollY > 300));
+        scrollToTopBtn.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    }
     
     const fadeElements = document.querySelectorAll('.fade-in');
-    const observerFadeIn = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
-    }, { threshold: 0.1 });
-    fadeElements.forEach(el => observerFadeIn.observe(el));
+    if (fadeElements.length > 0) {
+        const observerFadeIn = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+        }, { threshold: 0.1 });
+        fadeElements.forEach(el => observerFadeIn.observe(el));
+    }
 
-    // --- MUDANÇA: LÓGICA DO CALENDÁRIO REESTRUTURADA ---
-    // Apenas preparamos os dados para o componente global.
+    // --- CÓDIGO ESPECÍFICO PARA A PÁGINA DE EVENTOS (HOME) ---
+    const lessonsScroller = document.querySelector('.lessons-scroller');
+    if (lessonsScroller) {
+        const toggleBtn = document.getElementById('toggle-events-btn');
+        const eventsTitle = document.getElementById('events-title');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        toggleBtn.addEventListener('click', () => {
+            showingFutureEvents = !showingFutureEvents;
+            eventsTitle.textContent = showingFutureEvents ? 'Nossos Próximos Encontros' : 'Eventos que já Aconteceram';
+            toggleBtn.textContent = showingFutureEvents ? 'Ver Eventos Passados' : 'Ver Próximos Eventos';
+            renderEvents(showingFutureEvents ? 'future' : 'past');
+        });
+
+        prevBtn.addEventListener('click', () => lessonsScroller.scrollBy({ left: -330, behavior: 'smooth' }));
+        nextBtn.addEventListener('click', () => lessonsScroller.scrollBy({ left: 330, behavior: 'smooth' }));
+        
+        renderEvents('future'); // Renderização inicial
+    }
+
+    // --- CÓDIGO ESPECÍFICO PARA O FEED DO INSTAGRAM ---
+    const instaScroller = document.querySelector('.instagram-scroller');
+    if (instaScroller) {
+        const prevInstaBtn = document.getElementById('prev-insta-btn');
+        const nextInstaBtn = document.getElementById('next-insta-btn');
+        prevInstaBtn.addEventListener('click', () => instaScroller.scrollBy({ left: -300, behavior: 'smooth' }));
+        nextInstaBtn.addEventListener('click', () => instaScroller.scrollBy({ left: 300, behavior: 'smooth' }));
+    }
     
+    // --- LÓGICA DO CALENDÁRIO (se aplicável) ---
     function generateCalendarEvents() {
         const calendarEvents = {};
         eventsData.forEach(event => {
-            // Ignora eventos recorrentes sem uma data específica (ex: "Sextas-feiras")
             const eventDate = parseDate(event.date);
             if (eventDate) {
                 const dateStr = eventDate.toISOString().slice(0, 10);
@@ -213,20 +186,76 @@ document.addEventListener('DOMContentLoaded', () => {
                 calendarEvents[dateStr].push({ 
                     type: event.category.toLowerCase(), 
                     title: event.title, 
-                    location: event.location // O componente usa 'location' para a segunda linha
+                    location: event.location
                 });
             }
         });
         return calendarEvents;
     }
-    
-    // Expõe os dados dos eventos do Hodos para o componente de calendário.
     window.CALENDAR_EVENTS = generateCalendarEvents();
-    
-    // A lógica de renderização, navegação de meses e abertura/fechamento do modal
-    // foi removida e agora é gerenciada por 'componentes/calendario/calendario.js'.
-
-    // --- INICIALIZAÇÃO ---
-    renderEvents('future');
 
 });
+
+
+// --- LÓGICA DO MODAL DE PRODUTOS (PÁGINA DA LOJA) ---
+const productCards = document.querySelectorAll('.product-card');
+const productModal = document.getElementById('product-modal');
+
+if (productCards.length > 0 && productModal) {
+    const modalImg = document.getElementById('modal-product-img');
+    const modalTitle = document.getElementById('modal-product-title');
+    const modalDesc = document.getElementById('modal-product-desc');
+    const modalPrice = document.getElementById('modal-product-price');
+    const whatsappLink = document.getElementById('whatsapp-action-link');
+    
+    const pixBtn = document.getElementById('pix-action-btn');
+    const pixInfo = document.getElementById('pix-info-details');
+    const copyPixBtn = document.getElementById('copy-pix-key-btn');
+    const pixKeySpan = document.getElementById('pix-key');
+
+    productCards.forEach(card => {
+        card.addEventListener('click', () => {
+            // 1. Pega os dados do card clicado
+            const title = card.dataset.title;
+            const price = card.dataset.price;
+            const imgSrc = card.dataset.img;
+            const desc = card.dataset.desc;
+
+            // 2. Popula o modal com os dados
+            modalImg.src = imgSrc;
+            modalTitle.innerText = title;
+            modalDesc.innerText = desc;
+            modalPrice.innerText = price;
+            
+            // 3. Configura o link do WhatsApp
+            const whatsappMessage = encodeURIComponent(`Olá! Tenho interesse no produto: *${title}*. Poderia me passar mais informações?`);
+            // SUBSTITUA O NÚMERO ABAIXO PELO NÚMERO DO RESPONSÁVEL
+            whatsappLink.href = `https://wa.me/5561000000000?text=${whatsappMessage}`;
+
+            // 4. Garante que a seção PIX esteja escondida ao abrir
+            pixInfo.style.display = 'none';
+
+            // 5. Abre o modal
+            openAnyModal(productModal);
+        });
+    });
+
+    // Lógica para o botão PIX
+    pixBtn.addEventListener('click', () => {
+        // Alterna a visibilidade da div de informações do PIX
+        const isVisible = pixInfo.style.display === 'block';
+        pixInfo.style.display = isVisible ? 'none' : 'block';
+    });
+
+    // Lógica para copiar a chave PIX
+    copyPixBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(pixKeySpan.innerText).then(() => {
+            copyPixBtn.innerHTML = '<i class="fas fa-check"></i>';
+            setTimeout(() => {
+                copyPixBtn.innerHTML = '<i class="fas fa-copy"></i>';
+            }, 2000);
+        }).catch(err => {
+            console.error('Falha ao copiar a chave PIX: ', err);
+        });
+    });
+}

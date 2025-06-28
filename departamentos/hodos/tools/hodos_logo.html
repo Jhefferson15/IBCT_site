@@ -1,115 +1,56 @@
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Componente: HODOS Logo Animada</title>
-    <!-- Dependências de fonte para a logo -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animação Logo Hodos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
-    
-    <style>
-        /* 
-         * ESTILOS DO COMPONENTE DE LOGO ANIMADA
-         * Este bloco contém todos os estilos necessários para a logo.
-         * Ele será injetado no <head> da página principal.
-        */
-
-        /* --- Variáveis de Cor (para autossuficiência do componente) --- */
-        :root {
-            --bg-color: #fdf6ec;
-            --primary-color: #91452b;
-        }
-
-        /* --- Estilo base para visualização standalone --- */
-        body.logo-standalone-preview {
-            margin: 0;
-            display: grid;
-            place-content: center;
-            min-height: 100vh;
-            background-color: var(--bg-color);
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        /* --- ESTILOS DA LOGO --- */
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .logo-icon {
-            height: auto;
-            width: 95px;
-            position: relative;
-        }
-
-        .logo-icon svg {
-            animation: float 2.5s ease-in-out infinite;
-        }
-
-        .logo-icon::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            width: 70%;
-            height: 10px;
-            background: rgba(145, 69, 43, 0.15);
-            border-radius: 50%;
-            filter: blur(5px);
-            transform: translateX(-50%);
-            z-index: -1;
-            animation: shadow-float 2.5s ease-in-out infinite;
-        }
-        
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .logo-title {
-            text-transform: uppercase;
-            line-height: 1;
-            font-size: 3.5rem;
-            font-weight: 700;
-            letter-spacing: -0.05em;
-            color: var(--primary-color);
-        }
-        
-        .logo-subtitle {
-            text-transform: uppercase;
-            line-height: 1;
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 0.25em;
-            margin-top: 4px;
-            color: var(--primary-color);
-        }
-
-        /* --- Media Query específica da Logo --- */
-        @media (max-width: 768px) {
-            .logo-container { flex-direction: column; gap: 20px; }
-            .logo-text { align-items: center; }
-            .logo-title { font-size: 3rem; }
-        }
-        
-        /* --- KEYFRAMES DAS ANIMAÇÕES --- */
-        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
-        @keyframes shadow-float { 0% { transform: translateX(-50%) scale(1); opacity: 1; } 50% { transform: translateX(-50%) scale(0.85); opacity: 0.6; } 100% { transform: translateX(-50%) scale(1); opacity: 1; } }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
 </head>
-<!-- A classe 'logo-standalone-preview' é apenas para melhorar a visualização deste arquivo isoladamente -->
-<body class="logo-standalone-preview">
+<body style="margin: 0; padding: 0; background-color: transparent;">
 
-    <!-- 
-      * ESTRUTURA HTML DA LOGO
-      * Este é o conteúdo que será injetado na página principal. 
-    -->
-    <div class="logo-container">
-        <div class="logo-icon"><svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="pin-shape"><path d="M 50 120 C 40 110, 5 75, 5 55 A 45 45 0 1 1 95 55 C 95 75, 60 110, 50 120 Z" /></clipPath></defs><g><path fill="#91452b" d="M 50 120 C 40 110, 5 75, 5 55 A 45 45 0 1 1 95 55 C 95 75, 60 110, 50 120 Z" /><g clip-path="url(#pin-shape)"><line stroke="#fdf6ec" stroke-linecap="round" stroke-width="10.5" x1="-18" y1="11" x2="120" y2="77" /><line stroke="#fdf6ec" stroke-linecap="round" stroke-width="10.5" x1="-20" y1="59" x2="98" y2="79" /><circle fill="#fdf6ec" cx="50" cy="55" r="26" /></g></g></svg></div>
-        <div class="logo-text"><span class="logo-title">HODOS</span><span class="logo-subtitle">JUVENTUDE</span></div>
+    <div style="font-family: 'Montserrat', sans-serif; color: #91452b; display: grid; place-items: center; height: 100vh;">
+        <style>
+            @keyframes float_card { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+            @keyframes shadow_float_card { 0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; } 50% { transform: translateX(-50%) scale(0.85); opacity: 0.6; } }
+            @keyframes pulse_card { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+            .logo-icon_card { position: relative; width: 100px; /* Aumentei um pouco para o banner */ }
+            .logo-icon_card svg { animation: float_card 2.5s ease-in-out infinite; }
+            .logo-icon_card::after { 
+                content: ''; 
+                position: absolute; 
+                bottom: -8px; 
+                left: 50%; 
+                width: 70%; 
+                height: 8px; 
+                background: rgba(145, 69, 43, 0.15); 
+                border-radius: 50%; 
+                filter: blur(4px); 
+                transform: translateX(-50%); 
+                z-index: -1; 
+                animation: shadow_float_card 2.5s ease-in-out infinite; 
+            }
+        </style>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <div class="logo-icon_card">
+                <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+                    <defs><clipPath id="pin-shape-card"><path d="M 50 120 C 40 110, 5 75, 5 55 A 45 45 0 1 1 95 55 C 95 75, 60 110, 50 120 Z" /></clipPath></defs>
+                    <g>
+                        <path fill="#91452b" d="M 50 120 C 40 110, 5 75, 5 55 A 45 45 0 1 1 95 55 C 95 75, 60 110, 50 120 Z" />
+                        <g clip-path="url(#pin-shape-card)">
+                            <line stroke="#fdf6ec" stroke-linecap="round" stroke-width="10.5" x1="-18" y1="11" x2="120" y2="77" />
+                            <line stroke="#fdf6ec" stroke-linecap="round" stroke-width="10.5" x1="-20" y1="59" x2="98" y2="79" />
+                            <circle fill="#fdf6ec" cx="50" cy="55" r="26" />
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            <div style="display: flex; flex-direction: column;">
+                <span style="text-transform: uppercase; line-height: 1; font-size: 3rem; font-weight: 700; letter-spacing: -0.05em; animation: pulse_card 1.2s infinite; color: #902C3E;">HODOS</span>
+                <span style="text-transform: uppercase; line-height: 1; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.25em; margin-top: 4px; color: #F4A9A2;">JUVENTUDE</span>
+            </div>
+        </div>
     </div>
 
 </body>

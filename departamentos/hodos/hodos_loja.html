@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja - Ministério HODOS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/hodos_style.css">
+    <link rel="stylesheet" href="css/loja.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a href="hodos_home.html" class="logo">
+                <img src="../../img/logo.png" alt="Logo IBCT">
+                <span>HODOS</span>
+            </a>
+            <nav class="nav-links">
+                <a href="hodos_home.html#eventos">Eventos</a>
+                <a href="loja.html">Loja</a>
+                <a href="hodos_home.html#sobre">Sobre Nós</a>
+                <a href="hodos_home.html" data-action="open-calendar">Calendário</a>
+            </nav>
+            <div class="hamburger">
+                <div class="line1"></div><div class="line2"></div><div class="line3"></div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero fade-in">
+            <!-- ANIMAÇÃO CORRIGIDA AQUI -->
+            <iframe 
+                src="./tools/hodos_logo.html" 
+                class="hero-background-logo" 
+                frameborder="0" 
+                scrolling="no" 
+                title="Logo animada do Hodos como fundo">
+            </iframe>
+            <div class="container">
+                <h1>Loja Hodos</h1>
+                <p>Leve a mensagem <strong>#VivaAVerdade</strong> por onde for. <br>Todo o valor arrecadado é para os eventos e missões do nosso ministério.</p>
+            </div>
+        </section>
+
+        <!-- SEÇÃO DE PRODUTOS COM VISUAL SEPARADO -->
+        <section id="produtos" class="content-section fade-in">
+            <div class="container">
+                <h2>Nossos Produtos</h2>
+                <p>Clique em um item para ver os detalhes e como adquirir.</p>
+                <div class="product-grid">
+                    <!-- Card da Camiseta com data-attributes -->
+                    <div class="product-card" 
+                         data-title="Camiseta 'Viva a Verdade'" 
+                         data-price="R$ 65,00" 
+                         data-img="img/loja/camisa.png"
+                         data-desc="Camiseta marrom em malha 100% algodão, fio 30.1 penteado. Estampa elegante na frente e um design circular impactante nas costas. Conforto e mensagem em uma só peça.">
+                        <div class="product-image">
+                            <img src="img/loja/camisa.png" alt="Camiseta Hodos Viva a Verdade">
+                        </div>
+                        <div class="product-info">
+                            <h3>Camiseta "Viva a Verdade"</h3>
+                            <div class="product-price">R$ 65,00</div>
+                        </div>
+                    </div>
+                    <!-- Card da Caneca/Copo com data-attributes -->
+                    <div class="product-card"
+                         data-title="Copo 'Viva a Verdade'"
+                         data-price="R$ 15,00"
+                         data-img="img/loja/caneca.png"
+                         data-desc="Copo de 400ml personalizado com a estampa circular do tema. Perfeito para usar nos encontros, no dia a dia e para diminuir o uso de descartáveis. Leve, prático e com estilo.">
+                        <div class="product-image">
+                            <img src="img/loja/caneca.png" alt="Caneca Hodos Viva a Verdade">
+                        </div>
+                        <div class="product-info">
+                            <h3>Copo "Viva a Verdade"</h3>
+                            <div class="product-price">R$ 15,00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- A seção "Como Comprar" pode ser mantida ou removida, já que o modal explica -->
+        
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+             <div class="logo">IBCT <span>Ministério HODOS</span></div>
+             <p>© 2025 Igreja Batista Central em Taguatinga. Todos os direitos reservados. <br> #VivaAVerdade</p>
+        </div>
+    </footer>
+
+    <!-- ESTRUTURA DO MODAL DO PRODUTO -->
+    <div class="modal-overlay" id="product-modal">
+        <div class="product-modal-content">
+            <button class="modal-close">×</button>
+            <div class="modal-product-image">
+                <img id="modal-product-img" src="" alt="Imagem do Produto">
+            </div>
+            <div class="modal-product-details">
+                <h2 id="modal-product-title">Título do Produto</h2>
+                <p id="modal-product-desc">Descrição detalhada do produto...</p>
+                <div class="modal-product-price" id="modal-product-price">R$ 0,00</div>
+                
+                <div class="modal-action-buttons">
+                    <button class="action-btn pix-btn" id="pix-action-btn"><i class="fas fa-qrcode"></i> Pagar com PIX</button>
+                    <a href="formulario_pedido.html" class="action-btn form-btn"><i class="fas fa-file-alt"></i> Pedir por Formulário</a>
+                    <a id="whatsapp-action-link" href="#" target="_blank" class="action-btn whatsapp-btn"><i class="fab fa-whatsapp"></i> Chamar no WhatsApp</a>
+                </div>
+
+                <div class="pix-info" id="pix-info-details">
+                    <p><strong>Use a chave PIX abaixo:</strong></p>
+                    <div class="pix-key-box">
+                        <span id="pix-key">hodos@ibct.com.br</span>
+                        <button id="copy-pix-key-btn" title="Copiar Chave PIX"><i class="fas fa-copy"></i></button>
+                    </div>
+                    <small>Após o pagamento, envie o comprovante para a liderança do Hodos.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
+    <script src="js/hodos_script.js" defer></script>
+</body>
+</html>
