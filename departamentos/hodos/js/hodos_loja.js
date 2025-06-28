@@ -143,3 +143,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+    // --- LÓGICA DO BOTÃO DE COPIAR PIX NA PÁGINA PRINCIPAL ---
+    const copyMainPixBtn = document.getElementById('copy-main-pix-btn');
+    if (copyMainPixBtn) {
+        const pixKeySpan = document.getElementById('main-page-pix-key');
+        const originalText = copyMainPixBtn.querySelector('span').innerText;
+        const originalIcon = copyMainPixBtn.querySelector('i').outerHTML;
+
+        copyMainPixBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(pixKeySpan.innerText).then(() => {
+                copyMainPixBtn.querySelector('i').className = 'fas fa-check';
+                copyMainPixBtn.querySelector('span').innerText = 'Copiado!';
+                
+                setTimeout(() => {
+                    copyMainPixBtn.querySelector('i').outerHTML = originalIcon;
+                    copyMainPixBtn.querySelector('span').innerText = originalText;
+                }, 2500); // Volta ao normal após 2.5 segundos
+            }).catch(err => {
+                console.error('Falha ao copiar a chave PIX da página: ', err);
+                copyMainPixBtn.querySelector('span').innerText = 'Erro!';
+            });
+        });
+    }

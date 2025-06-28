@@ -42,7 +42,7 @@
                 <p>Leve a mensagem <strong>#VivaAVerdade</strong> por onde for. <br>Todo o valor arrecadado é para os eventos e missões do nosso ministério.</p>
             </div>
         </section>
-
+    
         <section id="produtos" class="content-section fade-in">
             <div class="container">
                 <h2>Nossos Produtos</h2>
@@ -69,7 +69,6 @@
                          data-img="img/loja/caneca.png"
                          data-desc="Copo de 400ml personalizado com a estampa circular do tema. Perfeito para usar nos encontros, no dia a dia e para diminuir o uso de descartáveis. Leve, prático e com estilo.">
                         <div class="product-image">
-                            <!-- MUDANÇA: Adicionada classe para a animação -->
                             <img src="img/loja/caneca.png" alt="Caneca Hodos Viva a Verdade" class="product-image-mug">
                         </div>
                         <div class="product-info">
@@ -81,29 +80,49 @@
             </div>
         </section>
         
-        <!-- MUDANÇA: NOVA SEÇÃO - CAMPANHA DO AGASALHO -->
+        <!-- MUDANÇA: SEÇÃO "CAMPANHA DO AGASALHO" REESTRUTURADA -->
         <section id="campanha-agasalho" class="content-section fade-in">
             <div class="container">
-                <h2><i class="fas fa-snowflake" style="margin-right: 10px;"></i> Campanha do Agasalho</h2>
-                <p>O inverno está chegando e podemos aquecer quem mais precisa. Traga sua doação de agasalhos, cobertores e roupas de frio em bom estado para a nossa caixa de coleta na IBCT. Sua ajuda faz a diferença!</p>
-            </div>
-        </section>
-
-        <!-- MUDANÇA: NOVA SEÇÃO - DOAÇÕES -->
-        <section id="doacoes" class="content-section fade-in" style="background-color: var(--cor-branco);">
-             <div class="container">
-                <h2><i class="fas fa-hand-holding-heart" style="margin-right: 10px;"></i> Faça uma Doação</h2>
-                <p>Quer abençoar nosso ministério e nos ajudar a realizar mais eventos e ações missionárias? Sua doação é muito bem-vinda e será usada para a expansão do Reino através dos jovens.</p>
-                <div class="pix-info" style="display: block; max-width: 400px; margin: 20px auto 0 auto; text-align: left;">
-                    <p><strong>Use a chave PIX do ministério:</strong></p>
-                    <div class="pix-key-box">
-                        <span>hodos@ibct.com.br</span>
+                <div class="campaign-card">
+                    <div class="campaign-icon-area">
+                        <i class="fas fa-snowflake"></i>
                     </div>
-                    <small>Que Deus te abençoe grandemente!</small>
+                    <div class="campaign-text-area">
+                        <h2>Campanha do Agasalho</h2>
+                        <p>O inverno está chegando e podemos aquecer quem mais precisa. Sua doação de agasalhos, cobertores e roupas de frio em bom estado faz toda a diferença!</p>
+                        <div class="campaign-callout">
+                            <i class="fas fa-box-open"></i>
+                            <span>Ponto de coleta: <strong>Caixa identificada na IBCT</strong></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-        
+    
+        <!-- MUDANÇA: SEÇÃO "DOAÇÕES" REESTRUTURADA -->
+        <section id="doacoes" class="content-section fade-in">
+             <div class="container">
+                <div class="campaign-card reversed">
+                    <div class="campaign-icon-area">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <div class="campaign-text-area">
+                        <h2>Faça uma Doação</h2>
+                        <p>Quer abençoar nosso ministério e nos ajudar a realizar mais eventos e ações missionárias? Sua doação é muito bem-vinda e será usada para a expansão do Reino através dos jovens.</p>
+                        <div class="donation-pix-box">
+                            <label>Chave PIX do ministério HODOS</label>
+                            <div class="pix-input-group">
+                                <span id="main-page-pix-key">hodos@ibct.com.br</span>
+                                <button id="copy-main-pix-btn" class="copy-btn">
+                                    <i class="fas fa-copy"></i>
+                                    <span>Copiar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">

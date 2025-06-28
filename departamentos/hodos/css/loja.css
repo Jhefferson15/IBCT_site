@@ -209,3 +209,167 @@
     .modal-product-details { padding: 30px; }
     .modal-product-details h2 { font-size: 26px; }
 }
+
+/* 6. ESTILOS DAS SEÇÕES DE CAMPANHA E DOAÇÃO (NOVO) */
+
+/* CSS CORRIGIDO */
+.campaign-card {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* <<< LINHA ADICIONADA PARA CENTRALIZAR O CONTEÚDO */
+    gap: 40px;
+    background-color: var(--cor-branco);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: var(--sombra-suave);
+    overflow: hidden;
+}
+
+/* Área do Ícone */
+.campaign-icon-area {
+    background-color: var(--cor-creme-fundo);
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.campaign-icon-area i {
+    font-size: 70px;
+    color: var(--cor-vinho);
+}
+
+/* Área do Texto */
+.campaign-text-area {
+    text-align: center; 
+}
+.campaign-text-area h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-vinho);
+    font-size: 34px;
+    margin: 0;
+}
+.campaign-text-area p {
+    font-size: 17px;
+    color: var(--cor-grafite-texto);
+    margin-top: 15px;
+    line-height: 1.6;
+}
+
+/* Callout da Campanha do Agasalho */
+.campaign-callout {
+    margin-top: 25px;
+    background-color: var(--cor-creme-fundo);
+    border-left: 4px solid var(--cor-vinho);
+    padding: 15px 20px;
+    border-radius: 0 8px 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.campaign-callout i {
+    color: var(--cor-vinho);
+    font-size: 20px;
+}
+.campaign-callout span {
+    font-size: 16px;
+    color: var(--cor-grafite-texto);
+    font-weight: 500;
+}
+
+/* Estilos específicos da Seção de Doações */
+#doacoes {
+    background-color: var(--cor-vinho);
+}
+#doacoes .campaign-card {
+    background-color: transparent;
+    box-shadow: none;
+    color: var(--cor-branco);
+}
+#doacoes .campaign-icon-area {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+#doacoes .campaign-icon-area i {
+    color: var(--cor-branco);
+}
+#doacoes .campaign-text-area h2, #doacoes .campaign-text-area p {
+    color: var(--cor-branco);
+}
+
+.donation-pix-box {
+    margin: 25px auto 0 auto;
+}
+.donation-pix-box label {
+    font-size: 14px;
+    opacity: 0.8;
+    display: block;
+    margin-bottom: 8px;
+}
+.pix-input-group {
+    display: flex;
+    align-items: stretch;
+    background-color: var(--cor-branco);
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 450px;
+}
+.pix-input-group span {
+    flex-grow: 1;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--cor-grafite-texto);
+    font-family: 'Courier New', Courier, monospace;
+}
+.copy-btn {
+    background-color: var(--cor-creme-fundo);
+    border: none;
+    cursor: pointer;
+    padding: 0 20px;
+    color: var(--cor-vinho);
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+}
+.copy-btn:hover {
+    background-color: #dcd3c8; /* Um pouco mais escuro que o creme */
+}
+.copy-btn i {
+    font-size: 16px;
+}
+
+/* Layout invertido para a segunda seção */
+.campaign-card.reversed {
+    flex-direction: row-reverse;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+    .campaign-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px;
+    }
+    .campaign-card.reversed {
+        flex-direction: column; /* Mantém a coluna em telas pequenas */
+    }
+    .campaign-text-area h2 {
+        font-size: 28px;
+    }
+    .campaign-icon-area {
+        width: 140px;
+        height: 140px;
+    }
+    .campaign-icon-area i {
+        font-size: 50px;
+    }
+    .pix-input-group {
+        max-width: 100%;
+    }
+}
