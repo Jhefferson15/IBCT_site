@@ -1,3 +1,4 @@
+
 /* 1. IMPORTAÇÃO E VARIÁVEIS */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@700&display=swap');
 :root {
@@ -102,15 +103,15 @@ a:hover { opacity: 0.7; }
 }
 .toggle-events-button:hover { background-color: var(--cor-rosa-suave); color: var(--cor-vinho); }
 
-/* 5. SEÇÃO DE EVENTOS */
+/* 5. SEÇÃO DE EVENTOS/AULAS */
 .lessons-wrapper { position: relative; }
 .lessons-scroller { display: flex; gap: 30px; overflow-x: auto; scroll-behavior: smooth; padding: 20px 5px; scrollbar-width: none; min-height: 380px; align-items: flex-start; }
 .lessons-scroller::-webkit-scrollbar { display: none; }
-.event-card {
+.event-card, .lesson-card {
     flex: 0 0 300px; background-color: var(--cor-branco); border-radius: 8px;
     box-shadow: var(--sombra-suave); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;
 }
-.event-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12); }
+.event-card:hover, .lesson-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12); }
 .lesson-card-image {
     height: 180px; background-color: var(--cor-rosa-suave);
     display: flex; align-items: center; justify-content: center;
@@ -124,7 +125,6 @@ a:hover { opacity: 0.7; }
 .lesson-card-image.special-content-container {
     padding: 0;
     overflow: hidden;
-    /* ALTERAÇÃO: Fundo do card especial alterado para branco */
     background-color: var(--cor-branco);
     position: relative;
     display: block;
@@ -146,12 +146,19 @@ a:hover { opacity: 0.7; }
 #prev-btn, #prev-insta-btn { left: -25px; }
 #next-btn, #next-insta-btn { right: -25px; }
 
-/* 6. SEÇÃO SOBRE & JUNTE-SE */
-#sobre, #junte-se { background-color: var(--cor-branco); }
+/* 6. SEÇÃO SOBRE & JUNTE-SE & AVISOS */
+#sobre, #junte-se, #avisos { background-color: var(--cor-branco); }
 .avisos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; text-align: left; }
 .aviso-card { background-color: var(--cor-creme-fundo); padding: 25px; border-left: 5px solid var(--cor-rosa-suave); }
 .aviso-card h3 { display: flex; align-items: center; gap: 10px; }
 .icon-pillar { color: var(--cor-vinho); font-size: 20px; }
+#countdown-section { background-color: var(--cor-vinho); color: var(--cor-branco); }
+#countdown-section h2, #countdown-section p { color: var(--cor-branco); }
+.countdown-timer { display: flex; justify-content: center; gap: 20px; margin-top: 30px; flex-wrap: wrap; }
+.countdown-block { background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 8px; min-width: 100px; }
+.countdown-block span { display: block; font-size: 40px; font-weight: 700; }
+.countdown-block p { font-size: 14px; margin: 0; opacity: 0.8; text-transform: uppercase; }
+
 
 /* 7. MODAIS (GERAL E EXTERNO) */
 .modal-overlay {
@@ -171,8 +178,8 @@ a:hover { opacity: 0.7; }
     position: absolute; top: 15px; right: 20px; font-size: 30px;
     color: var(--cor-grafite-texto); cursor: pointer; border: none; background: none; z-index: 10;
 }
-#modal-location { margin-bottom: 20px; }
-#modal-location strong { color: var(--cor-vinho); }
+#modal-location, #modal-teacher, #modal-scripture { margin-bottom: 20px; }
+#modal-location strong, #modal-teacher, #modal-scripture { color: var(--cor-vinho); }
 .modal-content-external {
     background: var(--cor-creme-fundo); padding: 10px; border-radius: 12px;
     width: 95%; height: 90%; max-width: 1200px; position: relative;
@@ -186,8 +193,7 @@ a:hover { opacity: 0.7; }
     display: grid; place-content: center; line-height: 1;
     top: -15px; right: -15px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
-
-/* MUDANÇA: Seção '8. MODAL DE CALENDÁRIO' foi totalmente removida */
+#modal-extra-content { margin-top: 25px; }
 
 /* 9. ANIMAÇÃO DE SCROLL */
 .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
@@ -195,7 +201,16 @@ a:hover { opacity: 0.7; }
 
 /* 10. RODAPÉ */
 .footer { background-color: var(--cor-vinho); color: var(--cor-creme-fundo); padding: 50px 0; text-align: center; margin-top: 60px; }
-.footer .logo { color: var(--cor-branco); }
+/* MUDANÇA: Estilos do logo no rodapé aprimorados */
+.footer .logo { 
+    color: var(--cor-branco); 
+    justify-content: center; /* Centraliza o logo no rodapé */
+    margin-bottom: 15px;
+    filter: brightness(0) invert(1);
+}
+.footer .logo img {
+    height: 30px; /* Ajusta o tamanho da imagem no rodapé */
+}
 .footer .logo span { color: var(--cor-rosa-suave); }
 
 /* 11. BOTÃO VOLTAR AO TOPO */
@@ -254,6 +269,6 @@ a:hover { opacity: 0.7; }
     .hamburger.toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
     .hero h1 { font-size: 36px; }
     .scroll-button { display: none; }
-    .event-card { flex-basis: 260px; }
+    .event-card, .lesson-card { flex-basis: 260px; }
     .insta-card { flex: 0 0 240px; }
 }
