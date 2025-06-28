@@ -1,6 +1,72 @@
+// --- SCRIPT PARA A PÁGINA HOME (hodos_home.html) ---
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- ARTE HTML DO ACAMPAMENTO ---
+    // --- LÓGICA COMPARTILHADA (Pode ser usada em várias páginas) ---
+
+    // 1. Menu Hamburger
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('toggle');
+        });
+    }
+
+    // 2. Funções de Modal Genéricas
+    function openAnyModal(modal) {
+        if (modal) {
+            modal.classList.add('active');
+            document.body.classList.add('modal-open');
+        }
+    }
+
+    function closeAnyModal(modal) {
+        if (modal) {
+            modal.classList.remove('active');
+            const iframe = modal.querySelector('iframe');
+            if (iframe) iframe.src = ""; // Limpa o iframe ao fechar
+            if (!document.querySelector('.modal-overlay.active')) {
+                document.body.classList.remove('modal-open');
+            }
+        }
+    }
+    document.querySelectorAll('.modal-close').forEach(btn => {
+        btn.addEventListener('click', (e) => closeAnyModal(e.target.closest('.modal-overlay')));
+    });
+    
+    // 3. Botão "Scroll to Top"
+    const scrollToTopBtn = document.querySelector('.scroll-to-top');
+    if (scrollToTopBtn) {
+        window.addEventListener('scroll', () => {
+            scrollToTopBtn.classList.toggle('visible', window.scrollY > 300);
+        });
+        scrollToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+    
+    // 4. Efeito de "Fade-in" ao rolar a página
+    const fadeElements = document.querySelectorAll('.fade-in');
+    if (fadeElements.length > 0) {
+        const observerFadeIn = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        fadeElements.forEach(el => observerFadeIn.observe(el));
+    }
+
+
+    // --- LÓGICA ESPECÍFICA DA PÁGINA HOME ---
+
+    // 1. Dados e Conteúdo dos Eventos
     const logoAnimadoHTML = `
         <div style="font-family: 'Montserrat', sans-serif; color: #91452b; display: grid; place-items: center; height: 100%;">
             <style>
@@ -26,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
 
-    // --- BASE DE DADOS DOS EVENTOS ---
     const eventsData = [
         { date: '12 de Abril, 2025', category: 'LOUVOR', title: 'Hodos Meet', location: 'IBCT', description: 'Um ambiente jovem de louvor, adoração e palavra. Uma oportunidade para nos reunirmos como um grande grupo para cultuar a Deus com intensidade e alegria.' },
         { date: '07 de Maio, 2025', category: 'ESPECIAL', title: 'Cinema: The Chosen', location: 'ParkShopping', description: 'Encontro descontraído do grupo para assistir à série The Chosen no cinema, fortalecendo a amizade e a comunhão.' },
@@ -37,14 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
         { date: 'Sextas-feiras', category: 'PGM', title: 'PGMs Semanais', location: 'IBCT e Lares', description: 'Nossos Pequenos Grupos de Multiplicação acontecem toda sexta! Temos PGMs para jovens, casais, \'Sis & Bros\' e \'Delas 30+\'. É o nosso principal momento de comunhão e estudo em grupos menores.', recurring: true, externalPage: './eventos/hodos_pgm.html', cardContentHTML: `<iframe src="./tools/logo_pgm.html" style="width:100%; height:100%; border:none; overflow:hidden; background-color: var(--cor-branco);" scrolling="no" title="Animação da logo PGM"></iframe>` },
         { date: 'Agosto de 2025', category: 'ACAMPA', title: 'Hodos Camp 2025', location: 'A definir', description: 'O evento mais esperado do ano! Serão dias de imersão total na Palavra, louvor, dinâmicas e comunhão. O tema deste ano é \'Viva a Verdade\'. Clique para mais detalhes!', externalPage: './eventos/hodos_camp_2025.html', cardContentHTML: logoAnimadoHTML, recurring: true },
     ];
-
-    // --- ELEMENTOS DO DOM (GERAIS) ---
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-
+    
+    // 2. Funções de Renderização de Eventos
     let showingFutureEvents = true;
 
-    // --- FUNÇÕES ---
     function parseDate(dateString) {
         if (!dateString || typeof dateString !== 'string') return null;
         const monthMap = { 'janeiro': 0, 'fevereiro': 1, 'março': 2, 'abril': 3, 'maio': 4, 'junho': 5, 'julho': 6, 'agosto': 7, 'setembro': 8, 'outubro': 9, 'novembro': 10, 'dezembro': 11 };
@@ -61,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderEvents(filter) {
         const lessonsScroller = document.querySelector('.lessons-scroller');
-        if (!lessonsScroller) return; // Se não houver scroller, não faz nada
+        if (!lessonsScroller) return;
         
         lessonsScroller.innerHTML = '';
         const today = new Date();
@@ -108,44 +169,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-    
-    // --- LÓGICA DO MENU, MODAIS E SCROLL (GERAL) ---
-    if (hamburger && navLinks) {
-        hamburger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navLinks.classList.toggle('active');
-            hamburger.classList.toggle('toggle');
-        });
-    }
 
-    function openAnyModal(modal) { if(modal) { modal.classList.add('active'); document.body.classList.add('modal-open'); } }
-    function closeAnyModal(modal) { 
-        if(modal) {
-            modal.classList.remove('active');
-            const iframe = modal.querySelector('iframe');
-            if (iframe) iframe.src = "";
-            if (!document.querySelector('.modal-overlay.active')) {
-                document.body.classList.remove('modal-open');
-            }
-        }
-    }
-    document.querySelectorAll('.modal-close').forEach(btn => btn.addEventListener('click', (e) => closeAnyModal(e.target.closest('.modal-overlay'))));
-    
-    const scrollToTopBtn = document.querySelector('.scroll-to-top');
-    if (scrollToTopBtn) {
-        window.addEventListener('scroll', () => scrollToTopBtn.classList.toggle('visible', window.scrollY > 300));
-        scrollToTopBtn.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
-    }
-    
-    const fadeElements = document.querySelectorAll('.fade-in');
-    if (fadeElements.length > 0) {
-        const observerFadeIn = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
-        }, { threshold: 0.1 });
-        fadeElements.forEach(el => observerFadeIn.observe(el));
-    }
-
-    // --- CÓDIGO ESPECÍFICO PARA A PÁGINA DE EVENTOS (HOME) ---
+    // 3. Lógica da Seção de Eventos (Botões, etc)
     const lessonsScroller = document.querySelector('.lessons-scroller');
     if (lessonsScroller) {
         const toggleBtn = document.getElementById('toggle-events-btn');
@@ -166,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderEvents('future'); // Renderização inicial
     }
 
-    // --- CÓDIGO ESPECÍFICO PARA O FEED DO INSTAGRAM ---
+    // 4. Lógica do Feed do Instagram
     const instaScroller = document.querySelector('.instagram-scroller');
     if (instaScroller) {
         const prevInstaBtn = document.getElementById('prev-insta-btn');
@@ -175,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
         nextInstaBtn.addEventListener('click', () => instaScroller.scrollBy({ left: 300, behavior: 'smooth' }));
     }
     
-    // --- LÓGICA DO CALENDÁRIO (se aplicável) ---
+    // 5. Lógica do Calendário
     function generateCalendarEvents() {
         const calendarEvents = {};
         eventsData.forEach(event => {
@@ -195,67 +220,3 @@ document.addEventListener('DOMContentLoaded', () => {
     window.CALENDAR_EVENTS = generateCalendarEvents();
 
 });
-
-
-// --- LÓGICA DO MODAL DE PRODUTOS (PÁGINA DA LOJA) ---
-const productCards = document.querySelectorAll('.product-card');
-const productModal = document.getElementById('product-modal');
-
-if (productCards.length > 0 && productModal) {
-    const modalImg = document.getElementById('modal-product-img');
-    const modalTitle = document.getElementById('modal-product-title');
-    const modalDesc = document.getElementById('modal-product-desc');
-    const modalPrice = document.getElementById('modal-product-price');
-    const whatsappLink = document.getElementById('whatsapp-action-link');
-    
-    const pixBtn = document.getElementById('pix-action-btn');
-    const pixInfo = document.getElementById('pix-info-details');
-    const copyPixBtn = document.getElementById('copy-pix-key-btn');
-    const pixKeySpan = document.getElementById('pix-key');
-
-    productCards.forEach(card => {
-        card.addEventListener('click', () => {
-            // 1. Pega os dados do card clicado
-            const title = card.dataset.title;
-            const price = card.dataset.price;
-            const imgSrc = card.dataset.img;
-            const desc = card.dataset.desc;
-
-            // 2. Popula o modal com os dados
-            modalImg.src = imgSrc;
-            modalTitle.innerText = title;
-            modalDesc.innerText = desc;
-            modalPrice.innerText = price;
-            
-            // 3. Configura o link do WhatsApp
-            const whatsappMessage = encodeURIComponent(`Olá! Tenho interesse no produto: *${title}*. Poderia me passar mais informações?`);
-            // SUBSTITUA O NÚMERO ABAIXO PELO NÚMERO DO RESPONSÁVEL
-            whatsappLink.href = `https://wa.me/5561000000000?text=${whatsappMessage}`;
-
-            // 4. Garante que a seção PIX esteja escondida ao abrir
-            pixInfo.style.display = 'none';
-
-            // 5. Abre o modal
-            openAnyModal(productModal);
-        });
-    });
-
-    // Lógica para o botão PIX
-    pixBtn.addEventListener('click', () => {
-        // Alterna a visibilidade da div de informações do PIX
-        const isVisible = pixInfo.style.display === 'block';
-        pixInfo.style.display = isVisible ? 'none' : 'block';
-    });
-
-    // Lógica para copiar a chave PIX
-    copyPixBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText(pixKeySpan.innerText).then(() => {
-            copyPixBtn.innerHTML = '<i class="fas fa-check"></i>';
-            setTimeout(() => {
-                copyPixBtn.innerHTML = '<i class="fas fa-copy"></i>';
-            }, 2000);
-        }).catch(err => {
-            console.error('Falha ao copiar a chave PIX: ', err);
-        });
-    });
-}
