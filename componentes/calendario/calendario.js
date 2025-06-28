@@ -6,18 +6,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function initializeCalendarComponent() {
         try {
             // Carrega o HTML do componente e injeta no body
-            
+            // Eu fiz uma gambiarra, pois varios sites estão pegando rodando de ligares diferentes e o url não está achando, e estou implementando varias tentativas com try
             try{
                 const response = await fetch(componentUrl);
-            }catch{
-                const response = await fetch("../../componentes/calendario/calendario.html");
-            }
-            if (!response.ok) throw new Error(`Não foi possível carregar o componente: ${response.statusText}`);
+                if (!response.ok) throw new Error(`Não foi possível carregar o componente: ${response.statusText}`);
             const html = await response.text();
             document.body.insertAdjacentHTML('beforeend', html);
 
             // Agora que o HTML existe, podemos configurar a lógica
             setupCalendarLogic();
+            }catch{
+                const response = await fetch("../../componentes/calendario/calendario.html");
+                if (!response.ok) throw new Error(`Não foi possível carregar o componente: ${response.statusText}`);
+                const html = await response.text();
+                document.body.insertAdjacentHTML('beforeend', html);
+    
+                // Agora que o HTML existe, podemos configurar a lógica
+                setupCalendarLogic();
+            }
+            
 
         } catch (error) {
             console.error('Falha ao inicializar o componente de calendário:', error);
