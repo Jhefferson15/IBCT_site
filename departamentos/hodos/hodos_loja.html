@@ -30,7 +30,6 @@
 
     <main>
         <section class="hero fade-in">
-            <!-- ANIMAÇÃO CORRIGIDA AQUI -->
             <iframe 
                 src="./tools/hodos_logo.html" 
                 class="hero-background-logo" 
@@ -44,13 +43,12 @@
             </div>
         </section>
 
-        <!-- SEÇÃO DE PRODUTOS COM VISUAL SEPARADO -->
         <section id="produtos" class="content-section fade-in">
             <div class="container">
                 <h2>Nossos Produtos</h2>
                 <p>Clique em um item para ver os detalhes e como adquirir.</p>
                 <div class="product-grid">
-                    <!-- Card da Camiseta com data-attributes -->
+                    <!-- Card da Camiseta -->
                     <div class="product-card" 
                          data-title="Camiseta 'Viva a Verdade'" 
                          data-price="R$ 65,00" 
@@ -64,14 +62,15 @@
                             <div class="product-price">R$ 65,00</div>
                         </div>
                     </div>
-                    <!-- Card da Caneca/Copo com data-attributes -->
+                    <!-- Card da Caneca/Copo -->
                     <div class="product-card"
                          data-title="Copo 'Viva a Verdade'"
                          data-price="R$ 15,00"
                          data-img="img/loja/caneca.png"
                          data-desc="Copo de 400ml personalizado com a estampa circular do tema. Perfeito para usar nos encontros, no dia a dia e para diminuir o uso de descartáveis. Leve, prático e com estilo.">
                         <div class="product-image">
-                            <img src="img/loja/caneca.png" alt="Caneca Hodos Viva a Verdade">
+                            <!-- MUDANÇA: Adicionada classe para a animação -->
+                            <img src="img/loja/caneca.png" alt="Caneca Hodos Viva a Verdade" class="product-image-mug">
                         </div>
                         <div class="product-info">
                             <h3>Copo "Viva a Verdade"</h3>
@@ -81,8 +80,29 @@
                 </div>
             </div>
         </section>
+        
+        <!-- MUDANÇA: NOVA SEÇÃO - CAMPANHA DO AGASALHO -->
+        <section id="campanha-agasalho" class="content-section fade-in">
+            <div class="container">
+                <h2><i class="fas fa-snowflake" style="margin-right: 10px;"></i> Campanha do Agasalho</h2>
+                <p>O inverno está chegando e podemos aquecer quem mais precisa. Traga sua doação de agasalhos, cobertores e roupas de frio em bom estado para a nossa caixa de coleta na IBCT. Sua ajuda faz a diferença!</p>
+            </div>
+        </section>
 
-        <!-- A seção "Como Comprar" pode ser mantida ou removida, já que o modal explica -->
+        <!-- MUDANÇA: NOVA SEÇÃO - DOAÇÕES -->
+        <section id="doacoes" class="content-section fade-in" style="background-color: var(--cor-branco);">
+             <div class="container">
+                <h2><i class="fas fa-hand-holding-heart" style="margin-right: 10px;"></i> Faça uma Doação</h2>
+                <p>Quer abençoar nosso ministério e nos ajudar a realizar mais eventos e ações missionárias? Sua doação é muito bem-vinda e será usada para a expansão do Reino através dos jovens.</p>
+                <div class="pix-info" style="display: block; max-width: 400px; margin: 20px auto 0 auto; text-align: left;">
+                    <p><strong>Use a chave PIX do ministério:</strong></p>
+                    <div class="pix-key-box">
+                        <span>hodos@ibct.com.br</span>
+                    </div>
+                    <small>Que Deus te abençoe grandemente!</small>
+                </div>
+            </div>
+        </section>
         
     </main>
 
@@ -93,7 +113,7 @@
         </div>
     </footer>
 
-    <!-- ESTRUTURA DO MODAL DO PRODUTO -->
+    <!-- MODAL DO PRODUTO -->
     <div class="modal-overlay" id="product-modal">
         <div class="product-modal-content">
             <button class="modal-close">×</button>
@@ -107,7 +127,8 @@
                 
                 <div class="modal-action-buttons">
                     <button class="action-btn pix-btn" id="pix-action-btn"><i class="fas fa-qrcode"></i> Pagar com PIX</button>
-                    <a href="formulario_pedido.html" class="action-btn form-btn"><i class="fas fa-file-alt"></i> Pedir por Formulário</a>
+                    <!-- MUDANÇA: Alterado de 'a' para 'button' e adicionado ID -->
+                    <button id="form-action-btn" class="action-btn form-btn"><i class="fas fa-file-alt"></i> Pedir por Formulário</button>
                     <a id="whatsapp-action-link" href="#" target="_blank" class="action-btn whatsapp-btn"><i class="fab fa-whatsapp"></i> Chamar no WhatsApp</a>
                 </div>
 
@@ -122,6 +143,10 @@
             </div>
         </div>
     </div>
+    
+    <!-- MUDANÇA: ELEMENTO DO TOAST -->
+    <div id="toast-notification"></div>
+
 
     <a class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
     <script src="js/hodos_loja.js" defer></script>

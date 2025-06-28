@@ -66,6 +66,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const productCards = document.querySelectorAll('.product-card');
     const productModal = document.getElementById('product-modal');
+    
+    // MUDANÇA: Lógica do Toast
+    const toast = document.getElementById('toast-notification');
+    const formActionBtn = document.getElementById('form-action-btn');
+
+    function showToast(message) {
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.add('active');
+        setTimeout(() => {
+            toast.classList.remove('active');
+        }, 3000); // O toast some após 3 segundos
+    }
+    
+    if(formActionBtn) {
+        formActionBtn.addEventListener('click', () => {
+            showToast('Funcionalidade em breve!');
+        });
+    }
+    // FIM DA LÓGICA DO TOAST
+
 
     if (productCards.length > 0 && productModal) {
         const modalImg = document.getElementById('modal-product-img');
@@ -81,32 +102,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         productCards.forEach(card => {
             card.addEventListener('click', () => {
-                // 1. Pega os dados do card clicado
                 const title = card.dataset.title;
                 const price = card.dataset.price;
                 const imgSrc = card.dataset.img;
                 const desc = card.dataset.desc;
 
-                // 2. Popula o modal com os dados
                 modalImg.src = imgSrc;
                 modalTitle.innerText = title;
                 modalDesc.innerText = desc;
                 modalPrice.innerText = price;
                 
-                // 3. Configura o link do WhatsApp
                 const whatsappMessage = encodeURIComponent(`Olá! Tenho interesse no produto: *${title}*. Poderia me passar mais informações?`);
                 // SUBSTITUA O NÚMERO ABAIXO PELO NÚMERO DO RESPONSÁVEL
-                whatsappLink.href = `https://wa.me/5561000000000?text=${whatsappMessage}`;
+                whatsappLink.href = `https://wa.me/556196763258?text=${whatsappMessage}`;
 
-                // 4. Garante que a seção PIX esteja escondida ao abrir
                 pixInfo.style.display = 'none';
 
-                // 5. Abre o modal
                 openAnyModal(productModal);
             });
         });
 
-        // Lógica para o botão PIX
         if (pixBtn) {
             pixBtn.addEventListener('click', () => {
                 const isVisible = pixInfo.style.display === 'block';
@@ -114,7 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Lógica para copiar a chave PIX
         if (copyPixBtn) {
             copyPixBtn.addEventListener('click', () => {
                 navigator.clipboard.writeText(pixKeySpan.innerText).then(() => {
