@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     // URL para o componente HTML. Ajuste o caminho se a estrutura de pastas for diferente.
-    const componentUrl = '/../componentes/calendario/calendario.html';
+    const componentUrl = './componentes/calendario/calendario.html';
 
     // --- 1. FUNÇÃO PRINCIPAL DE INICIALIZAÇÃO ---
     async function initializeCalendarComponent() {
