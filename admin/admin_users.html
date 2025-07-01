@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuários - Painel Administrativo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/admin_style.css">
+</head>
+<body class="admin-body">
+    <div class="admin-wrapper">
+        <!-- NAVEGAÇÃO LATERAL (Copie e mude o link ativo) -->
+        <aside class="sidebar">
+            <div class="sidebar-header"><img src="../../img/logo.png" alt="Logo IBCT"><span>IBCT Admin</span></div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-heading">Principal</li>
+                    <li><a href="admin_dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Análises e Relatórios</a></li>
+                    <li class="nav-heading">Gerenciamento de Conteúdo</li>
+                    <li><a href="admin_calendar.html"><i class="fas fa-calendar-alt"></i> Calendário de Eventos</a></li>
+                    <li><a href="admin_posts.html"><i class="fas fa-bullhorn"></i> Postagens e Avisos</a></li>
+                    <li><a href="#"><i class="fas fa-file-alt"></i> Páginas</a></li>
+                    <li><a href="#"><i class="fas fa-images"></i> Biblioteca de Mídia</a></li>
+                    <li class="nav-heading">Administração</li>
+                    <li><a href="admin_users.html" class="active"><i class="fas fa-users"></i> Gerenciar Usuários</a></li>
+                    <li><a href="admin_settings.html"><i class="fas fa-cogs"></i> Configurações Gerais</a></li>
+                    <li class="nav-heading">Avançado</li>
+                    <li><a href="admin_terminal.html"><i class="fas fa-terminal"></i> Terminal do Servidor</a></li>
+                    <li><a href="#"><i class="fas fa-shield-alt"></i> Logs de Segurança</a></li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <img src="#" alt="Foto do Admin">
+                <div class="user-info"><strong>Admin User</strong><span>administrador</span></div>
+                <a href="admin_login.html" class="logout-btn" title="Sair"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-content">
+            <header class="main-header">
+                <button class="hamburger-admin" id="hamburger-btn"><i class="fas fa-bars"></i></button>
+                <h1>Gerenciar Usuários</h1>
+                <div class="header-actions">
+                    <button class="btn-primary"><i class="fas fa-user-plus"></i> Adicionar Usuário</button>
+                </div>
+            </header>
+
+            <section class="content-panel">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Usuário</th>
+                            <th>Email</th>
+                            <th>Função</th>
+                            <th>Data de Cadastro</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><div class="user-cell"><img src="#" alt="avatar"><strong>Admin User</strong></div></td>
+                            <td>admin@ibct.org</td>
+                            <td><span class="badge badge-danger">Administrador</span></td>
+                            <td>01 de Jan, 2024</td>
+                            <td class="action-buttons">
+                                <button title="Editar"><i class="fas fa-pencil-alt"></i></button>
+                                <button title="Excluir"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><div class="user-cell"><img src="#" alt="avatar"><strong>Pr. Juliano Santos</strong></div></td>
+                            <td>juliano.santos@ibct.org</td>
+                            <td><span class="badge badge-info">Editor</span></td>
+                            <td>15 de Fev, 2024</td>
+                            <td class="action-buttons">
+                                <button><i class="fas fa-pencil-alt"></i></button>
+                                <button><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                           <td><div class="user-cell"><img src="#" alt="avatar"><strong>Ana Paula</strong></div></td>
+                            <td>ana.paula@ibct.org</td>
+                            <td><span class="badge badge-secondary">Colaborador</span></td>
+                            <td>20 de Mar, 2025</td>
+                            <td class="action-buttons">
+                                <button><i class="fas fa-pencil-alt"></i></button>
+                                <button><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    <div class="sidebar-overlay"></div>
+    <script src="js/admin_script.js"></script>
+</body>
+</html>
