@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IBCT - Ministério HODOS</title>
+    <title>IBCT - Departamento HODOS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="css/hodos_style.css">
     <link rel="stylesheet" href="../../componentes/calendario/calendario.css">
@@ -20,7 +20,7 @@
                 <a href="#eventos">Eventos</a>
                 <a href="hodos_loja.html">Loja</a>
                 <a href="hodos_ebd.html">EBD</a>
-                <a href="hodos_sobre.html">Sobre Nós</a> <!-- LINK ATUALIZADO -->
+                <a href="hodos_sobre.html">Sobre Nós</a>
                 <a data-action="open-calendar">Calendário</a>
             </nav>
             <div class="hamburger">
@@ -42,10 +42,11 @@
              <div class="container">
                 <h1>HODOS</h1>
                 <p>O caminho que leva a Cristo. <br><strong>#VivaAVerdade</strong></p>
-                <a href="#eventos" class="cta-button">Ver Próximos Eventos</a>
+                <a href="#eventos" class="cta-button">Ver Nossos Encontros</a>
             </div>
         </section>
 
+        <!-- MUDANÇA: ÚNICA SEÇÃO DO INSTAGRAM, COM MAIS FOTOS -->
         <section id="instagram-feed" class="content-section fade-in">
             <div class="container">
                 <h2>Siga-nos no Instagram <a href="https://www.instagram.com/hodosmj/" target="_blank" rel="noopener noreferrer">@hodosmj</a></h2>
@@ -53,33 +54,23 @@
                 <div class="instagram-wrapper">
                     <button id="prev-insta-btn" class="scroll-button"><i class="fas fa-chevron-left"></i></button>
                     <div class="instagram-scroller">
-                        <a href="https://www.instagram.com/hodosmj/" target="_blank" rel="noopener noreferrer" class="insta-card">
-                            <img src="img/instagram/hodos_in_love.webp" alt="Post do Instagram sobre o Hodos In Love">
-                            <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
-                        </a>
-                        <a href="https://www.instagram.com/hodosmj/" target="_blank" rel="noopener noreferrer" class="insta-card">
-                            <img src="img/instagram/grupo_guibli.webp" alt="Post do Instagram do Grupo Guibli">
-                            <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
-                        </a>
-                        <a href="https://www.instagram.com/hodosmj/" target="_blank" rel="noopener noreferrer" class="insta-card">
-                            <img src="img/instagram/jantar_natalino.webp" alt="Post do Instagram sobre o Jantar Natalino">
-                            <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
-                        </a>
-                         <a href="https://www.instagram.com/hodosmj/" target="_blank" rel="noopener noreferrer" class="insta-card">
-                            <img src="img/instagram/hodos_pace.webp" alt="Post do Instagram sobre o Hodos Pace">
-                            <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
-                        </a>
-                        <a href="https://www.instagram.com/hodosmj/" target="_blank" rel="noopener noreferrer" class="insta-card">
-                            <img src="img/instagram/foto_01.webp" alt="Foto de um encontro do Ministério Hodos">
-                            <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
-                        </a>
+                        <!-- Fileira 1 -->
+                        <a href="https://www.instagram.com/p/C77t8GNUvqS/" target="_blank" rel="noopener noreferrer" class="insta-card"><img src="img/instagram/hodos_in_love.webp" alt="Post do Hodos In Love"></a>
+                        <a href="https://www.instagram.com/p/C7f5dURUe1O/" target="_blank" rel="noopener noreferrer" class="insta-card"><img src="img/instagram/hodos_pace.webp" alt="Post do Hodos Pace"></a>
+                        <a href="https://www.instagram.com/p/C091b-xup_7/" target="_blank" rel="noopener noreferrer" class="insta-card"><img src="img/instagram/jantar_natalino.webp" alt="Post do Jantar Natalino"></a>
+                        <a href="https://www.instagram.com/p/Cz02Z2WOv6S/" target="_blank" rel="noopener noreferrer" class="insta-card"><img src="img/instagram/hodos_day.webp" alt="Post do Hodos Day"></a>
+                        <!-- Fileira 2 -->
+                         <a href="https://www.instagram.com/p/CxykP2FOCG1/" target="_blank" rel="noopener noreferrer" class="insta-card"><img src="img/instagram/foto_01.webp" alt="Foto de um encontro do Hodos"></a>
+                         <a href="https://www.instagram.com/p/Cyk4s2RO_8i/" target="_blank" rel="noopener noreferrer" class="insta-card"><img src="img/instagram/grupo_guibli.webp" alt="Foto do grupo Guibli"></a>
+                         <a href="https://www.instagram.com/p/Cw-B_I5uLFG/" target="_blank" rel="noopener noreferrer" class="insta-card"><img src="img/instagram/foto_02.webp" alt="Foto de um encontro do Hodos"></a>
+                         <a href="https://www.instagram.com/p/CweaR26OhYj/" target="_blank" rel="noopener noreferrer" class="insta-card"><img src="img/instagram/foto_03.webp" alt="Foto de um encontro do Hodos"></a>
                     </div>
                     <button id="next-insta-btn" class="scroll-button"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
         </section>
 
-        <section id="eventos" class="content-section fade-in">
+        <section id="eventos" class="content-section bg-light fade-in">
             <div class="container">
                 <div class="section-header-with-button">
                     <h2 id="events-title">Nossos Próximos Encontros</h2>
@@ -92,16 +83,31 @@
                 </div>
             </div>
         </section>
-        
-        <!-- NOVA SEÇÃO PARA CONHECER O MINISTÉRIO HODOS -->
-        <section id="conheca-hodos" class="content-section fade-in">
+
+        <section id="agenda-hodos" class="content-section fade-in">
+            <div class="container dual-column-container">
+                <div class="events-widget">
+                    <h2 class="section-title">Agenda Hodos</h2>
+                    <div id="next-events-list"></div>
+                    <button data-action="open-calendar" class="widget-button">Ver Calendário Completo</button>
+                </div>
+                <div class="verse-widget">
+                    <h2 class="section-title">PGM Semanal</h2>
+                    <blockquote>
+                       Nosso principal ponto de encontro para comunhão e estudo da Palavra em grupos menores. Acontece toda sexta-feira!
+                    </blockquote>
+                    <a href="./eventos/hodos_pgm.html" class="widget-button">Saiba mais sobre os PGMs</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="conheca-hodos" class="content-section bg-light fade-in">
             <div class="container">
-                <h2>Conheça o Ministério HODOS</h2>
+                <h2>Conheça o Departamento HODOS</h2>
                 <p>Nossa história, nossos pilares, nossa equipe e como você pode fazer parte desta jornada.</p>
                 <a href="hodos_sobre.html" class="cta-button">Saiba Mais Sobre Nós</a>
             </div>
         </section>
-        <!-- FIM DA NOVA SEÇÃO -->
 
     </main>
     
@@ -115,7 +121,7 @@
         </div>
     </footer>
 
-    <!-- MODAIS (EXCETO O DO CALENDÁRIO) -->
+    <!-- MODAIS -->
     <div class="modal-overlay" id="lesson-modal">
         <div class="modal-content">
             <button class="modal-close">×</button>
