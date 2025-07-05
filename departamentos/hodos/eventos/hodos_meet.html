@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hodos Meet | Rede de Jovens Hodos</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- ESTILOS GERAIS E CORES BASE --- */
+        :root {
+            --bg-color: #f8f8f8;
+            --text-color: #2c2c2c;
+            --primary-color: #1a1a1a;
+            --accent-orange: #f5a623;
+            --accent-yellow: #f8d44c;
+            --card-bg: #ffffff;
+            --card-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            text-align: center;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- CONTAINER E SEÇÕES --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        /* --- HEADER --- */
+        header {
+            padding: 1rem 0;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 3rem;
+        }
+
+        .header-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .header-subtitle {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-orange);
+            font-weight: 500;
+            margin-top: 0.25rem;
+        }
+        
+        /* --- SEÇÃO DO EVENTO PRINCIPAL (HERO) --- */
+        .event-hero {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+            text-align: left;
+        }
+
+        .event-poster {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            filter: drop-shadow(6px 6px 0px var(--accent-yellow));
+            transition: transform 0.3s ease;
+        }
+        
+        .event-poster:hover {
+            transform: translateY(-5px);
+        }
+
+        .event-details h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 10vw, 5rem);
+            color: var(--primary-color);
+            margin: 0 0 1rem 0;
+            line-height: 1.1;
+        }
+        
+        /* NOVO ESTILO PARA A NOTA DA DATA */
+        .event-note {
+            font-size: 0.9rem;
+            font-style: italic;
+            background-color: #fffbe6;
+            border-left: 3px solid var(--accent-yellow);
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .info-item {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            border-left: 5px solid var(--accent-orange);
+        }
+
+        .info-item h3 {
+            margin: 0 0 0.25rem 0;
+            font-size: 1rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-item p {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        /* --- SEÇÃO "O QUE ESPERAR" --- */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background-color: var(--accent-orange);
+        }
+
+        .section-subtitle {
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            text-align: left;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .feature-card h3 {
+            margin: 0.75rem 0 0.5rem 0;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+        }
+        
+        .feature-card p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin: 0;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent-orange);
+        }
+
+        /* --- SEÇÃO DE LOCALIZAÇÃO --- */
+        .location-map {
+            width: 100%;
+            height: 400px;
+            border-radius: 12px;
+            border: none;
+            box-shadow: var(--card-shadow);
+        }
+
+        /* --- SEÇÃO DE FAQ --- */
+        .faq-container {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .faq-item {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .faq-item summary {
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            list-style: none;
+            position: relative;
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        
+        .faq-item summary::after {
+            content: '+';
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: var(--accent-orange);
+            transition: transform 0.2s ease;
+        }
+        
+        .faq-item[open] summary::after {
+            transform: translateY(-50%) rotate(45deg);
+        }
+        
+        .faq-item div {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            border-top: 1px solid #e0e0e0;
+            padding-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* --- RESPONSIVIDADE --- */
+        @media (min-width: 768px) {
+            .event-hero {
+                flex-direction: row;
+                gap: 3rem;
+            }
+            .event-poster {
+                flex: 0 0 350px;
+            }
+            .event-details {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h2 class="header-title">Hodos Eventos</h2>
+            <p class="header-subtitle">Rede de Jovens</p>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- ======================= -->
+        <!--    SEÇÃO DO EVENTO      -->
+        <!-- ======================= -->
+        <section class="event-hero">
+            <img src="../img/eventos/hodos_meet.jpg" alt="Banner do Hodos Meet - Um Ambiente Jovem de Louvor" class="event-poster">
+            
+            <div class="event-details">
+                <h1>Hodos Meet</h1>
+                <p>O Hodos Meet é o nosso encontro mensal de louvor e adoração. Uma noite para cultuar a Deus com intensidade, fortalecer amizades e recarregar as energias!</p>
+                
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h3>Próxima Data</h3>
+                        <!-- ID ADICIONADO PARA O JAVASCRIPT -->
+                        <p id="event-date">Carregando...</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Horário</h3>
+                        <p>20h</p>
+                    </div>
+                     <div class="info-item">
+                        <h3>Local</h3>
+                        <p>IBCT - EPTG</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- (O restante do conteúdo da página permanece igual) -->
+        
+        <!-- =================================== -->
+        <!--      SEÇÃO "O QUE ESPERAR"          -->
+        <!-- =================================== -->
+        <section>
+            <h2 class="section-title">O Que Esperar do Nosso Encontro?</h2>
+            <p class="section-subtitle">O Hodos Meet é projetado para ser um tempo especial de conexão com Deus e com os irmãos. Veja o que te aguarda:</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🎵</span>
+                    <h3>Louvor e Adoração</h3>
+                    <p>O coração do nosso encontro. Um tempo vibrante de músicas para juntos adorarmos a Deus, com canções que falam profundamente aos nossos corações.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">💬</span>
+                    <h3>Comunhão e Amizade</h3>
+                    <p>Após o louvor, temos sempre um momento para conversar, rir e fortalecer os laços. É o nosso "alimento físico" para fechar a noite em grande estilo.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">❤️</span>
+                    <h3>Ambiente Acolhedor</h3>
+                    <p>Você é nosso convidado de honra! Sinta-se em casa para vir como está e trazer seus amigos. Queremos que todos se sintam parte da família Hodos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= -->
+        <!--    SEÇÃO DE LOCAL       -->
+        <!-- ======================= -->
+        <section>
+            <h2 class="section-title">Onde Acontece?</h2>
+            <p class="section-subtitle">Nos encontramos na Igreja Batista Central de Taguatinga, um lugar de fácil acesso pela EPTG. Confira o mapa!</p>
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7677.0949728339765!2d-48.05643324524222!3d-15.827796966749323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935a32f71de3365b%3A0x585c20f59e32788!2sIgreja%20Batista%20Central%20de%20Taguatinga!5e0!3m2!1sen!2sbr!4v1751056019632!5m2!1sen!2sbr" 
+                class="location-map" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </section>
+        
+        <!-- ======================= -->
+        <!--    SEÇÃO DE FAQ         -->
+        <!-- ======================= -->
+        <section>
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            <div class="faq-container">
+                <details class="faq-item">
+                    <summary>Preciso ser membro da igreja para participar?</summary>
+                    <div><p>Claro que não! O Hodos Meet é um evento aberto a todos. Queremos que você e seus amigos se sintam em casa, independentemente de onde congregam.</p></div>
+                </details>
+                <details class="faq-item">
+                    <summary>Posso levar um amigo?</summary>
+                    <div><p>Sim, por favor! Nós encorajamos você a trazer seus amigos para conhecerem nossa galera e adorarem a Deus conosco. Quanto mais gente, melhor!</p></div>
+                </details>
+                <details class="faq-item">
+                    <summary>O evento é gratuito?</summary>
+                    <div><p>Sim, a entrada é totalmente gratuita. Você não precisa se inscrever nem pagar nada para participar do momento de louvor.</p></div>
+                </details>
+                 <details class="faq-item">
+                    <summary>O que significa "alimento espiritual e físico"?</summary>
+                    <div><p>É o nosso jeito de dizer que cuidamos do culto e da comunhão! O "alimento espiritual" é o nosso tempo de louvor e adoração. O "alimento físico" é o lanche e o tempo de conversa que temos depois, para fortalecer nossas amizades.</p></div>
+                </details>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Hodos Juventude. Igreja Batista Central de Taguatinga.</p>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!--    SCRIPT JAVASCRIPT PARA DATA DINÂMICA    -->
+    <!-- ========================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elemento do HTML onde a data será exibida
+            const eventDateElement = document.getElementById('event-date');
+            
+            // Nomes dos meses em português
+            const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+            function getNextFirstSaturday() {
+                const today = new Date();
+                today.setHours(0, 0, 0, 0); // Zera o tempo para comparar apenas as datas
+
+                // Função para calcular o primeiro sábado de um determinado mês/ano
+                function calculateFirstSaturday(year, month) {
+                    const firstDayOfMonth = new Date(year, month, 1);
+                    const dayOfWeek = firstDayOfMonth.getDay(); // 0 = Domingo, 6 = Sábado
+                    
+                    // Dias a adicionar para chegar ao sábado
+                    // (6 - dayOfWeek + 7) % 7 lida com casos onde o primeiro dia já é sábado ou passou de sábado
+                    const daysToAdd = (6 - dayOfWeek + 7) % 7;
+                    const dateOfFirstSaturday = 1 + daysToAdd;
+                    
+                    return new Date(year, month, dateOfFirstSaturday);
+                }
+
+                // Calcula o primeiro sábado deste mês
+                let firstSaturdayThisMonth = calculateFirstSaturday(today.getFullYear(), today.getMonth());
+
+                // Se a data de hoje for DEPOIS do primeiro sábado deste mês,
+                // calcula o primeiro sábado do próximo mês.
+                if (today > firstSaturdayThisMonth) {
+                    const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+                    return calculateFirstSaturday(nextMonth.getFullYear(), nextMonth.getMonth());
+                } else {
+                    // Caso contrário, o evento deste mês ainda vai acontecer.
+                    return firstSaturdayThisMonth;
+                }
+            }
+
+            // Pega a data calculada
+            const eventDate = getNextFirstSaturday();
+            
+            // Formata para "DD Mês" (ex: "06 Julho")
+            const day = String(eventDate.getDate()).padStart(2, '0');
+            const monthName = meses[eventDate.getMonth()];
+            
+            // Atualiza o conteúdo na página
+            eventDateElement.textContent = `${day} ${monthName}`;
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR" style="height: 100%; margin: 0;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hodos Meet - Logo Animado</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --main-yellow: #fecb00;
+            --main-black: #111111;
+            --cycle-duration: 10s;
+            --orb-travel-time: 1.5s;
+            --orbs-initial-delay: 0.5s;
+            --core-initial-size: 120px;
+            --orb-size: 25px;
+            --max-growth-factor: 1.8;
+            --explosion-scale: 50;
+        }
+
+        /* AJUSTE CRÍTICO PARA CENTRALIZAÇÃO NO IFRAME */
+        body {
+            height: 100%;
+            margin: 0;
+            background-color: var(--bg-color);
+        }
+
+        .logo-viewport {
+            display: grid;
+            place-content: center;
+            height: 100%; /* Em vez de min-height: 100vh */
+            overflow: hidden;
+        }
+        
+        .hodos-logo-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: grid;
+            place-content: center;
+            animation: container-visibility-cycle var(--cycle-duration) ease-in-out infinite;
+        }
+
+        .hodos-logo-core {
+            width: var(--core-initial-size);
+            height: var(--core-initial-size);
+            background-color: var(--main-yellow);
+            border-radius: 50%;
+            color: var(--main-black);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            font-family: 'Anton', sans-serif;
+            animation: core-transform-cycle var(--cycle-duration) ease-in-out infinite;
+        }
+        
+        .hodos-logo-core .title { font-size: calc(var(--core-initial-size) * 0.28); line-height: 1; }
+        .hodos-logo-core .subtitle { font-size: calc(var(--core-initial-size) * 0.18); line-height: 1; }
+
+        .orbiter {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: var(--orb-size);
+            height: var(--orb-size);
+            background-color: var(--main-yellow);
+            border-radius: 50%;
+            transform-origin: center center;
+            opacity: 0;
+            animation: orb-travel-cycle var(--orb-travel-time) ease-in infinite;
+        }
+
+        .orbiter.o1 { --start-x: -140px; --start-y: -100px; animation-delay: calc(var(--orbs-initial-delay) + 0s); }
+        .orbiter.o2 { --start-x: 150px;  --start-y: 80px;   animation-delay: calc(var(--orbs-initial-delay) + 1.2s); }
+        .orbiter.o3 { --start-x: 100px;  --start-y: -130px; animation-delay: calc(var(--orbs-initial-delay) + 2.4s); }
+        .orbiter.o4 { --start-x: -90px;  --start-y: 140px;  animation-delay: calc(var(--orbs-initial-delay) + 3.6s); }
+        .orbiter.o5 { --start-x: -10px;  --start-y: -150px; animation-delay: calc(var(--orbs-initial-delay) + 4.8s); }
+
+        @keyframes container-visibility-cycle {
+            0%, 80% { opacity: 1; }
+            95%, 100% { opacity: 0; }
+        }
+
+        @keyframes core-transform-cycle {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.15); }
+            27% { transform: scale(1.3); }
+            39% { transform: scale(1.45); }
+            51% { transform: scale(1.6); }
+            63% { transform: scale(var(--max-growth-factor)); }
+            80% { transform: scale(var(--max-growth-factor)); }
+            95% { transform: scale(var(--explosion-scale)); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes orb-travel-cycle {
+            0% { transform: translate(var(--start-x), var(--start-y)) scale(1); opacity: 1; }
+            99% { transform: translate(-50%, -50%) scale(0.2); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-viewport">
+        <div class="hodos-logo-container">
+            <div class="hodos-logo-core">
+                <span class="title">HODOS</span>
+                <span class="subtitle">MEET</span>
+            </div>
+            <div class="orbiter o1"></div>
+            <div class="orbiter o2"></div>
+            <div class="orbiter o3"></div>
+            <div class="orbiter o4"></div>
+            <div class="orbiter o5"></div>
+        </div>
+    </div>
+</body>
+</html>

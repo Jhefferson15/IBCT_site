@@ -104,6 +104,13 @@ a:hover { opacity: 0.7; }
 .toggle-events-button:hover { background-color: var(--cor-rosa-suave); color: var(--cor-vinho); }
 
 /* 5. SEÇÃO DE EVENTOS/AULAS */
+/* Adicione esta nova classe ao seu arquivo CSS principal */
+
+/* Permite que o conteúdo de um card específico (como animações) 
+   ultrapasse os limites visíveis da caixa. */
+   .allow-overflow {
+    overflow: visible !important;
+}
 .lessons-wrapper { position: relative; }
 .lessons-scroller { display: flex; gap: 30px; overflow-x: auto; scroll-behavior: smooth; padding: 20px 5px; scrollbar-width: none; min-height: 380px; align-items: flex-start; }
 .lessons-scroller::-webkit-scrollbar { display: none; }
@@ -111,6 +118,7 @@ a:hover { opacity: 0.7; }
     flex: 0 0 300px; background-color: var(--cor-branco); border-radius: 8px;
     box-shadow: var(--sombra-suave); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;
 }
+
 .event-card:hover, .lesson-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12); }
 .lesson-card-image {
     height: 180px; background-color: var(--cor-rosa-suave);
