@@ -1,0 +1,343 @@
+
+/* Este arquivo CSS contém estilos específicos para a página "hodos_sobre.html". */
+/* Ele deve ser carregado APÓS hodos_style.css no seu HTML para garantir que as variáveis e estilos base estejam disponíveis. */
+
+/* 4. SEÇÃO HERO E BOTÕES (Específico da Página Sobre) */
+.hero-small {
+    padding: 60px 0; /* Menor padding para um banner mais compacto */
+}
+.hero-small h1 {
+    font-size: 48px; /* Ajuste para o tamanho menor */
+}
+.hero-small p {
+    font-size: 16px;
+    max-width: 600px;
+}
+
+/* Seções de Conteúdo (Fundo branco para as seções na página Sobre) */
+#introducao-hodos, #sobre, #junte-se, #lideres, #timeline-section { 
+    background-color: var(--cor-branco); 
+}
+/* O #lideres terá um fundo diferente, então sobrescrevemos abaixo */
+#lideres {
+    background-color: var(--cor-creme-fundo); /* Fundo contrastante */
+}
+
+
+/* 6. SEÇÃO "OS PILARES DO HODOS" (Específico da Página Sobre) */
+.avisos-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 30px; 
+    margin-top: 50px; 
+    text-align: left;
+}
+
+#sobre .aviso-card {
+    background-color: var(--cor-creme-fundo);
+    padding: 30px; 
+    border-radius: 12px; 
+    box-shadow: var(--sombra-suave);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center; 
+    border-left: none; 
+    cursor: pointer; 
+}
+
+#sobre .aviso-card:hover {
+    transform: translateY(-8px); 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); 
+}
+
+.aviso-icon-wrapper { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px; 
+    height: 70px;
+    border-radius: 50%;
+    background-color: var(--cor-rosa-suave); 
+    margin: 0 auto 20px auto; 
+}
+
+.aviso-icon { 
+    color: var(--cor-vinho); 
+    font-size: 38px; 
+}
+
+#sobre .aviso-card h3 { 
+    font-size: 24px; 
+    margin-bottom: 10px; 
+    color: var(--cor-vinho);
+    display: block; 
+}
+
+#sobre .aviso-card p {
+    font-size: 16px;
+    color: var(--cor-grafite-texto);
+    opacity: 0.85; 
+}
+
+/* SEÇÃO "JUNTE-SE A NÓS!" (Específico da Página Sobre) */
+#junte-se .aviso-card {
+    background-color: var(--cor-branco); 
+    padding: 25px;
+    border-left: 5px solid var(--cor-rosa-suave); 
+    border-radius: 8px; 
+    box-shadow: var(--sombra-suave);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer; 
+    text-align: left; 
+}
+
+#junte-se .aviso-card:hover {
+    transform: translateY(-5px); 
+    border-color: var(--cor-vinho); 
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1); 
+}
+
+#junte-se .aviso-card h3 { 
+    font-size: 20px; 
+    margin-bottom: 8px; 
+    color: var(--cor-vinho);
+}
+
+#junte-se .aviso-card p {
+    font-size: 15px;
+    color: var(--cor-grafite-texto);
+    opacity: 0.9;
+}
+
+
+/* 6.5. SEÇÃO NOSSOS LÍDERES (Específico da Página Sobre) */
+#lideres {
+    padding-bottom: 80px; /* Já definimos o background-color acima */
+}
+
+.lideres-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.lider-card {
+    background-color: var(--cor-branco);
+    border-radius: 12px;
+    box-shadow: var(--sombra-suave);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lider-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.lider-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 4px solid var(--cor-rosa-suave); /* Borda para destaque */
+}
+
+.lider-card h3 {
+    font-size: 22px;
+    margin-bottom: 5px;
+    color: var(--cor-vinho);
+}
+
+.lider-card .lider-role {
+    font-weight: 700;
+    color: var(--cor-grafite-texto);
+    opacity: 0.8;
+    margin-bottom: 15px;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.lider-card .lider-bio {
+    font-size: 15px;
+    color: var(--cor-grafite-texto);
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+/* 6.6. SEÇÃO LINHA DO TEMPO (Específico da Página Sobre) */
+.timeline {
+    position: relative;
+    max-width: 800px; 
+    margin: 60px auto 0 auto;
+    padding: 20px 0;
+}
+
+.timeline::before { 
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: var(--cor-rosa-suave);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.timeline-event {
+    position: relative;
+    width: 50%;
+    padding: 10px 0;
+    margin-bottom: 40px; 
+    z-index: 2;
+}
+
+.timeline-event:nth-child(odd) { 
+    left: 0;
+    padding-right: 40px; 
+    text-align: right;
+}
+
+.timeline-event:nth-child(even) { 
+    left: 50%;
+    padding-left: 40px; 
+    text-align: left;
+}
+
+.timeline-event::before { 
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: var(--cor-vinho);
+    border: 3px solid var(--cor-creme-fundo);
+    border-radius: 50%;
+    top: 25px; 
+    z-index: 3;
+    box-shadow: 0 0 0 2px var(--cor-vinho); 
+}
+
+.timeline-event:nth-child(odd)::before {
+    right: -10px; 
+}
+
+.timeline-event:nth-child(even)::before {
+    left: -10px; 
+}
+
+.timeline-event-header {
+    background-color: var(--cor-branco);
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: var(--sombra-suave);
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block; 
+    max-width: 100%; 
+}
+
+.timeline-event-header:hover {
+    background-color: var(--cor-creme-fundo);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-event-header h3 {
+    font-size: 20px;
+    color: var(--cor-vinho);
+    margin-bottom: 5px;
+}
+
+.timeline-event-header .timeline-date {
+    font-size: 14px;
+    color: var(--cor-grafite-texto);
+    opacity: 0.7;
+    font-weight: 500;
+    display: block; 
+}
+
+.timeline-event-content {
+    background-color: var(--cor-creme-fundo);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    max-height: 0; 
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out, opacity 0.4s ease-out; 
+    opacity: 0; 
+}
+
+.timeline-event-content.active {
+    max-height: 200px; 
+    padding: 20px; 
+    opacity: 1; 
+}
+
+.timeline-event-content p {
+    font-size: 15px;
+    color: var(--cor-grafite-texto);
+    margin-bottom: 0; 
+}
+
+/* NOVO MODAL PARA PILARES (Específico da Página Sobre) */
+#pillar-modal .modal-content {
+    max-width: 500px; 
+    text-align: center;
+}
+#pillar-modal h2 {
+    color: var(--cor-vinho);
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+#pillar-modal p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--cor-grafite-texto);
+    opacity: 0.9;
+}
+
+
+/* 12. RESPONSIVIDADE MOBILE (Específico da Página Sobre) */
+@media (max-width: 768px) {
+    .hero-small {
+        padding: 40px 0;
+    }
+    .hero-small h1 {
+        font-size: 32px;
+    }
+
+    .avisos-grid, .lideres-grid {
+        grid-template-columns: 1fr; /* Uma coluna em telas menores para cards */
+        gap: 20px; 
+    }
+
+    /* Responsividade para a Linha do Tempo */
+    .timeline::before { /* Mover a linha para a esquerda */
+        left: 20px;
+        transform: translateX(0);
+    }
+    .timeline-event {
+        width: 100%; /* Ocupa a largura total */
+        padding-left: 50px; /* Todo o conteúdo à direita da linha */
+        text-align: left !important; /* Forçar alinhamento à esquerda */
+        margin-left: 0; /* Remover qualquer margin-left que possa haver */
+    }
+    .timeline-event:nth-child(odd) { /* Remover estilos de lado esquerdo */
+        left: 0;
+        padding-right: 0;
+    }
+    .timeline-event:nth-child(even) { /* Remover estilos de lado direito */
+        left: 0;
+    }
+    .timeline-event::before { /* Ajustar o dot para a esquerda */
+        left: 10px; 
+    }
+    .timeline-event:nth-child(odd)::before { /* Remover posicionamento da direita */
+        right: auto;
+    }
+    .timeline-event:nth-child(even)::before { /* Ajustar para a nova posição */
+        left: 10px;
+    }
+}

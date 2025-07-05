@@ -13,9 +13,16 @@ document.addEventListener('DOMContentLoaded', () => {
             navLinks.classList.toggle('active');
             hamburger.classList.toggle('toggle');
         });
+        // Fecha o menu se clicar fora
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !hamburger.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('toggle');
+            }
+        });
     }
 
-    // 2. Funções de Modal Genéricas
+    // 2. Funções de Modal Genéricas (Apenas external para a Home)
     function openAnyModal(modal) {
         if (modal) {
             modal.classList.add('active');
@@ -28,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.classList.remove('active');
             const iframe = modal.querySelector('iframe');
             if (iframe) iframe.src = ""; // Limpa o iframe ao fechar
+            // Verifica se não há outros modais abertos antes de remover a classe do body
             if (!document.querySelector('.modal-overlay.active')) {
                 document.body.classList.remove('modal-open');
             }
@@ -153,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         const filteredEvents = eventsData.filter(event => {
-            if (event.recurring) return filter === 'future';
+            if (event.recurring) return filter === 'future'; // Eventos recorrentes sempre aparecem no "futuro"
             const eventDate = parseDate(event.date);
             if (!eventDate) return false;
             return filter === 'future' ? eventDate >= today : eventDate < today;
@@ -167,6 +175,9 @@ document.addEventListener('DOMContentLoaded', () => {
         filteredEvents.forEach(event => {
             const card = document.createElement('div');
             card.className = 'event-card';
+            if (event.cardClass) {
+                card.classList.add(event.cardClass);
+            }
             Object.keys(event).forEach(key => { if(event[key] !== undefined && key !== 'cardContentHTML') card.dataset[key] = event[key]; });
             const cardImageContent = event.cardContentHTML || event.category;
             const imageContainerClass = event.cardContentHTML ? "lesson-card-image special-content-container" : "lesson-card-image";
@@ -225,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
         nextInstaBtn.addEventListener('click', () => instaScroller.scrollBy({ left: 300, behavior: 'smooth' }));
     }
     
-    // 5. Lógica do Calendário
+    // 5. Lógica do Calendário (se presente na página)
     function generateCalendarEvents() {
         const calendarEvents = {};
         eventsData.forEach(event => {

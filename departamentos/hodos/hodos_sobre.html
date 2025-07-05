@@ -1,1 +1,228 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBCT - Sobre o Ministério HODOS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/hodos_sobre.css">
+    <link rel="stylesheet" href="css/hodos_style.css">
+    <link rel="stylesheet" href="../../componentes/calendario/calendario.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a href="../../index.html" class="logo">
+                <img src="../../img/logo.png" alt="Logo IBCT">
+                <span>HODOS</span>
+            </a>
+            <nav class="nav-links">
+                <a href="hodos_home.html#eventos">Eventos</a>
+                <a href="hodos_loja.html">Loja</a>
+                <a href="hodos_ebd.html">EBD</a>
+                <a href="#sobre">Sobre Nós</a> <!-- Aqui linka para a seção nesta mesma página -->
+                <a data-action="open-calendar">Calendário</a>
+            </nav>
+            <div class="hamburger">
+                <div class="line1"></div><div class="line2"></div><div class="line3"></div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero hero-small fade-in"> <!-- Usar hero-small para um banner menor -->
+            <iframe 
+                src="./tools/logo_igreja.html" 
+                class="hero-background-logo" 
+                frameborder="0" 
+                scrolling="no" 
+                title="Logo animada da IBCT como fundo">
+            </iframe>
+            <div class="container">
+                <h1>Nosso Ministério</h1>
+                <p>O HODOS é o caminho que leva a Cristo. <br>Saiba mais sobre quem somos, nossa missão e nossa história!</p>
+            </div>
+        </section>
+
+        <section id="introducao-hodos" class="content-section fade-in">
+            <div class="container" style="text-align: left;">
+                <h2>Quem Somos</h2>
+                <p>O Ministério de Jovens e Adolescentes HODOS da Igreja Batista Central em Taguatinga (IBCT) nasceu com a missão de guiar a juventude no caminho de Cristo. Através de encontros dinâmicos, estudos bíblicos profundos, momentos de comunhão e adoração, buscamos capacitar nossos jovens a viverem a verdade do Evangelho em todas as áreas de suas vidas.</p>
+                <p>Somos uma comunidade vibrante, acolhedora e apaixonada por Jesus, que acredita no potencial da nova geração para impactar o mundo. Nosso propósito é edificar, equipar e enviar jovens para cumprir o chamado de Deus em suas vidas, sendo luz e sal nesta terra.</p>
+            </div>
+        </section>
+
+        <section id="sobre" class="content-section fade-in">
+            <div class="container">
+                <h2>Os Pilares do HODOS</h2>
+                <p>Nosso ministério se baseia em quatro pilares essenciais para o crescimento cristão. Clique em cada um para saber mais!</p>
+                <div class="avisos-grid">
+                    <!-- Cards dos Pilares do HODOS (agora com data-pillar-id para o JS) -->
+                    <div class="aviso-card" data-pillar-id="palavra">
+                        <div class="aviso-icon-wrapper"><i class="fas fa-book-open-reader aviso-icon"></i></div>
+                        <h3>Palavra</h3>
+                        <p>Fundamento da nossa fé.</p>
+                    </div>
+                    <div class="aviso-card" data-pillar-id="comunhao">
+                        <div class="aviso-icon-wrapper"><i class="fas fa-people-group aviso-icon"></i></div>
+                        <h3>Comunhão</h3>
+                        <p>Construindo laços de amor.</p>
+                    </div>
+                    <div class="aviso-card" data-pillar-id="adoracao">
+                        <div class="aviso-icon-wrapper"><i class="fas fa-music aviso-icon"></i></div>
+                        <h3>Adoração</h3>
+                        <p>Honrando a Deus com vida.</p>
+                    </div>
+                    <div class="aviso-card" data-pillar-id="servico">
+                        <div class="aviso-icon-wrapper"><i class="fas fa-hand-holding-heart aviso-icon"></i></div>
+                        <h3>Serviço</h3>
+                        <p>Colocando a fé em ação.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="lideres" class="content-section fade-in">
+            <div class="container">
+                <h2>Nossos Líderes</h2>
+                <p>Conheça a equipe dedicada que serve e guia o Ministério HODOS.</p>
+                <div class="lideres-grid">
+                    <div class="lider-card">
+                        <img src="img/lideres/pastor_fabricio.webp" alt="Foto do Pastor Fabricio e Fernanda">
+                        <h3>Pr. Fabrício e Fernanda</h3>
+                        <p class="lider-role">Líderes do Ministério</p>
+                        <p class="lider-bio">Com paixão e sabedoria, dedicam suas vidas a inspirar e capacitar a juventude HODOS no caminho de Cristo.</p>
+                    </div>
+                    <div class="lider-card">
+                        <img src="img/lideres/lider_exemplo_01.webp" alt="Foto do Líder 1">
+                        <h3>João Silva</h3>
+                        <p class="lider-role">Coordenador de PGMs</p>
+                        <p class="lider-bio">Organiza e apoia nossos Pequenos Grupos de Multiplicação, garantindo que todos encontrem um lugar para crescer.</p>
+                    </div>
+                    <div class="lider-card">
+                        <img src="img/lideres/lider_exemplo_02.webp" alt="Foto da Líder 2">
+                        <h3>Maria Oliveira</h3>
+                        <p class="lider-role">Ministério de Louvor</p>
+                        <p class="lider-bio">Lidera a equipe de louvor e adoração, criando um ambiente onde todos podem experimentar a presença de Deus.</p>
+                    </div>
+                    <div class="lider-card">
+                        <img src="img/lideres/lider_exemplo_03.webp" alt="Foto do Líder 3">
+                        <h3>Pedro Santos</h3>
+                        <p class="lider-role">Ações Sociais e Missões</p>
+                        <p class="lider-bio">Coordena nossos projetos de serviço e missões, colocando o amor de Cristo em prática na comunidade.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="timeline-section" class="content-section fade-in">
+            <div class="container">
+                <h2>Nossa Jornada no HODOS</h2>
+                <p>Uma breve história dos momentos marcantes do nosso ministério.</p>
+                <div class="timeline">
+                    <div class="timeline-event">
+                        <div class="timeline-event-header">
+                            <h3>Fundação do HODOS</h3>
+                            <span class="timeline-date">Maio de 2018</span>
+                        </div>
+                        <div class="timeline-event-content">
+                            <p>O Ministério HODOS foi oficialmente fundado com a visão de alcançar e discipular a juventude da IBCT, estabelecendo seus pilares iniciais.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-event">
+                        <div class="timeline-event-header">
+                            <h3>Primeiro HODOS Camp</h3>
+                            <span class="timeline-date">Julho de 2019</span>
+                        </div>
+                        <div class="timeline-event-content">
+                            <p>Realizamos nosso primeiro acampamento, um marco de crescimento espiritual e comunhão intensa, com a participação de dezenas de jovens.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-event">
+                        <div class="timeline-event-header">
+                            <h3>Início dos PGMs</h3>
+                            <span class="timeline-date">Março de 2020</span>
+                        </div>
+                        <div class="timeline-event-content">
+                            <p>Lançamento dos Pequenos Grupos de Multiplicação (PGMs) em lares, fortalecendo a comunhão e o discipulado em grupos menores.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-event">
+                        <div class="timeline-event-header">
+                            <h3>"HODOS Meet" Regularizado</h3>
+                            <span class="timeline-date">Agosto de 2021</span>
+                        </div>
+                        <div class="timeline-event-content">
+                            <p>O HODOS Meet se tornou um evento mensal fixo, reunindo a juventude para cultos de louvor, adoração e palavra com convidados especiais.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-event">
+                        <div class="timeline-event-header">
+                            <h3>Expansão para Ações Sociais</h3>
+                            <span class="timeline-date">Abril de 2023</span>
+                        </div>
+                        <div class="timeline-event-content">
+                            <p>O ministério ampliou seu alcance para projetos sociais e parcerias missionárias, levando o amor de Cristo à comunidade local.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-event">
+                        <div class="timeline-event-header">
+                            <h3>Lançamento da Loja HODOS</h3>
+                            <span class="timeline-date">Novembro de 2024</span>
+                        </div>
+                        <div class="timeline-event-content">
+                            <p>Inauguração da loja de produtos HODOS, com itens que reforçam nossa identidade e apoiam financeiramente as atividades do ministério.</p>
+                        </div>
+                    </div>
+                    <!-- Adicione mais eventos conforme necessário -->
+                </div>
+            </div>
+        </section>
+
+        <section id="junte-se" class="content-section fade-in">
+            <div class="container">
+                <h2>Junte-se a Nós!</h2>
+                 <p>Você é nosso convidado especial para fazer parte da nossa família.</p>
+                <div class="avisos-grid">
+                    <div class="aviso-card"><h3>Participe de um PGM</h3><p>Toda sexta-feira temos um lugar para você. É a melhor forma de se conectar e fazer amigos. Fale com a gente!</p></div>
+                    <div class="aviso-card"><h3>Venha ao Hodos Meet</h3><p>Fique de olho no grupo para a data do nosso próximo encontro de louvor. Traga um amigo e venha adorar a Deus conosco!</p></div>
+                    <div class="aviso-card"><h3>Acompanhe no Grupo</h3><p>Todas as informações, devocionais e pedidos de oração são compartilhados em nosso grupo de WhatsApp. Peça o link de convite!</p></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+             <div class="logo">
+                <img src="../../img/logo.png" alt="Logo IBCT">
+                <span>HODOS</span>
+             </div>
+             <p>Igreja Batista Central em Taguatinga<br>© 2024 IBCT. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- MODAIS GERAIS (Reutilizados) -->
+    <div class="modal-overlay" id="external-page-modal">
+        <div class="modal-content-external">
+            <button class="modal-close">×</button>
+            <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+    
+    <!-- NOVO MODAL PARA DETALHES DOS PILARES -->
+    <div class="modal-overlay" id="pillar-modal">
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <h2 id="pillar-modal-title"></h2>
+            <p id="pillar-modal-description"></p>
+        </div>
+    </div>
+        
+    <a class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
+    <script src="js/hodos_sobre_script.js" defer></script> <!-- NOVO SCRIPT PARA ESTA PÁGINA -->
+    <script src="../../componentes/calendario/calendario.js" defer></script>
+</body>
+</html>
