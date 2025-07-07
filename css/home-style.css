@@ -150,12 +150,46 @@ a:hover { opacity: 0.7; }
 
 /* 7. SEÇÃO MISSÕES */
 .missoes-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
-.missao-card { display: flex; background: var(--cor-branco); border-radius: 12px; overflow: hidden; box-shadow: var(--sombra-elevada); transition: transform 0.3s; cursor: pointer; }
-.missao-card:hover { transform: scale(1.02); }
+.missao-card { 
+    display: flex; 
+    background: var(--cor-branco); 
+    border-radius: 12px; 
+    overflow: hidden; 
+    box-shadow: var(--sombra-elevada); 
+    /* cursor: pointer; */ /* Removido para priorizar o botão */
+}
 .missao-card img { width: 40%; object-fit: cover; }
-.missao-content { padding: 40px; }
-.missao-content h3 { font-family: var(--fonte-titulo); font-size: 28px; color: var(--cor-vinho); }
+.missao-content { 
+    padding: 40px; 
+    display: flex; 
+    flex-direction: column; 
+    width: 60%; 
+}
+.missao-content-main { 
+    flex-grow: 1; 
+}
+.missao-card-footer { 
+    margin-top: 25px; 
+}
+.cta-button-small {
+    display: inline-block;
+    background-color: var(--cor-creme-fundo);
+    color: var(--cor-vinho) !important;
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+.cta-button-small:hover {
+    background-color: var(--cor-rosa-suave);
+    transform: translateY(-2px);
+    opacity: 1;
+}
 .missao-card:nth-child(even) { flex-direction: row-reverse; }
+
 
 /* 8. SEÇÃO CONTATO */
 .contato-wrapper { display: flex; gap: 40px; margin-top: 50px; }
@@ -166,6 +200,10 @@ a:hover { opacity: 0.7; }
 .info-item p { margin: 0; }
 .map-container { flex: 1.5; border-radius: 12px; overflow: hidden; box-shadow: var(--sombra-elevada); min-height: 350px; }
 .map-container iframe { width: 100%; height: 100%; border: 0; }
+.contato-footer {
+    text-align: center;
+    margin-top: 40px;
+}
 
 /* 9. RODAPÉ */
 .footer { background-color: var(--cor-vinho); color: var(--cor-creme-fundo); padding: 50px 0; text-align: center; }
@@ -182,7 +220,7 @@ a:hover { opacity: 0.7; }
 .scroll-to-top:hover { transform: translateY(-3px); }
 .scroll-to-top.visible { display: flex; opacity: 1; }
 
-/* 11. MODAL DE INFORMAÇÕES (O do calendário foi removido) */
+/* 11. MODAL DE INFORMAÇÕES */
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(51, 51, 51, 0.8);
     backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 2000;
@@ -239,7 +277,7 @@ a:hover { opacity: 0.7; }
 @media (max-width: 920px) {
     .dual-column-container, .contato-wrapper, .missao-card, .missao-card:nth-child(even) { flex-direction: column; }
     .missao-card img { width: 100%; height: 250px; }
-    /* A regra responsiva do calendário foi removida daqui */
+    .missao-content { width: 100%; } /* Ajuste para layout de coluna */
 }
 
 @media (max-width: 768px) {

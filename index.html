@@ -6,7 +6,6 @@
     <title>Igreja Batista Central em Taguatinga - Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="css/home-style.css">
-    <!-- MUDANÇA: Adicionado o CSS do componente de calendário -->
     <link rel="stylesheet" href="componentes/calendario/calendario.css">
 </head>
 <body>
@@ -22,7 +21,7 @@
             <nav class="nav-links">
                 <a href="#inicio">Início</a>
                 <a href="#ministerios">Ministérios</a>
-                <a href="#missoes">Missões</a>
+                <a href="sobre_ibct.html">Sobre a Igreja</a>
                 <a href="#contato">Contato</a>
             </nav>
             <div class="hamburger">
@@ -59,7 +58,6 @@
                 <div class="events-widget">
                     <h2 class="section-title">Próximos Eventos</h2>
                     <div id="next-events-list"></div>
-                    <!-- MUDANÇA: O botão agora usa 'data-action' para ser detectado pelo script do componente -->
                     <button data-action="open-calendar" class="widget-button">Ver Calendário Completo</button>
                 </div>
                 <div class="verse-widget">
@@ -72,7 +70,6 @@
             </div>
         </section>
 
-        <!-- O RESTANTE DO SEU CONTEÚDO HTML PERMANECE IGUAL -->
         <section id="ministerios" class="content-section bg-light fade-in">
             <div class="container">
                 <h2 class="section-title">Nossos Ministérios</h2>
@@ -123,13 +120,29 @@
                 <h2 class="section-title">Projetos e Missões</h2>
                 <p class="section-subtitle">Levando o amor de Cristo além das quatro paredes, servindo à comunidade e ao mundo.</p>
                 <div class="missoes-grid">
-                    <div class="missao-card clickable-card" data-title="Projeto Viver" data-image="https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=1740" data-description="Uma iniciativa de ação social que serve nossa comunidade local através da arrecadação e distribuição de alimentos, organização de almoços beneficentes e apoio direto a famílias necessitadas em Taguatinga e arredores.">
+                    <div class="missao-card">
                         <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=1740" alt="Voluntários servindo comida">
-                        <div class="missao-content"><h3>Projeto Viver</h3><p>Ação social que serve nossa comunidade com alimentos e apoio.</p></div>
+                        <div class="missao-content">
+                            <div class="missao-content-main">
+                                <h3>Projeto Viver</h3>
+                                <p>Ação social que serve nossa comunidade com alimentos e apoio.</p>
+                            </div>
+                            <div class="missao-card-footer">
+                                <a href="missoes.html" class="cta-button-small">Saiba Mais</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="missao-card clickable-card" data-title="Parceria com a CRU" data-image="https://images.unsplash.com/photo-1542626991-a2f572a1e896?q=80&w=1740" data-description="Apoiamos e recebemos missionários da CRU (anteriormente conhecida como Cruzada Estudantil e Profissional para Cristo) para o trabalho de evangelismo em ambientes universitários. Oferecemos suporte logístico e um lar espiritual durante suas missões em Brasília.">
+                    <div class="missao-card">
                         <img src="https://images.unsplash.com/photo-1542626991-a2f572a1e896?q=80&w=1740" alt="Jovens universitários em uma conferência">
-                        <div class="missao-content"><h3>Parceria com a CRU</h3><p>Apoio ao evangelismo universitário com a Cruzada Estudantil.</p></div>
+                        <div class="missao-content">
+                            <div class="missao-content-main">
+                                <h3>Parceria com a CRU</h3>
+                                <p>Apoio ao evangelismo universitário com a Cruzada Estudantil.</p>
+                            </div>
+                            <div class="missao-card-footer">
+                                <a href="missoes.html#cru" class="cta-button-small">Saiba Mais</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -141,14 +154,18 @@
                 <p class="section-subtitle">Estamos de portas abertas para receber você. Venha nos visitar!</p>
                 <div class="contato-wrapper">
                     <div class="contato-info">
-                        <div class="info-item"><i class="fas fa-map-marker-alt"></i><div><strong>Nosso Endereço</strong><p>Templo EPTG (e outras localidades), Taguatinga, DF</p></div></div>
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i><div><strong>Nosso Endereço</strong><p>Templo EPTG e Unidade QNA, Taguatinga, DF</p></div></div>
                         <div class="info-item"><i class="fab fa-whatsapp"></i><div><strong>Secretaria</strong><p>(61) 99286-9501</p></div></div>
                         <div class="info-item"><i class="fas fa-clock"></i><div><strong>Atendimento</strong><p>Segunda a Sexta: 8h-12h e 13h-17h</p></div></div>
                          <div class="info-item"><i class="fas fa-calendar-alt"></i><div><strong>Nossos Cultos</strong><p>Domingos: 10h30 e 18h<br>Quartas: 20h</p></div></div>
                     </div>
                     <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3839.231718916362!2d-48.05948308898165!3d-15.791980823419515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935a33758913a047%3A0x62887652759902bd!2sIgreja%20Batista%20Central%20de%20Taguatinga!5e0!3m2!1spt-BR!2sbr!4v1716309854721" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7677.0949728339765!2d-48.05643324524222!3d-15.827796966749323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935a32f71de3365b%3A0x585c20f59e32788!2sIgreja%20Batista%20Central%20de%20Taguatinga!5e0!3m2!1sen!2sbr!4v1751056019632!5m2!1sen!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
+                </div>
+                 <div class="contato-footer">
+                    <a href="sobre_ibct.html" class="cta-button">Conheça nossa história</a>
+                 </a>
                 </div>
             </div>
         </section>
@@ -161,7 +178,6 @@
         </div>
     </footer>
 
-    <!-- MODAL DE INFORMAÇÃO (Ainda necessário para os cards) -->
     <div class="modal-overlay" id="info-modal">
         <div class="modal-content">
             <button class="modal-close">×</button>
@@ -172,15 +188,9 @@
         </div>
     </div>
     
-    <!-- MUDANÇA: O modal do calendário foi completamente removido daqui.
-         O script 'calendario.js' irá injetá-lo dinamicamente. -->
-
     <a class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
     
     <script src="js/home-script.js" defer></script>
-    <!-- MUDANÇA: Adicionado o script do componente de calendário -->
-        <!-- ... outros scripts -->
-    <!-- MUDANÇA: Adicionado o script do componente com o filtro 'igreja' -->
     <script src="componentes/calendario/calendario.js" data-filter="igreja" defer></script>
 </body>
 </html>

@@ -1,0 +1,229 @@
+/* Este arquivo CSS contém estilos específicos para a página "sobre_ibct.html". */
+/* Ele deve ser carregado APÓS home-style.css para garantir a consistência. */
+
+/* --- ESTILOS GERAIS DE CONSISTÊNCIA (MODAL, SCROLL-TOP, ETC.) --- */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(51, 51, 51, 0.8);
+    backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 2000;
+    padding: 20px; opacity: 0; transition: opacity 0.3s ease;
+}
+.modal-content {
+    background: var(--cor-branco); padding: 40px; border-radius: 12px; max-width: 600px; width: 100%; position: relative;
+    transform: scale(0.95); transition: transform 0.3s ease; box-shadow: var(--sombra-modal); text-align: left;
+}
+.modal-overlay.active { display: flex; opacity: 1; }
+.modal-overlay.active .modal-content { transform: scale(1); }
+.modal-close { position: absolute; top: 15px; right: 20px; font-size: 30px; color: var(--cor-grafite-texto); cursor: pointer; border: none; background: none; z-index: 10; }
+.scroll-to-top {
+    position: fixed; bottom: 30px; right: 30px; background-color: var(--cor-vinho); color: var(--cor-branco);
+    width: 50px; height: 50px; border-radius: 50%; display: none; align-items: center; justify-content: center;
+    font-size: 20px; cursor: pointer; z-index: 999; box-shadow: var(--sombra-suave);
+    opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.scroll-to-top:hover { transform: translateY(-3px); }
+.scroll-to-top.visible { display: flex; opacity: 1; }
+body.modal-open { overflow: hidden; }
+
+/* --- CORREÇÃO: ESTILOS DO BANNER (HERO) PARA FUNCIONAR COM A ANIMAÇÃO --- */
+.hero.hero-small {
+    height: 50vh;
+    min-height: 400px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--cor-branco);
+    overflow: hidden;
+    background: linear-gradient(rgba(40, 0, 0, 0.6), rgba(40, 0, 0, 0.6)), #50222a; /* Fundo de fallback */
+}
+.hero-background-logo {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1;
+    opacity: 0.15;
+    pointer-events: none; /* Impede interação com o iframe */
+}
+.hero.hero-small .container {
+    position: relative;
+    z-index: 2; /* Garante que o texto fique sobre a animação */
+}
+.hero-small h1 {
+    font-size: 48px;
+    color: var(--cor-branco);
+}
+.hero-small p {
+    font-size: 18px;
+    max-width: 600px;
+    color: var(--cor-branco);
+    opacity: 0.9;
+}
+
+/* PADRONIZAÇÃO: Cores das seções para alternar branco/creme */
+#introducao-ibct, #lideres-ibct {
+    background-color: var(--cor-branco); 
+}
+#universidade-familia, #timeline-section-ibct {
+    background-color: var(--cor-creme-fundo); 
+}
+
+/* Grid da Universidade da Família (UF) */
+.uf-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px; margin-top: 50px;
+}
+.uf-card {
+    background-color: var(--cor-branco); padding: 30px; border-radius: 12px;
+    box-shadow: var(--sombra-suave); transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center; cursor: pointer;
+}
+.uf-card:hover { transform: translateY(-8px); box-shadow: var(--sombra-elevada); }
+.uf-icon { color: var(--cor-vinho); font-size: 42px; margin-bottom: 20px; }
+.uf-card h3 { font-size: 22px; margin-bottom: 10px; color: var(--cor-vinho); }
+.uf-card p { font-size: 15px; color: var(--cor-grafite-texto); opacity: 0.85; }
+
+/* Grid e Cards de Líderes (agora em seção de fundo branco) */
+.lideres-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px; margin-top: 50px; text-align: center;
+}
+.lider-card {
+    background-color: var(--cor-creme-fundo); /* Fundo creme para contraste na seção branca */
+    border-radius: 12px; box-shadow: var(--sombra-suave); padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.lider-card:hover { transform: translateY(-5px); box-shadow: var(--sombra-elevada); }
+.lider-card img {
+    width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
+    margin-bottom: 15px; border: 4px solid var(--cor-rosa-suave);
+}
+.lider-card h3 { font-size: 22px; margin-bottom: 5px; color: var(--cor-vinho); }
+.lider-card .lider-role {
+    font-weight: 700; color: var(--cor-grafite-texto); opacity: 0.8;
+    margin-bottom: 15px; font-size: 14px; text-transform: uppercase;
+}
+.lider-card .lider-bio { font-size: 15px; color: var(--cor-grafite-texto); opacity: 0.9; line-height: 1.5; }
+
+/* Seção Linha do Tempo (agora em seção de fundo creme) */
+.timeline { position: relative; max-width: 800px; margin: 60px auto 0 auto; padding: 20px 0; }
+.timeline::before {
+    content: ''; position: absolute; width: 4px; background-color: var(--cor-rosa-suave);
+    top: 0; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1;
+}
+.timeline-event { position: relative; width: 50%; padding: 10px 0; margin-bottom: 40px; z-index: 2; }
+.timeline-event:nth-child(odd) { left: 0; padding-right: 40px; text-align: right; }
+.timeline-event:nth-child(even) { left: 50%; padding-left: 40px; text-align: left; }
+.timeline-event::before {
+    content: ''; position: absolute; width: 20px; height: 20px; background-color: var(--cor-vinho);
+    border: 3px solid var(--cor-branco); /* Borda branca para o fundo creme */
+    border-radius: 50%; top: 25px; z-index: 3;
+    box-shadow: 0 0 0 2px var(--cor-vinho);
+}
+.timeline-event:nth-child(odd)::before { right: -10px; }
+.timeline-event:nth-child(even)::before { left: -10px; }
+.timeline-event-header {
+    background-color: var(--cor-branco); padding: 15px 20px; border-radius: 8px; box-shadow: var(--sombra-suave);
+    cursor: pointer; transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block; max-width: 100%;
+}
+.timeline-event-header:hover { background-color: var(--cor-creme-fundo); border: 1px solid var(--cor-rosa-suave); }
+.timeline-event-header h3 { font-size: 20px; color: var(--cor-vinho); margin-bottom: 5px; }
+.timeline-event-header .timeline-date { font-size: 14px; color: var(--cor-grafite-texto); opacity: 0.7; font-weight: 500; display: block; }
+.timeline-event-content {
+    background-color: var(--cor-branco); padding: 0 20px; border-radius: 8px;
+    margin-top: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); max-height: 0;
+    overflow: hidden; transition: max-height 0.4s ease-out, padding 0.4s ease-out, opacity 0.4s ease-out; opacity: 0;
+}
+.timeline-event-content.active { padding: 20px; opacity: 1; }
+.timeline-event-content p { font-size: 15px; color: var(--cor-grafite-texto); margin-bottom: 0; }
+
+/* Modal para Cursos */
+#course-modal .modal-content { max-width: 500px; text-align: center; }
+#course-modal h2 { font-family: var(--fonte-titulo); color: var(--cor-vinho); font-size: 28px; margin-bottom: 15px; }
+#course-modal p { font-size: 17px; line-height: 1.7; color: var(--cor-grafite-texto); opacity: 0.9; }
+
+/* Responsividade Mobile */
+@media (max-width: 768px) {
+    .hero-small { height: 40vh; min-height: 350px; }
+    .hero-small h1 { font-size: 32px; }
+    .uf-grid, .lideres-grid { grid-template-columns: 1fr; gap: 20px; }
+    .timeline::before { left: 20px; transform: translateX(0); }
+    .timeline-event { width: 100%; padding-left: 50px; text-align: left !important; margin-left: 0; }
+    .timeline-event:nth-child(odd), .timeline-event:nth-child(even) { left: 0; padding-right: 0; }
+    .timeline-event::before { left: 10px; }
+    .timeline-event:nth-child(odd)::before { right: auto; }
+}
+/* --- ESTILOS PARA A NOVA SEÇÃO DE INTRODUÇÃO --- */
+
+#introducao-ibct {
+    background-color: var(--cor-branco);
+}
+
+.intro-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 50px; /* Aumenta o espaço entre a imagem e o texto */
+}
+
+.intro-image {
+    flex: 1; /* Ocupa metade do espaço */
+    min-width: 40%;
+}
+
+.intro-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: var(--sombra-elevada);
+    aspect-ratio: 4 / 5; /* Proporção mais vertical, ideal para retratos/grupos */
+    object-fit: cover;
+}
+
+.intro-content {
+    flex: 1.2; /* Ocupa um pouco mais de espaço que a imagem */
+    text-align: left;
+}
+
+.intro-content h2 {
+    font-size: 38px; /* Título maior e mais impactante */
+    text-align: left;
+}
+
+.intro-subtitle {
+    font-weight: 700;
+    color: var(--cor-vinho);
+    font-size: 18px;
+    margin-top: -5px;
+    margin-bottom: 20px;
+}
+
+.intro-content p {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.intro-content .cta-button {
+    margin-top: 20px;
+    display: inline-block; /* Garante que a margem funcione */
+}
+
+/* RESPONSIVIDADE PARA A NOVA SEÇÃO */
+@media (max-width: 920px) {
+    .intro-wrapper {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .intro-content {
+        text-align: center; /* Centraliza o texto em telas menores */
+    }
+
+    .intro-content h2 {
+        text-align: center;
+    }
+
+    .intro-image img {
+        aspect-ratio: 16 / 9; /* Muda a proporção para paisagem em telas menores */
+    }
+}
