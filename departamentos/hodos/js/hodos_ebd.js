@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- LÓGICA COMPARTILHADA (Padrão HODOS) ---
@@ -132,11 +131,10 @@ document.addEventListener('DOMContentLoaded', () => {
             card.className = 'lesson-card';
             Object.keys(lesson).forEach(key => { if(lesson[key] !== undefined) card.dataset[key] = lesson[key]; });
             
-            const formattedDate = (parseDate(lesson.date) || new Date()).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
             card.innerHTML = `
                 <div class="lesson-card-image ${lesson.imageClass || ''}">${lesson.imageText}</div>
                 <div class="lesson-card-content">
-                    <div class="date-container"><span class="date-value">${formattedDate}</span></div>
+                    <span class="date-value">${lesson.date}</span>
                     <h3>${lesson.title}</h3>
                 </div>`;
             lessonsScroller.appendChild(card);
@@ -185,7 +183,16 @@ document.addEventListener('DOMContentLoaded', () => {
     
     renderLessons('future'); // Renderização inicial
     
-    // 5. Geração de Eventos para o Calendário
+    // 5. Geração de Eventos e Abertura do Calendário
+    // CORREÇÃO: Adicionada a lógica para abrir o modal do calendário
+    const calendarModal = document.getElementById('calendar-modal');
+    document.querySelectorAll('[data-action="open-calendar"]').forEach(el => {
+        el.addEventListener('click', (e) => {
+            e.preventDefault();
+            openAnyModal(calendarModal);
+        });
+    });
+
     function generateCalendarEvents() {
         const calendarEvents = {};
         lessonsData.forEach(lesson => {

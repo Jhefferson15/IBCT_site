@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escola Bíblica Dominical - IBCT</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <!-- MUDANÇA: Apontando para o CSS unificado e moderno. -->
-    <link rel="stylesheet" href="css/hodos_style.css">
-    <!-- MUDANÇA: Adicionado o CSS do componente de calendário. -->
+    <!-- CORREÇÃO: Apontando para o CSS específico da EBD -->
+    <link rel="stylesheet" href="css/hodos_ebd.css">
+    <!-- Adicionado o CSS do componente de calendário (ele é compartilhado) -->
     <link rel="stylesheet" href="../../componentes/calendario/calendario.css">
 </head>
 <body>
 
     <header class="header">
         <div class="container">
-            <!-- MUDANÇA: Logo corrigido e padronizado. -->
             <a href="hodos_home.html" class="logo">
                 <img src="../../img/logo.png" alt="Logo IBCT">
                 <span>HODOS | EBD</span>
@@ -24,8 +22,8 @@
                 <a href="#aulas">Aulas</a>
                 <a href="hodos_loja.html">Loja</a>
                 <a href="#avisos">Avisos</a>
-                <!-- MUDANÇA: Link do calendário padronizado com data-action. -->
-                <a data-action="open-calendar">Calendário</a>
+                <!-- CORREÇÃO: Link padronizado para abrir o calendário -->
+                <a href="#" data-action="open-calendar">Calendário</a>
             </nav>
             <div class="hamburger">
                 <div class="line1"></div><div class="line2"></div><div class="line3"></div>
@@ -57,14 +55,12 @@
 
         <section id="aulas" class="content-section fade-in">
             <div class="container">
-                <!-- MUDANÇA: Adicionado cabeçalho com botão para alternar visualização, como na home. -->
                 <div class="section-header-with-button">
                     <h2 id="lessons-title">Próximas Aulas do Trimestre</h2>
                     <button id="toggle-lessons-btn" class="toggle-events-button">Ver Aulas Passadas</button>
                 </div>
                 <div class="lessons-wrapper">
                     <button id="prev-btn" class="scroll-button"><i class="fas fa-chevron-left"></i></button>
-                    <!-- MUDANÇA: O scroller agora é preenchido dinamicamente pelo JavaScript. -->
                     <div class="lessons-scroller"></div>
                     <button id="next-btn" class="scroll-button"><i class="fas fa-chevron-right"></i></button>
                 </div>
@@ -75,9 +71,25 @@
             <div class="container">
                 <h2>Avisos Importantes</h2>
                 <div class="avisos-grid">
-                    <div class="aviso-card"><h3><i class="fas fa-broom icon-pillar"></i> Mutirão de Limpeza</h3><p>No próximo sábado, teremos nosso mutirão de limpeza e organização da igreja. Contamos com a sua ajuda a partir das 8h!</p></div>
-                    <div class="aviso-card"><h3><i class="fas fa-shirt icon-pillar"></i> Campanha do Agasalho</h3><p>As doações para a campanha do agasalho podem ser entregues na secretaria até o final do mês. Aqueça o inverno de quem precisa.</p></div>
-                    <div class="aviso-card"><h3><i class="fas fa-church icon-pillar"></i> Inscrições para Batismo</h3><p>As inscrições para a próxima turma de batismo já estão abertas. Procure a secretaria para mais informações.</p></div>
+                    <!-- CORREÇÃO: Estrutura do card melhorada para consistência -->
+                    <div class="aviso-card">
+                        <div class="aviso-header">
+                           <i class="fas fa-broom aviso-icon"></i><h3>Mutirão de Limpeza</h3>
+                        </div>
+                        <p>No próximo sábado, teremos nosso mutirão de limpeza e organização da igreja. Contamos com a sua ajuda a partir das 8h!</p>
+                    </div>
+                    <div class="aviso-card">
+                        <div class="aviso-header">
+                            <i class="fas fa-shirt aviso-icon"></i><h3>Campanha do Agasalho</h3>
+                        </div>
+                        <p>As doações para a campanha do agasalho podem ser entregues na secretaria até o final do mês. Aqueça o inverno de quem precisa.</p>
+                    </div>
+                    <div class="aviso-card">
+                        <div class="aviso-header">
+                            <i class="fas fa-church aviso-icon"></i><h3>Inscrições para Batismo</h3>
+                        </div>
+                        <p>As inscrições para a próxima turma de batismo já estão abertas. Procure a secretaria para mais informações.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -104,18 +116,23 @@
         </div>
     </div>
     
-    <!-- MUDANÇA: Adicionado o modal de página externa com iframe, igual ao da home -->
+    <!-- CORREÇÃO: Modal de página externa agora usa a classe 'modal-content-external' -->
     <div class="modal-overlay" id="external-page-modal">
         <div class="modal-content-external">
             <button class="modal-close">×</button>
             <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
+
+    <!-- CORREÇÃO: Estrutura do modal do calendário que estava faltando -->
+    <div class="modal-overlay" id="calendar-modal">
+        <!-- O conteúdo do modal do calendário é gerenciado pelo script do componente -->
+    </div>
     
-    <a class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
-    <!-- MUDANÇA: Apontando para o script refatorado da EBD -->
+    <a href="#" class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
+    
     <script src="js/hodos_ebd.js" defer></script>
-    <!-- MUDANÇA: Adicionado o script do componente de calendário -->
+    <!-- O script do calendário é um componente compartilhado e deve estar presente -->
     <script src="../../componentes/calendario/calendario.js" defer></script>
 </body>
 </html>

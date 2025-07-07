@@ -28,17 +28,19 @@ body.modal-open { overflow: hidden; }
 h1, h2 { font-family: var(--fonte-titulo); color: var(--cor-vinho); margin-bottom: 20px; }
 h3 { font-family: var(--fonte-corpo); font-weight: 700; color: var(--cor-vinho); margin-bottom: 10px; }
 p { margin-bottom: 20px; }
-a { text-decoration: none; transition: opacity 0.3s ease; }
+a { text-decoration: none; color: inherit; transition: opacity 0.3s ease; }
 a:hover { opacity: 0.7; }
 
 /* 3. CABEÇALHO E NAVEGAÇÃO */
 .header {
     background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px);
-    padding: 20px 0; border-bottom: 2px solid var(--cor-creme-fundo);
+    padding: 15px 0; border-bottom: 2px solid var(--cor-creme-fundo);
     position: sticky; top: 0; z-index: 1000;
 }
 .header .container { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-family: var(--fonte-titulo); font-size: 24px; color: var(--cor-vinho); }
+/* CORREÇÃO: Estilo do logo com imagem + texto */
+.logo { display: flex; align-items: center; gap: 10px; font-family: var(--fonte-titulo); font-size: 24px; color: var(--cor-vinho); }
+.logo img { height: 35px; }
 .logo span { font-family: var(--fonte-corpo); font-size: 16px; color: var(--cor-rosa-suave); }
 .nav-links { display: flex; }
 .nav-links a { margin-left: 25px; font-weight: 500; cursor: pointer; text-decoration: none; color: var(--cor-grafite-texto);}
@@ -66,6 +68,19 @@ a:hover { opacity: 0.7; }
 .countdown-block p { font-size: 14px; margin: 0; opacity: 0.8; text-transform: uppercase; }
 
 /* 5. SEÇÃO DE AULAS */
+/* CORREÇÃO: Adicionado estilo para cabeçalho de seção com botão */
+.section-header-with-button {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 25px; flex-wrap: wrap; gap: 15px;
+}
+.section-header-with-button h2 { margin-bottom: 0; text-align: left; }
+.toggle-events-button {
+    background-color: transparent; border: 2px solid var(--cor-rosa-suave);
+    color: var(--cor-vinho); padding: 10px 20px; border-radius: 50px;
+    font-weight: 700; cursor: pointer; transition: all 0.3s ease;
+}
+.toggle-events-button:hover { background-color: var(--cor-rosa-suave); }
+
 .lessons-wrapper { position: relative; }
 .lessons-scroller { display: flex; gap: 30px; overflow-x: auto; scroll-behavior: smooth; padding: 20px 5px; scrollbar-width: none; }
 .lessons-scroller::-webkit-scrollbar { display: none; }
@@ -82,17 +97,7 @@ a:hover { opacity: 0.7; }
 .lesson-card-image.prova-final { background-color: var(--cor-vinho); color: var(--cor-branco); }
 .lesson-card-content { padding: 25px; text-align: left; }
 .lesson-card-content h3 { font-size: 22px; font-family: var(--fonte-titulo); color: var(--cor-vinho); margin-top: 10px; }
-
-/* NOVO ESTILO PARA DATA + STATUS */
-.date-container { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
 .date-value { font-size: 14px; font-weight: 700; color: var(--cor-grafite-texto); opacity: 0.7; }
-.date-status {
-    font-size: 11px; font-weight: 700; text-transform: uppercase;
-    padding: 3px 8px; border-radius: 12px; line-height: 1;
-    background-color: var(--cor-vinho); color: var(--cor-branco);
-}
-.date-status.status-proxima { background-color: var(--cor-rosa-suave); color: var(--cor-vinho); }
-.date-status.status-prova { background-color: #c0392b; color: var(--cor-branco); } /* Um vermelho para destaque */
 .scroll-button {
     position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(255,255,255,0.8);
     backdrop-filter: blur(4px); color: var(--cor-vinho); border: 2px solid var(--cor-creme-fundo); width: 50px; height: 50px;
@@ -106,9 +111,14 @@ a:hover { opacity: 0.7; }
 #avisos { background-color: var(--cor-branco); }
 .avisos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; text-align: left; }
 .aviso-card { background-color: var(--cor-creme-fundo); padding: 25px; border-radius: 8px; border-left: 5px solid var(--cor-rosa-suave); }
-.aviso-card h3 { color: var(--cor-vinho); margin-bottom: 10px; }
+/* CORREÇÃO: Estilos para o cabeçalho do card de aviso */
+.aviso-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.aviso-icon { font-size: 22px; color: var(--cor-vinho); }
+.aviso-card h3 { margin-bottom: 0; }
+.aviso-card p { margin-bottom: 0; }
 
-/* 7. MODAIS (Gerais) */
+
+/* 7. MODAIS (Gerais e Iframe) */
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(51, 51, 51, 0.8); backdrop-filter: blur(5px);
     display: none; align-items: center; justify-content: center; z-index: 2000;
@@ -121,91 +131,30 @@ a:hover { opacity: 0.7; }
     box-shadow: var(--sombra-modal);
 }
 .modal-overlay.active { display: flex; opacity: 1; }
-.modal-overlay.active .modal-content, .modal-overlay.active .calendar-modal-content { transform: scale(1); }
+.modal-overlay.active .modal-content, 
+.modal-overlay.active .modal-content-external { transform: scale(1); }
 .modal-close {
     position: absolute; top: 15px; right: 20px; font-size: 30px;
     color: var(--cor-grafite-texto); cursor: pointer; border: none; background: none; z-index: 10;
 }
-.modal-content-large { max-width: 800px; }
-#modal-extra-content { margin-top: 25px; }
-.material-button {
-    display: inline-block; background-color: var(--cor-rosa-suave); color: var(--cor-vinho) !important;
-    padding: 12px 30px; border-radius: 50px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 1px; box-shadow: var(--sombra-suave);
-    transition: opacity 0.3s ease, transform 0.2s ease; border: none; cursor: pointer;
+/* CORREÇÃO: Estilos adicionados para o modal de página externa (iframe), copiados da home */
+.modal-content-external {
+    background: var(--cor-creme-fundo); padding: 10px; border-radius: 12px;
+    width: 95%; height: 90%; max-width: 1200px; position: relative;
+    display: flex; box-shadow: var(--sombra-modal);
+    transform: scale(0.95); transition: transform 0.3s ease;
 }
-.material-button:hover { opacity: 0.8; transform: translateY(-2px); }
+#modal-iframe { width: 100%; height: 100%; border: none; border-radius: 6px; }
+.modal-content-external .modal-close {
+    background: var(--cor-branco); color: var(--cor-vinho);
+    border-radius: 50%; width: 40px; height: 40px;
+    display: grid; place-content: center; line-height: 1;
+    top: -15px; right: -15px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
 
-/* 8. NOVO MODAL DE CALENDÁRIO */
-#calendar-modal .modal-close { color: var(--cor-vinho); }
-.calendar-modal-content {
-    background-color: var(--cor-branco);
-    max-width: 950px; width: 100%;
-    display: flex; gap: 30px;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: var(--sombra-modal);
-    transform: scale(0.95);
-    transition: transform 0.3s ease;
-    position: relative;
-}
-.calendar-main { flex: 1.5; min-width: 400px; }
-.calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
-.calendar-header h2 { font-size: 28px; margin: 0; color: var(--cor-vinho); font-family: var(--fonte-titulo); }
-.calendar-nav-btn {
-    background: none; border: none; font-size: 18px; color: var(--cor-vinho); cursor: pointer; padding: 10px;
-    border-radius: 50%; transition: background-color 0.2s;
-}
-.calendar-nav-btn:hover { background-color: var(--cor-creme-fundo); }
-.weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-bottom: 10px; }
-.weekdays div { text-align: center; font-weight: 700; color: var(--cor-rosa-suave); font-size: 14px; }
-.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
 
-/* MUDANÇA: Estilos do Calendário refinados */
-.day-cell {
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 500;
-    aspect-ratio: 1 / 1;
-    cursor: pointer;
-    border-radius: 50%;
-    transition: all 0.2s ease;
-    position: relative;
-    border: 2px solid transparent; /* Borda transparente por padrão */
-    background-color: transparent;
-}
-/* Apenas dias válidos recebem o hover. Apenas a borda muda (circunferência) */
-.day-cell:not(.prev-next-month-day):hover {
-    border-color: var(--cor-rosa-suave);
-}
-.day-cell.prev-next-month-day { color: #ccc; cursor: default; }
-/* Dia atual é marcado apenas com a borda (circunferência) */
-.day-cell.current-day {
-    border-color: var(--cor-vinho);
-    font-weight: 700;
-}
-/* Dia selecionado tem fundo sólido para destaque máximo */
-.day-cell.selected-day {
-    background-color: var(--cor-vinho);
-    color: var(--cor-branco);
-    border-color: var(--cor-vinho);
-    transform: scale(1.05);
-}
-.day-cell.event-day::after {
-    content: ''; position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
-    width: 6px; height: 6px; border-radius: 50%; background-color: var(--cor-rosa-suave);
-}
-.day-cell.selected-day.event-day::after { background-color: var(--cor-branco); }
-
-#event-details-wrapper { flex: 1; min-width: 300px; background-color: var(--cor-creme-fundo); border-radius: 8px; padding: 25px; display: flex; flex-direction: column; }
-#event-details-title { font-family: var(--fonte-titulo); font-size: 22px; margin-bottom: 15px; border-bottom: 2px solid var(--cor-rosa-suave); padding-bottom: 10px; color: var(--cor-vinho); }
-#event-details { flex-grow: 1; overflow-y: auto; padding-right: 10px; }
-.event-item {
-    display: flex; align-items: flex-start; gap: 15px;
-    margin-bottom: 15px; font-size: 15px;
-}
-.event-icon { font-size: 18px; color: var(--cor-rosa-suave); width: 20px; text-align: center; margin-top: 2px; }
-.event-info strong { display: block; color: var(--cor-vinho); font-weight: 700; }
-.event-info span { font-size: 14px; opacity: 0.8; }
+/* 8. MODAL DE CALENDÁRIO (Os estilos do componente são carregados separadamente) */
+/* ... Estilos do modal de calendário já estão no componente ... */
 
 /* 9. ANIMAÇÃO DE SCROLL */
 .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
@@ -213,73 +162,55 @@ a:hover { opacity: 0.7; }
 
 /* 10. RODAPÉ */
 .footer { background-color: var(--cor-vinho); color: var(--cor-creme-fundo); padding: 50px 0; text-align: center; margin-top: 60px; }
-.footer .logo { color: var(--cor-branco); }
+/* CORREÇÃO: Centraliza o logo no rodapé */
+.footer .logo { justify-content: center; margin-bottom: 15px; }
+/* CORREÇÃO: Deixa a imagem do logo branca no rodapé */
+.footer .logo img { filter: brightness(0) invert(1); }
 .footer .logo span { color: var(--cor-rosa-suave); }
 
 /* 11. BOTÃO VOLTAR AO TOPO */
-/* MUDANÇA: Botão estilizado para um visual mais limpo e moderno */
 .scroll-to-top {
     position: fixed; bottom: 30px; right: 30px; background-color: var(--cor-vinho); color: var(--cor-branco);
     width: 50px; height: 50px; border-radius: 50%; display: none; align-items: center; justify-content: center;
-    font-size: 20px; /* Ajuste para o tamanho do ícone */
-    cursor: pointer; z-index: 999;
-    opacity: 0;
-    box-shadow: var(--sombra-suave);
+    font-size: 20px; cursor: pointer; z-index: 999;
+    opacity: 0; box-shadow: var(--sombra-suave);
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
-.scroll-to-top:hover {
-    transform: translateY(-3px);
-}
+.scroll-to-top:hover { transform: translateY(-3px); }
 .scroll-to-top.visible { display: flex; opacity: 1; }
 
 /* 12. RESPONSIVIDADE MOBILE */
 @media (max-width: 920px) {
-    .calendar-modal-content { flex-direction: column; max-height: 90vh; overflow-y: auto; }
-    #event-details { max-height: 250px; }
+    /* ... As regras de responsividade do calendário são gerenciadas pelo componente ... */
 }
 @media (max-width: 768px) {
-    /* MUDANÇA: Menu agora é um "float" que aparece de cima, em vez de deslizar da lateral */
+    .section-header-with-button { justify-content: center; text-align: center; }
+    .section-header-with-button h2 { width: 100%; text-align: center; }
+    /* CORREÇÃO: CSS do menu mobile unificado com o da home */
     .nav-links {
-        position: fixed;
-        top: 80px; /* Abaixo do cabeçalho */
-        right: 20px;
-        width: 250px;
-        background-color: var(--cor-branco);
-        flex-direction: column;
-        padding: 15px;
-        border-radius: 8px;
-        box-shadow: var(--sombra-modal);
-        opacity: 0;
-        transform: translateY(-10px) scale(0.98);
+        position: fixed; top: 80px; right: 20px; width: 250px;
+        background-color: var(--cor-branco); flex-direction: column;
+        padding: 15px; border-radius: 8px; box-shadow: var(--sombra-modal);
+        opacity: 0; transform: translateY(-10px) scale(0.98);
         transform-origin: top right;
         transition: opacity 0.3s ease, transform 0.3s ease;
-        pointer-events: none; /* Impede interação quando escondido */
+        pointer-events: none;
     }
     .nav-links.active {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        pointer-events: auto;
+        opacity: 1; transform: translateY(0) scale(1); pointer-events: auto;
     }
     .nav-links a {
-        margin: 10px;
-        padding: 10px;
-        border-radius: 6px;
-        text-align: left;
-        font-size: 16px;
+        margin: 10px; padding: 10px; border-radius: 6px;
+        text-align: left; font-size: 16px;
         transition: background-color 0.2s ease;
     }
-    .nav-links a:hover {
-        background-color: var(--cor-creme-fundo);
-        opacity: 1;
-    }
+    .nav-links a:hover { background-color: var(--cor-creme-fundo); opacity: 1; }
     .hamburger { display: block; z-index: 1001; }
     .hamburger.toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
     .hamburger.toggle .line2 { opacity: 0; }
     .hamburger.toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
 
     .hero h1 { font-size: 36px; }
-    #prev-btn, #next-btn { display: none; }
+    .scroll-button { display: none; }
     .lesson-card { flex-basis: 260px; }
-    .calendar-main { min-width: unset; width: 100%; }
-    .calendar-header h2 { font-size: 22px; }
 }
