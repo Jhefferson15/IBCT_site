@@ -1,0 +1,314 @@
+/* css/ibct_tv.css */
+
+/* 1. SEÇÃO HERO E ANIMAÇÃO DE FUNDO */
+#tv-hero {
+    position: relative;
+    padding: 80px 0;
+    text-align: center;
+    color: var(--cor-branco);
+    background: linear-gradient(rgba(40, 0, 0, 0.7), rgba(40, 0, 0, 0.7)), var(--cor-vinho);
+    overflow: hidden;
+}
+
+.hero-animation-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.hero-animation-layer iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.hero-content-layer {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-family: var(--fonte-titulo);
+    font-size: 56px;
+    line-height: 1.2;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+    font-size: 18px;
+    max-width: 600px;
+    margin: 10px auto;
+    opacity: 0.9;
+}
+
+/* 2. CAMPO DE BUSCA */
+.search-container {
+    position: relative;
+    max-width: 500px;
+    margin: 30px auto;
+}
+
+#search-input {
+    width: 100%;
+    padding: 15px 50px 15px 25px;
+    border-radius: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.3);
+    color: var(--cor-branco);
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+#search-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#search-input:focus {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-color: var(--cor-rosa-suave);
+    outline: none;
+}
+
+.search-container .fa-search {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 18px;
+}
+
+/* 3. FILTROS DE VÍDEO */
+.video-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.filter-btn {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--cor-branco);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-family: var(--fonte-corpo);
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-btn:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background-color: var(--cor-rosa-suave);
+    color: var(--cor-vinho);
+    border-color: var(--cor-rosa-suave);
+    box-shadow: var(--sombra-suave);
+}
+
+/* 4. GALERIA E GRADE DE VÍDEOS (COM CORREÇÃO) */
+#video-gallery {
+    transition: background-color 0.5s ease;
+}
+
+#gallery-title {
+    margin-bottom: 50px;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.video-card {
+    background-color: var(--cor-branco);
+    border-radius: 12px;
+    box-shadow: var(--sombra-suave);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.video-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--sombra-elevada);
+}
+
+.video-thumbnail {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    background-color: var(--cor-creme-fundo);
+    /* Força o contêiner a ter uma proporção 16:9 */
+    padding-top: 56.25%; /* (9 / 16) * 100% */
+    height: 0;
+    overflow: hidden; /* Garante que a imagem não vaze */
+}
+
+.video-thumbnail img {
+    /* Faz a imagem preencher o contêiner criado acima */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+    border-bottom: none; /* A borda agora não é mais necessária aqui */
+    transition: transform 0.3s ease;
+}
+
+.video-thumbnail:hover img {
+    transform: scale(1.05); /* Efeito de zoom sutil no hover */
+}
+
+.video-thumbnail .fa-youtube {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 60px;
+    color: rgba(255, 0, 0, 0.85);
+    transition: transform 0.3s, color 0.3s;
+    text-shadow: 0 0 10px rgba(0,0,0,0.3);
+    z-index: 2; /* Garante que o ícone fique sobre a imagem */
+}
+
+.video-thumbnail:hover .fa-youtube {
+    transform: translate(-50%, -50%) scale(1.15);
+    color: #FF0000;
+}
+
+.video-info {
+    padding: 20px;
+    flex-grow: 1; /* Faz esta área crescer para preencher o espaço */
+    border-top: 3px solid var(--cor-vinho); /* Movi a borda para cá para um visual melhor */
+}
+
+.video-info h3 {
+    font-family: var(--fonte-corpo);
+    font-weight: 700;
+    color: var(--cor-grafite-texto);
+    font-size: 16px;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* 5. MENSAGENS DE STATUS */
+.loading-message,
+.error-message {
+    grid-column: 1 / -1; /* Ocupa a grade inteira */
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+    color: var(--cor-grafite-texto);
+}
+
+/* 6. ESTILOS DO MODAL DE VÍDEO */
+body.modal-open {
+    overflow: hidden;
+}
+
+#video-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#video-modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    background: #1c1c1c;
+    border-radius: 12px;
+    box-shadow: var(--sombra-modal);
+    transform: scale(0.95);
+    transition: transform 0.3s ease-in-out;
+}
+
+#video-modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+#modal-video-player-container {
+    position: relative;
+    padding-top: 56.25%; /* Proporção 16:9 */
+    width: 100%;
+    background-color: #000;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#modal-video-player-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.modal-close {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 40px;
+    height: 40px;
+    background: var(--cor-branco);
+    color: var(--cor-vinho);
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: var(--sombra-elevada);
+    transition: transform 0.2s;
+}
+
+.modal-close:hover {
+    transform: scale(1.1);
+}
+
+.modal-logo-animation {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 450px;
+    height: 250px;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0.7;
+    transform-origin: top left;
+    transform: scale(0.25);
+}

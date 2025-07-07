@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBCT TV - Igreja Batista Central em Taguatinga</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/home-style.css">
+    <link rel="stylesheet" href="css/ibct_tv.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <img src="img/logo.png" alt="Logo IBCT" class="header-logo-img">
+                    <span>IBCT TV</span>
+                </div>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">Início</a>
+                <a href="ibct_tv.html" class="active">IBCT TV</a>
+                <a href="index.html#ministerios">Ministérios</a>
+                <a href="sobre_ibct.html">Sobre a Igreja</a>
+                <a href="index.html#contato">Contato</a>
+            </nav>
+            <div class="hamburger">
+                <div class="line1"></div><div class="line2"></div><div class="line3"></div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="tv-hero">
+            <div class="hero-animation-layer">
+                <iframe src="./departamentos/hodos/tools/logo_ibct_tv.html" frameborder="0" scrolling="no" title="Animação de fundo da IBCT TV"></iframe>
+            </div>
+            <div class="hero-content-layer">
+                <div class="container">
+                    <h1 class="hero-title">IBCT TV</h1>
+                    <p class="hero-subtitle">Reveja nossos cultos, estudos bíblicos e séries especiais quando quiser.</p>
+                    
+                    <!-- CAMPO DE BUSCA NOVO -->
+                    <div class="search-container">
+                        <input type="text" id="search-input" placeholder="Pesquisar por título do vídeo...">
+                        <i class="fas fa-search"></i>
+                    </div>
+
+                    <div id="video-filters" class="video-filters">
+                        <button class="filter-btn active" data-filter="all">Todos</button>
+                        <button class="filter-btn" data-filter="domingo">Cultos de Domingo</button>
+                        <button class="filter-btn" data-filter="quarta">Cultos de Quarta</button>
+                        <button class="filter-btn" data-filter="ebd">EBD</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="video-gallery" class="content-section bg-light">
+            <div class="container">
+                <h2 id="gallery-title" class="section-title">Todos os Vídeos</h2>
+                <div id="video-grid" class="video-grid">
+                    <p class="loading-message">Carregando vídeos...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+             <div class="logo">Igreja Batista Central <span>em Taguatinga</span></div>
+             <p>© 2025 IBCT. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <!-- MODAL DO PLAYER DE VÍDEO NOVO -->
+    <div id="video-modal-overlay">
+        <div class="modal-content">
+            <iframe class="modal-logo-animation" src="./departamentos/hodos/tools/logo_ibct_tv.html" frameborder="0" scrolling="no"></iframe>
+            <button class="modal-close" id="modal-close-btn">×</button>
+            <div id="modal-video-player-container">
+                <!-- O Iframe do vídeo será injetado aqui pelo JS -->
+            </div>
+        </div>
+    </div>
+    
+    <a class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
+    
+    <script src="js/tv-loader.js" defer></script>
+</body>
+</html>
