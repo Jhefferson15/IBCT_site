@@ -119,13 +119,29 @@
     box-shadow: var(--sombra-suave);
 }
 
-/* 4. GALERIA E GRADE DE VÍDEOS (COM CORREÇÃO) */
+/* 4. GALERIA E GRADE DE VÍDEOS */
 #video-gallery {
     transition: background-color 0.5s ease;
 }
 
 #gallery-title {
-    margin-bottom: 50px;
+    margin-bottom: 20px;
+}
+
+/* NOVO: Estilo para o sumário de resultados */
+.results-summary {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #666;
+    font-size: 15px;
+}
+.results-summary strong {
+    color: var(--cor-grafite-texto);
+    font-weight: 600;
+}
+.results-summary .hidden-notice {
+    font-style: italic;
+    opacity: 0.8;
 }
 
 .video-grid {
@@ -144,6 +160,15 @@
     flex-direction: column;
 }
 
+.video-card.fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .video-card:hover {
     transform: translateY(-8px);
     box-shadow: var(--sombra-elevada);
@@ -154,26 +179,23 @@
     position: relative;
     cursor: pointer;
     background-color: var(--cor-creme-fundo);
-    /* Força o contêiner a ter uma proporção 16:9 */
-    padding-top: 56.25%; /* (9 / 16) * 100% */
+    padding-top: 56.25%;
     height: 0;
-    overflow: hidden; /* Garante que a imagem não vaze */
+    overflow: hidden;
 }
 
 .video-thumbnail img {
-    /* Faz a imagem preencher o contêiner criado acima */
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
-    border-bottom: none; /* A borda agora não é mais necessária aqui */
+    object-fit: cover;
     transition: transform 0.3s ease;
 }
 
 .video-thumbnail:hover img {
-    transform: scale(1.05); /* Efeito de zoom sutil no hover */
+    transform: scale(1.05);
 }
 
 .video-thumbnail .fa-youtube {
@@ -185,7 +207,7 @@
     color: rgba(255, 0, 0, 0.85);
     transition: transform 0.3s, color 0.3s;
     text-shadow: 0 0 10px rgba(0,0,0,0.3);
-    z-index: 2; /* Garante que o ícone fique sobre a imagem */
+    z-index: 2;
 }
 
 .video-thumbnail:hover .fa-youtube {
@@ -195,8 +217,8 @@
 
 .video-info {
     padding: 20px;
-    flex-grow: 1; /* Faz esta área crescer para preencher o espaço */
-    border-top: 3px solid var(--cor-vinho); /* Movi a borda para cá para um visual melhor */
+    flex-grow: 1;
+    border-top: 3px solid var(--cor-vinho);
 }
 
 .video-info h3 {
@@ -211,7 +233,7 @@
 /* 5. MENSAGENS DE STATUS */
 .loading-message,
 .error-message {
-    grid-column: 1 / -1; /* Ocupa a grade inteira */
+    grid-column: 1 / -1;
     text-align: center;
     padding: 40px;
     font-size: 18px;
@@ -229,14 +251,16 @@ body.modal-open {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(8px);
+    background: rgba(15, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: none;
     align-items: center;
     justify-content: center;
     z-index: 2000;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
+    padding: 20px;
 }
 
 #video-modal-overlay.active {
@@ -246,22 +270,26 @@ body.modal-open {
 
 .modal-content {
     position: relative;
-    width: 90%;
-    max-width: 900px;
-    background: #1c1c1c;
-    border-radius: 12px;
-    box-shadow: var(--sombra-modal);
-    transform: scale(0.95);
-    transition: transform 0.3s ease-in-out;
+    width: 100%;
+    max-width: 960px;
+    background: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    transform: scale(0.95) translateY(20px);
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    opacity: 0;
+    padding: 8px;
 }
 
 #video-modal-overlay.active .modal-content {
-    transform: scale(1);
+    transform: scale(1) translateY(0);
+    opacity: 1;
 }
 
 #modal-video-player-container {
     position: relative;
-    padding-top: 56.25%; /* Proporção 16:9 */
+    padding-top: 56.25%;
     width: 100%;
     background-color: #000;
     border-radius: 12px;
@@ -279,36 +307,73 @@ body.modal-open {
 
 .modal-close {
     position: absolute;
-    top: -15px;
-    right: -15px;
-    width: 40px;
-    height: 40px;
+    top: -16px;
+    right: -16px;
+    width: 44px;
+    height: 44px;
     background: var(--cor-branco);
     color: var(--cor-vinho);
     border: none;
     border-radius: 50%;
-    font-size: 24px;
-    line-height: 40px;
-    text-align: center;
+    font-size: 20px;
     cursor: pointer;
-    z-index: 10;
+    z-index: 2010;
     box-shadow: var(--sombra-elevada);
-    transition: transform 0.2s;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-close:hover {
-    transform: scale(1.1);
+    background-color: var(--cor-rosa-suave);
+    transform: scale(1.1) rotate(90deg);
 }
 
+/* ATUALIZAÇÃO: Logo maior para desktop */
 .modal-logo-animation {
     position: absolute;
-    top: 15px;
-    left: 15px;
-    width: 450px;
-    height: 250px;
-    z-index: 5;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, calc(-50% - 70px));
+    width: 300px; /* Aumentado de 150px para 300px */
+    height: auto;
+    z-index: 2005;
     pointer-events: none;
-    opacity: 0.7;
-    transform-origin: top left;
-    transform: scale(0.25);
+    opacity: 0;
+    transition: opacity 0.4s 0.2s ease, transform 0.4s 0.2s ease;
+}
+
+#video-modal-overlay.active .modal-logo-animation {
+    opacity: 1;
+    /* Ajusta a posição Y para o logo maior ficar bem posicionado */
+    transform: translate(-50%, calc(-50% - 90px)); 
+}
+
+@media (max-width: 768px) {
+    /* Ajuste para telas menores como tablets */
+    .modal-logo-animation {
+        width: 220px;
+    }
+    #video-modal-overlay.active .modal-logo-animation {
+        transform: translate(-50%, calc(-50% - 70px));
+    }
+}
+
+
+@media (max-width: 600px) {
+    /* Ajuste para celulares */
+    .modal-logo-animation {
+        width: 180px;
+    }
+    #video-modal-overlay.active .modal-logo-animation {
+         transform: translate(-50%, calc(-50% - 60px));
+    }
+    .modal-close {
+        top: -10px;
+        right: -10px;
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
 }

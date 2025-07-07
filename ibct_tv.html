@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IBCT TV - Igreja Batista Central em Taguatinga</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="css/home-style.css">
+    <link rel="stylesheet" href="css/home-style.css"> 
     <link rel="stylesheet" href="css/ibct_tv.css">
 </head>
 <body>
@@ -20,9 +20,9 @@
             </a>
             <nav class="nav-links">
                 <a href="index.html">Início</a>
-                <a href="ibct_tv.html" class="active">IBCT TV</a>
                 <a href="index.html#ministerios">Ministérios</a>
-                <a href="sobre_ibct.html">Sobre a Igreja</a>
+                <a href="ibct_tv.html" class="active">IBCT TV</a>
+                <a href="sobre_ibct.html">Sobre</a>
                 <a href="index.html#contato">Contato</a>
             </nav>
             <div class="hamburger">
@@ -41,7 +41,6 @@
                     <h1 class="hero-title">IBCT TV</h1>
                     <p class="hero-subtitle">Reveja nossos cultos, estudos bíblicos e séries especiais quando quiser.</p>
                     
-                    <!-- CAMPO DE BUSCA NOVO -->
                     <div class="search-container">
                         <input type="text" id="search-input" placeholder="Pesquisar por título do vídeo...">
                         <i class="fas fa-search"></i>
@@ -60,6 +59,10 @@
         <section id="video-gallery" class="content-section bg-light">
             <div class="container">
                 <h2 id="gallery-title" class="section-title">Todos os Vídeos</h2>
+                
+                <!-- NOVO: Sumário de resultados -->
+                <div id="results-summary" class="results-summary"></div>
+
                 <div id="video-grid" class="video-grid">
                     <p class="loading-message">Carregando vídeos...</p>
                 </div>
@@ -74,11 +77,13 @@
         </div>
     </footer>
     
-    <!-- MODAL DO PLAYER DE VÍDEO NOVO -->
     <div id="video-modal-overlay">
+        <iframe class="modal-logo-animation" src="./departamentos/hodos/tools/logo_ibct_tv.html" frameborder="0" scrolling="no" title="Logo animado IBCT TV"></iframe>
+        
         <div class="modal-content">
-            <iframe class="modal-logo-animation" src="./departamentos/hodos/tools/logo_ibct_tv.html" frameborder="0" scrolling="no"></iframe>
-            <button class="modal-close" id="modal-close-btn">×</button>
+            <button class="modal-close" id="modal-close-btn" aria-label="Fechar vídeo">
+                <i class="fas fa-times"></i>
+            </button>
             <div id="modal-video-player-container">
                 <!-- O Iframe do vídeo será injetado aqui pelo JS -->
             </div>
