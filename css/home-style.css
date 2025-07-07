@@ -158,7 +158,11 @@ a:hover { opacity: 0.7; }
     box-shadow: var(--sombra-elevada); 
     /* cursor: pointer; */ /* Removido para priorizar o botão */
 }
-.missao-card img { width: 40%; object-fit: cover; }
+.missao-card img {
+    width: 40%;
+    object-fit: cover;
+    height: 300px; /* Garante altura uniforme para os cards */
+}
 .missao-content { 
     padding: 40px; 
     display: flex; 
