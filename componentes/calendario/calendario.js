@@ -1,40 +1,131 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    // URL para o componente HTML. Ajuste o caminho se a estrutura de pastas for diferente.
-    const componentUrl = './componentes/calendario/calendario.html';
+// --- START OF FILE componentes/calendario/calendario.js ---
 
-    // --- 1. FUNÇÃO PRINCIPAL DE INICIALIZAÇÃO ---
-    async function initializeCalendarComponent() {
+// A lógica é encapsulada em uma IIFE (Immediately Invoked Function Expression)
+// para evitar poluir o escopo global, exceto pela API que queremos expor.
+(function(window) {
+    'use strict';
+
+    // =================================================================================
+    // 1. BANCO DE DADOS CENTRAL DE EVENTOS (A ÚNICA FONTE DA VERDADE)
+    // =================================================================================
+    // Propriedades:
+    // - department: 'igreja' ou 'hodos'. Usado para filtrar.
+    // - display: Array ['widget', 'carousel', 'calendar']. Controla onde o evento aparece.
+    // - date: Formato 'AAAA-MM-DD' para eventos específicos, ou texto para recorrentes.
+    const ALL_EVENTS_DATABASE = [
+        // --- Eventos do HODOS ---
+        { department: 'hodos', date: '2025-04-12', time: '19:00', title: 'Hodos Meet', location: 'IBCT', type: 'louvor', description: 'Um ambiente jovem de louvor, adoração e palavra.', display: ['carousel', 'widget', 'calendar'] },
+        { department: 'hodos', date: '2025-05-07', time: '20:00', title: 'Cinema: The Chosen', location: 'ParkShopping', type: 'comunhão', description: 'Encontro para assistir The Chosen no cinema.', display: ['carousel', 'widget', 'calendar'] },
+        { department: 'hodos', date: '2025-05-24', time: '10:00', title: 'Hodos Day', location: 'Sítio Campo Maior', type: 'comunhão', description: 'Um dia inteiro de diversão, churrasco e comunhão.', display: ['carousel', 'widget', 'calendar'] },
+        { department: 'hodos', date: '2025-06-07', time: '19:00', title: 'Hodos Meet', location: 'IBCT', type: 'louvor', description: 'Mais um encontro para adorarmos juntos.', display: ['carousel', 'widget', 'calendar'] },
+        { department: 'hodos', date: '2025-06-14', time: '19:30', title: 'Hodos In Love', location: 'IBCT', type: 'especial', description: 'Noite especial com tema de Dia dos Namorados.', display: ['carousel', 'widget', 'calendar'] },
+        { department: 'hodos', date: '2025-06-18', time: '15:00', title: 'Evangelismo com CRU', location: 'Parque de Águas Claras', type: 'missões', description: 'Evangelismo em parceria com a CRU.', display: ['carousel', 'widget', 'calendar'] },
+        { department: 'hodos', date: 'Semanalmente', time: '20:00', title: 'PGMs Semanais', location: 'IBCT e Lares', type: 'pgm', recurring: true, externalPage: './eventos/hodos_pgm.html', cardContentHTML: `<iframe src="./tools/logo_pgm.html" style="width:100%; height:100%; border:none; overflow:hidden; background-color: var(--cor-branco);" scrolling="no" title="Animação da logo PGM"></iframe>`, display: ['carousel'] },
+        { department: 'hodos', date: 'Agosto de 2025', time: 'A definir', title: 'Hodos Camp 2025', location: 'A definir', type: 'acampa', recurring: true, externalPage: './eventos/hodos_camp_2025.html', description: 'O evento mais esperado do ano!', display: ['carousel', 'widget'] },
+        { department: 'hodos', date: 'Ao primeiro sábado do mês', time: '19:00', title: 'Hodos Meet', location: 'IBCT', type: 'meet', recurring: true, cardClass: 'allow-overflow', externalPage: './eventos/hodos_meet.html', cardContentHTML: `<div style="position: relative; width: 100%; height: 100%; background-color: white;"><iframe src="./tools/logo_meet.html" style="width:100%; height:100%; border:none; overflow:hidden; pointer-events: none;" scrolling="no" title="Animação Hodos Meet"></iframe><div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; z-index: 5;"></div></div>`, display: ['carousel'] },
+
+        // --- Eventos da IGREJA ---
+        { department: 'igreja', date: '2025-04-13', time: '09:00', title: 'EBD', type: 'ebd', display: ['widget', 'calendar'] },
+        { department: 'igreja', date: '2025-04-27', time: '09:00', title: 'EBD', type: 'ebd', display: ['widget', 'calendar'] },
+        { department: 'igreja', date: '2025-05-18', time: '09:00', title: 'EBD', type: 'ebd', display: ['widget', 'calendar'] },
+        { department: 'igreja', date: '2025-05-25', time: '09:00', title: 'EBD', type: 'ebd', display: ['widget', 'calendar'] },
+        // ... (outras EBDs ou eventos específicos da igreja podem ser adicionados aqui)
+    ];
+
+    // Função auxiliar para gerar eventos recorrentes da igreja (cultos, oração)
+    function generateRecurringChurchEvents(year) {
+        const events = [];
+        for (let m = 0; m < 12; m++) {
+            const daysInMonth = new Date(year, m + 1, 0).getDate();
+            for (let d = 1; d <= daysInMonth; d++) {
+                const currentDate = new Date(year, m, d);
+                const dayOfWeek = currentDate.getDay();
+                const dateStr = currentDate.toISOString().slice(0, 10);
+                if (dayOfWeek === 0) { // Domingo
+                    events.push({ department: 'igreja', date: dateStr, time: '10:30', title: 'Culto Matutino', type: 'culto', display: ['widget', 'calendar'] });
+                    events.push({ department: 'igreja', date: dateStr, time: '18:00', title: 'Culto Noturno', type: 'culto', display: ['widget', 'calendar'] });
+                }
+                if (dayOfWeek === 3) { // Quarta-feira
+                    events.push({ department: 'igreja', date: dateStr, time: '20:00', title: 'Culto de Oração', type: 'oracao', display: ['widget', 'calendar'] });
+                }
+            }
+        }
+        return events;
+    }
+
+    const allEventsWithRecurring = [...ALL_EVENTS_DATABASE, ...generateRecurringChurchEvents(2025)];
+
+    // =================================================================================
+    // 2. API PÚBLICA (Para ser usada por home-script.js e hodos_script.js)
+    // =================================================================================
+    window.IBCT_EVENTS_API = {
+        /**
+         * Retorna uma lista de eventos filtrados.
+         * @param {object} options - Opções de filtro.
+         * @param {string} options.filter - 'igreja' (só igreja), 'hodos' (igreja + hodos) ou 'all'.
+         * @param {string} [options.displayIn] - 'widget', 'carousel', ou 'calendar' para filtrar onde o evento deve aparecer.
+         * @returns {Array} - Lista de eventos filtrados.
+         */
+        getEvents: function(options = {}) {
+            const filter = options.filter || 'all';
+            return allEventsWithRecurring.filter(event => {
+                const departmentMatch = (filter === 'all') ||
+                                        (filter === 'igreja' && event.department === 'igreja') ||
+                                        (filter === 'hodos' && (event.department === 'igreja' || event.department === 'hodos'));
+                const displayMatch = !options.displayIn || (event.display && event.display.includes(options.displayIn));
+                return departmentMatch && displayMatch;
+            });
+        }
+    };
+
+    // =================================================================================
+    // 3. LÓGICA DO COMPONENTE DE CALENDÁRIO
+    // =================================================================================
+    
+    /**
+     * Função principal que inicializa o componente.
+     */
+    async function initializeComponent() {
         try {
-            // Carrega o HTML do componente e injeta no body
-            // Eu fiz uma gambiarra, pois varios sites estão pegando rodando de ligares diferentes e o url não está achando, e estou implementando varias tentativas com try
-            try{
-                const response = await fetch(componentUrl);
-                if (!response.ok) throw new Error(`Não foi possível carregar o componente: ${response.statusText}`);
+            // document.currentScript refere-se à tag <script> que está executando este código no momento.
+            const scriptTag = document.currentScript;
+            if (!scriptTag) throw new Error("Não foi possível encontrar a tag do script do calendário para determinar o caminho.");
+            
+            // Lê os atributos da tag <script> para configurar o componente.
+            const pageFilter = scriptTag.getAttribute('data-filter') || 'all';
+            const scriptPath = scriptTag.src;
+            const scriptDir = scriptPath.substring(0, scriptPath.lastIndexOf('/'));
+            const componentUrl = `${scriptDir}/calendario.html`;
+
+            // Busca o conteúdo HTML do modal do calendário.
+            const response = await fetch(componentUrl);
+            if (!response.ok) throw new Error(`Não foi possível carregar o componente de ${componentUrl}. Status: ${response.status}`);
+            
+            // Insere o HTML do modal no final do <body>.
             const html = await response.text();
             document.body.insertAdjacentHTML('beforeend', html);
-
-            // Agora que o HTML existe, podemos configurar a lógica
-            setupCalendarLogic();
-            }catch{
-                const response = await fetch("../../componentes/calendario/calendario.html");
-                if (!response.ok) throw new Error(`Não foi possível carregar o componente: ${response.statusText}`);
-                const html = await response.text();
-                document.body.insertAdjacentHTML('beforeend', html);
-    
-                // Agora que o HTML existe, podemos configurar a lógica
-                setupCalendarLogic();
-            }
             
+            // Inicia a lógica interativa do calendário.
+            setupCalendarLogic(pageFilter);
+
+            // Dispara um evento personalizado para avisar a outras partes do site
+            // que a API e o componente estão prontos para uso.
+            document.dispatchEvent(new CustomEvent('ibct-api-ready'));
 
         } catch (error) {
             console.error('Falha ao inicializar o componente de calendário:', error);
         }
     }
 
-    // --- 2. FUNÇÃO PARA CONFIGURAR TODA A LÓGICA ---
-    function setupCalendarLogic() {
+    /**
+     * Configura toda a interatividade do calendário depois que ele é adicionado ao DOM.
+     * @param {string} pageFilter - O filtro ('igreja' ou 'hodos') a ser aplicado no calendário.
+     */
+    function setupCalendarLogic(pageFilter) {
         // --- Elementos do DOM do Componente ---
         const calendarModal = document.getElementById('calendar-modal-component');
+        if (!calendarModal) return;
+
         const closeModalBtn = calendarModal.querySelector('.modal-close-component');
         const monthYearEl = document.getElementById('month-year-component');
         const calendarDaysEl = document.getElementById('calendar-days-component');
@@ -43,31 +134,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         const prevMonthBtn = document.getElementById('prev-month-component');
         const nextMonthBtn = document.getElementById('next-month-component');
         const openCalendarTriggers = document.querySelectorAll('[data-action="open-calendar"]');
-
-        if (!calendarModal) return; // Se o modal não foi injetado, para a execução
-
-        // --- Estado e Dados ---
+        
         let currentDate = new Date();
-        // A "API" do componente: busca os eventos de uma variável global.
-        // Cada página deve definir `window.CALENDAR_EVENTS` antes de este script rodar.
-        const allEvents = window.CALENDAR_EVENTS || {};
-        const eventIcons = {
-            ebd: 'fa-solid fa-book-open',
-            culto: 'fa-solid fa-cross',
-            curso: 'fa-solid fa-graduation-cap',
-            oracao: 'fa-solid fa-hands-praying',
-            evento: 'fa-solid fa-star',
-            pgm: 'fa-solid fa-people-group',
-            missões: 'fa-solid fa-globe',
-            especial: 'fa-solid fa-gift',
-            acampa: 'fa-solid fa-campground',
-            comunhão: 'fa-solid fa-users',
-            louvor: 'fa-solid fa-music'
-        };
+        
+        const eventsForCalendar = window.IBCT_EVENTS_API.getEvents({ filter: pageFilter, displayIn: 'calendar' });
+        const allEventsMap = {};
+        eventsForCalendar.forEach(event => {
+            if (event.date.includes('-')) {
+                if (!allEventsMap[event.date]) allEventsMap[event.date] = [];
+                allEventsMap[event.date].push(event);
+            }
+        });
 
-        // --- Funções do Modal ---
+        const eventIcons = { ebd: 'fa-solid fa-book-open', culto: 'fa-solid fa-cross', curso: 'fa-solid fa-graduation-cap', oracao: 'fa-solid fa-hands-praying', evento: 'fa-solid fa-star', pgm: 'fa-solid fa-people-group', missões: 'fa-solid fa-globe', especial: 'fa-solid fa-gift', acampa: 'fa-solid fa-campground', comunhão: 'fa-solid fa-users', louvor: 'fa-solid fa-music', meet: 'fa-solid fa-bolt' };
+        
         const openModal = () => {
-            currentDate = new Date(); // Reseta para o mês atual ao abrir
+            currentDate = new Date();
             renderCalendar();
             calendarModal.classList.add('active');
             document.body.classList.add('modal-open');
@@ -75,10 +157,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const closeModal = () => {
             calendarModal.classList.remove('active');
-            document.body.classList.remove('modal-open');
+            if (!document.querySelector('.modal-overlay.active')) {
+                document.body.classList.remove('modal-open');
+            }
         };
 
-        // --- Funções do Calendário ---
         const renderCalendar = () => {
             const month = currentDate.getMonth();
             const year = currentDate.getFullYear();
@@ -100,7 +183,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     classes += ' current-day';
                 }
                 const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
-                if (allEvents[dateStr]) {
+                if (allEventsMap[dateStr]) {
                     classes += ' event-day';
                 }
                 const dayCell = document.createElement('div');
@@ -122,12 +205,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const showEventsForDate = (dateStr, cell) => {
             document.querySelectorAll('.day-cell.selected-day').forEach(c => c.classList.remove('selected-day'));
-            cell.classList.add('selected-day');
+            if(cell) cell.classList.add('selected-day');
             
             const formattedDate = new Date(dateStr + 'T00:00:00').toLocaleDateString('pt-BR', { day: '2-digit', month: 'long' });
             eventDetailsTitle.textContent = `Eventos de ${formattedDate}`;
             
-            const events = allEvents[dateStr];
+            const events = allEventsMap[dateStr];
             if (events && events.length > 0) {
                 const sortedEvents = events.sort((a, b) => (a.time || '00:00').localeCompare(b.time || '00:00'));
                 eventDetailsEl.innerHTML = sortedEvents.map(event => `
@@ -143,19 +226,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         };
 
-        // --- Listeners de Eventos ---
         openCalendarTriggers.forEach(trigger => trigger.addEventListener('click', openModal));
         closeModalBtn.addEventListener('click', closeModal);
         prevMonthBtn.addEventListener('click', () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); });
         nextMonthBtn.addEventListener('click', () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); });
+        
         calendarModal.addEventListener('click', (e) => {
-            // Fecha o modal se clicar no overlay (fundo)
             if (e.target === calendarModal) {
                 closeModal();
             }
         });
     }
 
-    // --- 3. EXECUTA A INICIALIZAÇÃO ---
-    initializeCalendarComponent();
-});
+    // Inicia todo o processo de inicialização do componente.
+    initializeComponent();
+
+})(window);

@@ -1,8 +1,12 @@
-// --- SCRIPT PARA A PÁGINA HODOS (hodos_home.html) ---
+// --- START OF FILE departamentos/hodos/js/hodos_script.js ---
 
-document.addEventListener('DOMContentLoaded', () => {
+// MUDANÇA: Toda a lógica agora está dentro de um listener que espera a API do calendário ficar pronta.
+// Isso garante que `window.IBCT_EVENTS_API` exista antes de tentarmos usá-la.
+document.addEventListener('ibct-api-ready', () => {
 
-    // --- LÓGICA COMPARTILHADA (Pode ser usada em várias páginas) ---
+    // --- LÓGICA COMPARTILHADA (Menu, Modais, Scroll, Fade) ---
+    // Esta parte pode ser reutilizada em outras páginas do site.
+
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     if (hamburger && navLinks) {
@@ -25,16 +29,18 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.add('modal-open');
         }
     }
+    
     function closeAnyModal(modal) {
         if (modal) {
             modal.classList.remove('active');
             const iframe = modal.querySelector('iframe');
-            if (iframe) iframe.src = "";
+            if (iframe) iframe.src = ""; // Limpa o iframe para parar vídeos/animações
             if (!document.querySelector('.modal-overlay.active')) {
                 document.body.classList.remove('modal-open');
             }
         }
     }
+
     document.querySelectorAll('.modal-close').forEach(btn => {
         btn.addEventListener('click', (e) => closeAnyModal(e.target.closest('.modal-overlay')));
     });
@@ -65,44 +71,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- LÓGICA ESPECÍFICA DA PÁGINA HODOS ---
-
-    // 1. Dados e Conteúdo dos Eventos
-    const eventsData = [
-        { date: '12 de Abril, 2025', category: 'LOUVOR', title: 'Hodos Meet', location: 'IBCT', description: 'Um ambiente jovem de louvor, adoração e palavra. Uma oportunidade para nos reunirmos como um grande grupo para cultuar a Deus com intensidade e alegria.' },
-        { date: '07 de Maio, 2025', category: 'ESPECIAL', title: 'Cinema: The Chosen', location: 'ParkShopping', description: 'Encontro descontraído do grupo para assistir à série The Chosen no cinema, fortalecendo a amizade e a comunhão.' },
-        { date: '24 de Maio, 2025', category: 'COMUNHÃO', title: 'Hodos Day', location: 'Sítio Campo Maior', description: 'Um dia inteiro de diversão, churrasco e comunhão profunda! Um tempo precioso para fortalecer laços e criar memórias.' },
-        { date: '07 de Junho, 2025', category: 'LOUVOR', title: 'Hodos Meet', location: 'IBCT', description: 'Mais um encontro para adorarmos juntos. Traga um amigo e venha cultuar conosco!' },
-        { date: '14 de Junho, 2025', category: 'ESPECIAL', title: 'Hodos In Love', location: 'IBCT', description: 'Uma noite especial com tema de Dia dos Namorados para celebrar o amor de forma cristã, seja entre casais ou entre amigos.' },
-        { date: '18 de Junho, 2025', category: 'MISSÕES', title: 'Evangelismo com CRU', location: 'Parque de Águas Claras', description: 'Nos unimos aos missionários da CRU para um tempo de evangelismo e serviço a Deus em nossa cidade, compartilhando as boas novas.' },
-        { date: 'Semanalmente', category: 'PGM', title: 'PGMs Semanais', location: 'IBCT e Lares', description: 'Nossos Pequenos Grupos de Multiplicação acontecem toda sexta! Temos PGMs para jovens, casais, \'Sis & Bros\' e \'Delas 30+\'. É o nosso principal momento de comunhão e estudo em grupos menores.', recurring: true, externalPage: './eventos/hodos_pgm.html', cardContentHTML: `<iframe src="./tools/logo_pgm.html" style="width:100%; height:100%; border:none; overflow:hidden; background-color: var(--cor-branco);" scrolling="no" title="Animação da logo PGM"></iframe>` },
-        { date: 'Agosto de 2025', category: 'ACAMPA', title: 'Hodos Camp 2025', location: 'A definir', description: 'O evento mais esperado do ano! Serão dias de imersão total na Palavra, louvor, dinâmicas e comunhão. O tema deste ano é \'Viva a Verdade\'. Clique para mais detalhes!', externalPage: './eventos/hodos_camp_2025.html', recurring: true },
-        { date: 'Ao primeiro sábado do mês', category: 'MEET', title: 'Hodos Meet', location: 'IBCT', cardClass: 'allow-overflow', description: 'Nosso encontro mensal de adoração e Palavra. Uma noite para recarregar as energias e se conectar com Deus e com os irmãos.', externalPage: './eventos/hodos_meet.html', cardContentHTML: `<div style="position: relative; width: 100%; height: 100%; background-color: white;"><iframe src="./tools/logo_meet.html" style="width:100%; height:100%; border:none; overflow:hidden; pointer-events: none;" scrolling="no" title="Animação Hodos Meet"></iframe><div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; z-index: 5;"></div></div>`, recurring: true },
-    ];
     
+    // O array de dados de eventos foi removido daqui e centralizado no `calendario.js`.
+
+    // Função auxiliar para converter datas do formato 'AAAA-MM-DD' para objetos Date.
     function parseDate(dateString) {
-        if (!dateString || typeof dateString !== 'string') return null;
-        const monthMap = { 'janeiro': 0, 'fevereiro': 1, 'março': 2, 'abril': 3, 'maio': 4, 'junho': 5, 'julho': 6, 'agosto': 7, 'setembro': 8, 'outubro': 9, 'novembro': 10, 'dezembro': 11 };
-        const parts = dateString.toLowerCase().replace(',', '').split(' ');
-        if (parts.length === 3 && parts[0].match(/^\d+$/)) {
-             const day = parseInt(parts[0], 10), month = monthMap[parts[1]], year = parseInt(parts[2], 10);
-             return (!isNaN(day) && month !== undefined && !isNaN(year)) ? new Date(year, month, day) : null;
-        } else if (parts.length === 3 && monthMap[parts[0]] !== undefined) {
-            const month = monthMap[parts[0]], year = parseInt(parts[2], 10);
-            return (month !== undefined && !isNaN(year)) ? new Date(year, month, 1) : null;
-        }
-        return null;
+        if (!dateString || typeof dateString !== 'string' || !dateString.includes('-')) return null;
+        return new Date(dateString + "T00:00:00"); // Adiciona o T00:00 para evitar problemas de fuso horário
     }
     
-    // 2. Renderização dos Cards de Eventos (Carrossel Principal)
+    // Controla se o carrossel mostra eventos futuros ou passados.
     let showingFutureEvents = true;
-    function renderEvents(filter) {
+
+    function renderEventsCarousel(filter) {
         const lessonsScroller = document.querySelector('.lessons-scroller');
         if (!lessonsScroller) return;
+
         lessonsScroller.innerHTML = '';
+        
+        // Pega os eventos da API central, filtrando para o departamento 'hodos' e que devem aparecer no 'carousel'.
+        const allHodosEvents = window.IBCT_EVENTS_API.getEvents({ filter: 'hodos', displayIn: 'carousel' });
+        
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-        const filteredEvents = eventsData.filter(event => {
-            if (event.recurring) return filter === 'future';
+        
+        const filteredEvents = allHodosEvents.filter(event => {
+            if (event.recurring) return filter === 'future'; // Eventos recorrentes sempre aparecem em "futuros".
             const eventDate = parseDate(event.date);
             if (!eventDate) return false;
             return filter === 'future' ? eventDate >= today : eventDate < today;
@@ -117,8 +111,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'event-card';
             if (event.cardClass) card.classList.add(event.cardClass);
-            Object.keys(event).forEach(key => { if(event[key] !== undefined && key !== 'cardContentHTML') card.dataset[key] = event[key]; });
-            const cardImageContent = event.cardContentHTML || event.category;
+            
+            // Transfere todas as propriedades do evento para data-attributes no elemento do card.
+            Object.keys(event).forEach(key => {
+                 if(event[key] !== undefined && typeof event[key] !== 'object') {
+                    card.dataset[key] = event[key];
+                 }
+            });
+
+            const cardImageContent = event.cardContentHTML || event.type.toUpperCase();
             const imageContainerClass = event.cardContentHTML ? "lesson-card-image special-content-container" : "lesson-card-image";
             card.innerHTML = `<div class="${imageContainerClass}">${cardImageContent}</div><div class="lesson-card-content"><span class="date-value">${event.date}</span><h3>${event.title}</h3></div>`;
             lessonsScroller.appendChild(card);
@@ -128,14 +129,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function addModalListeners() {
         document.querySelectorAll('.event-card').forEach(card => {
-            if(card.querySelector('.special-content-container')) {
-                card.querySelector('.special-content-container + .lesson-card-content').addEventListener('click', () => openEventModal(card.dataset));
-                const clickableOverlay = card.querySelector('[style*="cursor: pointer"]');
-                if (clickableOverlay) {
-                    clickableOverlay.addEventListener('click', () => openEventModal(card.dataset));
-                }
+            if (card.dataset.externalPage) {
+                // Se tiver uma página externa, o clique abre o modal com iframe.
+                card.addEventListener('click', () => openEventModal(card.dataset));
             } else {
-                 card.addEventListener('click', () => openEventModal(card.dataset));
+                 // Senão, abre o modal de informações simples.
+                 // (Implementação do modal simples não está aqui, mas o gancho está pronto).
             }
         });
     }
@@ -144,62 +143,61 @@ document.addEventListener('DOMContentLoaded', () => {
         if (dataset.externalPage) {
             const externalPageModal = document.getElementById('external-page-modal');
             const iframe = document.getElementById('modal-iframe');
-            iframe.src = dataset.externalPage;
-            openAnyModal(externalPageModal);
-        } else {
-            const lessonModal = document.getElementById('lesson-modal');
-            document.getElementById('modal-title').innerText = dataset.title;
-            document.querySelector('#modal-location span').innerText = dataset.location;
-            document.getElementById('modal-description').innerText = dataset.description;
-            openAnyModal(lessonModal);
-        }
+            if(externalPageModal && iframe) {
+                iframe.src = dataset.externalPage;
+                openAnyModal(externalPageModal);
+            }
+        } 
+        // Você pode adicionar um `else` aqui para lidar com modais simples se precisar.
     }
 
-    // 3. Lógica do Carrossel de Eventos Principal
+    // --- Inicialização e Listeners dos Componentes da Página ---
+
+    // 1. Carrossel de Eventos Principal
     const lessonsWrapper = document.querySelector('.lessons-wrapper');
     if (lessonsWrapper) {
-        const lessonsScroller = lessonsWrapper.querySelector('.lessons-scroller');
         const toggleBtn = document.getElementById('toggle-events-btn');
         const eventsTitle = document.getElementById('events-title');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
+        const scroller = lessonsWrapper.querySelector('.lessons-scroller');
 
         toggleBtn.addEventListener('click', () => {
             showingFutureEvents = !showingFutureEvents;
             eventsTitle.textContent = showingFutureEvents ? 'Nossos Próximos Encontros' : 'Eventos que já Aconteceram';
             toggleBtn.textContent = showingFutureEvents ? 'Ver Eventos Passados' : 'Ver Próximos Eventos';
-            renderEvents(showingFutureEvents ? 'future' : 'past');
+            renderEventsCarousel(showingFutureEvents ? 'future' : 'past');
         });
 
-        prevBtn.addEventListener('click', () => lessonsScroller.scrollBy({ left: -330, behavior: 'smooth' }));
-        nextBtn.addEventListener('click', () => lessonsScroller.scrollBy({ left: 330, behavior: 'smooth' }));
+        prevBtn.addEventListener('click', () => scroller.scrollBy({ left: -330, behavior: 'smooth' }));
+        nextBtn.addEventListener('click', () => scroller.scrollBy({ left: 330, behavior: 'smooth' }));
         
-        renderEvents('future');
+        renderEventsCarousel('future'); // Renderiza o carrossel pela primeira vez.
     }
 
-    // 4. Lógica do Carrossel do Instagram (agora único)
+    // 2. Carrossel do Instagram
     const instaScroller = document.querySelector('.instagram-scroller');
     if (instaScroller) {
         const prevInstaBtn = document.getElementById('prev-insta-btn');
         const nextInstaBtn = document.getElementById('next-insta-btn');
-        
-        // MUDANÇA: O valor do scroll precisa ser maior para mover um "bloco" de colunas
         const scrollAmount = 280 + 20; // Largura do card + gap
         
         prevInstaBtn.addEventListener('click', () => instaScroller.scrollBy({ left: -scrollAmount, behavior: 'smooth' }));
         nextInstaBtn.addEventListener('click', () => instaScroller.scrollBy({ left: scrollAmount, behavior: 'smooth' }));
     }
     
-    // 5. Lógica para popular o WIDGET de próximos eventos
+    // 3. Widget de Próximos Eventos
     function populateNextHodosEvents() {
         const listContainer = document.getElementById('next-events-list');
         if (!listContainer) return;
 
+        // Pede eventos do 'hodos' que devem ser exibidos no 'widget'.
+        const hodosWidgetEvents = window.IBCT_EVENTS_API.getEvents({ filter: 'hodos', displayIn: 'widget' });
+
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        const futureEvents = eventsData
-            .filter(event => !event.recurring)
+        const futureEvents = hodosWidgetEvents
             .map(event => ({ ...event, dateObj: parseDate(event.date) }))
             .filter(event => event.dateObj && event.dateObj >= today)
             .sort((a, b) => a.dateObj - b.dateObj);
@@ -207,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const next4Events = futureEvents.slice(0, 4);
 
         if(next4Events.length === 0) {
-            listContainer.innerHTML = '<p>Nenhum evento agendado em breve.</p>';
+            listContainer.innerHTML = '<p>Nenhum evento do Hodos agendado em breve.</p>';
             return;
         }
 
@@ -227,27 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>`;
         }).join('');
     }
-    populateNextHodosEvents();
+    populateNextHodosEvents(); // Popula o widget de eventos.
 
-    // 6. Lógica para alimentar o CALENDÁRIO COMPLETO (Modal)
-    function generateCalendarEvents() {
-        const calendarEvents = {};
-        eventsData.forEach(event => {
-            if (event.recurring) return;
-            const eventDate = parseDate(event.date);
-            if (eventDate) {
-                const dateStr = eventDate.toISOString().slice(0, 10);
-                if (!calendarEvents[dateStr]) calendarEvents[dateStr] = [];
-                calendarEvents[dateStr].push({ 
-                    type: event.category.toLowerCase().replace('ã', 'a'),
-                    title: event.title, 
-                    location: event.location,
-                    time: 'Verificar'
-                });
-            }
-        });
-        return calendarEvents;
-    }
-    window.CALENDAR_EVENTS = generateCalendarEvents();
-
-});
+}); // Fim do listener 'ibct-api-ready'

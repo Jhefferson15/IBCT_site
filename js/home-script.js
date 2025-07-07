@@ -1,3 +1,5 @@
+// --- START OF FILE js/home-script.js ---
+
 document.addEventListener('DOMContentLoaded', () => {
     /* 
     AVISO: A lógica da animação da logo foi intencionalmente removida deste arquivo.
@@ -5,47 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
     o que torna este script mais leve, rápido e focado apenas na interatividade da página.
     */
 
-    // --- 1. MANIPULAÇÃO DE ELEMENTOS DO DOM (DECLARADOS NO INÍCIO) ---
+    // --- 1. MANIPULAÇÃO DE ELEMENTOS DO DOM ---
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     const infoModal = document.getElementById('info-modal');
-    // MUDANÇA: Remoção da variável do modal do calendário
-    // const calendarModal = document.getElementById('calendar-modal');
     const scrollToTopBtn = document.querySelector('.scroll-to-top');
     const fadeElements = document.querySelectorAll('.fade-in');
 
-    // --- 2. BASE DE DADOS DO CALENDÁRIO ---
-    const specificEvents = {
-        "2025-04-13": [{ type: 'ebd', time: '09:00', title: 'EBD' }], "2025-04-27": [{ type: 'ebd', time: '09:00', title: 'EBD' }], "2025-05-18": [{ type: 'ebd', time: '09:00', title: 'EBD' }], "2025-05-25": [{ type: 'ebd', time: '09:00', title: 'EBD' }], "2025-06-01": [{ type: 'ebd', time: '09:00', title: 'EBD' }], "2025-06-08": [{ type: 'ebd', time: '09:00', title: 'EBD' }], "2025-06-15": [{ type: 'ebd', time: '09:00', title: 'EBD' }], "2025-06-22": [{ type: 'ebd', time: '09:00', title: 'EBD' }], "2025-06-29": [{ type: 'ebd', time: '09:00', title: 'EBD' }], "2025-07-06": [{ type: 'ebd', time: '09:00', title: 'EBD' }],
-    };
-    function generateRecurringEvents(year) {
-        const recurringEvents = {};
-        const addEvent = (date, event) => {
-            const dateStr = date.toISOString().slice(0, 10);
-            if (!recurringEvents[dateStr]) recurringEvents[dateStr] = [];
-            recurringEvents[dateStr].push(event);
-        };
-        for (let m = 0; m < 12; m++) {
-            const daysInMonth = new Date(year, m + 1, 0).getDate();
-            for (let d = 1; d <= daysInMonth; d++) {
-                const currentDate = new Date(year, m, d);
-                const dayOfWeek = currentDate.getDay();
-                if (dayOfWeek === 0) { addEvent(currentDate, { type: 'culto', time: '10:30', title: 'Culto Matutino' }); addEvent(currentDate, { type: 'culto', time: '18:00', title: 'Culto Noturno' }); }
-                if (dayOfWeek === 3) { addEvent(currentDate, { type: 'oracao', time: '20:00', title: 'Culto de Oração' }); }
-            }
-        }
-        return recurringEvents;
-    }
-    const allEvents = { ...generateRecurringEvents(2025) };
-    Object.keys(specificEvents).forEach(date => {
-        if (!allEvents[date]) allEvents[date] = [];
-        allEvents[date].push(...specificEvents[date]);
-    });
+    // MUDANÇA: Base de dados de eventos foi REMOVIDA daqui.
+    // O script `calendario.js` agora centraliza todos os dados.
 
-    // MUDANÇA: Expondo os dados de eventos para o componente de calendário global.
-    window.CALENDAR_EVENTS = allEvents;
-
-    // --- 3. LÓGICA DO MENU HAMBÚRGUER ---
+    // --- 2. LÓGICA DO MENU HAMBÚRGUER ---
     if (hamburger && navLinks) {
         hamburger.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -55,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 4. LÓGICA DOS MODAIS ---
+    // --- 3. LÓGICA DOS MODAIS (Ministérios, etc) ---
     function openAnyModal(modal) {
         if (modal) {
             modal.classList.add('active');
@@ -65,7 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeAnyModal(modal) {
         if (modal) {
             modal.classList.remove('active');
-            if (!navLinks.classList.contains('active')) {
+            // Verifica se o modal do calendário ou do menu ainda estão ativos
+            if (!document.querySelector('.modal-overlay.active') && !navLinks.classList.contains('active')) {
                 document.body.classList.remove('modal-open');
             }
         }
@@ -109,19 +82,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 5. LÓGICA DO WIDGET DE PRÓXIMOS EVENTOS ---
+    // --- 4. LÓGICA DO WIDGET DE PRÓXIMOS EVENTOS ---
     function populateNextEvents() {
         const listContainer = document.getElementById('next-events-list');
-        if (!listContainer) return;
+        if (!listContainer || !window.IBCT_EVENTS_API) return;
+
+        // MUDANÇA: Busca eventos da API central, com filtro 'igreja' e para 'widget'.
+        const allChurchEvents = window.IBCT_EVENTS_API.getEvents({ filter: 'igreja', displayIn: 'widget' });
 
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        const futureEvents = Object.entries(allEvents)
-            .filter(([dateStr]) => new Date(dateStr + 'T00:00:00') >= today)
-            .flatMap(([dateStr, events]) => events.map(event => ({ ...event, date: new Date(dateStr + 'T00:00:00') })))
-            .sort((a, b) => a.date - b.date);
-
+        const futureEvents = allChurchEvents
+            .map(event => ({ ...event, dateObj: new Date(event.date + 'T00:00:00') }))
+            .filter(event => event.dateObj >= today)
+            .sort((a, b) => a.dateObj - b.dateObj);
+            
         const next4Events = futureEvents.slice(0, 4);
 
         if(next4Events.length === 0) {
@@ -130,8 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         listContainer.innerHTML = next4Events.map(event => {
-            const day = String(event.date.getDate()).padStart(2, '0');
-            const month = event.date.toLocaleString('pt-BR', { month: 'short' }).replace('.', '');
+            const day = String(event.dateObj.getDate()).padStart(2, '0');
+            const month = event.dateObj.toLocaleString('pt-BR', { month: 'short' }).replace('.', '');
             return `
                 <div class="event-item-widget">
                     <div class="date">
@@ -145,13 +121,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>`;
         }).join('');
     }
-    populateNextEvents();
-
-    // --- 6. MUDANÇA: LÓGICA DO CALENDÁRIO COMPLETO (MODAL) REMOVIDA ---
-    // Toda a lógica que estava aqui (renderCalendar, showEventsForDate, listeners dos botões, etc.)
-    // foi movida para o componente 'componentes/calendario/calendario.js'.
-
-    // --- 7. BOTÃO VOLTAR AO TOPO & ANIMAÇÃO DE SCROLL ---
+    // MUDANÇA: Espera a API carregar antes de popular o widget
+    if (window.IBCT_EVENTS_API) {
+        populateNextEvents();
+    } else {
+        window.addEventListener('load', populateNextEvents); // Fallback
+    }
+    
+    // --- 5. BOTÃO VOLTAR AO TOPO & ANIMAÇÃO DE SCROLL ---
     if (scrollToTopBtn) {
         window.addEventListener('scroll', () => {
             scrollToTopBtn.classList.toggle('visible', window.scrollY > 300);
