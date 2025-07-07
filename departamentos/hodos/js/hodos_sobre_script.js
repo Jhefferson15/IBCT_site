@@ -71,23 +71,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LÓGICA ESPECÍFICA DA PÁGINA SOBRE ---
 
-    // 1. Lógica dos Pilares (Modal)
+    // 1. Lógica dos Pilares (Modal) - CONTEÚDO ATUALIZADO
     const pillarDetails = {
         palavra: {
             title: "Pilar: Palavra",
-            description: "A Palavra de Deus é a nossa bússola. Estudamos a Bíblia semanalmente em nossa EBD e nos aprofundamos nos Pequenos Grupos de Multiplicação (PGMs), buscando sempre entender e viver a verdade do Evangelho. É através dela que somos moldados e capacitados para toda boa obra."
+            description: "A Palavra de Deus é a nossa bússola. Aprofundamos nosso conhecimento bíblico em estudos como o da carta aos Filipenses na EBD, com desafios como a PRO.FI, e o aplicamos em nossos PGMs. Cremos que a Bíblia é viva e nos transforma para viver a verdade."
         },
         comunhao: {
             title: "Pilar: Comunhão",
-            description: "Acreditamos que somos família em Cristo. Nossos PGMs, Hodos Day, Hodos Meet e encontros informais são oportunidades para fortalecer laços, compartilhar a vida, apoiar uns aos outros e crescer juntos em amor e fé. Juntos, somos mais fortes!"
+            description: "Somos uma família em Cristo. Fortalecemos nossos laços no Hodos Day com churrasco e diversão, nos PGMs semanais e nos encontros informais. Acreditamos que a caminhada cristã é vivida em comunidade, com apoio, oração e amizade verdadeira."
         },
         adoracao: {
             title: "Pilar: Adoração",
-            description: "Adorar a Deus é o centro do nosso ser. No Hodos Meet, nos reunimos para louvar, celebrar e ouvir a Palavra de forma inspiradora. Entendemos que a adoração não é apenas música, mas um estilo de vida que reflete nosso amor e reverência ao Criador em tudo o que fazemos."
+            description: "Nossa adoração vai além da música. Nos Hodos Meet, nos unimos em louvor e celebração vibrante. Mas buscamos honrar a Deus em tudo: em nosso trabalho, estudos e relacionamentos, fazendo de toda a nossa vida um ato de adoração ao Criador."
         },
         servico: {
             title: "Pilar: Serviço",
-            description: "Colocamos nossa fé em prática através do serviço. Seja apoiando projetos missionários como a CRU, ou participando de ações sociais na comunidade, buscamos ser as mãos e os pés de Jesus. Servir ao próximo é um privilégio e uma expressão tangível do amor de Deus."
+            description: "O amor de Deus nos move a servir. Colocamos nossa fé em prática apoiando projetos missionários, como a recepção aos jovens da CRU, e servindo nossa comunidade local. Entendemos que somos as mãos e os pés de Jesus no mundo."
         }
     };
 
