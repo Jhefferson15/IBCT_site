@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     <link rel="stylesheet" href="css/hodos_home.css">
+    <link rel="stylesheet" href="tools/instagram.css"> <!-- Adicionado -->
     <link rel="stylesheet" href="../../componentes/calendario/calendario.css">
 </head>
 <body>
@@ -120,7 +121,6 @@
             <div class="insta-modal-flex-container">
                 <div class="insta-modal__media-wrapper">
                     <img id="insta-modal-image" src="" alt="Post do Instagram Hodos" style="display: none;">
-                    <!-- Adicionado 'muted' para permitir autoplay -->
                     <video id="insta-modal-video" playsinline controls muted style="display: none;"></video>
                     <button id="insta-modal-prev" class="insta-modal__nav-btn prev" style="display: none;"><i class="fas fa-chevron-left"></i></button>
                     <button id="insta-modal-next" class="insta-modal__nav-btn next" style="display: none;"><i class="fas fa-chevron-right"></i></button>
@@ -128,7 +128,7 @@
                 </div>
                 <div class="insta-modal__content-wrapper">
                     <div class="insta-modal__header">
-                        <img src="img/logo.png" alt="Logo Hodos" class="insta-modal__pfp">
+                        <img src="img/instagram/hodos_logo.png" alt="Logo Hodos" class="insta-modal__pfp">
                         <div class="insta-modal__user-info">
                             <span id="insta-modal-username">hodosmj</span>
                         </div>
@@ -162,6 +162,7 @@
     
     <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
     <script src="js/hodos_script.js" defer></script>
+    <script src="tools/instagram.js" defer></script> <!-- Adicionado -->
     <script src="../../componentes/calendario/calendario.js" data-filter="hodos" defer></script>
 
 </body>
