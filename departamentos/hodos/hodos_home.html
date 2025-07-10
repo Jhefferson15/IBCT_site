@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IBCT - Departamento HODOS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="css/hodos_style.css">
+    <link rel="stylesheet" href="css/hodos_home.css">
     <link rel="stylesheet" href="../../componentes/calendario/calendario.css">
 </head>
 <body>
@@ -32,7 +32,7 @@
     <main>
         <section class="hero fade-in">
              <iframe 
-                src="./tools/logo_igreja.html" 
+                src="./tools/logo_eusouhodos.html" 
                 class="hero-background-logo" 
                 frameborder="0" 
                 scrolling="no" 
@@ -46,7 +46,6 @@
             </div>
         </section>
 
-        <!-- MUDANÇA: ÚNICA SEÇÃO DO INSTAGRAM, COM MAIS FOTOS -->
         <section id="instagram-feed" class="content-section fade-in">
             <div class="container">
                 <h2>Siga-nos no Instagram <a href="https://www.instagram.com/hodosmj/" target="_blank" rel="noopener noreferrer">@hodosmj</a></h2>
@@ -54,16 +53,7 @@
                 <div class="instagram-wrapper">
                     <button id="prev-insta-btn" class="scroll-button"><i class="fas fa-chevron-left"></i></button>
                     <div class="instagram-scroller">
-                        <!-- Fileira 1 -->
-                        <a href="https://www.instagram.com/p/C77t8GNUvqS/" target="_blank" rel="noopener noreferrer" class="insta-card"><img src="img/instagram/hodos_in_love.webp" alt="Post do Hodos In Love"></a>
-                        <a href="https://www.instagram.com/p/C7f5dURUe1O/" target="_blank" rel="noopener noreferrer" class="insta-card"><img src="img/instagram/hodos_pace.webp" alt="Post do Hodos Pace"></a>
-                        <a href="https://www.instagram.com/p/C091b-xup_7/" target="_blank" rel="noopener noreferrer" class="insta-card"><img src="img/instagram/jantar_natalino.webp" alt="Post do Jantar Natalino"></a>
-                        <a href="https://www.instagram.com/p/Cz02Z2WOv6S/" target="_blank" rel="noopener noreferrer" class="insta-card"><img src="img/instagram/hodos_day.webp" alt="Post do Hodos Day"></a>
-                        <!-- Fileira 2 -->
-                         <a href="https://www.instagram.com/p/CxykP2FOCG1/" target="_blank" rel="noopener noreferrer" class="insta-card"><img src="img/instagram/foto_01.webp" alt="Foto de um encontro do Hodos"></a>
-                         <a href="https://www.instagram.com/p/Cyk4s2RO_8i/" target="_blank" rel="noopener noreferrer" class="insta-card"><img src="img/instagram/grupo_guibli.webp" alt="Foto do grupo Guibli"></a>
-                         <a href="https://www.instagram.com/p/Cw-B_I5uLFG/" target="_blank" rel="noopener noreferrer" class="insta-card"><img src="img/instagram/foto_02.webp" alt="Foto de um encontro do Hodos"></a>
-                         <a href="https://www.instagram.com/p/CweaR26OhYj/" target="_blank" rel="noopener noreferrer" class="insta-card"><img src="img/instagram/foto_03.webp" alt="Foto de um encontro do Hodos"></a>
+                        <p class="insta-loading-message">Carregando as novidades do Instagram...</p>
                     </div>
                     <button id="next-insta-btn" class="scroll-button"><i class="fas fa-chevron-right"></i></button>
                 </div>
@@ -122,12 +112,29 @@
     </footer>
 
     <!-- MODAIS -->
-    <div class="modal-overlay" id="lesson-modal">
-        <div class="modal-content">
+    <div class="modal-overlay" id="instagram-modal">
+        <div class="modal-content-insta-custom">
             <button class="modal-close">×</button>
-            <h2 id="modal-title">Título do Evento</h2>
-            <p id="modal-location"><strong>Local:</strong> <span></span></p>
-            <p id="modal-description">Descrição detalhada do evento...</p>
+            <div class="insta-modal__header">
+                <img src="img/logo.png" alt="Logo Hodos" class="insta-modal__pfp">
+                <span id="insta-modal-username">hodosmj</span>
+            </div>
+            <div class="insta-modal__image-wrapper">
+                <img id="insta-modal-image" src="" alt="Post do Instagram">
+            </div>
+            <div class="insta-modal__content">
+                <div class="insta-modal__actions">
+                    <span id="insta-modal-likes"><i class="fas fa-heart"></i> 0</span>
+                    <span id="insta-modal-comments"><i class="fas fa-comment"></i> 0</span>
+                </div>
+                <div id="insta-modal-caption" class="insta-modal__caption">
+                    <p id="insta-modal-caption-text"></p>
+                </div>
+                <div id="insta-modal-date" class="insta-modal__date"></div>
+            </div>
+            <a id="insta-modal-fab-link" href="#" target="_blank" rel="noopener noreferrer" class="insta-modal__fab" title="Ver no Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
         </div>
     </div>
     
@@ -139,9 +146,8 @@
     </div>
         
     <a class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
-        <!-- ... outros scripts -->
-        <script src="js/hodos_script.js" defer></script>
-        <!-- MUDANÇA: Adicionado o script do componente com o filtro 'hodos' -->
-        <script src="../../componentes/calendario/calendario.js" data-filter="hodos" defer></script>
+        
+    <script src="js/hodos_script.js" defer></script>
+    <script src="../../componentes/calendario/calendario.js" data-filter="hodos" defer></script>
     </body>
     </html>

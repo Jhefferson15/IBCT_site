@@ -1,12 +1,6 @@
-// --- START OF FILE departamentos/hodos/js/hodos_script.js ---
-
-// MUDANÇA: Toda a lógica agora está dentro de um listener que espera a API do calendário ficar pronta.
-// Isso garante que `window.IBCT_EVENTS_API` exista antes de tentarmos usá-la.
 document.addEventListener('ibct-api-ready', () => {
 
     // --- LÓGICA COMPARTILHADA (Menu, Modais, Scroll, Fade) ---
-    // Esta parte pode ser reutilizada em outras páginas do site.
-
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     if (hamburger && navLinks) {
@@ -34,7 +28,7 @@ document.addEventListener('ibct-api-ready', () => {
         if (modal) {
             modal.classList.remove('active');
             const iframe = modal.querySelector('iframe');
-            if (iframe) iframe.src = ""; // Limpa o iframe para parar vídeos/animações
+            if (iframe) iframe.src = ""; 
             if (!document.querySelector('.modal-overlay.active')) {
                 document.body.classList.remove('modal-open');
             }
@@ -72,15 +66,11 @@ document.addEventListener('ibct-api-ready', () => {
 
     // --- LÓGICA ESPECÍFICA DA PÁGINA HODOS ---
     
-    // O array de dados de eventos foi removido daqui e centralizado no `calendario.js`.
-
-    // Função auxiliar para converter datas do formato 'AAAA-MM-DD' para objetos Date.
     function parseDate(dateString) {
         if (!dateString || typeof dateString !== 'string' || !dateString.includes('-')) return null;
-        return new Date(dateString + "T00:00:00"); // Adiciona o T00:00 para evitar problemas de fuso horário
+        return new Date(dateString + "T00:00:00");
     }
     
-    // Controla se o carrossel mostra eventos futuros ou passados.
     let showingFutureEvents = true;
 
     function renderEventsCarousel(filter) {
@@ -89,14 +79,13 @@ document.addEventListener('ibct-api-ready', () => {
 
         lessonsScroller.innerHTML = '';
         
-        // Pega os eventos da API central, filtrando para o departamento 'hodos' e que devem aparecer no 'carousel'.
         const allHodosEvents = window.IBCT_EVENTS_API.getEvents({ filter: 'hodos', displayIn: 'carousel' });
         
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         
         const filteredEvents = allHodosEvents.filter(event => {
-            if (event.recurring) return filter === 'future'; // Eventos recorrentes sempre aparecem em "futuros".
+            if (event.recurring) return filter === 'future';
             const eventDate = parseDate(event.date);
             if (!eventDate) return false;
             return filter === 'future' ? eventDate >= today : eventDate < today;
@@ -112,7 +101,6 @@ document.addEventListener('ibct-api-ready', () => {
             card.className = 'event-card';
             if (event.cardClass) card.classList.add(event.cardClass);
             
-            // Transfere todas as propriedades do evento para data-attributes no elemento do card.
             Object.keys(event).forEach(key => {
                  if(event[key] !== undefined && typeof event[key] !== 'object') {
                     card.dataset[key] = event[key];
@@ -130,11 +118,7 @@ document.addEventListener('ibct-api-ready', () => {
     function addModalListeners() {
         document.querySelectorAll('.event-card').forEach(card => {
             if (card.dataset.externalPage) {
-                // Se tiver uma página externa, o clique abre o modal com iframe.
                 card.addEventListener('click', () => openEventModal(card.dataset));
-            } else {
-                 // Senão, abre o modal de informações simples.
-                 // (Implementação do modal simples não está aqui, mas o gancho está pronto).
             }
         });
     }
@@ -148,12 +132,103 @@ document.addEventListener('ibct-api-ready', () => {
                 openAnyModal(externalPageModal);
             }
         } 
-        // Você pode adicionar um `else` aqui para lidar com modais simples se precisar.
     }
 
-    // --- Inicialização e Listeners dos Componentes da Página ---
+    // --- LÓGICA DO INSTAGRAM PERSONALIZADO ---
 
-    // 1. Carrossel de Eventos Principal
+    function openCustomInstaModal(post) {
+        const modal = document.getElementById('instagram-modal');
+        if (!modal) return;
+
+        const imageEl = document.getElementById('insta-modal-image');
+        const likesEl = document.getElementById('insta-modal-likes');
+        const commentsEl = document.getElementById('insta-modal-comments');
+        const captionTextEl = document.getElementById('insta-modal-caption-text');
+        const dateEl = document.getElementById('insta-modal-date');
+        const fabLinkEl = document.getElementById('insta-modal-fab-link');
+
+        const imgSrc = imageEl.src; // Pega o src da imagem do card, que já foi calculado
+
+        // Preenche os dados no modal
+        document.getElementById('insta-modal-username').textContent = post['User Name'] || 'hodosmj';
+        document.getElementById('insta-modal-image').src = imgSrc;
+        document.getElementById('insta-modal-image').alt = post['Caption'] ? post['Caption'].substring(0, 100) + '...' : 'Post do Instagram';
+        likesEl.innerHTML = `<i class="fas fa-heart"></i> ${post.Likes.toLocaleString('pt-BR')}`;
+        commentsEl.innerHTML = `<i class="fas fa-comment"></i> ${post.Comments.toLocaleString('pt-BR')}`;
+        captionTextEl.innerHTML = post.Caption ? post.Caption.replace(/\n/g, '<br>') : 'Sem legenda.';
+        dateEl.textContent = new Date(post['Date(GMT)']).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+        fabLinkEl.href = post['Post URL'];
+        
+        openAnyModal(modal);
+    }
+
+    function populateInstagramFeed() {
+        const scroller = document.querySelector('.instagram-scroller');
+        if (!scroller) return;
+
+        const jsonPath = './tools/posts_instagram.json';
+
+        fetch(jsonPath)
+            .then(response => {
+                if (!response.ok) throw new Error(`Erro: ${response.statusText}`);
+                return response.json();
+            })
+            .then(posts => {
+                scroller.innerHTML = '';
+                if (!posts || posts.length === 0) {
+                    scroller.innerHTML = `<p class="insta-loading-message">Nenhum post encontrado.</p>`;
+                    return;
+                }
+
+                posts.forEach(post => {
+                    const card = document.createElement('a');
+                    card.href = "#";
+                    card.className = 'insta-card';
+                    
+                    const img = document.createElement('img');
+                    
+                    const mediaId = post['Media ID'];
+                    const userId = post['User ID'];
+                    const isVideo = post['Is Video'] === 'YES';
+                    const isCarousel = post['Is Carousel'] === 'YES';
+                    let imgSrc = '';
+
+                    if (isVideo) {
+                        imgSrc = post['Thumbnail URL'];
+                    } else if (mediaId && userId) {
+                        const baseFilename = `${mediaId}_${userId}`;
+                        const finalFilename = isCarousel ? `${baseFilename}_1.jpg` : `${baseFilename}.jpg`;
+                        imgSrc = `img/instagram/posts/${finalFilename}`;
+                    } else {
+                        imgSrc = post['Thumbnail URL'];
+                    }
+
+                    img.src = imgSrc;
+                    img.onerror = function() { this.src = post['Thumbnail URL']; this.onerror = null; };
+                    img.alt = post['Caption'] ? post['Caption'].substring(0, 100) + '...' : 'Post do Instagram';
+                    img.loading = 'lazy';
+                    
+                    card.appendChild(img);
+
+                    card.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        // Passa o post e o SRC da imagem já calculado para o modal
+                        openCustomInstaModal(post, img.src);
+                    });
+
+                    if (isVideo) card.insertAdjacentHTML('beforeend', '<i class="fas fa-play insta-card-icon"></i>');
+                    else if (isCarousel) card.insertAdjacentHTML('beforeend', '<i class="fas fa-clone insta-card-icon"></i>');
+
+                    scroller.appendChild(card);
+                });
+            })
+            .catch(error => {
+                console.error("Falha ao carregar posts do Instagram:", error);
+                scroller.innerHTML = `<p class="insta-loading-message">Não foi possível carregar os posts.</p>`;
+            });
+    }
+
+    // --- Inicialização ---
     const lessonsWrapper = document.querySelector('.lessons-wrapper');
     if (lessonsWrapper) {
         const toggleBtn = document.getElementById('toggle-events-btn');
@@ -172,26 +247,25 @@ document.addEventListener('ibct-api-ready', () => {
         prevBtn.addEventListener('click', () => scroller.scrollBy({ left: -330, behavior: 'smooth' }));
         nextBtn.addEventListener('click', () => scroller.scrollBy({ left: 330, behavior: 'smooth' }));
         
-        renderEventsCarousel('future'); // Renderiza o carrossel pela primeira vez.
+        renderEventsCarousel('future'); 
     }
 
-    // 2. Carrossel do Instagram
     const instaScroller = document.querySelector('.instagram-scroller');
     if (instaScroller) {
         const prevInstaBtn = document.getElementById('prev-insta-btn');
         const nextInstaBtn = document.getElementById('next-insta-btn');
-        const scrollAmount = 280 + 20; // Largura do card + gap
+        const scrollAmount = 280 + 20;
         
         prevInstaBtn.addEventListener('click', () => instaScroller.scrollBy({ left: -scrollAmount, behavior: 'smooth' }));
         nextInstaBtn.addEventListener('click', () => instaScroller.scrollBy({ left: scrollAmount, behavior: 'smooth' }));
+        
+        populateInstagramFeed();
     }
     
-    // 3. Widget de Próximos Eventos
     function populateNextHodosEvents() {
         const listContainer = document.getElementById('next-events-list');
         if (!listContainer) return;
 
-        // Pede eventos do 'hodos' que devem ser exibidos no 'widget'.
         const hodosWidgetEvents = window.IBCT_EVENTS_API.getEvents({ filter: 'hodos', displayIn: 'widget' });
 
         const today = new Date();
@@ -225,6 +299,6 @@ document.addEventListener('ibct-api-ready', () => {
                 </div>`;
         }).join('');
     }
-    populateNextHodosEvents(); // Popula o widget de eventos.
+    populateNextHodosEvents();
 
 }); // Fim do listener 'ibct-api-ready'
