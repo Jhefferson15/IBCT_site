@@ -29,6 +29,13 @@ document.addEventListener('ibct-api-ready', () => {
             modal.classList.remove('active');
             const iframe = modal.querySelector('iframe');
             if (iframe) iframe.src = ""; 
+            
+            const video = modal.querySelector('video');
+            if (video) {
+                video.pause();
+                video.src = '';
+            }
+
             if (!document.querySelector('.modal-overlay.active')) {
                 document.body.classList.remove('modal-open');
             }
@@ -134,31 +141,54 @@ document.addEventListener('ibct-api-ready', () => {
         } 
     }
 
-    // --- LÓGICA DO INSTAGRAM PERSONALIZADO ---
+    // --- LÓGICA DO INSTAGRAM PROFISSIONAL ---
 
     function openCustomInstaModal(post) {
         const modal = document.getElementById('instagram-modal');
         if (!modal) return;
 
         const imageEl = document.getElementById('insta-modal-image');
+        const videoEl = document.getElementById('insta-modal-video');
+        const captionEl = document.getElementById('insta-modal-caption');
         const likesEl = document.getElementById('insta-modal-likes');
         const commentsEl = document.getElementById('insta-modal-comments');
-        const captionTextEl = document.getElementById('insta-modal-caption-text');
         const dateEl = document.getElementById('insta-modal-date');
-        const fabLinkEl = document.getElementById('insta-modal-fab-link');
+        const linkEl = document.getElementById('insta-modal-link');
 
-        const imgSrc = imageEl.src; // Pega o src da imagem do card, que já foi calculado
+        imageEl.style.display = 'none';
+        videoEl.style.display = 'none';
+        
+        const mediaId = post['Media ID'];
+        const userId = post['User ID'];
+        const isVideo = post['Is Video'] === 'YES';
+        const isCarousel = post['Is Carousel'] === 'YES';
+        let localFilePath = '';
 
-        // Preenche os dados no modal
-        document.getElementById('insta-modal-username').textContent = post['User Name'] || 'hodosmj';
-        document.getElementById('insta-modal-image').src = imgSrc;
-        document.getElementById('insta-modal-image').alt = post['Caption'] ? post['Caption'].substring(0, 100) + '...' : 'Post do Instagram';
+        if (mediaId && userId) {
+            const baseFilename = `${mediaId}_${userId}`;
+            if (isVideo) {
+                localFilePath = `img/instagram/posts/${baseFilename}.mp4`;
+            } else if (isCarousel) {
+                localFilePath = `img/instagram/posts/${baseFilename}_1.jpg`;
+            } else {
+                localFilePath = `img/instagram/posts/${baseFilename}.jpg`;
+            }
+        }
+
+        if (isVideo && localFilePath) {
+            videoEl.src = localFilePath;
+            videoEl.style.display = 'block';
+        } else if (!isVideo && localFilePath) {
+            imageEl.src = localFilePath;
+            imageEl.style.display = 'block';
+        }
+
+        captionEl.innerHTML = post.Caption ? post.Caption.replace(/\n/g, '<br>') : 'Sem legenda.';
         likesEl.innerHTML = `<i class="fas fa-heart"></i> ${post.Likes.toLocaleString('pt-BR')}`;
         commentsEl.innerHTML = `<i class="fas fa-comment"></i> ${post.Comments.toLocaleString('pt-BR')}`;
-        captionTextEl.innerHTML = post.Caption ? post.Caption.replace(/\n/g, '<br>') : 'Sem legenda.';
         dateEl.textContent = new Date(post['Date(GMT)']).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
-        fabLinkEl.href = post['Post URL'];
-        
+        linkEl.href = post['Post URL'];
+
         openAnyModal(modal);
     }
 
@@ -193,6 +223,7 @@ document.addEventListener('ibct-api-ready', () => {
                     const isCarousel = post['Is Carousel'] === 'YES';
                     let imgSrc = '';
 
+                    // Para a capa (card), priorizamos arquivos locais e usamos URL externa como último recurso.
                     if (isVideo) {
                         imgSrc = post['Thumbnail URL'];
                     } else if (mediaId && userId) {
@@ -205,15 +236,14 @@ document.addEventListener('ibct-api-ready', () => {
 
                     img.src = imgSrc;
                     img.onerror = function() { this.src = post['Thumbnail URL']; this.onerror = null; };
-                    img.alt = post['Caption'] ? post['Caption'].substring(0, 100) + '...' : 'Post do Instagram';
+                    img.alt = post['Caption'] ? post['Caption'].substring(0, 100) + '...' : 'Post do Instagram Hodos';
                     img.loading = 'lazy';
                     
                     card.appendChild(img);
-
+                    
                     card.addEventListener('click', (e) => {
                         e.preventDefault();
-                        // Passa o post e o SRC da imagem já calculado para o modal
-                        openCustomInstaModal(post, img.src);
+                        openCustomInstaModal(post);
                     });
 
                     if (isVideo) card.insertAdjacentHTML('beforeend', '<i class="fas fa-play insta-card-icon"></i>');
@@ -228,7 +258,7 @@ document.addEventListener('ibct-api-ready', () => {
             });
     }
 
-    // --- Inicialização ---
+    // --- INICIALIZAÇÃO ---
     const lessonsWrapper = document.querySelector('.lessons-wrapper');
     if (lessonsWrapper) {
         const toggleBtn = document.getElementById('toggle-events-btn');

@@ -113,28 +113,35 @@
 
     <!-- MODAIS -->
     <div class="modal-overlay" id="instagram-modal">
-        <div class="modal-content-insta-custom">
+        <div class="modal-content-insta-professional">
             <button class="modal-close">×</button>
-            <div class="insta-modal__header">
-                <img src="img/logo.png" alt="Logo Hodos" class="insta-modal__pfp">
-                <span id="insta-modal-username">hodosmj</span>
-            </div>
-            <div class="insta-modal__image-wrapper">
-                <img id="insta-modal-image" src="" alt="Post do Instagram">
-            </div>
-            <div class="insta-modal__content">
-                <div class="insta-modal__actions">
-                    <span id="insta-modal-likes"><i class="fas fa-heart"></i> 0</span>
-                    <span id="insta-modal-comments"><i class="fas fa-comment"></i> 0</span>
+            <div class="insta-modal-flex-container">
+                <!-- Coluna da Mídia (Imagem ou Vídeo) -->
+                <div class="insta-modal__media-wrapper">
+                    <img id="insta-modal-image" src="" alt="Post do Instagram Hodos" style="display: none;">
+                    <video id="insta-modal-video" src="" controls style="display: none;"></video>
                 </div>
-                <div id="insta-modal-caption" class="insta-modal__caption">
-                    <p id="insta-modal-caption-text"></p>
+                <!-- Coluna do Conteúdo -->
+                <div class="insta-modal__content-wrapper">
+                    <div class="insta-modal__header">
+                        <img src="img/logo.png" alt="Logo Hodos" class="insta-modal__pfp">
+                        <span id="insta-modal-username">hodosmj</span>
+                    </div>
+                    <div class="insta-modal__content-body">
+                        <div id="insta-modal-caption" class="insta-modal__caption"></div>
+                        <div class="insta-modal__stats">
+                            <span id="insta-modal-likes"><i class="fas fa-heart"></i> 0</span>
+                            <span id="insta-modal-comments"><i class="fas fa-comment"></i> 0</span>
+                        </div>
+                        <div id="insta-modal-date" class="insta-modal__date"></div>
+                    </div>
+                    <div class="insta-modal__footer">
+                        <a id="insta-modal-link" href="#" target="_blank" rel="noopener noreferrer" class="insta-modal__button">
+                            Ver no Instagram <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
                 </div>
-                <div id="insta-modal-date" class="insta-modal__date"></div>
             </div>
-            <a id="insta-modal-fab-link" href="#" target="_blank" rel="noopener noreferrer" class="insta-modal__fab" title="Ver no Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
         </div>
     </div>
     
