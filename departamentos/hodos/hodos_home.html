@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IBCT - Departamento HODOS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     <link rel="stylesheet" href="css/hodos_home.css">
     <link rel="stylesheet" href="../../componentes/calendario/calendario.css">
 </head>
 <body>
 
+    <!-- ... (Conteúdo do Header e Main inalterado) ... -->
     <header class="header">
         <div class="container">
             <a href="../../index.html" class="logo">
@@ -110,30 +112,34 @@
              <p>Igreja Batista Central em Taguatinga<br>© 2024 IBCT. Todos os direitos reservados.</p>
         </div>
     </footer>
-
+    
     <!-- MODAIS -->
     <div class="modal-overlay" id="instagram-modal">
         <div class="modal-content-insta-professional">
-            <button class="modal-close">×</button>
+            <button class="modal-close"><i class="fas fa-times"></i></button>
             <div class="insta-modal-flex-container">
-                <!-- Coluna da Mídia (Imagem ou Vídeo) -->
                 <div class="insta-modal__media-wrapper">
                     <img id="insta-modal-image" src="" alt="Post do Instagram Hodos" style="display: none;">
-                    <video id="insta-modal-video" src="" controls style="display: none;"></video>
+                    <!-- Adicionado 'muted' para permitir autoplay -->
+                    <video id="insta-modal-video" playsinline controls muted style="display: none;"></video>
+                    <button id="insta-modal-prev" class="insta-modal__nav-btn prev" style="display: none;"><i class="fas fa-chevron-left"></i></button>
+                    <button id="insta-modal-next" class="insta-modal__nav-btn next" style="display: none;"><i class="fas fa-chevron-right"></i></button>
+                    <div class="insta-modal__dots" style="display: none;"></div>
                 </div>
-                <!-- Coluna do Conteúdo -->
                 <div class="insta-modal__content-wrapper">
                     <div class="insta-modal__header">
                         <img src="img/logo.png" alt="Logo Hodos" class="insta-modal__pfp">
-                        <span id="insta-modal-username">hodosmj</span>
+                        <div class="insta-modal__user-info">
+                            <span id="insta-modal-username">hodosmj</span>
+                        </div>
                     </div>
                     <div class="insta-modal__content-body">
-                        <div id="insta-modal-caption" class="insta-modal__caption"></div>
+                        <p id="insta-modal-caption" class="insta-modal__caption"></p>
                         <div class="insta-modal__stats">
-                            <span id="insta-modal-likes"><i class="fas fa-heart"></i> 0</span>
-                            <span id="insta-modal-comments"><i class="fas fa-comment"></i> 0</span>
+                            <span id="insta-modal-likes"></span>
+                            <span id="insta-modal-comments"></span>
                         </div>
-                        <div id="insta-modal-date" class="insta-modal__date"></div>
+                        <span id="insta-modal-date"></span>
                     </div>
                     <div class="insta-modal__footer">
                         <a id="insta-modal-link" href="#" target="_blank" rel="noopener noreferrer" class="insta-modal__button">
@@ -153,8 +159,10 @@
     </div>
         
     <a class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
-        
+    
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
     <script src="js/hodos_script.js" defer></script>
     <script src="../../componentes/calendario/calendario.js" data-filter="hodos" defer></script>
-    </body>
-    </html>
+
+</body>
+</html>

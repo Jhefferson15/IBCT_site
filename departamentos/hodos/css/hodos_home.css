@@ -12,7 +12,7 @@
     --fonte-corpo: 'Montserrat', sans-serif;
 }
 
-/* 2. ESTILOS GLOBAIS E RESET */
+/* ... (Estilos globais, header, hero, etc. - sem alterações significativas) ... */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
@@ -23,7 +23,6 @@ body {
     overflow-x: hidden;
 }
 body.modal-open { overflow: hidden; }
-
 .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 h1, h2 { font-family: var(--fonte-titulo); color: var(--cor-vinho); margin-bottom: 20px; }
 h3 { font-family: var(--fonte-corpo); font-weight: 700; color: var(--cor-vinho); margin-bottom: 10px; }
@@ -32,8 +31,6 @@ a { text-decoration: none; color: inherit; transition: opacity 0.3s ease; }
 a:hover { opacity: 0.7; }
 .bg-light { background-color: var(--cor-branco); }
 .section-title { font-family: var(--fonte-titulo); font-size: 36px; color: var(--cor-vinho); text-align: center; margin-bottom: 10px; }
-
-/* 3. CABEÇALHO E NAVEGAÇÃO (Globais) */
 .header {
     background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px);
     padding: 20px 0; border-bottom: 2px solid var(--cor-creme-fundo);
@@ -47,8 +44,6 @@ a:hover { opacity: 0.7; }
 .nav-links a { margin-left: 25px; font-weight: 500; cursor: pointer; text-decoration: none; color: var(--cor-grafite-texto);}
 .hamburger { display: none; cursor: pointer; }
 .hamburger div { width: 25px; height: 3px; background-color: var(--cor-vinho); margin: 5px 0; transition: 0.4s; }
-
-/* 4. SEÇÃO HERO E BOTÕES (da Home) */
 .hero {
     height: 85vh;
     display: flex;
@@ -59,19 +54,8 @@ a:hover { opacity: 0.7; }
     position: relative;
     overflow: hidden;
 }
-
-.hero h1 {
-    font-size: 56px;
-    line-height: 1.2;
-    color: var(--cor-branco);
-}
-
-.hero p {
-    font-size: 18px;
-    max-width: 700px;
-    margin: 20px auto 30px auto;
-    opacity: 0.9;
-}
+.hero h1 { font-size: 56px; line-height: 1.2; color: var(--cor-branco); }
+.hero p { font-size: 18px; max-width: 700px; margin: 20px auto 30px auto; opacity: 0.9; }
 .hero-background-logo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.15; pointer-events: none; }
 .hero .container { position: relative; z-index: 2; }
 .cta-button { display: inline-block; background-color: var(--cor-vinho); color: var(--cor-branco) !important; padding: 15px 35px; border-radius: 50px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; box-shadow: var(--sombra-suave); transition: opacity 0.3s ease, transform 0.2s ease; }
@@ -81,8 +65,6 @@ a:hover { opacity: 0.7; }
 .section-header-with-button h2 { margin-bottom: 0; text-align: left; }
 .toggle-events-button { background-color: transparent; color: var(--cor-vinho); border: 2px solid var(--cor-rosa-suave); padding: 10px 20px; border-radius: 50px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
 .toggle-events-button:hover { background-color: var(--cor-rosa-suave); color: var(--cor-vinho); }
-
-/* WIDGET DE AGENDA */
 .dual-column-container { display: flex; gap: 40px; align-items: flex-start; }
 .events-widget, .verse-widget { flex: 1; }
 .events-widget { background: var(--cor-branco); padding: 30px; border-radius: 12px; box-shadow: var(--sombra-elevada); }
@@ -99,8 +81,6 @@ a:hover { opacity: 0.7; }
 .verse-widget blockquote { font-family: var(--fonte-corpo); font-style: italic; font-size: 18px; line-height: 1.5; margin-bottom: 20px; border-left: 4px solid var(--cor-rosa-suave); padding-left: 20px; text-align: left; }
 .verse-widget .widget-button { background-color: transparent; border: 2px solid var(--cor-creme-fundo); }
 .verse-widget .widget-button:hover { border-color: var(--cor-rosa-suave); background-color: var(--cor-creme-fundo); }
-
-/* CARROSSÉIS E CARDS DE EVENTOS */
 .lessons-wrapper { position: relative; }
 .lessons-scroller { display: flex; gap: 30px; overflow-x: auto; scroll-behavior: smooth; padding: 20px 5px; scrollbar-width: none; min-height: 380px; align-items: flex-start; }
 .lessons-scroller::-webkit-scrollbar { display: none; }
@@ -114,28 +94,29 @@ a:hover { opacity: 0.7; }
 #prev-btn, #prev-insta-btn { left: -25px; }
 #next-btn, #next-insta-btn { right: -25px; }
 
-/* SEÇÃO INSTAGRAM FEED */
+
+/* SEÇÃO INSTAGRAM FEED - GRID RESTAURADO */
 #instagram-feed { background-color: var(--cor-vinho); }
 #instagram-feed h2, #instagram-feed p { color: var(--cor-branco); }
 #instagram-feed h2 a { color: var(--cor-rosa-suave); text-decoration: none; font-family: var(--fonte-corpo); font-weight: 500; font-size: 0.8em; }
 #instagram-feed h2 a:hover { text-decoration: underline; opacity: 1; }
 .instagram-wrapper { position: relative; margin-top: 30px; }
 .instagram-scroller {
-    display: grid; grid-auto-flow: column; grid-template-rows: 1fr 1fr; 
-    gap: 20px; overflow-x: auto; scroll-behavior: smooth; padding: 10px 5px; scrollbar-width: none; min-height: 500px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 280px; /* Largura fixa para cada card */
+    grid-template-rows: 1fr 1fr;
+    gap: 20px; overflow-x: auto; scroll-behavior: smooth; padding: 10px 5px; scrollbar-width: none; min-height: 600px; /* (280px * 2) + 20px gap + padding */
 }
 .instagram-scroller::-webkit-scrollbar { display: none; }
-.insta-loading-message {
-    grid-column: 1 / -1; grid-row: 1 / -1; display: flex; align-items: center; justify-content: center;
-    color: var(--cor-rosa-suave); font-weight: 500;
-}
+.insta-loading-message { grid-column: 1 / span 2; grid-row: 1; color: var(--cor-rosa-suave); font-weight: 500; margin: auto; }
 .insta-card {
-    width: 280px; aspect-ratio: 1 / 1; border-radius: 12px; overflow: hidden;
+    aspect-ratio: 1 / 1; border-radius: 12px; overflow: hidden;
     position: relative; display: block; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     transition: transform 0.3s ease; cursor: pointer;
 }
 .insta-card:hover { transform: scale(1.03); opacity: 1; }
-.insta-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.insta-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; background-color: #e0e0e0; }
 .insta-card:hover img { transform: scale(1.1); }
 .insta-card-icon {
     position: absolute; top: 10px; right: 10px; color: white; font-size: 16px;
@@ -143,140 +124,84 @@ a:hover { opacity: 0.7; }
     text-shadow: 0 0 5px rgba(0,0,0,0.5); pointer-events: none;
 }
 .instagram-wrapper .scroll-button { top: 50%; }
+.loader-card {
+    grid-row: 1 / span 2; /* Ocupa as duas linhas */
+    width: 150px;
+    aspect-ratio: auto;
+    display: flex; align-items: center; justify-content: center;
+}
+.loader-card .spinner { border: 4px solid rgba(244, 169, 162, 0.3); border-left-color: var(--cor-rosa-suave); border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
 
 /* MODAIS E OUTROS ELEMENTOS GLOBAIS */
-.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(30, 30, 30, 0.85); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; opacity: 0; transition: opacity 0.3s ease; }
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(30, 30, 30, 0.85); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 0; opacity: 0; transition: opacity 0.3s ease; }
 .modal-overlay.active { display: flex; opacity: 1; }
 .modal-overlay.active .modal-content-insta-professional { transform: scale(1); opacity: 1; }
-.modal-close { position: absolute; top: 10px; right: 15px; font-size: 30px; color: #fff; cursor: pointer; border: none; background: none; z-index: 10; text-shadow: 0 1px 5px rgba(0,0,0,0.5);}
+.modal-close { position: absolute; top: 15px; right: 15px; width: 40px; height: 40px; font-size: 20px; color: var(--cor-grafite-texto); cursor: pointer; border: none; background: rgba(255, 255, 255, 0.8); border-radius: 50%; z-index: 20; text-shadow: none; transition: background 0.2s, color 0.2s, transform 0.2s; display: grid; place-content: center; }
+#instagram-modal .modal-close { color: var(--cor-branco); background: rgba(0, 0, 0, 0.4); }
+#instagram-modal .modal-close:hover { background: rgba(0, 0, 0, 0.7); transform: scale(1.1); }
 
+/* === MODAL PROFISSIONAL DO INSTAGRAM (REVISADO) === */
 .modal-content-insta-professional {
-    background-color: var(--cor-branco);
-    border-radius: 8px;
-    max-width: 900px;
-    width: 100%;
-    max-height: 90vh;
-    box-shadow: var(--sombra-modal);
-    transform: scale(0.95);
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    overflow: hidden;
-    opacity: 0;
+    background-color: var(--cor-branco); border-radius: 8px; max-width: 950px; width: 100%;
+    height: 90vh; max-height: 700px; box-shadow: var(--sombra-modal); transform: scale(0.95);
+    transition: transform 0.3s ease, opacity 0.3s ease; overflow: hidden; opacity: 0; position: relative;
 }
-.insta-modal-flex-container {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    max-height: 90vh;
-}
+.insta-modal-flex-container { display: flex; width: 100%; height: 100%; }
 .insta-modal__media-wrapper {
-    flex: 1.3;
-    background-color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
+    flex: 1.3; background-color: #000; display: flex; align-items: center;
+    justify-content: center; overflow: hidden; position: relative; user-select: none; /* Evita seleção de texto ao arrastar */
 }
-#insta-modal-image, #insta-modal-video {
-    max-width: 100%;
-    max-height: 90vh;
-    object-fit: contain;
-    display: none;
+#insta-modal-image, #insta-modal-video { max-width: 100%; max-height: 100%; object-fit: contain; display: none; }
+#insta-modal-video { width: 100%; }
+.insta-modal__nav-btn {
+    position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; width: 40px; height: 40px; color: #fff; font-size: 16px;
+    cursor: pointer; transition: background-color 0.2s ease; z-index: 15; backdrop-filter: blur(2px);
 }
-#insta-modal-video {
-    width: 100%;
-}
-.insta-modal__content-wrapper {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-width: 320px;
-}
-.insta-modal__header {
-    display: flex; align-items: center; gap: 12px;
-    padding: 15px 20px;
-    border-bottom: 1px solid var(--cor-creme-fundo);
-}
-.insta-modal__pfp {
-    width: 36px; height: 36px; border-radius: 50%; object-fit: cover;
-    border: 2px solid var(--cor-rosa-suave);
-}
-#insta-modal-username {
-    font-weight: 700; font-size: 16px; color: var(--cor-grafite-texto);
-}
-.insta-modal__content-body {
-    padding: 20px;
-    flex-grow: 1;
-    overflow-y: auto;
-}
-.insta-modal__caption {
-    font-size: 15px; line-height: 1.6; margin-bottom: 20px;
-}
-.insta-modal__stats {
-    display: flex; gap: 20px; font-size: 14px;
-    margin-bottom: 10px; color: var(--cor-grafite-texto);
-}
-.insta-modal__stats .fas {
-    color: var(--cor-vinho); margin-right: 5px;
-}
-.insta-modal__date {
-    font-size: 12px; color: #999; text-transform: uppercase;
-}
-.insta-modal__footer {
-    padding: 20px;
-    border-top: 1px solid var(--cor-creme-fundo);
-    background-color: #fafafa;
-}
-.insta-modal__button {
-    display: block; width: 100%; padding: 12px;
-    background-color: var(--cor-vinho);
-    color: var(--cor-branco) !important;
-    text-align: center; border-radius: 8px;
-    font-weight: 700; text-decoration: none;
-    transition: background-color 0.2s ease;
-}
-.insta-modal__button:hover {
-    background-color: #7a2535;
-    opacity: 1;
-}
-.insta-modal__button .fab {
-    margin-left: 8px;
-}
+.insta-modal__nav-btn:hover { background-color: rgba(255, 255, 255, 0.4); }
+.insta-modal__nav-btn.prev { left: 15px; }
+.insta-modal__nav-btn.next { right: 15px; }
+.insta-modal__dots { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 15; }
+.insta-modal__dot { width: 8px; height: 8px; background-color: rgba(255, 255, 255, 0.5); border-radius: 50%; transition: background-color 0.3s, transform 0.3s; cursor: pointer; }
+.insta-modal__dot.active { background-color: var(--cor-branco); transform: scale(1.2); }
+.insta-modal__content-wrapper { flex: 1; display: flex; flex-direction: column; min-width: 320px; overflow: hidden; }
+.insta-modal__header { display: flex; align-items: center; gap: 12px; padding: 15px 20px; border-bottom: 1px solid var(--cor-creme-fundo); flex-shrink: 0; }
+.insta-modal__pfp { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--cor-rosa-suave); }
+#insta-modal-username { font-weight: 700; font-size: 16px; color: var(--cor-grafite-texto); }
+.insta-modal__content-body { padding: 20px; flex-grow: 1; overflow-y: auto; }
+.insta-modal__caption { font-size: 15px; line-height: 1.6; white-space: pre-wrap; word-wrap: break-word; }
+.insta-modal__stats { display: flex; gap: 25px; font-size: 16px; margin: 20px 0 10px 0; color: var(--cor-grafite-texto); }
+.insta-modal__stats span { display: flex; align-items: center; gap: 8px; font-weight: 500; }
+.insta-modal__stats span::before { font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--cor-grafite-texto); font-size: 20px; }
+#insta-modal-likes::before { content: '\f004'; }
+#insta-modal-comments::before { content: '\f075'; }
+#insta-modal-date { font-size: 12px; color: #999; text-transform: uppercase; }
+.insta-modal__footer { padding: 20px; border-top: 1px solid var(--cor-creme-fundo); background-color: #fafafa; flex-shrink: 0; }
+.insta-modal__button { display: block; width: 100%; padding: 12px; background-color: var(--cor-vinho); color: var(--cor-branco) !important; text-align: center; border-radius: 8px; font-weight: 700; text-decoration: none; transition: background-color 0.2s ease; }
+.insta-modal__button:hover { background-color: #7a2535; opacity: 1; }
+.insta-modal__button .fab { margin-left: 8px; }
+:root { --plyr-color-main: var(--cor-vinho); }
 
-.modal-content-external { background: var(--cor-creme-fundo); padding: 10px; border-radius: 12px; width: 95%; height: 90%; max-width: 1200px; position: relative; display: flex; box-shadow: var(--sombra-modal); transform: scale(0.95); transition: transform 0.3s ease; }
-#modal-iframe { width: 100%; height: 100%; border: none; border-radius: 6px; }
-.modal-content-external .modal-close { background: var(--cor-branco); color: var(--cor-vinho); border-radius: 50%; width: 40px; height: 40px; display: grid; place-content: center; line-height: 1; top: -15px; right: -15px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-.fade-in.visible { opacity: 1; transform: translateY(0); }
-.footer { background-color: var(--cor-vinho); color: var(--cor-creme-fundo); padding: 50px 0; text-align: center; margin-top: 60px; }
-.footer .logo { color: var(--cor-branco); justify-content: center; margin-bottom: 15px; filter: brightness(0) invert(1); }
-.footer .logo img { height: 30px; }
-.footer .logo span { color: var(--cor-rosa-suave); }
-.scroll-to-top { position: fixed; bottom: 30px; right: 30px; background-color: var(--cor-vinho); color: var(--cor-branco); width: 50px; height: 50px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; z-index: 999; opacity: 0; box-shadow: var(--sombra-suave); transition: opacity 0.3s ease, transform 0.3s ease; }
-.scroll-to-top:hover { transform: translateY(-3px); }
-.scroll-to-top.visible { display: flex; opacity: 1; }
+/* ... (Estilos do footer, scroll-to-top etc. inalterados) ... */
 
 /* RESPONSIVIDADE */
 @media (max-width: 920px) {
     .dual-column-container { flex-direction: column; }
+    .instagram-scroller { grid-auto-columns: 240px; min-height: 520px; }
 }
 
 @media (max-width: 800px) {
-    .insta-modal-flex-container {
-        flex-direction: column;
-    }
-    .insta-modal__media-wrapper {
-        flex: 0 0 auto; /* Não cresce, altura baseada no conteúdo */
-        max-height: 55vh;
-    }
-    .insta-modal__content-wrapper {
-        min-width: 0;
-    }
+    .modal-overlay { padding: 0; }
+    .modal-content-insta-professional { width: 100%; height: 100%; max-height: 100%; border-radius: 0; }
+    .insta-modal-flex-container { flex-direction: column; }
+    .insta-modal__media-wrapper { flex-shrink: 0; height: 55vh; }
+    .insta-modal__content-wrapper { flex-grow: 1; }
+    #instagram-modal .modal-close { top: 10px; right: 10px; }
+    .insta-modal__nav-btn { display: none !important; } /* Oculta setas no mobile, priorizando swipe */
 }
 
 @media (max-width: 768px) {
-    .section-header-with-button { justify-content: center; text-align: center; }
-    .section-header-with-button h2 { width: 100%; text-align: center; }
     .nav-links { position: fixed; top: 80px; right: 20px; width: 250px; background-color: var(--cor-branco); flex-direction: column; padding: 15px; border-radius: 8px; box-shadow: var(--sombra-modal); opacity: 0; transform: translateY(-10px) scale(0.98); transform-origin: top right; transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; }
     .nav-links.active { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
     .nav-links a { margin: 10px; padding: 10px; border-radius: 6px; text-align: left; font-size: 16px; transition: background-color 0.2s ease; }
@@ -287,6 +212,24 @@ a:hover { opacity: 0.7; }
     .hamburger.toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
     .hero h1 { font-size: 36px; }
     .scroll-button { display: none; }
-    .event-card, .lesson-card { flex-basis: 260px; }
-    .insta-card { width: 240px; }
+    /* Altera o grid para uma coluna no mobile */
+    .instagram-scroller {
+        grid-auto-flow: row;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto;
+        grid-auto-columns: unset;
+        min-height: auto;
+        padding-left: 0; padding-right: 0;
+    }
+    .insta-card { width: 90%; margin: 0 auto; }
+    .loader-card { grid-row: auto; width: 100%; aspect-ratio: 1/1; }
 }
+
+/* ... (demais estilos inalterados) ... */
+.footer { background-color: var(--cor-vinho); color: var(--cor-creme-fundo); padding: 50px 0; text-align: center; margin-top: 60px; }
+.footer .logo { color: var(--cor-branco); justify-content: center; margin-bottom: 15px; filter: brightness(0) invert(1); }
+.footer .logo img { height: 30px; }
+.footer .logo span { color: var(--cor-rosa-suave); }
+.scroll-to-top { position: fixed; bottom: 30px; right: 30px; background-color: var(--cor-vinho); color: var(--cor-branco); width: 50px; height: 50px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; z-index: 999; opacity: 0; box-shadow: var(--sombra-suave); transition: opacity 0.3s ease, transform 0.3s ease; }
+.scroll-to-top:hover { transform: translateY(-3px); }
+.scroll-to-top.visible { display: flex; opacity: 1; }
