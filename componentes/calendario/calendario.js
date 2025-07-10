@@ -20,10 +20,54 @@
         { department: 'hodos', date: '2025-06-07', time: '19:00', title: 'Hodos Meet', location: 'IBCT', type: 'louvor', description: 'Mais um encontro para adorarmos juntos.', display: ['carousel', 'widget', 'calendar'] },
         { department: 'hodos', date: '2025-06-14', time: '19:30', title: 'Hodos In Love', location: 'IBCT', type: 'especial', description: 'Noite especial com tema de Dia dos Namorados.', display: ['carousel', 'widget', 'calendar'] },
         { department: 'hodos', date: '2025-06-18', time: '15:00', title: 'Evangelismo com CRU', location: 'Parque de Águas Claras', type: 'missões', description: 'Evangelismo em parceria com a CRU.', display: ['carousel', 'widget', 'calendar'] },
-        { department: 'hodos', date: 'Semanalmente', time: '20:00', title: 'PGMs Semanais', location: 'IBCT e Lares', type: 'pgm', recurring: true, externalPage: './eventos/hodos_pgm.html', cardContentHTML: `<iframe src="./tools/logo_pgm.html" style="width:100%; height:100%; border:none; overflow:hidden; background-color: var(--cor-branco);" scrolling="no" title="Animação da logo PGM"></iframe>`, display: ['carousel'] },
-        { department: 'hodos', date: 'Agosto de 2025', time: 'A definir', title: 'Hodos Camp 2025', location: 'A definir', type: 'acampa', recurring: true, externalPage: './eventos/hodos_camp_2025.html', description: 'O evento mais esperado do ano!', display: ['carousel', 'widget'] },
-        { department: 'hodos', date: 'Ao primeiro sábado do mês', time: '19:00', title: 'Hodos Meet', location: 'IBCT', type: 'meet', recurring: true, cardClass: 'allow-overflow', externalPage: './eventos/hodos_meet.html', cardContentHTML: `<div style="position: relative; width: 100%; height: 100%; background-color: white;"><iframe src="./tools/logo_meet.html" style="width:100%; height:100%; border:none; overflow:hidden; pointer-events: none;" scrolling="no" title="Animação Hodos Meet"></iframe><div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; z-index: 5;"></div></div>`, display: ['carousel'] },
-
+        { 
+            department: 'hodos', 
+            date: 'Semanalmente', 
+            time: '20:00', 
+            title: 'PGMs Semanais', 
+            location: 'IBCT e Lares', 
+            type: 'pgm', 
+            recurring: true, 
+            externalPage: './eventos/hodos_pgm.html', 
+            cardContentHTML: `<iframe src="./tools/logo_pgm.html" style="width:100%; height:100%; border:none; overflow:hidden; background-color: var(--cor-branco); pointer-events: none;" scrolling="no" title="Animação da logo PGM"></iframe>`, 
+            display: ['carousel'] 
+        },
+        { 
+            department: 'hodos', 
+            date: 'Agosto de 2025', 
+            time: 'A definir', 
+            title: 'Hodos Camp 2025', 
+            location: 'A definir', 
+            type: 'acampa', 
+            recurring: true, 
+            externalPage: './eventos/hodos_camp_2025.html', 
+            description: 'O evento mais esperado do ano!', 
+            cardContentHTML: `
+                <div style="width: 100%; height: 100%; background-color: white;">
+                    <iframe 
+                        src="./img/html_arte/hodos_logo.html" 
+                        style="width: 100%; height: 100%; border: none; pointer-events: none;" 
+                        frameborder="0" 
+                        scrolling="no" 
+                        title="Arte da capa">
+                    </iframe>
+                </div>
+            `,
+            display: ['carousel', 'widget'] 
+        },        
+        { 
+            department: 'hodos', 
+            date: 'Ao primeiro sábado do mês', 
+            time: '19:00', 
+            title: 'Hodos Meet', 
+            location: 'IBCT', 
+            type: 'meet', 
+            recurring: true, 
+            cardClass: 'allow-overflow', 
+            externalPage: './eventos/hodos_meet.html', 
+            cardContentHTML: `<div style="position: relative; width: 100%; height: 100%; background-color: white;"><iframe src="./tools/logo_meet.html" style="width:100%; height:100%; border:none; overflow:hidden; pointer-events: none;" scrolling="no" title="Animação Hodos Meet"></iframe><div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; z-index: 5;"></div></div>`, 
+            display: ['carousel'] 
+        },
         // --- Eventos da IGREJA ---
         { department: 'igreja', date: '2025-04-13', time: '09:00', title: 'EBD', type: 'ebd', display: ['widget', 'calendar'] },
         { department: 'igreja', date: '2025-04-27', time: '09:00', title: 'EBD', type: 'ebd', display: ['widget', 'calendar'] },

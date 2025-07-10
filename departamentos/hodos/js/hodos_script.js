@@ -1,3 +1,4 @@
+
 document.addEventListener('ibct-api-ready', () => {
 
     // --- LÓGICA COMPARTILHADA (Menu, Modais, Scroll, Fade) ---

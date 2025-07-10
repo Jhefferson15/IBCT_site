@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@700&display=swap');
 :root {
     --cor-vinho: #902C3E;
@@ -95,10 +96,42 @@ a:hover { opacity: 0.7; }
 #next-btn { right: -25px; }
 
 /* MODAIS E OUTROS ELEMENTOS GLOBAIS */
-.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(30, 30, 30, 0.85); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 0; opacity: 0; transition: opacity 0.3s ease; }
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(30, 30, 30, 0.85); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; opacity: 0; transition: opacity 0.3s ease; }
 .modal-overlay.active { display: flex; opacity: 1; }
-.modal-close { position: absolute; top: 15px; right: 15px; width: 40px; height: 40px; font-size: 20px; color: var(--cor-grafite-texto); cursor: pointer; border: none; background: rgba(255, 255, 255, 0.8); border-radius: 50%; z-index: 20; text-shadow: none; transition: background 0.2s, color 0.2s, transform 0.2s; display: grid; place-content: center; }
 
+.modal-content-external {
+    position: relative;
+    width: 90vw;
+    height: 85vh;
+    max-width: 1200px;
+    background-color: var(--cor-creme-fundo);
+    border-radius: 12px;
+    box-shadow: var(--sombra-modal);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transform: scale(0.95);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal-overlay.active .modal-content-external {
+    transform: scale(1);
+    opacity: 1;
+}
+
+#modal-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.modal-close { position: absolute; top: 15px; right: 15px; width: 40px; height: 40px; font-size: 20px; color: var(--cor-grafite-texto); cursor: pointer; border: none; background: rgba(255, 255, 255, 0.8); border-radius: 50%; z-index: 20; text-shadow: none; transition: background 0.2s, color 0.2s, transform 0.3s ease; display: grid; place-content: center; }
+.modal-close:hover {
+    background: var(--cor-vinho);
+    color: var(--cor-branco);
+    transform: rotate(90deg);
+}
 
 /* ... (Estilos do footer, scroll-to-top etc. inalterados) ... */
 
@@ -108,7 +141,8 @@ a:hover { opacity: 0.7; }
 }
 
 @media (max-width: 800px) {
-    .modal-overlay { padding: 0; }
+    .modal-overlay { padding: 10px; }
+    .modal-content-external { width: 95vw; height: 80vh; }
 }
 
 @media (max-width: 768px) {
