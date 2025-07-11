@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HODOS CAMP 2025 | Viva a Verdade</title>
+
+    <!-- ==================================================== -->
+    <!--   META TAGS ADICIONADAS PARA COMPARTILHAMENTO        -->
+    <!-- ==================================================== -->
+    <meta property="og:title" content="HODOS CAMP 2025 | Viva a Verdade">
+    <meta property="og:description" content="Uma experiência inesquecível de fé e amizade. Garanta sua vaga para o Hodos Camp 2025 e prepare-se para mergulhar na verdade que liberta!">
+    
+    <!-- IMPORTANTE: Use a URL COMPLETA (com https://) da imagem do evento. -->
+    <meta property="og:image" content="https://jhefferson15.github.io/IBCT_site/departamentos/hodos/img/eventos/hodos_camp.webp">
+    
+    <!-- IMPORTANTE: Use a URL COMPLETA (com https://) desta página. -->
+    <meta property="og:url" content="https://jhefferson15.github.io/IBCT_site/departamentos/hodos/eventos/hodos_camp_2025.html">
+
+    <meta property="og:site_name" content="Hodos Juventude">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
@@ -188,9 +205,8 @@
             margin-left: auto;
             margin-right: auto;
             box-shadow: var(--card-shadow);
-            /* ALTERAÇÃO: Garante que a largura seja 100% do container pai */
             width: 100%;
-            box-sizing: border-box; /* Garante que padding não estoure a largura */
+            box-sizing: border-box;
         }
 
         .countdown-item {
@@ -198,7 +214,7 @@
             flex-direction: column;
             align-items: center;
             min-width: 60px;
-            flex-grow: 1; /* Permite que os itens cresçam para preencher o espaço */
+            flex-grow: 1;
         }
 
         .countdown-item span:first-child {
@@ -286,10 +302,37 @@
         @media (min-width: 992px) {
             .media-container { flex-direction: row; align-items: flex-start; justify-content: center; }
             .trailer-section, .poster-section { flex: 1; max-width: 500px; }
-            /* Centraliza os filhos da seção do trailer para que o contador e o vídeo se alinhem */
             .trailer-section { display: flex; flex-direction: column; align-items: center; } 
         }
 
+        /* --- ESTILO ADICIONADO PARA BOTÃO DE COMPARTILHAR --- */
+        .share-button {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color); /* Usa a cor primária do tema */
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 999; /* Abaixo do overlay do formulário */
+            transition: transform 0.2s ease-in-out, background-color 0.2s;
+        }
+        .share-button:hover {
+            transform: scale(1.1);
+            background-color: #a1553a; /* Mesma cor do hover do botão de inscrição */
+        }
+        .share-button svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--bg-color); /* Cor do texto que contrasta com o botão */
+        }
+        
         /* --- KEYFRAMES DAS ANIMAÇÕES --- */
         @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
         @keyframes shadow-float { 0% { transform: translateX(-50%) scale(1); opacity: 1; } 50% { transform: translateX(-50%) scale(0.85); opacity: 0.6; } 100% { transform: translateX(-50%) scale(1); opacity: 1; } }
@@ -310,19 +353,14 @@
             <p class="section-subtitle">Uma experiência inesquecível para quem deseja mergulhar na verdade que liberta.</p>
             
             <div class="media-container">
-                <!-- ======================= -->
-                <!--    SEÇÃO DO TRAILER     -->
-                <!-- ======================= -->
                 <section class="trailer-section">
                     <h2>Assista ao Trailer</h2>
                     <div class="media-wrapper">
-                        <!-- ALTERAÇÃO: Removido 'poster' e adicionado 'autoplay muted loop' -->
                         <video id="player" playsinline controls autoplay muted loop>
                             <source src="../img/eventos/hodos_camp_trailer.mp4" type="video/mp4" />
                         </video>
                         <a href="https://www.instagram.com/hodosmj/" target="_blank" rel="noopener noreferrer" class="insta-float-button" title="Ver no Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
                     </div>
-                    <!-- Contador agora se alinha perfeitamente -->
                     <div class="countdown-container" id="countdown">
                         <div class="countdown-item"><span id="days">00</span><span>Dias</span></div>
                         <div class="countdown-item"><span id="hours">00</span><span>Horas</span></div>
@@ -331,9 +369,6 @@
                     </div>
                 </section>
 
-                <!-- ======================= -->
-                <!--    SEÇÃO DO CARTAZ      -->
-                <!-- ======================= -->
                 <section class="poster-section">
                     <h2>Confira o Cartaz Oficial</h2>
                     <div class="media-wrapper">
@@ -361,6 +396,13 @@
         <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeinN6fQvBXEnKb1DZRni50QWIQdUEU7Uy_ogRL623OqK3dMA/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">A carregar…</iframe>
     </div>
 
+    <!-- BOTÃO DE COMPARTILHAR ADICIONADO -->
+    <button class="share-button" id="shareButton" aria-label="Compartilhar página">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L16.04,7.15C16.56,7.62 17.24,7.92 18,7.92C19.66,7.92 21,6.58 21,5C21,3.42 19.66,2 18,2C16.34,2 15,3.42 15,5C15,5.24 15.04,5.47 15.09,5.7L7.96,9.85C7.44,9.38 6.76,9.08 6,9.08C4.34,9.08 3,10.42 3,12C3,13.58 4.34,14.92 6,14.92C6.76,14.92 7.44,14.62 7.96,14.15L15.09,18.3C15.04,18.53 15,18.76 15,19C15,20.58 16.34,22 18,22C19.66,22 21,20.58 21,19C21,17.42 19.66,16.08 18,16.08Z" />
+        </svg>
+    </button>
+    
     <!-- JS do Player de Vídeo (Plyr) -->
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
     
@@ -375,33 +417,27 @@
             const hoursEl = document.getElementById('hours');
             const minutesEl = document.getElementById('minutes');
             const secondsEl = document.getElementById('seconds');
-            
-            // Define a data do evento
             const eventDate = new Date('2025-08-22T00:00:00');
 
             function updateCountdown() {
                 const now = new Date();
                 const diff = eventDate - now;
-
                 if (diff <= 0) {
                     countdownEl.innerHTML = "<p style='font-size: 1.5rem; font-weight: bold; color: var(--primary-color);'>O evento já começou!</p>";
                     clearInterval(countdownInterval);
                     return;
                 }
-
                 const d = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
                 const s = Math.floor((diff % (1000 * 60)) / 1000);
-
                 daysEl.innerText = String(d).padStart(2, '0');
                 hoursEl.innerText = String(h).padStart(2, '0');
                 minutesEl.innerText = String(m).padStart(2, '0');
                 secondsEl.innerText = String(s).padStart(2, '0');
             }
-
             const countdownInterval = setInterval(updateCountdown, 1000);
-            updateCountdown(); // Chama uma vez para não esperar 1 segundo para exibir
+            updateCountdown();
 
             // --- LÓGICA DE EXIBIÇÃO DO FORMULÁRIO ---
             const mainContent = document.getElementById('main-content');
@@ -410,16 +446,43 @@
             const backToMainBtn = document.getElementById('back-to-main-btn');
 
             showFormBtn.addEventListener('click', () => {
-                mainContent.style.display = 'none';
                 formContainer.classList.add('visible');
-                document.body.style.overflow = 'hidden'; 
+                // Esconde o botão de compartilhar quando o formulário está visível
+                document.getElementById('shareButton').style.display = 'none';
             });
 
             backToMainBtn.addEventListener('click', () => {
                 formContainer.classList.remove('visible');
-                mainContent.style.display = 'block';
-                document.body.style.overflow = 'auto'; 
+                // Mostra o botão de compartilhar novamente
+                 document.getElementById('shareButton').style.display = 'flex';
             });
+        });
+    </script>
+    
+    <!-- SCRIPT ADICIONADO PARA O BOTÃO DE COMPARTILHAMENTO -->
+    <script>
+        const shareButton = document.getElementById('shareButton');
+
+        shareButton.addEventListener('click', async () => {
+            const shareData = {
+                title: 'HODOS CAMP 2025 | Viva a Verdade',
+                text: 'Olha essa página do Hodos Camp 2025! Uma experiência incrível de fé e amizade. Vamos juntos?',
+                url: window.location.href
+            };
+
+            // Tenta usar a API de Compartilhamento nativa
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                } catch (err) {
+                    console.error('Erro ao compartilhar:', err);
+                }
+            } else {
+                // Fallback para desktop (abre WhatsApp Web)
+                const whatsappMessage = encodeURIComponent(`${shareData.text} ${shareData.url}`);
+                const whatsappUrl = `https://api.whatsapp.com/send?text=${whatsappMessage}`;
+                window.open(whatsappUrl, '_blank');
+            }
         });
     </script>
 

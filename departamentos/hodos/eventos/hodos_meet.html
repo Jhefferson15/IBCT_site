@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hodos Meet | Rede de Jovens Hodos</title>
     
+    <!-- ==================================================== -->
+    <!--   META TAGS ADICIONADAS PARA COMPARTILHAMENTO        -->
+    <!-- ==================================================== -->
+    <meta property="og:title" content="Hodos Meet | Uma Noite de Louvor e Comunhão">
+    <meta property="og:description" content="Participe do Hodos Meet, nosso encontro mensal de louvor e adoração da Rede de Jovens Hodos. Uma noite para se conectar com Deus e amigos. Confira a próxima data!">
+    
+    <!-- VERIFIQUE SE ESTA É A URL COMPLETA E CORRETA DA IMAGEM NO SEU SERVIDOR -->
+    <meta property="og:image" content="https://jhefferson15.github.io/IBCT_site/departamentos/hodos/img/eventos/hodos_meet.jpg">
+    
+    <!-- VERIFIQUE SE ESTA É A URL COMPLETA E CORRETA DESTA PÁGINA -->
+    <meta property="og:url" content="https://jhefferson15.github.io/IBCT_site/departamentos/hodos/eventos/hodos_meet.html">
+
+    <meta property="og:site_name" content="Hodos Juventude">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -96,7 +112,6 @@
             line-height: 1.1;
         }
         
-        /* NOVO ESTILO PARA A NOTA DA DATA */
         .event-note {
             font-size: 0.9rem;
             font-style: italic;
@@ -271,6 +286,36 @@
                 flex: 1;
             }
         }
+        
+        /* ==================================================== */
+        /* --- ESTILO ADICIONADO P/ BOTÃO DE COMPARTILHAR --- */
+        /* ==================================================== */
+        .share-button {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-orange);
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.2s ease-in-out, background-color 0.2s;
+        }
+        .share-button:hover {
+            transform: scale(1.1);
+            background-color: #e69500; /* Um tom de laranja mais escuro no hover */
+        }
+        .share-button svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
     </style>
 </head>
 <body>
@@ -297,7 +342,6 @@
                 <div class="info-grid">
                     <div class="info-item">
                         <h3>Próxima Data</h3>
-                        <!-- ID ADICIONADO PARA O JAVASCRIPT -->
                         <p id="event-date">Carregando...</p>
                     </div>
                     <div class="info-item">
@@ -312,8 +356,6 @@
             </div>
         </section>
 
-        <!-- (O restante do conteúdo da página permanece igual) -->
-        
         <!-- =================================== -->
         <!--      SEÇÃO "O QUE ESPERAR"          -->
         <!-- =================================== -->
@@ -387,57 +429,69 @@
         </div>
     </footer>
 
-    <!-- ========================================== -->
-    <!--    SCRIPT JAVASCRIPT PARA DATA DINÂMICA    -->
-    <!-- ========================================== -->
+    <!-- SCRIPT ORIGINAL PARA DATA DINÂMICA (MANTIDO) -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Elemento do HTML onde a data será exibida
             const eventDateElement = document.getElementById('event-date');
-            
-            // Nomes dos meses em português
             const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
             function getNextFirstSaturday() {
                 const today = new Date();
-                today.setHours(0, 0, 0, 0); // Zera o tempo para comparar apenas as datas
-
-                // Função para calcular o primeiro sábado de um determinado mês/ano
+                today.setHours(0, 0, 0, 0);
                 function calculateFirstSaturday(year, month) {
                     const firstDayOfMonth = new Date(year, month, 1);
-                    const dayOfWeek = firstDayOfMonth.getDay(); // 0 = Domingo, 6 = Sábado
-                    
-                    // Dias a adicionar para chegar ao sábado
-                    // (6 - dayOfWeek + 7) % 7 lida com casos onde o primeiro dia já é sábado ou passou de sábado
+                    const dayOfWeek = firstDayOfMonth.getDay();
                     const daysToAdd = (6 - dayOfWeek + 7) % 7;
                     const dateOfFirstSaturday = 1 + daysToAdd;
-                    
                     return new Date(year, month, dateOfFirstSaturday);
                 }
-
-                // Calcula o primeiro sábado deste mês
                 let firstSaturdayThisMonth = calculateFirstSaturday(today.getFullYear(), today.getMonth());
-
-                // Se a data de hoje for DEPOIS do primeiro sábado deste mês,
-                // calcula o primeiro sábado do próximo mês.
                 if (today > firstSaturdayThisMonth) {
                     const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
                     return calculateFirstSaturday(nextMonth.getFullYear(), nextMonth.getMonth());
                 } else {
-                    // Caso contrário, o evento deste mês ainda vai acontecer.
                     return firstSaturdayThisMonth;
                 }
             }
-
-            // Pega a data calculada
             const eventDate = getNextFirstSaturday();
-            
-            // Formata para "DD Mês" (ex: "06 Julho")
             const day = String(eventDate.getDate()).padStart(2, '0');
             const monthName = meses[eventDate.getMonth()];
-            
-            // Atualiza o conteúdo na página
             eventDateElement.textContent = `${day} ${monthName}`;
+        });
+    </script>
+    
+    <!-- ==================================================== -->
+    <!--     HTML E SCRIPT ADICIONADOS PARA COMPARTILHAR      -->
+    <!-- ==================================================== -->
+    <button class="share-button" id="shareButton" aria-label="Compartilhar página">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L16.04,7.15C16.56,7.62 17.24,7.92 18,7.92C19.66,7.92 21,6.58 21,5C21,3.42 19.66,2 18,2C16.34,2 15,3.42 15,5C15,5.24 15.04,5.47 15.09,5.7L7.96,9.85C7.44,9.38 6.76,9.08 6,9.08C4.34,9.08 3,10.42 3,12C3,13.58 4.34,14.92 6,14.92C6.76,14.92 7.44,14.62 7.96,14.15L15.09,18.3C15.04,18.53 15,18.76 15,19C15,20.58 16.34,22 18,22C19.66,22 21,20.58 21,19C21,17.42 19.66,16.08 18,16.08Z" />
+        </svg>
+    </button>
+    
+    <script>
+        const shareButton = document.getElementById('shareButton');
+
+        shareButton.addEventListener('click', async () => {
+            const shareData = {
+                title: 'Hodos Meet | Rede de Jovens Hodos',
+                text: 'Vem pro Hodos Meet! Nosso encontro mensal de louvor e adoração. Vai ser incrível!',
+                url: window.location.href // Pega a URL atual da página
+            };
+
+            // Tenta usar a API de Compartilhamento nativa (melhor para mobile)
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                } catch (err) {
+                    console.error('Erro ao usar a API de compartilhamento:', err);
+                }
+            } else {
+                // Fallback para desktop: abre o WhatsApp Web com uma mensagem pronta
+                const whatsappMessage = encodeURIComponent(`${shareData.text} ${shareData.url}`);
+                const whatsappUrl = `https://api.whatsapp.com/send?text=${whatsappMessage}`;
+                window.open(whatsappUrl, '_blank');
+            }
         });
     </script>
 
