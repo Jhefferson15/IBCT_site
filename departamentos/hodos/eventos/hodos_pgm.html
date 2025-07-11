@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PGM | Rede de Jovens Hodos</title>
+
+    <!-- ============================================= -->
+    <!--   META TAGS PARA COMPARTILHAMENTO (WHATSAPP)  -->
+    <!-- ============================================= -->
+    <meta property="og:title" content="PGM Hodos | Uma noite de comunhão e palavra">
+    <meta property="og:description" content="Junte-se a nós no PGM da Rede de Jovens Hodos no dia 27 de Junho, às 20h. Uma noite especial para encontrar seu grupo e se conectar.">
+    
+    <!-- IMPORTANTE: ALTERE AQUI! Use a URL COMPLETA (com https://) da imagem do evento. -->
+    <meta property="og:image" content="https://jhefferson15.github.io/IBCT_site/departamentos/hodos/img/eventos/pgm_rede_de_jovens.jpg">
+    
+    <!-- IMPORTANTE: ALTERE AQUI! Use a URL COMPLETA (com https://) desta página. -->
+    <meta property="og:url" content="https://jhefferson15.github.io/IBCT_site/departamentos/hodos/img/eventos/pgm_rede_de_jovens.jpg/eventos/pgm-hodos.html">
+
+    <meta property="og:site_name" content="Hodos Juventude">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -80,7 +96,6 @@
             max-width: 400px;
             border-radius: 12px;
             box-shadow: var(--card-shadow);
-            /* Efeito de recorte inspirado no poster */
             filter: drop-shadow(6px 6px 0px var(--accent-yellow));
             transition: transform 0.3s ease;
         }
@@ -191,7 +206,7 @@
         }
         
         .group-card .contact-info {
-            margin-top: auto; /* Empurra para o final do card */
+            margin-top: auto;
             padding-top: 1rem;
             border-top: 1px solid #eee;
             font-size: 0.9rem;
@@ -224,7 +239,7 @@
             font-size: 1.1rem;
             padding: 1rem 1.5rem;
             cursor: pointer;
-            list-style: none; /* Remove a seta padrão */
+            list-style: none;
             position: relative;
         }
         .faq-item summary::-webkit-details-marker { display: none; }
@@ -256,7 +271,7 @@
             font-size: 0.9rem;
             opacity: 0.7;
         }
-        
+
         /* --- RESPONSIVIDADE --- */
         @media (min-width: 768px) {
             .event-hero {
@@ -264,11 +279,41 @@
                 gap: 3rem;
             }
             .event-poster {
-                flex: 0 0 350px; /* Não cresce, não encolhe, base de 350px */
+                flex: 0 0 350px;
             }
             .event-details {
                 flex: 1;
             }
+        }
+
+        /* =========================================== */
+        /* --- BOTÃO DE COMPARTILHAR FLUTUANTE --- */
+        /* =========================================== */
+        .share-button {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-orange);
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.2s ease-in-out, background-color 0.2s;
+        }
+        .share-button:hover {
+            transform: scale(1.1);
+            background-color: #e69500; /* Um tom de laranja mais escuro no hover */
+        }
+        .share-button svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
         }
     </style>
 </head>
@@ -287,6 +332,7 @@
         <!--    SEÇÃO DO EVENTO      -->
         <!-- ======================= -->
         <section class="event-hero">
+            <!-- IMPORTANTE: ALTERE AQUI! O caminho da imagem deve ser válido no seu servidor -->
             <img src="../img/eventos/pgm_rede_de_jovens.jpg" alt="Banner do PGM da Rede de Jovens" class="event-poster">
             
             <div class="event-details">
@@ -383,6 +429,45 @@
             <p>© 2025 Hodos Juventude. Igreja Batista Central de Taguatinga.</p>
         </div>
     </footer>
+
+    <!-- ============================================= -->
+    <!--     HTML DO BOTÃO DE COMPARTILHAMENTO         -->
+    <!-- ============================================= -->
+    <button class="share-button" id="shareButton" aria-label="Compartilhar página">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L16.04,7.15C16.56,7.62 17.24,7.92 18,7.92C19.66,7.92 21,6.58 21,5C21,3.42 19.66,2 18,2C16.34,2 15,3.42 15,5C15,5.24 15.04,5.47 15.09,5.7L7.96,9.85C7.44,9.38 6.76,9.08 6,9.08C4.34,9.08 3,10.42 3,12C3,13.58 4.34,14.92 6,14.92C6.76,14.92 7.44,14.62 7.96,14.15L15.09,18.3C15.04,18.53 15,18.76 15,19C15,20.58 16.34,22 18,22C19.66,22 21,20.58 21,19C21,17.42 19.66,16.08 18,16.08Z" />
+        </svg>
+    </button>
+    
+    <!-- ============================================= -->
+    <!--    JAVASCRIPT PARA O BOTÃO FUNCIONAR          -->
+    <!-- ============================================= -->
+    <script>
+        const shareButton = document.getElementById('shareButton');
+
+        shareButton.addEventListener('click', async () => {
+            const shareData = {
+                title: 'PGM | Rede de Jovens Hodos',
+                text: 'Olha que legal o evento da Rede Hodos! Vamos juntos?',
+                url: window.location.href
+            };
+
+            // Tenta usar a API de Compartilhamento nativa (melhor para mobile)
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                    console.log('Conteúdo compartilhado com sucesso!');
+                } catch (err) {
+                    console.error('Erro ao compartilhar:', err);
+                }
+            } else {
+                // Fallback para desktop: abre o WhatsApp Web
+                const whatsappMessage = encodeURIComponent(`${shareData.text} ${shareData.url}`);
+                const whatsappUrl = `https://api.whatsapp.com/send?text=${whatsappMessage}`;
+                window.open(whatsappUrl, '_blank');
+            }
+        });
+    </script>
 
 </body>
 </html>
