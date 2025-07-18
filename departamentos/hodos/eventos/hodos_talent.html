@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noite de Talentos | Rede de Jovens Hodos</title>
+
+    <!-- ==================================================== -->
+    <!--   META TAGS ADICIONADAS PARA COMPARTILHAMENTO        -->
+    <!-- ==================================================== -->
+    <meta property="og:title" content="Noite de Talentos | Hodos Juventude">
+    <meta property="og:description" content="Nossa primeira Noite de Talentos está chegando! Participe e vamos glorificar ao Senhor juntos através da arte. Inscreva-se!">
+    
+    <!-- IMPORTANTE: Use a URL COMPLETA (com https://) da imagem do evento. -->
+    <meta property="og:image" content="https://jhefferson15.github.io/IBCT_site/departamentos/hodos/img/eventos/noite_de_talentos.jpeg">
+    
+    <!-- IMPORTANTE: Use a URL COMPLETA (com https://) desta página. -->
+    <meta property="og:url" content="https://jhefferson15.github.io/IBCT_site/departamentos/hodos/eventos/noite_de_talentos.html">
+
+    <meta property="og:site_name" content="Hodos Juventude">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --text-color: #f0f0f0;
+            --primary-color: #ffffff;
+            --accent-blue: #00bfff;
+            --accent-orange: #ff8c00;
+            --card-bg: #2c2c2c;
+            --card-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+        section { margin-bottom: 4rem; }
+
+        header { padding: 1rem 0; border-bottom: 1px solid #444; margin-bottom: 3rem; }
+        .header-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary-color); margin: 0; }
+        .header-subtitle { font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-orange); font-weight: 500; margin-top: 0.25rem; }
+        
+        .event-hero { display: flex; flex-direction: column; gap: 2rem; align-items: center; text-align: left; }
+        .event-poster { width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
+        .event-details h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 10vw, 4.5rem); color: var(--primary-color); margin: 0 0 1rem 0; line-height: 1.1; }
+        .event-details p { font-size: 1.1rem; opacity: 0.9; }
+
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .info-item { background-color: var(--card-bg); padding: 1.5rem; border-radius: 10px; box-shadow: var(--card-shadow); border-left: 5px solid var(--accent-blue); }
+        .info-item h3 { margin: 0 0 0.25rem 0; font-size: 1rem; color: var(--accent-orange); text-transform: uppercase; letter-spacing: 1px; }
+        .info-item p { margin: 0; font-size: 1.5rem; font-weight: 700; color: var(--text-color); }
+
+        .section-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 0.5rem; position: relative; display: inline-block; color: var(--primary-color); }
+        .section-title::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 60%; height: 4px; background: linear-gradient(90deg, var(--accent-blue), var(--accent-orange)); }
+        .section-subtitle { max-width: 600px; margin: 0 auto 2.5rem auto; font-size: 1.1rem; opacity: 0.8; }
+        
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; text-align: left; }
+        .feature-card { background: var(--card-bg); border-radius: 10px; padding: 2rem; box-shadow: var(--card-shadow); display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .feature-card h3 { margin: 0.75rem 0 0.5rem 0; font-size: 1.25rem; color: var(--primary-color); }
+        .feature-card p { font-size: 0.95rem; opacity: 0.8; margin: 0; }
+        .feature-icon { font-size: 2.5rem; color: var(--accent-blue); }
+
+        .cta-section { background-color: var(--card-bg); padding: 3rem 1rem; border-radius: 12px; box-shadow: var(--card-shadow); }
+        .cta-button { display: inline-block; background: linear-gradient(90deg, var(--accent-blue), #c724b1); color: white; padding: 1rem 3rem; font-size: 1.2rem; font-weight: 700; text-decoration: none; text-transform: uppercase; border-radius: 50px; transition: transform 0.2s ease; border: none; cursor: pointer; }
+        .cta-button:hover { transform: scale(1.05); }
+
+        .location-map { width: 100%; height: 400px; border-radius: 12px; border: none; box-shadow: var(--card-shadow); }
+
+        footer { border-top: 1px solid #444; padding-top: 2rem; font-size: 0.9rem; opacity: 0.7; }
+        
+        .form-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); z-index: 1000; transform: translateY(100%); transition: transform 0.5s ease-in-out; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
+        .form-container.visible { transform: translateY(0); }
+        .form-wrapper { position: relative; width: 100%; max-width: 800px; height: 90%; background: var(--bg-color); border-radius: 10px; overflow: hidden; }
+        .form-container iframe { width: 100%; height: 100%; border: none; }
+        .back-button { position: absolute; top: 15px; right: 15px; z-index: 1001; background-color: var(--accent-orange); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.2s ease; }
+        .back-button:hover { transform: scale(1.1); }
+
+        .share-button { position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px; background-color: var(--accent-blue); border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); cursor: pointer; z-index: 999; transition: transform 0.2s ease; }
+        .share-button:hover { transform: scale(1.1); }
+        .share-button svg { width: 28px; height: 28px; fill: white; }
+
+        @media (min-width: 768px) {
+            .event-hero { flex-direction: row; gap: 3rem; }
+            .event-poster { flex: 0 0 350px; }
+            .event-details { flex: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main-content">
+        <header>
+            <div class="container">
+                <h2 class="header-title">Hodos Eventos</h2>
+                <p class="header-subtitle">Rede de Jovens</p>
+            </div>
+        </header>
+
+        <main class="container">
+
+            <section class="event-hero">
+                <!-- A imagem do evento será inserida aqui -->
+                <img src="../img/eventos/noite_de_talentos.jpeg" alt="Cartaz da Noite de Talentos" class="event-poster">
+                
+                <div class="event-details">
+                    <h1>Noite de Talentos</h1>
+                    <p>HEY, JUVENTUDE! Olha que convite incrível que tá vindo aí! Nossa primeira NOITE DE TALENTOS! Vamos glorificar ao Senhor juntos através da arte?</p>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h3>Data</h3>
+                            <p>02 Agosto</p>
+                        </div>
+                        <div class="info-item">
+                            <h3>Horário</h3>
+                            <p>20h</p>
+                        </div>
+                         <div class="info-item">
+                            <h3>Local</h3>
+                            <p>IBCT - EPTG</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title">O Que Esperar?</h2>
+                <p class="section-subtitle">Com direito a premiações por categorias e muita comunhão! Já estamos ansiosos para ver o talento de vocês!</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">🎤</span>
+                        <h3>Música & Arte</h3>
+                        <p>Solte a voz, toque seu instrumento, dance, recite uma poesia... Todas as formas de arte são bem-vindas para glorificar a Deus!</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🏆</span>
+                        <h3>Premiações</h3>
+                        <p>Teremos premiações especiais por categorias para celebrar os dons que Deus tem distribuído em nosso meio. Participe!</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">❤️</span>
+                        <h3>Comunhão</h3>
+                        <p>Mais que um show, será uma noite para fortalecer amizades, rir e se conectar em um ambiente acolhedor e criativo.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cta-section">
+                <h2 class="section-title">Mostre Seu Talento!</h2>
+                <p class="section-subtitle">As inscrições estão abertas! Clique no botão abaixo para preencher o formulário e garantir sua participação. É rápido e fácil!</p>
+                <button id="show-form-btn" class="cta-button">Inscreva-se Agora</button>
+            </section>
+
+            <section>
+                <h2 class="section-title">Onde Acontece?</h2>
+                <p class="section-subtitle">Nosso encontro será na Igreja Batista Central de Taguatinga, um lugar de fácil acesso pela EPTG. Confira o mapa!</p>
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7677.0949728339765!2d-48.05643324524222!3d-15.827796966749323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935a32f71de3365b%3A0x585c20f59e32788!2sIgreja%20Batista%20Central%20de%20Taguatinga!5e0!3m2!1sen!2sbr!4v1751056019632!5m2!1sen!2sbr" 
+                    class="location-map" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container">
+                <p>© 2025 Hodos Juventude. Igreja Batista Central de Taguatinga.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Contêiner do formulário -->
+    <div id="form-container" class="form-container">
+        <div class="form-wrapper">
+             <button id="back-to-main-btn" class="back-button">X</button>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf6y-5aF0k9y7dK3m7B2g8r9oPqJ_cT6hU_n5iV1o8aW7eQw/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">A carregar…</iframe>
+        </div>
+    </div>
+
+    <!-- Botão de Compartilhar -->
+    <button class="share-button" id="shareButton" aria-label="Compartilhar página">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L16.04,7.15C16.56,7.62 17.24,7.92 18,7.92C19.66,7.92 21,6.58 21,5C21,3.42 19.66,2 18,2C16.34,2 15,3.42 15,5C15,5.24 15.04,5.47 15.09,5.7L7.96,9.85C7.44,9.38 6.76,9.08 6,9.08C4.34,9.08 3,10.42 3,12C3,13.58 4.34,14.92 6,14.92C6.76,14.92 7.44,14.62 7.96,14.15L15.09,18.3C15.04,18.53 15,18.76 15,19C15,20.58 16.34,22 18,22C19.66,22 21,20.58 21,19C21,17.42 19.66,16.08 18,16.08Z" />
+        </svg>
+    </button>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- LÓGICA DE EXIBIÇÃO DO FORMULÁRIO ---
+            const formContainer = document.getElementById('form-container');
+            const showFormBtn = document.getElementById('show-form-btn');
+            const backToMainBtn = document.getElementById('back-to-main-btn');
+            const shareButtonEl = document.getElementById('shareButton');
+
+            showFormBtn.addEventListener('click', () => {
+                formContainer.classList.add('visible');
+                shareButtonEl.style.display = 'none'; // Esconde o botão de compartilhar
+            });
+
+            backToMainBtn.addEventListener('click', () => {
+                formContainer.classList.remove('visible');
+                shareButtonEl.style.display = 'flex'; // Mostra o botão de compartilhar
+            });
+
+            // --- LÓGICA DO BOTÃO DE COMPARTILHAMENTO ---
+            const shareButton = document.getElementById('shareButton');
+            shareButton.addEventListener('click', async () => {
+                const shareData = {
+                    title: 'Noite de Talentos | Hodos Juventude',
+                    text: 'Se liga na Noite de Talentos da Hodos! Vai ser incrível, vamos juntos?',
+                    url: window.location.href
+                };
+                try {
+                    await navigator.share(shareData);
+                } catch (err) {
+                    // Fallback para desktop: abre o WhatsApp Web
+                    const whatsappMessage = encodeURIComponent(`${shareData.text} ${shareData.url}`);
+                    const whatsappUrl = `https://api.whatsapp.com/send?text=${whatsappMessage}`;
+                    window.open(whatsappUrl, '_blank');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -68,6 +68,19 @@
             cardContentHTML: `<div style="position: relative; width: 100%; height: 100%; background-color: white;"><iframe src="./tools/logo_meet.html" style="width:100%; height:100%; border:none; overflow:hidden; pointer-events: none;" scrolling="no" title="Animação Hodos Meet"></iframe><div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; z-index: 5;"></div></div>`, 
             display: ['carousel'] 
         },
+        { 
+            department: 'hodos', 
+            date: '2025-08-02', 
+            time: '20:00', 
+            title: 'Noite de Talentos', 
+            location: 'IBCT', 
+            type: 'Talentos', 
+            recurring: true, 
+            cardClass: 'allow-overflow', 
+            externalPage: './eventos/hodos_talent.html', 
+            cardContentHTML: `<div style="position: relative; width: 100%; height: 100%; background-color: white;"><iframe src="./tools/logo_talentos.html" style="width:100%; height:100%; border:none; overflow:hidden; pointer-events: none;" scrolling="no" title="Animação Hodos Meet"></iframe><div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; z-index: 5;"></div></div>`, 
+            display: ['carousel'] 
+        },
         // --- Eventos da IGREJA ---
         { department: 'igreja', date: '2025-04-13', time: '09:00', title: 'EBD', type: 'ebd', display: ['widget', 'calendar'] },
         { department: 'igreja', date: '2025-04-27', time: '09:00', title: 'EBD', type: 'ebd', display: ['widget', 'calendar'] },

@@ -279,7 +279,7 @@ a:hover { opacity: 0.7; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
 @media (max-width: 920px) {
-    .dual-column-container, .contato-wrapper, .missao-card, .missao-card:nth-child(even) { flex-direction: column; }
+    .dual-column-container, .contato-wrapper, .missao-card, .missao-card:nth-child(even) { flex-direction: column; align-items: stretch; }
     .missao-card img { width: 100%; height: 250px; }
     .missao-content { width: 100%; } /* Ajuste para layout de coluna */
 }

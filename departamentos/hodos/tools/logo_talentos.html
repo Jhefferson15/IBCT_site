@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show de Talentos - Animação Otimizada</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@600&display=swap');
+
+        :root {
+            /* Variáveis de Cor */
+            --background-color: #ffffff;
+            --circle-color-1: #4e8dff;
+            --circle-color-2: #3a7bfd;
+            --text-main-color-1: #ff8c00;
+            --text-main-color-2: #ffae3c;
+            --text-main-shadow: #c86e00;
+            --text-de-color: #4a4a4a;
+            --icon-color: #4a4a4a;
+            --icon-glow-color: #e945c1;
+            
+            /* Variáveis de Layout controladas pelo Editor */
+            --logo-container-size: 450px;
+            --logo-pos-x: 0px;
+            --logo-pos-y: 0px;
+            --main-font-size: 7rem;
+            --secondary-font-size: 2.5rem;
+            --icon-size: 85px;
+        }
+
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            display: flex; justify-content: center; align-items: center;
+            background-color: var(--background-color);
+            font-family: 'Teko', sans-serif;
+            overflow: hidden;
+            transition: background-color 0.3s;
+        }
+
+        .logo-container {
+            position: relative;
+            width: var(--logo-container-size);
+            height: var(--logo-container-size);
+            display: flex; justify-content: center; align-items: center;
+            transform: translate(var(--logo-pos-x), var(--logo-pos-y));
+            transition: width 0.3s, height 0.3s, transform 0.3s;
+        }
+
+        .circle-background {
+            width: 100%; height: 100%;
+            background: radial-gradient(circle, var(--circle-color-1), var(--circle-color-2));
+            box-shadow: 0 10px 30px rgba(78, 141, 255, 0.3), inset 0 0 20px rgba(0,0,0,0.1);
+            position: absolute; z-index: 1;
+            /* Transição de transformação adicionada para a rotação */
+            transition: clip-path 1.5s cubic-bezier(0.65, 0, 0.35, 1), background 0.3s, transform 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        
+        .text-container {
+            position: relative; z-index: 10; text-align: center;
+            line-height: 1; text-transform: uppercase;
+        }
+
+        .text-container h1 {
+            font-size: var(--main-font-size); margin: 0 10px; font-weight: 600;
+            background: linear-gradient(45deg, var(--text-main-color-1), var(--text-main-color-2));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 0 var(--text-main-shadow);
+            transition: font-size 0.3s, text-shadow 0.3s;
+        }
+
+        .text-container h2 {
+            font-size: var(--secondary-font-size); margin: 0; font-weight: 600;
+            color: var(--text-de-color);
+            transition: font-size 0.3s, color 0.3s;
+        }
+        
+        .icon {
+            position: absolute; width: var(--icon-size); height: var(--icon-size);
+            z-index: 20; opacity: 0; transform: translateX(-350px);
+            will-change: transform, opacity;
+            transition: width 0.3s, height 0.3s;
+        }
+        
+        .icon svg {
+            width: 100%; height: 100%;
+            fill: var(--icon-color); 
+            transition: fill 0.4s ease, filter 0.4s ease;
+        }
+
+        .icon.is-active { filter: drop-shadow(0 0 15px var(--icon-glow-color)); }
+        .icon.is-active svg { fill: var(--icon-glow-color); }
+        
+        #editor-panel {
+            position: fixed; top: 0; right: 0; width: 300px; height: 100vh;
+            background-color: #f0f2f5; border-left: 1px solid #ccc;
+            padding: 15px; box-sizing: border-box; z-index: 1000;
+            overflow-y: auto; font-family: 'Roboto', sans-serif;
+        }
+        #editor-panel h3 { margin-top: 0; border-bottom: 2px solid #ccc; padding-bottom: 10px; font-family: 'Teko', sans-serif; font-size: 1.8rem; color: #333; }
+        .control-group { margin-bottom: 20px; }
+        .control-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #555; font-size: 0.9rem; }
+        .control-group input[type="color"], .control-group input[type="range"], .control-group select, .control-group button { width: 100%; box-sizing: border-box; }
+        .control-group input[type="color"] { height: 40px; border: 1px solid #ccc; padding: 0; cursor: pointer; }
+        .control-group select, .control-group button { padding: 8px; border-radius: 4px; border: 1px solid #ccc; }
+        .control-group button { background-color: #007bff; color: white; border: none; cursor: pointer; margin-top: 5px; }
+        .control-group button:hover { background-color: #0056b3; }
+        #load-button { background-color: #28a745; }
+        #load-button:hover { background-color: #1e7e34; }
+        .color-pair { display: flex; gap: 10px; }
+        .color-pair > div { flex: 1; }
+        #file-loader { display: none; }
+
+        @media (max-width: 768px) { #editor-panel { display: none; } }
+        @media (max-width: 500px) { :root { --logo-container-size: 320px; --main-font-size: 5rem; --secondary-font-size: 2rem; --icon-size: 65px; } }
+    </style>
+</head>
+<body>
+
+    <div class="logo-container">
+        <div class="circle-background"></div>
+        <div class="text-container">
+            <h1>Show</h1>
+            <h2>de</h2>
+            <h1>Talentos</h1>
+        </div>
+        <!-- Ícones -->
+        <div class="icon" data-index="0"> <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8,21a1,1,0,0,0,0,2h8a1,1,0,0,0,0-2H13V16.9A5.009,5.009,0,0,0,17,12V6A5,5,0,0,0,7,6v6a5.009,5.009,0,0,0,4,4.9V21Zm1.184-8H10a1,1,0,0,0,0-2H9V10h1a1,1,0,0,0,0-2H9V7h1a1,1,0,0,0,0-2H9.184a2.982,2.982,0,0,1,5.632,0H14a1,1,0,0,0,0,2h1V8H14a1,1,0,0,0,0,2h1v1H14a1,1,0,0,0,0,2h.816a2.982,2.982,0,0,1-5.632,0Z"/></svg> </div>
+        <div class="icon" data-index="1"> <svg fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M293.686,333.324c5.976,52.529,58.497,59.684,74.014,59.684c15.521,0,68.042-7.155,74.01-59.684 c-9.545,8.358-40.582,22.691-74.01,22.691C334.276,356.014,303.239,341.681,293.686,333.324z"/><path d="M312.681,272.069c12.31,1.33,23.671,5.338,33.591,11.37c0.394-17.695-12.824-33.041-30.747-34.969 c-17.827-1.92-33.926,10.126-37.423,27.344C288.894,272.189,300.622,270.778,312.681,272.069z"/><path d="M389.129,283.439c9.919-6.032,21.285-10.039,33.587-11.37c12.067-1.291,23.786,0.12,34.579,3.745 c-3.498-17.218-19.596-29.264-37.42-27.344C401.948,250.398,388.73,265.744,389.129,283.439z"/><path d="M511.724,171.919c0,0-0.02-0.216-0.036-0.327l-0.02-0.104l-0.02-0.144c-0.948-6.86-5.975-12.389-13.05-13.106 c-5.765-0.59-11.586,2.35-17.119,3.673c-11.405,2.693-22.97,4.74-34.535,6.462c-30.085,4.478-60.56,6.549-90.964,5.832 c-23.604-0.55-47.223-2.621-70.552-6.278c-8.7-36.101-23.006-95.259-27.058-112.023c-0.82-3.402-1.43-8.724-8.29-3.792 c-4.96,3.593-54.665,28.874-118.249,44.243C68.247,111.724,12.475,111.916,6.42,111c-8.346-1.275-6.466,3.744-5.641,7.146 C5.133,136.16,21.294,203.039,29.7,237.777c20.496,84.87,111.994,128.117,164.213,115.489c11.242-2.717,22.918-8.573,34.125-16.939 c11.282,46.108,43.136,86.902,84.714,109.784c13.413,7.378,28.077,12.979,43.311,15.027c14.935,2.023,29.942-0.167,44.14-5.02 c27.938-9.56,52.665-28.213,71.624-50.649c18.481-21.886,31.731-48.227,37.172-76.408c2.506-12.964,2.848-25.934,2.848-39.073 V186.977C511.848,182.029,512.262,176.842,511.724,171.919z M61.156,185.351c11.358,0.972,23.082-0.398,34.487-4.493 c11.656-4.176,21.776-10.733,29.99-18.932c4.534,17.098-4.705,35.129-21.679,41.2C87.086,209.182,68.606,201.262,61.156,185.351z M223.564,256.612c-13.808-2.852-33.539-3.991-52.84,0.685c-28.596,6.908-52.18,25.576-58.625,34.691 c-5.744-46.156,37.694-63.134,50.98-66.354c10.202-2.47,40.001-5.832,60.485,12.629V256.612z M231.835,159.648 c-1.932,3.928-4.581,7.466-7.844,10.406c-5.008,4.526-11.405,7.633-18.6,8.581c-17.875,2.327-34.324-9.489-38.108-26.794 c11.07,3.554,23.046,4.764,35.328,3.171c12.019-1.57,23.082-5.705,32.734-11.76C235.564,149.083,234.289,154.677,231.835,159.648z M488.574,284.937c0,12.708,0.16,25.337-2.079,37.91c-1.933,10.867-5.247,21.448-9.72,31.519c-0.056,0.104-0.112,0.231-0.164,0.358 c-0.015,0.048-0.055,0.104-0.071,0.175c-0.088,0.183-0.164,0.374-0.251,0.557c-0.159,0.374-0.339,0.749-0.518,1.14 c0.048-0.144,0.123-0.263,0.179-0.415c-11.354,24.644-29.67,46.164-51.892,61.66c-12.302,8.589-26.109,15.593-40.813,18.939 c-13.732,3.155-27.284,1.825-40.57-2.701c-27.826-9.506-52.032-29.814-69.01-53.526c-13.286-18.564-22.277-40.076-25.496-62.576 c-0.88-6.103-1.326-12.302-1.326-18.516V184.149c14.274,3.513,28.83,6.102,43.438,8.07c9.314,1.275,18.676,2.295,27.986,3.14 c31.193,2.805,62.548,2.964,93.757,0.43c25.66-2.079,51.514-5.497,76.551-11.656V284.937z"/></svg> </div>
+        <div class="icon" data-index="2"> <svg fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 325.04 325.04"><path d="M117.866,234.088c-2.956,14.532-4.875,21.558-16.092,22.458c-2.764,0.222-5.015,2.308-5.446,5.047 c-0.432,2.738,1.069,5.416,3.631,6.477c0.721,0.298,17.877,7.308,37.921,7.309c0.003,0,0.005,0,0.007,0 c13.968,0,25.95-3.386,35.612-10.063c11.45-7.912,19.344-20.294,23.541-36.788l-38.572-38.88 C125.871,194.924,121.253,217.436,117.866,234.088z"/><path d="M322.745,63.336c-1.037-1.046-2.887-2.293-5.806-2.293c-3.423,0-12.516,0-67.74,46.992 c-25.509,21.706-54.92,48.559-78.314,71.41l36.603,36.894c24.061-25.009,52.129-56.355,74.451-83.258 c14.096-16.986,24.935-31.002,32.216-41.657C323.799,77.311,328.023,68.655,322.745,63.336z"/><path d="M182.595,278.479c-12.387,8.56-27.429,12.899-44.716,12.899c-22.753-0.001-41.919-7.649-44.046-8.527 c-9.425-3.906-14.898-13.673-13.31-23.749c1.555-9.871,9.463-17.373,19.341-18.446c0.861-2.571,1.813-7.254,2.323-9.758 c1.878-9.23,4.449-21.873,12.358-33.126c8.637-12.287,21.656-20.165,38.751-23.466c9.811-9.737,21.005-20.443,32.686-31.308 c-5.905-1.281-11.185-5.127-14.017-10.944c-4.875-10.02-0.623-22.073,9.484-26.895c10.133-4.834,22.287-0.612,27.155,9.423 c0.961,1.978,1.555,4.033,1.832,6.096c9.688-8.677,19.309-17.099,28.392-24.828c0.054-0.046,0.105-0.09,0.16-0.136 c-10.209-19.536-24.849-36.845-42.687-50.098c-25.614-19.031-56.114-29.096-88.2-29.104c-0.01,0-0.017,0-0.025,0 c-21.654,0-47.976,7.566-68.697,19.749C13.981,51.193-0.005,71.163,0,92.49c0.008,25.748,14.53,36.518,26.199,45.171 c9.515,7.057,17.03,12.63,17.034,24.844c0.003,12.213-7.508,17.781-17.018,24.831c-11.665,8.648-26.184,19.412-26.176,45.163 c0.006,21.324,14.001,41.299,39.406,56.244c20.736,12.198,47.072,19.78,68.73,19.786c0.015,0,0.028,0,0.042,0 c39.305,0,76.254-15.171,104.044-42.72c20.837-20.655,34.656-46.416,40.273-74.442c-13.952,15.471-27.997,30.493-40.563,43.322 C206.641,253.965,196.773,268.682,182.595,278.479z M111.054,77.103c2.498-10.871,13.4-17.657,24.354-15.167 c10.939,2.478,17.793,13.282,15.313,24.138c-2.499,10.844-13.407,17.631-24.362,15.154 C115.411,98.764,108.554,87.947,111.054,77.103z M45.054,114.152c-7.005-8.716-5.565-21.401,3.216-28.339 c8.78-6.925,21.571-5.505,28.589,3.195c6.99,8.703,5.545,21.388-3.229,28.34C64.869,124.288,52.058,122.853,45.054,114.152z M55.746,247.168c-8.786-6.944-10.231-19.629-3.226-28.342c7-8.696,19.796-10.122,28.581-3.18 c8.778,6.943,10.224,19.629,3.225,28.327C77.327,252.686,64.53,254.111,55.746,247.168z"/></svg> </div>
+        <div class="icon" data-index="3"> <svg fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.925 31.925"><g><path d="M19.469,22.809c0.093-0.625,0.605-2.154,0.904-3.158c-0.105,0.002-0.212-0.007-0.315-0.036 c-0.222-0.059-0.415-0.181-0.56-0.348c-0.224,0.035-0.449,0.003-0.652-0.092c-0.208-0.096-0.375-0.25-0.489-0.44 c-0.225-0.004-0.439-0.073-0.625-0.204c-0.078-0.054-0.143-0.121-0.202-0.19c0.074,1.172,0.124,2.227,0.14,2.548 c0.041,0.797-0.435,2.653-0.271,3.424c0.165,0.772,1.378,2.911,1.419,3.272c0.041,0.36-0.338,0.518-0.531,0.719 c-0.194,0.202-0.132,0.509,0.023,0.689c0.156,0.181,0.583,0.345,0.739,0.689s-0.082,1.677-0.1,2.021 c-0.017,0.343,0.436,0.246,0.592,0c0.155-0.246,0.846-1.396,0.887-2.095c0.041-0.697-0.275-1.633-0.345-2.045 C20.013,27.151,19.371,23.474,19.469,22.809z"/><path d="M14.822,10.664c-0.512-0.146-1.021-0.292-1.463-0.418c-1.634-0.465-7.724-1.664-8.277-1.774S4.185,8.134,3.973,8.015 S2.29,6.229,1.632,6.18C0.976,6.131,0.681,6.722,0.943,7.042C1.205,7.362,2.584,8.692,3.16,8.89 c0.575,0.197,0.972,0.322,1.577,0.517c0.433,0.141,6.415,2.373,9.891,3.797c-0.005-0.027-0.017-0.052-0.02-0.079 c-0.021-0.23,0.029-0.453,0.137-0.646c-0.106-0.191-0.156-0.414-0.137-0.642c0.021-0.23,0.108-0.441,0.248-0.613 C14.794,11.045,14.789,10.853,14.822,10.664z"/><path d="M30.9,0.021c-0.319-0.147-2.353,0.518-2.784,1.01c-0.431,0.493-3.024,5.934-3.424,6.701 c0.025-0.185-0.505-0.775-0.342-1.081c0.163-0.305,0.958-0.803,1.007-1c0.049-0.196-0.542-0.665-0.468-0.801 c0.074-0.135,0.209-0.258,0.123-0.369c-0.086-0.11-0.689-0.099-0.862-0.222c-0.172-0.123-0.558-0.44-0.812-0.64 c-0.254-0.2-1.527-0.025-2.021,0.394s-0.656,1.057-0.714,1.232c-0.057,0.175-0.283,0.185-0.32,0.394 c-0.036,0.209,0.53,0.887,0.715,0.961s1.024,0.575,1.22,0.689s-0.012,0.259-0.16,0.172c-0.148-0.086-7.454-4.776-7.957-5.1 c-0.504-0.322-3.24-0.185-3.598,0c-0.356,0.186,1.158,1.108,1.527,1.011c0.37-0.1,1.22-0.505,1.479-0.346 c0.259,0.16,6.898,5.531,7.145,5.913c0.247,0.382,0.428,1.89,0.223,2.217c-0.051,0.081-0.138,0.125-0.243,0.149 c-1.338-1.168-3.224-2.807-3.411-2.937c-0.288-0.204-0.69-0.133-0.894,0.155c-0.146,0.208-0.146,0.47-0.031,0.677 c-0.235,0.005-0.463,0.136-0.568,0.363c-0.107,0.229-0.062,0.487,0.087,0.672c-0.233,0.045-0.434,0.215-0.498,0.458 c-0.065,0.245,0.023,0.489,0.201,0.646c-0.221,0.086-0.389,0.287-0.411,0.538c-0.021,0.251,0.108,0.478,0.312,0.601 c-0.203,0.123-0.333,0.351-0.312,0.601c0.022,0.252,0.19,0.451,0.411,0.538c-0.179,0.156-0.268,0.401-0.202,0.645 c0.064,0.246,0.265,0.413,0.499,0.459c-0.149,0.185-0.194,0.443-0.087,0.669c0.106,0.23,0.333,0.361,0.568,0.367 c-0.114,0.208-0.111,0.469,0.031,0.675c0.146,0.206,0.389,0.296,0.623,0.26c-0.075,0.225-0.029,0.48,0.149,0.658 c0.178,0.179,0.435,0.224,0.658,0.148c-0.035,0.232,0.055,0.479,0.262,0.624c0.208,0.145,0.467,0.145,0.675,0.032 c0.006,0.235,0.138,0.463,0.365,0.568c0.229,0.107,0.486,0.062,0.671-0.086c0.046,0.232,0.213,0.432,0.459,0.497 c0.243,0.066,0.488-0.023,0.644-0.202c0.086,0.222,0.287,0.389,0.54,0.41c0.251,0.021,0.477-0.108,0.6-0.311 c0.123,0.203,0.349,0.332,0.602,0.311c0.251-0.022,0.45-0.189,0.535-0.41c0.158,0.179,0.402,0.268,0.647,0.202 c0.244-0.066,0.41-0.266,0.457-0.497c0.185,0.147,0.442,0.192,0.673,0.086c0.227-0.106,0.358-0.333,0.363-0.57 c0.208,0.114,0.468,0.114,0.676-0.031c0.289-0.203,0.36-0.604,0.158-0.895c-0.136-0.191-1.895-2.211-3.066-3.554 c1.325-1.071,2.713-2.154,2.835-2.467c0.238-0.608-0.113-1.527-0.147-1.995c-0.035-0.468,3.019-7.371,3.178-7.76 c0.16-0.391,1.231,0.062,1.725-0.173C31.097,1.043,31.22,0.169,30.9,0.021z"/></g> </div>
+        <div class="icon" data-index="4"> <svg fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path d="M452.911,59.872c-4.713,0-8.533,3.821-8.533,8.533v294.352H118.439v-62.242c0-4.713-3.821-8.533-8.533-8.533 c-4.713,0-8.533,3.821-8.533,8.533v62.865c-13.122,1.898-24.864,8.101-33.749,17.13V59.349c0-20.392,14.511-37.458,33.749-41.416 v32.106c0,4.713,3.821,8.533,8.533,8.533c4.713,0,8.533-3.821,8.533-8.533V17.067h325.939v22.894 c-0.001,4.713,3.82,8.533,8.532,8.533c4.713,0,8.533-3.821,8.533-8.533V8.533c0-4.713-3.821-8.533-8.533-8.533H109.905 C77.179,0,50.557,26.624,50.557,59.349v362.71c0,0.015-0.001,0.03-0.001,0.044c0,6.277,0.98,12.462,2.909,18.373 c2.875,8.85,7.879,17.011,14.476,23.608c11.221,11.206,26.122,17.377,41.961,17.377h12.118v22.006c0,3.103,1.683,5.96,4.396,7.464 c2.711,1.503,6.027,1.417,8.66-0.228l31.886-19.929l31.886,19.929c1.381,0.864,2.95,1.297,4.523,1.297 c1.422,0,2.848-0.355,4.137-1.07c2.714-1.504,4.396-4.361,4.396-7.464v-22.006h241.003c4.713,0,8.533-3.821,8.533-8.533 l0.003-404.522C461.445,63.693,457.624,59.872,452.911,59.872z M194.837,472.916c0,0.003,0,0.007,0,0.011c0,0.005,0,0.007,0,0.011 v15.131l-23.353-14.595c-1.384-0.865-2.954-1.297-4.523-1.297c-1.569,0-3.139,0.432-4.523,1.297l-23.353,14.595v-75.057h55.751 V472.916z M220.437,395.947H110.073c-4.713,0-8.533,3.821-8.533,8.533c0,4.713,3.821,8.533,8.533,8.533h11.947v16.293H98.695 c-4.713,0-8.533,3.821-8.533,8.533s3.821,8.533,8.533,8.533h23.324v18.021h-12.118c-11.283,0-21.903-4.399-29.897-12.382 c-4.697-4.697-8.261-10.51-10.312-16.821c-1.374-4.209-2.071-8.613-2.071-13.088c0.001-23.313,18.968-42.28,42.28-42.28H406.27 v16.123H272.775c-4.713,0-8.533,3.821-8.533,8.533c0,4.713,3.821,8.533,8.533,8.533H406.27v16.293H211.904v-16.293h8.533 c4.713,0,8.533-3.821,8.533-8.533C228.97,399.767,225.15,395.947,220.437,395.947z M444.373,464.394L444.373,464.394h-232.47 v-18.021h202.9c4.713,0,8.533-3.821,8.533-8.533v-58.016h21.036V464.394z"/><path d="M109.905,70.542c-4.713,0-8.533,3.821-8.533,8.533v190.588c0,4.713,3.821,8.533,8.533,8.533 c4.713,0,8.533-3.821,8.533-8.533V79.076C118.439,74.363,114.618,70.542,109.905,70.542z"/><path d="M412.983,79.436c-17.195,0-31.184-13.989-31.184-31.184c0-4.713-3.821-8.533-8.533-8.533H191.365 c-4.713,0-8.533,3.821-8.533,8.533c0,17.195-13.989,31.184-31.184,31.184c-4.713,0-8.533,3.821-8.533,8.533v201.865 c0,4.713,3.821,8.533,8.533,8.533c17.195,0,31.184,13.989,31.184,31.184c0,4.713,3.821,8.533,8.533,8.533h37.466 c4.713,0,8.533-3.821,8.533-8.533c0-4.713-3.821-8.533-8.533-8.533h-29.688c-3.544-19.778-19.184-35.418-38.962-38.962V95.747 c19.778-3.544,35.418-19.184,38.962-38.962h166.345c3.544,19.778,19.184,35.418,38.962,38.962v186.31 c-19.778,3.544-35.418-19.184-38.962,38.962H257.275c-4.713,0-8.533,3.821-8.533,8.533c0,4.713,3.821,8.533,8.533,8.533h115.991 c4.713,0,8.533-3.821,8.533-8.533c0-17.195,13.989-31.184,31.184-31.184c4.713,0,8.533-3.821,8.533-8.533V87.97 C421.517,83.257,417.696,79.436,412.983,79.436z"/><path d="M333.515,141.684h-42.667V97.88c0-4.713-3.821-8.533-8.533-8.533c-4.713,0-8.533,3.821-8.533,8.533v43.804h-42.667 c-4.713,0-8.533,3.821-8.533,8.533c0,4.713,3.821,8.533,8.533,8.533h42.667v121.173c0,4.713,3.821,8.533,8.533,8.533 c4.713,0,8.533-3.821,8.533-8.533V158.751h42.667c4.713,0,8.533-3.821,8.533-8.533 C342.048,145.505,338.228,141.684,333.515,141.684z"/></g> </div>
+        <div class="icon" data-index="5">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <g>
+                    <path d="M12 19.5C12 20.8807 10.8807 22 9.5 22C8.11929 22 7 20.8807 7 19.5C7 18.1193 8.11929 17 9.5 17C10.8807 17 12 18.1193 12 19.5Z" stroke="currentColor" stroke-width="1.5"/><path d="M22 17.5C22 18.8807 20.8807 20 19.5 20C18.1193 20 17 18.8807 17 17.5C17 16.1193 18.1193 15 19.5 15C20.8807 15 22 16.1193 22 17.5Z" stroke="currentColor" stroke-width="1.5"/><path d="M22 8L12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14.4556 5.15803L14.7452 5.84987L14.4556 5.15803ZM16.4556 4.32094L16.1661 3.62909L16.4556 4.32094ZM21.1081 3.34059L20.6925 3.96496L20.6925 3.96496L21.1081 3.34059ZM12.75 19.0004V8.84787H11.25V19.0004H12.75ZM22.75 17.1542V8.01078H21.25V17.1542H22.75ZM14.7452 5.84987L16.7452 5.01278L16.1661 3.62909L14.1661 4.46618L14.7452 5.84987ZM22.75 8.01078C22.75 6.67666 22.752 5.59091 22.6304 4.76937C22.5067 3.93328 22.2308 3.18689 21.5236 2.71622L20.6925 3.96496C20.8772 4.08787 21.0473 4.31771 21.1466 4.98889C21.248 5.67462 21.25 6.62717 21.25 8.01078H22.75ZM16.7452 5.01278C18.0215 4.47858 18.901 4.11263 19.5727 3.94145C20.2302 3.77391 20.5079 3.84204 20.6925 3.96496L21.5236 2.71622C20.8164 2.24554 20.0213 2.2792 19.2023 2.48791C18.3975 2.69298 17.3967 3.114 16.1661 3.62909L16.7452 5.01278ZM12.75 8.84787C12.75 8.18634 12.751 7.74991 12.7875 7.41416C12.822 7.09662 12.8823 6.94006 12.9594 6.8243L11.7106 5.99325C11.4527 6.38089 11.3455 6.79864 11.2963 7.25218C11.249 7.68752 11.25 8.21893 11.25 8.84787H12.75ZM14.1661 4.46618C13.5859 4.70901 13.0953 4.91324 12.712 5.12494C12.3126 5.34549 11.9686 5.60562 11.7106 5.99325L12.9594 6.8243C13.0364 6.70855 13.1575 6.59242 13.4371 6.438C13.7328 6.27473 14.135 6.10528 14.7452 5.84987L14.1661 4.46618Z" stroke="currentColor"/><path d="M7 11V6.5V2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="4.5" cy="10.5" r="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M10 5C8.75736 5 7 4.07107 7 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <div id="editor-panel">
+        <h3>Editor Avançado</h3>
+        <div class="control-group"> <label>Fonte</label> <select id="font-selector"> <option value="Teko">Teko</option> <option value="Roboto">Roboto</option> <option value="Montserrat">Montserrat</option> <option value="Lobster">Lobster</option> <option value="Playfair Display">Playfair Display</option> </select> </div>
+        <div class="control-group"> <label>Cores do Fundo</label> <div class="color-pair"> <div> <label for="circle-color-1">Cor 1</label> <input type="color" id="circle-color-1" data-css-var="--circle-color-1" value="#4e8dff"> </div> <div> <label for="circle-color-2">Cor 2</label> <input type="color" id="circle-color-2" data-css-var="--circle-color-2" value="#3a7bfd"> </div> </div> </div>
+        <div class="control-group"> <label>Cores do Texto Principal</label> <div class="color-pair"> <div> <label for="text-main-color-1">Cor 1</label> <input type="color" id="text-main-color-1" data-css-var="--text-main-color-1" value="#ff8c00"> </div> <div> <label for="text-main-color-2">Cor 2</label> <input type="color" id="text-main-color-2" data-css-var="--text-main-color-2" value="#ffae3c"> </div> </div> <label for="text-main-shadow" style="margin-top:10px;">Sombra</label> <input type="color" id="text-main-shadow" data-css-var="--text-main-shadow" value="#c86e00"> </div>
+        <div class="control-group"> <label for="text-de-color">Cor do Texto "de"</label> <input type="color" id="text-de-color" data-css-var="--text-de-color" value="#4a4a4a"> </div>
+        <div class="control-group"> <label>Cores dos Ícones</label> <div class="color-pair"> <div> <label for="icon-color">Padrão</label> <input type="color" id="icon-color" data-css-var="--icon-color" value="#4a4a4a"> </div> <div> <label for="icon-glow-color">Brilho</label> <input type="color" id="icon-glow-color" data-css-var="--icon-glow-color" value="#e945c1"> </div> </div> </div>
+        <div class="control-group"> <label for="background-color">Cor de Fundo da Página</label> <input type="color" id="background-color" data-css-var="--background-color" value="#ffffff"> </div>
+        <div class="control-group"> <label for="border-radius">Bordas Arredondadas (0-50)</label> <input type="range" id="border-radius" min="0" max="50" value="15"> </div>
+        <div class="control-group"> <label for="logo-size">Tamanho do Logo</label> <input type="range" id="logo-size" min="200" max="600" value="450" data-css-var="--logo-container-size" data-unit="px"> </div>
+        <div class="control-group"> <label for="logo-pos-x">Posição X do Logo</label> <input type="range" id="logo-pos-x" min="-200" max="200" value="0" data-css-var="--logo-pos-x" data-unit="px"> </div>
+        <div class="control-group"> <label for="logo-pos-y">Posição Y do Logo</label> <input type="range" id="logo-pos-y" min="-200" max="200" value="0" data-css-var="--logo-pos-y" data-unit="px"> </div>
+        <div class="control-group"> <label for="main-font-size">Tamanho Fonte Principal</label> <input type="range" id="main-font-size" min="3" max="12" step="0.1" value="7" data-css-var="--main-font-size" data-unit="rem"> </div>
+        <div class="control-group"> <label for="secondary-font-size">Tamanho Fonte Secundária</label> <input type="range" id="secondary-font-size" min="1" max="6" step="0.1" value="2.5" data-css-var="--secondary-font-size" data-unit="rem"> </div>
+        <div class="control-group"> <label for="icon-size">Tamanho Ícones</label> <input type="range" id="icon-size" min="30" max="150" value="85" data-css-var="--icon-size" data-unit="px"> </div>
+        <div class="control-group"> <label for="icon-travel">Distância Animação Ícones</label> <input type="range" id="icon-travel" min="100" max="500" value="350"> </div>
+        <div class="control-group"> <button id="save-button">Salvar Configurações</button> <button id="load-button">Carregar Configurações</button> <input type="file" id="file-loader" accept=".json"> </div>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const config = {
+            animationDuration: 4000, 
+            travelDistance: 350,
+        };
+        
+        const circleBackground = document.querySelector('.circle-background');
+        let currentRotationAngle = 0; // Variável para controlar o ângulo de rotação
+
+        // --- LÓGICA DE GERAÇÃO DE FORMA SIMPLIFICADA ---
+        
+        const TOTAL_CLIP_PATH_POINTS = 120; 
+
+        // Apenas a forma de quadrado é mantida
+        const SHAPES = {
+            square: [[0, 0], [100, 0], [100, 100], [0, 100]],
+        };
+        
+        function generateClipPath(shapeVertices, cornerRadius, totalPoints) {
+            const points = [];
+            const numVertices = shapeVertices.length;
+            
+            if (cornerRadius < 0.1) {
+                return shapeVertices.map(p => `${p[0]}% ${p[1]}%`).join(', ');
+            }
+
+            for (let i = 0; i < numVertices; i++) {
+                const p0 = shapeVertices[(i - 1 + numVertices) % numVertices];
+                const p1 = shapeVertices[i];
+                const p2 = shapeVertices[(i + 1) % numVertices];
+
+                const v1 = [p0[0] - p1[0], p0[1] - p1[1]];
+                const v2 = [p2[0] - p1[0], p2[1] - p1[1]];
+
+                const lenV1 = Math.sqrt(v1[0] * v1[0] + v1[1] * v1[1]);
+                const lenV2 = Math.sqrt(v2[0] * v2[0] + v2[1] * v2[1]);
+
+                v1[0] /= lenV1; v1[1] /= lenV1;
+                v2[0] /= lenV2; v2[1] /= lenV2;
+
+                const angle = Math.acos(v1[0] * v2[0] + v1[1] * v2[1]);
+                const tanHalfAngle = Math.tan(angle / 2);
+                
+                let segment = cornerRadius / tanHalfAngle;
+                segment = Math.min(segment, lenV1 / 2, lenV2 / 2);
+
+                const pStart = [p1[0] + v1[0] * segment, p1[1] + v1[1] * segment];
+                const pEnd = [p1[0] + v2[0] * segment, p1[1] + v2[1] * segment];
+                
+                points.push(pStart);
+
+                const numArcPoints = Math.floor(totalPoints / numVertices / 2);
+                for (let j = 1; j < numArcPoints; j++) {
+                    const t = j / numArcPoints;
+                    const b0 = (1 - t) * (1 - t);
+                    const b1 = 2 * (1 - t) * t;
+                    const b2 = t * t;
+                    const x = b0 * pStart[0] + b1 * p1[0] + b2 * pEnd[0];
+                    const y = b0 * pStart[1] + b1 * p1[1] + b2 * pEnd[1];
+                    points.push([x, y]);
+                }
+                points.push(pEnd);
+            }
+
+            const finalPoints = [];
+            for (let i = 0; i < totalPoints; i++) {
+                finalPoints.push(points[Math.floor(i * points.length / totalPoints)]);
+            }
+
+            return finalPoints.map(p => `${p[0].toFixed(2)}% ${p[1].toFixed(2)}%`).join(', ');
+        }
+        
+        function updateShape() {
+            const vertices = SHAPES.square; // Usa sempre o quadrado
+            const radius = parseFloat(document.getElementById('border-radius').value);
+            const clipPathValue = generateClipPath(vertices, radius, TOTAL_CLIP_PATH_POINTS);
+            circleBackground.style.clipPath = `polygon(${clipPathValue})`;
+        }
+        
+        // A função changeShape e o setInterval foram removidos.
+        
+        // --- LÓGICA DOS ÍCONES COM ROTAÇÃO ---
+        const iconElements = document.querySelectorAll('.icon');
+        const totalIcons = iconElements.length;
+        const icons = Array.from(iconElements).map((el, i) => ({ el, index: i, isActive: false, startTime: 0, triggeredNext: false, }));
+        function easeInOutCubic(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+        function startIconAnimation(index) { const icon = icons[index]; if (!icon || icon.isActive) return; icon.isActive = true; icon.startTime = performance.now(); icon.triggeredNext = false; }
+        
+        function updateAnimation(currentTime) {
+            icons.forEach(icon => {
+                if (!icon.isActive) return;
+                const elapsed = currentTime - icon.startTime;
+                let progress = elapsed / config.animationDuration;
+                if (progress >= 1) {
+                    icon.isActive = false;
+                    icon.el.style.opacity = 0;
+                    icon.el.classList.remove('is-active');
+                    return;
+                }
+                const easedProgress = easeInOutCubic(progress);
+                const x = (easedProgress - 0.5) * 2 * config.travelDistance;
+                const scaleProgress = Math.sin(easedProgress * Math.PI);
+                const scale = 1 + 0.5 * scaleProgress;
+                const rotation = (easedProgress - 0.5) * 30;
+                const opacity = scaleProgress > 0.1 ? 1 : scaleProgress * 10;
+                icon.el.style.opacity = opacity;
+                icon.el.style.transform = `translateX(${x}px) scale(${scale}) rotate(${rotation}deg)`;
+                
+                if (progress > 0.4 && progress < 0.6) {
+                    icon.el.classList.add('is-active');
+                } else {
+                    icon.el.classList.remove('is-active');
+                }
+                
+                // Rotação é acionada aqui, junto com a próxima animação de ícone
+                if (progress > 0.5 && !icon.triggeredNext) {
+                    icon.triggeredNext = true;
+
+                    // Adiciona 45 graus à rotação atual
+                    currentRotationAngle += 45;
+                    // Aplica a nova rotação ao fundo
+                    circleBackground.style.transform = `rotate(${currentRotationAngle}deg)`;
+
+                    const nextIndex = (icon.index + 1) % totalIcons;
+                    startIconAnimation(nextIndex);
+                }
+            });
+            requestAnimationFrame(updateAnimation);
+        }
+        
+        // --- LÓGICA DO EDITOR (sem alterações) ---
+        function setupEditor() {
+            const controls = document.querySelectorAll('#editor-panel input, #editor-panel select');
+            const root = document.documentElement;
+
+            controls.forEach(control => {
+                const eventType = control.matches('select') ? 'change' : 'input';
+                control.addEventListener(eventType, (e) => {
+                    const target = e.target;
+                    if (target.dataset.cssVar) {
+                        root.style.setProperty(target.dataset.cssVar, target.value + (target.dataset.unit || ''));
+                    }
+                    if (target.id === 'icon-travel') {
+                        config.travelDistance = parseInt(target.value, 10);
+                    }
+                    if (target.id === 'font-selector') {
+                        updateFont(target.value);
+                    }
+                    if (target.id === 'border-radius') {
+                        updateShape();
+                    }
+                });
+            });
+
+            const saveButton = document.getElementById('save-button');
+            const loadButton = document.getElementById('load-button');
+            const fileLoader = document.getElementById('file-loader');
+
+            saveButton.addEventListener('click', () => {
+                const settings = {};
+                controls.forEach(control => { if (control.id && control.id !== 'file-loader') settings[control.id] = control.value; });
+                const blob = new Blob([JSON.stringify(settings, null, 2)], { type: 'application/json' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'configuracoes.json';
+                a.click();
+                URL.revokeObjectURL(a.href);
+                a.remove();
+            });
+
+            loadButton.addEventListener('click', () => fileLoader.click());
+            fileLoader.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try { applySettings(JSON.parse(event.target.result)); } 
+                    catch (err) { alert('Erro ao carregar o arquivo JSON.'); console.error(err); }
+                };
+                reader.readAsText(file);
+                e.target.value = ''; 
+            });
+        }
+        
+        function updateFont(fontName) {
+            const fontId = 'google-font-stylesheet';
+            const oldLink = document.getElementById(fontId);
+            if (oldLink) oldLink.remove();
+            const link = document.createElement('link');
+            link.id = fontId; link.rel = 'stylesheet';
+            link.href = `https://fonts.googleapis.com/css2?family=${fontName.replace(/\s/g, '+')}:wght@400;600;700&display=swap`;
+            document.head.appendChild(link);
+            document.body.style.fontFamily = `'${fontName}', sans-serif`;
+        }
+
+        function applySettings(settings) {
+            for (const key in settings) {
+                const control = document.getElementById(key);
+                if (control) {
+                    control.value = settings[key];
+                    control.dispatchEvent(new Event(control.matches('select') ? 'change' : 'input', { bubbles: true }));
+                }
+            }
+            if (settings['font-selector']) updateFont(settings['font-selector']);
+            updateShape();
+        }
+        
+        // --- INICIALIZAÇÃO ---
+        setupEditor();
+        updateShape(); // Define a forma inicial (quadrado)
+        startIconAnimation(0);
+        requestAnimationFrame(updateAnimation);
+
+        // Carrega o JSON que você forneceu para demonstrar
+        const initialConfig = { "font-selector": "Teko", "circle-color-1": "#ff4dea", "circle-color-2": "#940dd3", "text-main-color-1": "#ff8c00", "text-main-color-2": "#ffae3c", "text-main-shadow": "#efff14", "text-de-color": "#fff700", "icon-color": "#d6d6d6", "icon-glow-color": "#ffffff", "background-color": "#ffffff", "border-radius": "30", "logo-size": "450", "logo-pos-x": "0", "logo-pos-y": "0", "main-font-size": "4.4", "secondary-font-size": "2.5", "icon-size": "102", "icon-travel": "350" };
+        applySettings(initialConfig);
+    });
+</script>
+
+</body>
+</html>
