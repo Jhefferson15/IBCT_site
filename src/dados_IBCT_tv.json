@@ -1,0 +1,448 @@
+[
+  {
+    "videoId": "Fj-6VzhJRgo",
+    "metadata": {
+      "schemaVersion": "1.1",
+      "publishedDate": "2022-09-10",
+      "event": {
+        "type": "Escola Bíblica Dominical",
+        "theme": "Introdução à Educação Cristã Clássica",
+        "language": "pt-BR"
+      },
+      "churchInfo": {
+        "name": "Igreja Batista Central de Taguatinga (IBCT)",
+        "channel": null
+      },
+      "sermon": {
+        "title": "A Paideia de Deus (parte 1)",
+        "speaker": "Marlon Meira",
+        "speakerRole": "Professor",
+        "series": "Introdução à Educação Cristã Clássica",
+        "mainScripture": "Efésios 6:4",
+        "keyConcepts": [
+          "educação cristã clássica",
+          "paideia",
+          "trivium",
+          "homeschooling",
+          "platão",
+          "aristóteles",
+          "agostinho",
+          "virtude",
+          "racionalismo",
+          "lógica",
+          "david hicks",
+          "g.k. chesterton",
+          "douglas wilson",
+          "classicismo"
+        ]
+      },
+      "participants": [
+        {
+          "name": "Marlon Meira",
+          "role": "Professor"
+        }
+      ],
+      "worship": []
+    },
+    "timeline": [
+      {
+        "start": "00:00:00",
+        "end": "00:00:02",
+        "label": "Tela de título da aula: 'Classe Introdução à Educação Cristã Clássica', Aula 05.",
+        "type": "Opening Credits",
+        "overlays": []
+      },
+      {
+        "start": "00:00:02",
+        "end": "00:00:16",
+        "label": "Professor Marlon Meira se apresenta e introduz a aula número cinco sobre Introdução à Educação Cristã Clássica.",
+        "type": "Introduction",
+        "overlays": []
+      },
+      {
+        "start": "00:00:16",
+        "end": "00:00:55",
+        "label": "O professor inicia a aula com uma oração, agradecendo a Deus pelo curso e pedindo orientação.",
+        "type": "Prayer",
+        "overlays": []
+      },
+      {
+        "start": "00:00:55",
+        "end": "00:02:18",
+        "label": "O professor comenta sobre sua participação no evento 'Expo Homeschooling', onde ministrou uma oficina sobre como ensinar a história do Brasil através do Trivium.",
+        "type": "Introduction",
+        "overlays": []
+      },
+      {
+        "start": "00:02:18",
+        "end": "00:38:08",
+        "label": "Início da aula com o tema 'A Paideia de Deus'. O professor lê Efésios 6:4, discute o significado de 'ser clássico' usando a pintura 'A Escola de Atenas', explora os padrões Platônico, Aristotélico e Agostiniano, e adverte sobre a idolatria do classicismo, citando David Hicks e G.K. Chesterton. Ele contrasta o 'psychikos' com o 'pneumatikos' e conclui com uma citação de Chris Schlect sobre a educação secular.",
+        "type": "Sermon",
+        "overlays": []
+      },
+      {
+        "start": "00:38:08",
+        "end": "00:38:35",
+        "label": "O professor encerra a aula com uma oração, pedindo a Deus que a educação dos filhos seja orientada pelas Escrituras.",
+        "type": "Prayer",
+        "overlays": []
+      },
+      {
+        "start": "00:38:35",
+        "end": "00:38:43",
+        "label": "Despedida e encerramento da aula.",
+        "type": "Conclusion",
+        "overlays": []
+      },
+      {
+        "start": "00:38:43",
+        "end": "00:38:46",
+        "label": "Tela final da aula.",
+        "type": "Closing Credits",
+        "overlays": []
+      }
+    ]
+  },
+  {
+    "videoId": "J-rB2x8Scdc",
+    "metadata": {
+      "schemaVersion": "1.1",
+      "publishedDate": "2025-07-16",
+      "event": {
+        "type": "Culto de Oração",
+        "theme": "Testemunho de Cristo eu sou",
+        "language": "pt-BR"
+      },
+      "churchInfo": {
+        "name": "Igreja Batista Central de Taguatinga (IBCT)",
+        "channel": "TV IBC+"
+      },
+      "sermon": {
+        "title": "A Oração que Une o Assentar, o Andar e o Ficar Firme",
+        "speaker": "Pr. David Cantanhede",
+        "speakerRole": "Pastor de Crianças",
+        "series": "Estudo em Efésios",
+        "mainScripture": "Efésios 3:1-21",
+        "keyConcepts": [
+          "oração",
+          "postura espiritual",
+          "ajoelhar-se",
+          "epístolas da prisão",
+          "efésios",
+          "unidade em cristo",
+          "mistério do evangelho",
+          "ligacamp",
+          "projeto escuta da bíblia",
+          "proclaimer",
+          "a fé vem pelo ouvir",
+          "john piper",
+          "colônia de férias cross 2025"
+        ]
+      },
+      "participants": [
+        {
+          "name": "Pr. David Cantanhede",
+          "role": "Pregador"
+        },
+        {
+          "name": "Equipe de Louvor da IBCT",
+          "role": "Louvor e Adoração"
+        }
+      ],
+      "worship": [
+        {
+          "songTitle": "Brilho Celeste",
+          "hymnal": "Cantor Cristão 301",
+          "performer": "Equipe de Louvor da IBCT",
+          "isInstrumental": false
+        }
+      ]
+    },
+    "timeline": [
+      {
+        "start": "00:00:00",
+        "end": "00:02:49",
+        "label": "Contagem regressiva de 3 minutos para o início do culto, com diferentes fundos animados e música instrumental.",
+        "type": "Timer",
+        "overlays": []
+      },
+      {
+        "start": "00:02:49",
+        "end": "00:03:17",
+        "label": "Vinheta de abertura com contagem regressiva estilizada de 10 a 0, mostrando imagens aéreas da Igreja Batista Central de Taguatinga.",
+        "type": "Opening Credits",
+        "overlays": []
+      },
+      {
+        "start": "00:03:17",
+        "end": "00:07:06",
+        "label": "Momento de louvor com a equipe no palco cantando o hino 'Brilho Celeste' (Cantor Cristão 301). No púlpito, um banner mostra o tema do culto: 'Testemunho de Cristo eu sou'.",
+        "type": "Worship",
+        "overlays": [
+          {
+            "start": "00:03:17",
+            "end": "00:07:06",
+            "type": "Subtitle",
+            "content": {
+              "text": "Letra da música 'Brilho Celeste' exibida na tela."
+            }
+          }
+        ]
+      },
+      {
+        "start": "00:07:06",
+        "end": "00:09:58",
+        "label": "Pr. David Cantanhede faz a saudação inicial e dá avisos importantes: oração pela família pastoral em férias, anúncio do acampamento 'LigaCamp' e introdução do 'Projeto Escuta da Bíblia' com o dispositivo Proclaimer.",
+        "type": "Announcements",
+        "overlays": [
+          {
+            "start": "00:08:35",
+            "end": "00:09:58",
+            "type": "Banner",
+            "content": {
+              "title": "ligacamp",
+              "details": "18 a 20 de julho | Chácara Shekinah",
+              "logos": [
+                "ENSINE",
+                "IGREJA BATISTA CENTRAL DE TAGUATINGA"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "start": "00:09:58",
+        "end": "00:14:41",
+        "label": "Início da mensagem bíblica. O pastor, em pé no púlpito, ora e introduz o estudo da Epístola aos Efésios, contextualizando que Paulo a escreveu na prisão. Ele estabelece a estrutura da pregação em torno das posturas de 'assentar', 'andar' e 'ficar firme', conectadas pela oração ('ajoelhar-se').",
+        "type": "Sermon",
+        "overlays": []
+      },
+      {
+        "start": "00:14:41",
+        "end": "00:18:02",
+        "label": "Leitura da Bíblia em áudio do capítulo 3 completo de Efésios (versículos 1-21), na versão NVT.",
+        "type": "Scripture Reading",
+        "overlays": [
+          {
+            "start": "00:14:41",
+            "end": "00:18:02",
+            "type": "Banner",
+            "content": {
+              "title": "Projeto Escuta da Bíblia",
+              "details": "Parceria com Editora Mundo Cristão e A Fé Vem pelo Ouvir"
+            }
+          }
+        ]
+      },
+      {
+        "start": "00:18:02",
+        "end": "00:30:03",
+        "label": "O Pr. David Cantanhede, agora sentado nos degraus do palco, continua a mensagem. Ele reflete sobre a leitura de Efésios 3, convida os espectadores a compartilharem seus pedidos de oração no chat, e agradece aos voluntários da Colônia de Férias Cross 2025.",
+        "type": "Sermon",
+        "overlays": []
+      },
+      {
+        "start": "00:30:03",
+        "end": "00:33:14",
+        "label": "O pastor se levanta e conduz a oração final. Ele intercede pela família pastoral, pelo acampamento da LIGA, pela EBD de Inverno, pelos servos da igreja e por todos que acompanharam o culto. Finaliza com uma benção.",
+        "type": "Prayer",
+        "overlays": []
+      },
+      {
+        "start": "00:33:14",
+        "end": "00:33:43",
+        "label": "Vinheta de encerramento, mostrando imagens aéreas da igreja e o logo da TV IBC+.",
+        "type": "Closing Credits",
+        "overlays": []
+      }
+    ]
+  },
+  {
+    "videoId": "J-KfEl6ls1c",
+    "metadata": {
+      "schemaVersion": "1.1",
+      "publishedDate": "2020-05-18",
+      "event": {
+        "type": "Série Devocional",
+        "theme": "Estação SEMEAR",
+        "language": "pt-BR"
+      },
+      "churchInfo": {
+        "name": "Igreja Batista Central de Taguatinga",
+        "channel": null
+      },
+      "sermon": {
+        "title": "Entendendo o tempo",
+        "speaker": "Alexandre Rios",
+        "speakerRole": "Pregador",
+        "series": "Estação SEMEAR",
+        "mainScripture": "Marcos 4:4",
+        "keyConcepts": [
+          "semear",
+          "tempo",
+          "advérbio temporal",
+          "cronológico",
+          "clima",
+          "semeadura",
+          "paciência",
+          "mudança",
+          "aquarela",
+          "toquinho",
+          "vinicius de moraes"
+        ]
+      },
+      "participants": [
+        {
+          "name": "Alexandre Rios",
+          "role": "Pregador"
+        }
+      ],
+      "worship": []
+    },
+    "timeline": [
+      {
+        "start": "00:00:00",
+        "end": "00:00:18",
+        "label": "Vinheta de abertura da série 'Estação SEMEAR' com animações gráficas e música instrumental. O título do episódio, 'Entendendo o tempo', é exibido.",
+        "type": "Opening Credits",
+        "overlays": []
+      },
+      {
+        "start": "00:00:18",
+        "end": "00:00:25",
+        "label": "Alexandre Rios introduz o capítulo 2 da minissérie.",
+        "type": "Introduction",
+        "overlays": [
+          {
+            "start": "00:00:18",
+            "end": "00:00:25",
+            "type": "Lower Third",
+            "content": {
+              "line1": "Estação SEMEAR",
+              "line2": "Alexandre Rios"
+            }
+          }
+        ]
+      },
+      {
+        "start": "00:00:25",
+        "end": "00:02:41",
+        "label": "Inicia a reflexão com base em Marcos 4:4, focando na palavra 'enquanto' como um advérbio temporal. Cita a música 'Aquarela' para ilustrar a incontrolabilidade do tempo, explora a paciência na semeadura e relaciona as mudanças de 'clima' com os desafios da vida.",
+        "type": "Sermon",
+        "overlays": []
+      },
+      {
+        "start": "00:02:41",
+        "end": "00:03:17",
+        "label": "Conclui a mensagem afirmando que Deus é o 'dono de todo tempo' e pode usar tempos turbulentos para quebrantar corações. Encerra com uma bênção.",
+        "type": "Conclusion",
+        "overlays": []
+      },
+      {
+        "start": "00:03:17",
+        "end": "00:03:23",
+        "label": "Vinheta de encerramento com o logotipo da 'Igreja Batista Central de Taguatinga'.",
+        "type": "Closing Credits",
+        "overlays": []
+      }
+    ]
+  },
+  {
+    "videoId": "BkVPhFlN7ck",
+    "metadata": {
+      "schemaVersion": "1.1",
+      "publishedDate": "2023-02-21",
+      "event": {
+        "type": "Retiro de Jovens",
+        "theme": "Fé Pra Continuar - Retro 2023",
+        "language": "pt-BR"
+      },
+      "churchInfo": {
+        "name": "Igreja Batista Central de Taguatinga",
+        "channel": null
+      },
+      "sermon": {
+        "title": "A Fé do Nós: O Papel da Comunidade para Continuar",
+        "speaker": "Breton",
+        "speakerRole": "Pregador",
+        "series": "Fé Pra Continuar",
+        "mainScripture": "Tiago 5:13-20; Romanos 16:1-16",
+        "keyConcepts": [
+          "fé",
+          "comunidade",
+          "serviço cristão",
+          "hospitalidade",
+          "cooperadores",
+          "igreja nos lares",
+          "oração",
+          "perseverança",
+          "relacionamentos",
+          "fé do nós",
+          "consumismo na igreja"
+        ]
+      },
+      "participants": [
+        {
+          "name": "Breton",
+          "role": "Pregador"
+        },
+        {
+          "name": "Pastor Mateus",
+          "role": "Prayer Leader"
+        }
+      ],
+      "worship": []
+    },
+    "timeline": [
+      {
+        "start": "00:00:00",
+        "end": "00:00:09",
+        "label": "Vinheta de abertura do evento 'Retro 2023' com o tema 'Fé Pra Continuar'.",
+        "type": "Opening Credits",
+        "overlays": []
+      },
+      {
+        "start": "00:00:09",
+        "end": "00:01:21",
+        "label": "Pregador Breton sobe ao púlpito, faz comentários iniciais bem-humorados e introduz a mensagem focando na aplicação prática da palavra.",
+        "type": "Introduction",
+        "overlays": []
+      },
+      {
+        "start": "00:01:21",
+        "end": "00:02:20",
+        "label": "Exposição sobre Tiago 5:13-20, destacando a instrução de orar em todas as circunstâncias: sofrimento, alegria, enfermidade e desvio espiritual.",
+        "type": "Sermon",
+        "overlays": []
+      },
+      {
+        "start": "00:02:20",
+        "end": "00:03:36",
+        "label": "O pregador propõe uma atividade prática: divide a congregação em quatro grupos para orarem especificamente pelos temas de Tiago 5.",
+        "type": "Interactive Activity",
+        "overlays": []
+      },
+      {
+        "start": "00:03:36",
+        "end": "00:36:01",
+        "label": "Transição para Romanos 16:1-16. O pregador discorre sobre a importância da comunidade, citando Febe, Priscila, Áquila e outros como 'cooperadores'. Aplica o conceito à vida da igreja, criticando a mentalidade de 'consumidor' e reforçando a necessidade de serviço, hospitalidade e relacionamentos profundos, definindo a 'fé do nós'.",
+        "type": "Sermon",
+        "overlays": []
+      },
+      {
+        "start": "00:36:01",
+        "end": "00:36:51",
+        "label": "Conclusão da mensagem por Breton e oração final conduzida pelo Pastor Mateus.",
+        "type": "Prayer",
+        "overlays": []
+      },
+      {
+        "start": "00:36:51",
+        "end": "00:36:57",
+        "label": "Vinheta de encerramento com o logotipo da Igreja Batista Central de Taguatinga.",
+        "type": "Closing Credits",
+        "overlays": []
+      }
+    ]
+  }
+]
