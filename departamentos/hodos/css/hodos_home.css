@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@700&display=swap');
 :root {
     --cor-vinho: #902C3E;
@@ -13,7 +12,7 @@
     --fonte-corpo: 'Montserrat', sans-serif;
 }
 
-/* ... (Estilos globais, header, hero, etc. - sem alterações significativas) ... */
+/* ... (Estilos globais, hero, etc. - sem alterações significativas) ... */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
@@ -37,10 +36,29 @@ a:hover { opacity: 0.7; }
     padding: 20px 0; border-bottom: 2px solid var(--cor-creme-fundo);
     position: sticky; top: 0; z-index: 1000;
 }
-.header .container { display: flex; justify-content: space-between; align-items: center; }
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; /* Adicionado para posicionar o logo central */
+}
 .logo { font-family: var(--fonte-titulo); font-size: 24px; color: var(--cor-vinho); display: flex; align-items: center; gap: 10px; }
 .logo img { height: 35px; }
 .logo span { font-family: var(--fonte-corpo); font-size: 16px; color: var(--cor-rosa-suave); }
+
+/* --- NOVOS ESTILOS PARA O LOGO CENTRAL --- */
+.header-center-logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.header-center-logo img {
+    height: 45px; /* Um pouco maior que o logo da igreja para dar destaque */
+    display: block;
+}
+/* --- FIM DOS NOVOS ESTILOS --- */
+
 .nav-links { display: flex; }
 .nav-links a { margin-left: 25px; font-weight: 500; cursor: pointer; text-decoration: none; color: var(--cor-grafite-texto);}
 .hamburger { display: none; cursor: pointer; }
@@ -156,6 +174,11 @@ a:hover { opacity: 0.7; }
     .hamburger.toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
     .hero h1 { font-size: 36px; }
     .scroll-button { display: none; }
+    
+    /* Oculta o logo central em telas pequenas para não poluir a interface */
+    .header-center-logo {
+        display: none;
+    }
 }
 
 /* ... (demais estilos inalterados) ... */

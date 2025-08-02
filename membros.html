@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área de Membros - IBCT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/home-style.css">
+    <link rel="stylesheet" href="css/membros-style.css">
+</head>
+<body>
+    <!-- O script de guarda de rota e backend devem ser carregados antes de tudo -->
+    <script src="js/backend-simulado.js"></script>
+    <script>
+        // GUARDA DE ROTA: Verifica a sessão antes de carregar o resto
+        if (!IBCT_Backend.checkSession()) {
+            window.location.href = 'login.html';
+        }
+    </script>
+    
+    <!-- O cabeçalho é injetado dinamicamente pelo membros-script.js -->
+    <header class="header"></header>
+
+    <main>
+        <section id="membros-hero" class="content-section bg-light">
+            <div class="container">
+                <h1 id="welcome-message"></h1>
+                <p>Este é o seu espaço central para informações e avisos importantes da IBCT.</p>
+            </div>
+        </section>
+
+        <section id="membros-content" class="content-section">
+            <div class="container membros-layout">
+                <div class="main-content">
+                    <h2><i class="fas fa-bullhorn"></i> Quadro de Avisos</h2>
+                    <div id="avisos-container" class="avisos-container">
+                        <!-- Avisos serão inseridos aqui pelo JS -->
+                    </div>
+                </div>
+                <aside class="sidebar">
+                    <div class="info-card">
+                        <h3><i class="fas fa-user-circle"></i> Meu Perfil</h3>
+                        <div id="perfil-container">
+                            <!-- Informações do perfil inseridas aqui -->
+                        </div>
+                    </div>
+                     <div class="info-card">
+                        <h3><i class="fas fa-link"></i> Links Rápidos</h3>
+                        <ul class="quick-links">
+                            <li><a href="ibct_tv.html">IBCT TV (Cultos Ao Vivo)</a></li>
+                            <li><a href="#agenda">Calendário Completo</a></li>
+                            <li><a href="sobre_ibct.html">Nossa História</a></li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+             <div class="logo">Igreja Batista Central <span>em Taguatinga</span></div>
+             <p>© 2025 IBCT. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <script src="js/membros-script.js" defer></script>
+</body>
+</html>

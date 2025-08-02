@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="css/home-style.css">
     <link rel="stylesheet" href="componentes/calendario/calendario.css">
+    
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 
@@ -33,6 +35,8 @@
                 <a href="ibct_tv.html">IBCT TV</a>
                 <a href="sobre_ibct.html">Sobre</a>
                 <a href="#contato">Contato</a>
+                <!-- ADICIONADO: Container para a sessão do usuário -->
+                <div id="user-session-container"></div>
             </nav>
             <div class="hamburger">
                 <div class="line1"></div><div class="line2"></div><div class="line3"></div>
@@ -40,6 +44,7 @@
         </div>
     </header>
 
+    <!-- (Seu <main> e <footer> continuam aqui sem alterações) -->
     <main>
         <section id="inicio" class="home-hero fade-in">
             <div class="hero-background-layer"></div>
@@ -198,8 +203,11 @@
         </div>
     </div>
     
+
     <a class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
     
+    <!-- CARREGUE O BACKEND ANTES DO SCRIPT DA HOME -->
+    <script src="js/backend-simulado.js"></script>
     <script src="js/home-script.js" defer></script>
     <script src="componentes/calendario/calendario.js" data-filter="igreja" defer></script>
 </body>

@@ -1,0 +1,95 @@
+#membros-hero {
+    padding: 60px 0;
+    text-align: center;
+}
+
+#membros-hero h1 {
+    font-family: var(--fonte-titulo);
+    font-size: 38px;
+    color: var(--cor-vinho);
+}
+
+.membros-layout {
+    display: flex;
+    gap: 40px;
+}
+
+.main-content {
+    flex: 2;
+}
+
+.sidebar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.main-content h2, .info-card h3 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-vinho);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--cor-creme-fundo);
+    padding-bottom: 10px;
+}
+
+.avisos-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.aviso-item {
+    background: var(--cor-creme-fundo);
+    padding: 20px;
+    border-left: 5px solid var(--cor-rosa-suave);
+    border-radius: 8px;
+}
+
+.info-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: var(--sombra-suave);
+}
+
+.perfil-item {
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+.perfil-item strong {
+    display: block;
+    color: var(--cor-grafite-texto);
+    margin-bottom: 3px;
+}
+.perfil-item span {
+    opacity: 0.8;
+}
+
+.quick-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.quick-links li a {
+    display: block;
+    padding: 10px 0;
+    text-decoration: none;
+    font-weight: 500;
+    color: var(--cor-vinho);
+    border-bottom: 1px solid #f0f0f0;
+}
+.quick-links li a:hover {
+    background: var(--cor-creme-fundo);
+    padding-left: 10px;
+}
+.quick-links li:last-child a {
+    border-bottom: none;
+}
+
+/* Responsividade */
+@media (max-width: 920px) {
+    .membros-layout {
+        flex-direction: column;
+    }
+}

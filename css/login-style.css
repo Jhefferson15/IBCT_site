@@ -1,0 +1,158 @@
+/* --- ARQUIVO: css/login-style.css --- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@700&display=swap');
+
+/* Puxa as variáveis do arquivo principal para manter a consistência */
+:root {
+    --cor-vinho: #902C3E;
+    --cor-rosa-suave: #F4A9A2;
+    --cor-creme-fundo: #F5EFE9;
+    --cor-grafite-texto: #333333;
+    --cor-branco: #FFFFFF;
+    --sombra-elevada: 0 8px 25px rgba(0, 0, 0, 0.12);
+    --fonte-corpo: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: var(--cor-creme-fundo);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: var(--fonte-corpo);
+}
+
+.login-container {
+    width: 100%;
+    padding: 20px;
+}
+
+.login-box {
+    max-width: 400px;
+    margin: 0 auto;
+    background: var(--cor-branco);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: var(--sombra-elevada);
+    text-align: center;
+}
+
+.login-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: var(--cor-vinho);
+}
+
+.login-logo img {
+    height: 45px;
+}
+
+.login-logo span {
+    font-weight: 500;
+}
+
+.login-box h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--cor-vinho);
+    margin-bottom: 5px;
+}
+
+.login-subtitle {
+    margin-bottom: 30px;
+    opacity: 0.7;
+}
+
+#login-form {
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: var(--fonte-corpo);
+    font-size: 16px;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.forgot-password {
+    color: var(--cor-vinho);
+    text-decoration: none;
+}
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: var(--cor-vinho);
+    background-color: #fdd;
+    border: 1px solid var(--cor-rosa-suave);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: none; /* Começa escondido */
+    font-size: 14px;
+}
+
+.login-button {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 30px 0;
+    color: #aaa;
+}
+
+.separator::before, .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+}
+
+.separator:not(:empty)::before {
+    margin-right: .5em;
+}
+
+.separator:not(:empty)::after {
+    margin-left: .5em;
+}
+
+/* Div para o botão do Google */
+#g_id_signin {
+    display: flex;
+    justify-content: center;
+}

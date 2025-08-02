@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Área de Membros IBCT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/home-style.css"> <!-- Reutiliza o estilo base -->
+    <link rel="stylesheet" href="css/login-style.css"> <!-- Estilo específico da página -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <a href="index.html" class="login-logo">
+                <img src="img/logo.png" alt="Logo IBCT">
+                <span>Igreja Batista Central</span>
+            </a>
+            <h2>Área de Membros</h2>
+            <p class="login-subtitle">Acesse sua conta para ver avisos e informações.</p>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember-me"> Lembrar de mim
+                    </label>
+                    <a href="#" class="forgot-password">Esqueci a senha</a>
+                </div>
+                <p id="error-message" class="error-message"></p>
+                <button type="submit" class="cta-button login-button">Entrar</button>
+            </form>
+
+            <div class="separator"><span>ou</span></div>
+
+            <!-- Botão de Login do Google -->
+            <div id="g_id_onload"
+                 data-client_id="993674158752-8j69dj521cna0uv7f8pqs6tvkccmesip.apps.googleusercontent.com"
+                 data-context="signin"
+                 data-ux_mode="popup"
+                 data-callback="handleGoogleLogin"
+                 data-auto_prompt="false">
+            </div>
+            <div class="g_id_signin"
+                 data-type="standard"
+                 data-shape="rectangular"
+                 data-theme="outline"
+                 data-text="signin_with"
+                 data-size="large"
+                 data-logo_alignment="left">
+            </div>
+        </div>
+    </div>
+
+    <script src="js/backend-simulado.js"></script>
+    <script src="js/login-script.js"></script>
+</body>
+</html>
