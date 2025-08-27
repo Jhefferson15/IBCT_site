@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBCT - Ministério de Louvor e Adoração</title>
+
+    <!-- ============================================= -->
+    <!--   META TAGS PARA COMPARTILHAMENTO (WHATSAPP)  -->
+    <!-- ============================================= -->
+    <meta property="og:title" content="Louvor e Adoração | Conduzindo a Igreja à Presença de Deus">
+    <meta property="og:description" content="Conheça o Ministério de Louvor e Adoração da IBCT. Servindo a Deus e à igreja através da música e da adoração.">
+    
+    <!-- IMPORTANTE: Use a URL COMPLETA (com https://) de uma imagem representativa da Hodos (1200x630px é o ideal). -->
+    <meta property="og:image" content="https://jhefferson15.github.io/IBCT_site/departamentos/louvor-e-adoracao/tools/louvor_e_adoracao_logo.png">
+    
+    <!-- IMPORTANTE: Use a URL COMPLETA (com https://) desta página principal. -->
+    <meta property="og:url" content="https://jhefferson15.github.io/IBCT_site/departamentos/louvor-e-adoracao/louvor-e-adoracao_home.html">
+
+    <meta property="og:site_name" content="Hodos Juventude">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <link rel="stylesheet" href="css/louvor-e-adoracao_home.css">
+    <link rel="stylesheet" href="tools/instagram.css">
+    <link rel="stylesheet" href="../../componentes/calendario/calendario.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a href="../../index.html" class="logo">
+                <img src="../../img/logo.png" alt="Logo IBCT">
+                <!-- O texto "HODOS" foi removido daqui -->
+            </a>
+            <!-- NOVO LOGO CENTRALIZADO ADICIONADO AQUI -->
+            <div class="header-center-logo">
+                <img src="./tools/louvor_e_adoracao_home_logo.png" alt="Logo Louvor e Adoração">
+            </div>
+            <nav class="nav-links">
+                <a href="#eventos">Eventos</a>
+                <a href="hodos_loja.html">Loja</a>
+                <a href="hodos_ebd.html">EBD</a>
+                <a href="hodos_sobre.html">Sobre Nós</a>
+                <a data-action="open-calendar">Calendário</a>
+            </nav>
+            <div class="hamburger">
+                <div class="line1"></div><div class="line2"></div><div class="line3"></div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero fade-in">
+             <iframe 
+                src="./tools/logo_louvor_e_adoracao.html" 
+                class="hero-background-logo" 
+                frameborder="0" 
+                scrolling="no" 
+                title="Logo animada da IBCT como fundo">
+            </iframe>
+            
+             <div class="container">
+                <h1>Louvor e Adoração</h1>
+                <p>Conduzindo a igreja à presença de Deus. <br><strong>#Adoração</strong></p>
+                <a href="#eventos" class="cta-button">Ver Nossos Encontros</a>
+            </div>
+        </section>
+
+        <section id="instagram-feed" class="content-section fade-in">
+            <div class="container">
+                <h2>Siga-nos no Instagram <a href="https://www.instagram.com/louvoreadoracaoibct/" target="_blank" rel="noopener noreferrer">@louvoreadoracaoibct</a></h2>
+                <p>Acompanhe nosso dia a dia, atualizações e muito mais!</p>
+                <div class="instagram-wrapper">
+                    <button id="prev-insta-btn" class="scroll-button"><i class="fas fa-chevron-left"></i></button>
+                    <div class="instagram-scroller">
+                        <p class="insta-loading-message">Carregando as novidades do Instagram...</p>
+                    </div>
+                    <button id="next-insta-btn" class="scroll-button"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="eventos" class="content-section bg-light fade-in">
+            <div class="container">
+                <div class="section-header-with-button">
+                    <h2 id="events-title">Nossos Próximos Encontros</h2>
+                    <button id="toggle-events-btn" class="toggle-events-button">Ver Eventos Passados</button>
+                </div>
+                <div class="lessons-wrapper">
+                    <button id="prev-btn" class="scroll-button"><i class="fas fa-chevron-left"></i></button>
+                    <div class="lessons-scroller"></div>
+                    <button id="next-btn" class="scroll-button"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="agenda-hodos" class="content-section fade-in">
+            <div class="container dual-column-container">
+                <div class="events-widget">
+                    <h2 class="section-title">Agenda Louvor e Adoração</h2>
+                    <div id="next-events-list"></div>
+                    <button data-action="open-calendar" class="widget-button">Ver Calendário Completo</button>
+                </div>
+                <div class="verse-widget">
+                    <h2 class="section-title">Ensaios e Encontros</h2>
+                    <blockquote>
+                       Nossos ensaios e encontros são momentos de aprimoramento musical e espiritual, preparando-nos para servir.
+                    </blockquote>
+                    <a href="./eventos/hodos_pgm.html" class="widget-button">Saiba mais sobre nossos Encontros</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="conheca-hodos" class="content-section bg-light fade-in">
+            <div class="container">
+                <h2>Conheça o Ministério de Louvor e Adoração</h2>
+                <p>Nossa história, nossos pilares, nossa equipe e como você pode se conectar.</p>
+                <a href="hodos_sobre.html" class="cta-button">Saiba Mais Sobre Nós</a>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+             <div class="logo">
+                <img src="../../img/logo.png" alt="Logo IBCT">
+                <span>Louvor e Adoração</span>
+             </div>
+             <p>Igreja Batista Central em Taguatinga<br>© 2024 IBCT. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <!-- MODAIS -->
+    <div class="modal-overlay" id="instagram-modal">
+        <div class="modal-content-insta-professional">
+            <button class="modal-close"><i class="fas fa-times"></i></button>
+            <div class="insta-modal-flex-container">
+                <div class="insta-modal__media-wrapper">
+                    <img id="insta-modal-image" src="" alt="Post do Instagram Hodos" style="display: none;">
+                    <video id="insta-modal-video" playsinline controls muted style="display: none;"></video>
+                    <button id="insta-modal-prev" class="insta-modal__nav-btn prev" style="display: none;"><i class="fas fa-chevron-left"></i></button>
+                    <button id="insta-modal-next" class="insta-modal__nav-btn next" style="display: none;"><i class="fas fa-chevron-right"></i></button>
+                    <div class="insta-modal__dots" style="display: none;"></div>
+                </div>
+                <div class="insta-modal__content-wrapper">
+                    <div class="insta-modal__header">
+                        <img src="img/instagram/louvor_e_adoracao_logo.png" alt="Logo Louvor e Adoração" class="insta-modal__pfp">
+                        <div class="insta-modal__user-info">
+                            <span id="insta-modal-username">louvoreadoracaoibct</span>
+                        </div>
+                    </div>
+                    <div class="insta-modal__content-body">
+                        <p id="insta-modal-caption" class="insta-modal__caption"></p>
+                        <div class="insta-modal__stats">
+                            <span id="insta-modal-likes"></span>
+                            <span id="insta-modal-comments"></span>
+                        </div>
+                        <span id="insta-modal-date"></span>
+                    </div>
+                    <div class="insta-modal__footer">
+                        <a id="insta-modal-link" href="#" target="_blank" rel="noopener noreferrer" class="insta-modal__button">
+                            Ver no Instagram <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="external-page-modal">
+        <div class="modal-content-external">
+            <button class="modal-close"><i class="fas fa-times"></i></button>
+            <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+        
+    <a class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
+    
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+    <script src="js/louvor-e-adoracao_script.js" defer></script>
+    <script src="tools/instagram.js" defer></script>
+    <script src="../../componentes/calendario/calendario.js" data-filter="louvor-e-adoracao" defer></script>
+
+</body>
+</html>

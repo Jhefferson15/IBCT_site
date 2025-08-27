@@ -141,7 +141,23 @@ a:hover { opacity: 0.7; }
 .verse-widget cite { font-style: normal; font-weight: 700; color: var(--cor-vinho); }
 
 /* 6. SEÇÃO MINISTÉRIOS */
-.ministerios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+.ministerios-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns for large screens */
+    gap: 30px;
+}
+
+@media (max-width: 1200px) { /* Adjust breakpoint as needed */
+    .ministerios-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+    }
+}
+
+@media (max-width: 768px) { /* Existing mobile breakpoint */
+    .ministerios-grid {
+        grid-template-columns: repeat(1, 1fr); /* 1 column for small screens */
+    }
+}
 .ministerio-card { background-color: var(--cor-branco); text-align: center; padding: 40px 25px; border-radius: 12px; box-shadow: var(--sombra-suave); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; }
 .ministerio-card:hover { transform: translateY(-8px); box-shadow: var(--sombra-elevada); }
 .ministerio-card i { font-size: 40px; color: var(--cor-vinho); margin-bottom: 20px; }
