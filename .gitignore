@@ -67,3 +67,6 @@ node_modules/
 
 # dataconnect generated files
 .dataconnect
+
+# Arquivo de atualização com chave de API secreta
+update_youtube_data.js
