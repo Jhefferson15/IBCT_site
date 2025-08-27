@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missões - IBCT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/home-style.css">
+    <link rel="stylesheet" href="css/missoes.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <img src="../img/logo.png" alt="Logo IBCT" class="header-logo-img">
+                    <span>Missões</span>
+                </div>
+            </a>
+            <nav class="nav-links">
+                <a href="../index.html#inicio">Início</a>
+                <a href="../index.html#ministerios">Ministérios</a>
+                <a href="missoes/missoes.html">Missões</a>
+                <a href="../ibct_tv.html">IBCT TV</a>
+                <a href="../sobre_ibct.html">Sobre</a>
+                <a href="../index.html#contato">Contato</a>
+            </nav>
+            <div class="hamburger">
+                <div class="line1"></div><div class="line2"></div><div class="line3"></div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="missoes-hero">
+            <div class="container">
+                <h1>Projetos e Missões</h1>
+            </div>
+        </section>
+
+        <section id="missoes-content" class="content-section">
+            <div class="container">
+                <p class="section-subtitle" style="margin-bottom: 60px;">Conheça os projetos que apoiamos e como você pode se envolver para levar o amor de Cristo à nossa comunidade e ao redor do mundo.</p>
+
+                <div id="missoes-grid" class="missoes-grid">
+                    <!-- As missões serão carregadas aqui pelo JavaScript -->
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+             <div class="logo">Igreja Batista Central <span>em Taguatinga</span></div>
+             <p>© 2025 IBCT. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal de Detalhes da Missão -->
+    <div class="modal-overlay" id="mission-details-modal">
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <img id="modal-mission-image" src="" alt="Imagem da Missão">
+            <h2 id="modal-mission-title"></h2>
+            <p id="modal-mission-subtitle"></p>
+            <div id="modal-mission-description"></div>
+            <div id="modal-mission-stats" class="mission-stats"></div>
+            <div id="modal-mission-link-container" class="modal-action-button-container">
+                <a id="modal-mission-link" href="#" target="_blank" class="modal-action-button"></a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../js/home-script.js" defer></script>
+    <script src="../js/missoes-data.js" defer></script>
+    <script src="js/missoes-script.js" defer></script>
+</body>
+</html>

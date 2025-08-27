@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </a>
                 <nav class="nav-links">
                     <a href="index.html">Início</a>
+                    <a href="missoes/missoes.html">Missões</a>
                     <a href="ibct_tv.html">IBCT TV</a>
                     <a href="sobre_ibct.html">Sobre</a>
                 </nav>
