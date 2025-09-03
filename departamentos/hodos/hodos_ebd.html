@@ -124,9 +124,15 @@
         </div>
     </div>
 
-    <!-- CORREÇÃO: Estrutura do modal do calendário que estava faltando -->
-    <div class="modal-overlay" id="calendar-modal">
-        <!-- O conteúdo do modal do calendário é gerenciado pelo script do componente -->
+    <!-- NOVO: Modal para o resumo do trimestre anterior -->
+    <div class="modal-overlay" id="summary-modal">
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <h2 id="summary-modal-title">Resumo do Trimestre</h2>
+            <div id="summary-modal-content">
+                <!-- O conteúdo será preenchido por JavaScript -->
+            </div>
+        </div>
     </div>
     
     <a href="#" class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>

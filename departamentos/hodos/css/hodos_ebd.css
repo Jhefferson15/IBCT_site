@@ -38,7 +38,6 @@ a:hover { opacity: 0.7; }
     position: sticky; top: 0; z-index: 1000;
 }
 .header .container { display: flex; justify-content: space-between; align-items: center; }
-/* CORREÇÃO: Estilo do logo com imagem + texto */
 .logo { display: flex; align-items: center; gap: 10px; font-family: var(--fonte-titulo); font-size: 24px; color: var(--cor-vinho); }
 .logo img { height: 35px; }
 .logo span { font-family: var(--fonte-corpo); font-size: 16px; color: var(--cor-rosa-suave); }
@@ -68,7 +67,6 @@ a:hover { opacity: 0.7; }
 .countdown-block p { font-size: 14px; margin: 0; opacity: 0.8; text-transform: uppercase; }
 
 /* 5. SEÇÃO DE AULAS */
-/* CORREÇÃO: Adicionado estilo para cabeçalho de seção com botão */
 .section-header-with-button {
     display: flex; justify-content: space-between; align-items: center;
     margin-bottom: 25px; flex-wrap: wrap; gap: 15px;
@@ -84,11 +82,28 @@ a:hover { opacity: 0.7; }
 .lessons-wrapper { position: relative; }
 .lessons-scroller { display: flex; gap: 30px; overflow-x: auto; scroll-behavior: smooth; padding: 20px 5px; scrollbar-width: none; }
 .lessons-scroller::-webkit-scrollbar { display: none; }
+
+/* CORREÇÃO: Card de aula agora é flexível */
 .lesson-card {
-    flex: 0 0 300px; background-color: var(--cor-branco); border-radius: 8px;
+    flex: 1 0 280px; /* Permite que o card encolha mas a base é 280px */
+    max-width: 300px; /* Não vai crescer além de 300px */
+    background-color: var(--cor-branco); border-radius: 8px;
     box-shadow: var(--sombra-suave); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;
 }
 .lesson-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12); }
+
+/* CORREÇÃO: Estilo do card de resumo melhorado */
+.summary-card {
+    background-color: var(--cor-creme-fundo);
+    border: 2px solid var(--cor-rosa-suave);
+}
+.summary-card .lesson-card-image {
+    background-color: transparent;
+    color: var(--cor-vinho);
+    font-size: 40px;
+}
+.summary-card .lesson-card-content p { font-size: 14px; opacity: 0.8; margin-bottom: 0; }
+
 .lesson-card-image {
     height: 180px; background-color: var(--cor-rosa-suave);
     display: flex; align-items: center; justify-content: center;
@@ -111,7 +126,6 @@ a:hover { opacity: 0.7; }
 #avisos { background-color: var(--cor-branco); }
 .avisos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; text-align: left; }
 .aviso-card { background-color: var(--cor-creme-fundo); padding: 25px; border-radius: 8px; border-left: 5px solid var(--cor-rosa-suave); }
-/* CORREÇÃO: Estilos para o cabeçalho do card de aviso */
 .aviso-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
 .aviso-icon { font-size: 22px; color: var(--cor-vinho); }
 .aviso-card h3 { margin-bottom: 0; }
@@ -129,6 +143,8 @@ a:hover { opacity: 0.7; }
     max-width: 600px; width: 100%; position: relative;
     transform: scale(0.95); transition: transform 0.3s ease;
     box-shadow: var(--sombra-modal);
+    /* CORREÇÃO: Garante que o conteúdo do modal não estoure a altura */
+    display: flex; flex-direction: column; max-height: 90vh;
 }
 .modal-overlay.active { display: flex; opacity: 1; }
 .modal-overlay.active .modal-content, 
@@ -137,7 +153,6 @@ a:hover { opacity: 0.7; }
     position: absolute; top: 15px; right: 20px; font-size: 30px;
     color: var(--cor-grafite-texto); cursor: pointer; border: none; background: none; z-index: 10;
 }
-/* CORREÇÃO: Estilos adicionados para o modal de página externa (iframe), copiados da home */
 .modal-content-external {
     background: var(--cor-creme-fundo); padding: 10px; border-radius: 12px;
     width: 95%; height: 90%; max-width: 1200px; position: relative;
@@ -152,6 +167,25 @@ a:hover { opacity: 0.7; }
     top: -15px; right: -15px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
+/* CORREÇÃO: Estilos para o conteúdo do modal de resumo (permite rolagem) */
+#summary-modal-content {
+    overflow-y: auto; /* Permite rolagem vertical */
+    padding-right: 15px; /* Espaço para a barra de rolagem */
+    margin-right: -15px; /* Compensa o padding */
+}
+.summary-lesson-item {
+    list-style: none;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--cor-creme-fundo);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.summary-lesson-item:last-child { border-bottom: none; }
+.summary-lesson-item:hover { background-color: var(--cor-creme-fundo); }
+.summary-lesson-item h4 { font-family: var(--fonte-corpo); font-size: 18px; color: var(--cor-vinho); margin-bottom: 5px; }
+.summary-lesson-item p { font-size: 14px; margin-bottom: 8px; opacity: 0.8; }
+.summary-lesson-item .summary-scripture { font-style: italic; opacity: 1; color: var(--cor-vinho); border-left: 3px solid var(--cor-rosa-suave); padding-left: 10px; margin-top: 10px; }
+
 
 /* 8. MODAL DE CALENDÁRIO (Os estilos do componente são carregados separadamente) */
 /* ... Estilos do modal de calendário já estão no componente ... */
@@ -162,9 +196,7 @@ a:hover { opacity: 0.7; }
 
 /* 10. RODAPÉ */
 .footer { background-color: var(--cor-vinho); color: var(--cor-creme-fundo); padding: 50px 0; text-align: center; margin-top: 60px; }
-/* CORREÇÃO: Centraliza o logo no rodapé */
 .footer .logo { justify-content: center; margin-bottom: 15px; }
-/* CORREÇÃO: Deixa a imagem do logo branca no rodapé */
 .footer .logo img { filter: brightness(0) invert(1); }
 .footer .logo span { color: var(--cor-rosa-suave); }
 
@@ -186,7 +218,6 @@ a:hover { opacity: 0.7; }
 @media (max-width: 768px) {
     .section-header-with-button { justify-content: center; text-align: center; }
     .section-header-with-button h2 { width: 100%; text-align: center; }
-    /* CORREÇÃO: CSS do menu mobile unificado com o da home */
     .nav-links {
         position: fixed; top: 80px; right: 20px; width: 250px;
         background-color: var(--cor-branco); flex-direction: column;
