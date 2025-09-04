@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const postsPerBatch = 10;
     let instaObserver;
     let plyrPlayer = null;
-    let currentCarousel = { baseName: '', imageCount: 0, currentIndex: 0 };
+    let currentCarousel = { post: null, imageUrls: [], currentIndex: 0, imageCount: 0 };
 
     const scroller = document.querySelector('.instagram-scroller');
     const prevInstaBtn = document.getElementById('prev-insta-btn');
@@ -35,19 +35,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const videoContainer = document.createElement('div');
     videoContainer.id = 'insta-modal-video-container';
-    // CORREÇÃO 1: Adicionado display flex para centralizar o vídeo
     videoContainer.style.cssText = 'width:100%; height:100%; display:none; align-items:center; justify-content:center;';
     
     const originalImage = document.getElementById('insta-modal-image');
     if (originalImage) imageContainer.appendChild(originalImage);
 
     const originalVideo = document.getElementById('insta-modal-video');
-    if (originalVideo) originalVideo.parentNode.removeChild(originalVideo);
+    if (originalVideo && originalVideo.parentNode) {
+        originalVideo.parentNode.removeChild(originalVideo);
+    }
 
     modalElements.mediaWrapper.appendChild(imageContainer);
     modalElements.mediaWrapper.appendChild(videoContainer);
 
     // --- 3. DEFINIÇÃO DAS FUNÇÕES ---
+
+    function getLocalMediaPath(post, forVideo = false, carouselIndex = -1) {
+        const userName = post['User Name'];
+        let remoteUrl;
+
+        if (carouselIndex > -1) {
+            const urls = post['Image URLs'].split('\n').filter(u => u.trim() !== '');
+            remoteUrl = urls[carouselIndex] || post['Thumbnail URL'];
+        } else if (forVideo) {
+            remoteUrl = post['Video URL'];
+        } else {
+            remoteUrl = post['Thumbnail URL'];
+        }
+
+        if (!remoteUrl) {
+            return 'img/instagram/posts/placeholder.jpg';
+        }
+
+        try {
+            const url = new URL(remoteUrl);
+            const filename = url.pathname.split('/').pop();
+            return `img/instagram/posts/${userName}_${filename}`;
+        } catch (e) {
+            console.error("Error parsing URL:", remoteUrl, e);
+            return 'img/instagram/posts/placeholder.jpg';
+        }
+    }
+
+
     function openInstaModal() {
         modalElements.modal.classList.add('active');
         document.body.classList.add('modal-open');
@@ -68,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const img = imageContainer.querySelector('img');
         if (img) {
             img.removeAttribute('src');
-            img.style.display = 'none'; // CORREÇÃO 2: Garante que a imagem comece escondida
+            img.style.display = 'none';
         }
         imageContainer.style.display = 'none';
         videoContainer.style.display = 'none';
@@ -88,19 +118,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function preloadCarouselImages() {
-        const { baseName, currentIndex, imageCount } = currentCarousel;
+        const { post, currentIndex, imageCount } = currentCarousel;
         if (currentIndex + 1 < imageCount) {
             const nextImage = new Image();
-            nextImage.src = `img/instagram/posts/${baseName}_${currentIndex + 2}.jpg`;
+            nextImage.src = getLocalMediaPath(post, false, currentIndex + 1);
         }
     }
 
     function displayCarouselImage() {
         const img = imageContainer.querySelector('img');
         if (!img) return;
-        img.style.display = 'block'; // CORREÇÃO 2: Garante que a imagem seja visível
-        const imagePath = `img/instagram/posts/${currentCarousel.baseName}_${currentCarousel.currentIndex + 1}.jpg`;
+
+        const { post, currentIndex } = currentCarousel;
+        const imagePath = getLocalMediaPath(post, false, currentIndex);
+
+        img.style.display = 'block';
         img.src = imagePath;
+        img.onerror = () => {
+            const urls = post['Image URLs'].split('\n').filter(u => u.trim() !== '');
+            img.src = urls[currentIndex] || post['Thumbnail URL'];
+        };
         updateCarouselUI();
         preloadCarouselImages();
     }
@@ -119,41 +156,48 @@ document.addEventListener('DOMContentLoaded', () => {
     function openCustomInstaModal(post) {
         resetInstaModalState(); 
         
-        const { 'Media ID': mediaId, 'User ID': userId, 'Is Video': isVideo, 'Is Carousel': isCarousel } = post;
+        const { 'Is Video': isVideo, 'Is Carousel': isCarousel } = post;
         
-        if (isCarousel === 'YES' && mediaId && userId) {
+        if (isCarousel === 'YES') {
+            const imageUrls = (post['Image URLs'] || '').split('\n').filter(url => url.trim() !== '');
             currentCarousel = {
-                baseName: `${mediaId}_${userId}`, currentIndex: 0,
-                imageCount: (post['Image URLs'] || '').split('\n').filter(url => url.trim() !== '').length || 10
+                post: post,
+                imageUrls: imageUrls,
+                currentIndex: 0,
+                imageCount: imageUrls.length
             };
+
             modalElements.dotsContainer.innerHTML = Array.from({ length: currentCarousel.imageCount }, () => `<div class="insta-modal__dot"></div>`).join('');
             modalElements.dotsContainer.style.display = 'flex';
             displayCarouselImage();
             ensureCorrectMediaState('image');
         
-        } else if (mediaId && userId) {
+        } else { 
             currentCarousel.imageCount = 0;
             modalElements.prevBtn.style.display = 'none';
             modalElements.nextBtn.style.display = 'none';
             modalElements.dotsContainer.style.display = 'none';
-            const baseFilename = `${mediaId}_${userId}`;
             
             if (isVideo === 'YES') {
+                const videoSrc = getLocalMediaPath(post, true);
                 const newVideo = document.createElement('video');
                 newVideo.playsinline = true;
                 newVideo.controls = true;
-                newVideo.src = `img/instagram/posts/${baseFilename}.mp4`;
+                newVideo.src = videoSrc;
+                newVideo.onerror = () => { newVideo.src = post['Video URL']; };
                 videoContainer.appendChild(newVideo);
                 plyrPlayer = new Plyr(newVideo, {
                     autoplay: true, muted: false,
                     controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen']
                 });
                 ensureCorrectMediaState('video');
-            } else { // Post de imagem única
+            } else { 
                 const img = imageContainer.querySelector('img');
                 if (img) {
-                    img.style.display = 'block'; // CORREÇÃO 2: Torna a imagem visível
-                    img.src = `img/instagram/posts/${baseFilename}.jpg`;
+                    img.style.display = 'block';
+                    const imgSrc = getLocalMediaPath(post, false);
+                    img.src = imgSrc;
+                    img.onerror = () => { img.src = post['Thumbnail URL']; };
                 }
                 ensureCorrectMediaState('image');
             }
@@ -167,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
         openInstaModal();
     }
     
-    // --- 4. LÓGICA DE CARREGAMENTO DO FEED E EVENTOS (sem alterações) ---
+    // --- 4. LÓGICA DE CARREGAMENTO DO FEED E EVENTOS ---
     function renderPostBatch() {
         if (!scroller || isLoadingPosts) return;
         isLoadingPosts = true;
@@ -178,21 +222,24 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('a');
             card.href = "#"; card.className = 'insta-card';
             const img = document.createElement('img');
-            const mediaId = post['Media ID'], userId = post['User ID'];
-            const isVideo = post['Is Video'] === 'YES', isCarousel = post['Is Carousel'] === 'YES';
-            const remoteThumbnail = post['Thumbnail URL'];
-            let finalImgSrc;
-            if (isVideo) { finalImgSrc = remoteThumbnail; }
-            else if (mediaId && userId) { finalImgSrc = `img/instagram/posts/${isCarousel ? `${mediaId}_${userId}_1.jpg` : `${mediaId}_${userId}.jpg`}`; }
-            else { finalImgSrc = remoteThumbnail; }
+            const { 'User Name': userName, 'Is Video': isVideo, 'Is Carousel': isCarousel, 'Thumbnail URL': remoteThumbnail } = post;
+            
+            const finalImgSrc = getLocalMediaPath(post, false);
+
             img.src = finalImgSrc;
-            img.alt = post.Caption ? post.Caption.substring(0, 100) + '...' : 'Post do Instagram Hodos';
+            img.alt = post.Caption ? post.Caption.substring(0, 100) + '...' : `Post do Instagram ${userName}`;
             img.loading = 'lazy';
-            img.onerror = function() { if (this.src !== remoteThumbnail) { this.src = remoteThumbnail; } else { card.style.display = 'none'; } };
+            img.onerror = function() { 
+                if (this.src !== remoteThumbnail) { 
+                    this.src = remoteThumbnail; 
+                } else { 
+                    card.style.display = 'none'; 
+                } 
+            };
             card.appendChild(img);
             card.addEventListener('click', e => { e.preventDefault(); openCustomInstaModal(post); });
-            if (isVideo) card.insertAdjacentHTML('beforeend', '<i class="fas fa-play insta-card-icon"></i>');
-            else if (isCarousel) card.insertAdjacentHTML('beforeend', '<i class="fas fa-clone insta-card-icon"></i>');
+            if (isVideo === 'YES') card.insertAdjacentHTML('beforeend', '<i class="fas fa-play insta-card-icon"></i>');
+            else if (isCarousel === 'YES') card.insertAdjacentHTML('beforeend', '<i class="fas fa-clone insta-card-icon"></i>');
             scroller.appendChild(card);
         });
         currentPostIndex += batch.length;

@@ -31,11 +31,7 @@ a { text-decoration: none; color: inherit; transition: opacity 0.3s ease; }
 a:hover { opacity: 0.7; }
 .bg-light { background-color: var(--cor-branco); }
 .section-title { font-family: var(--fonte-titulo); font-size: 36px; color: var(--cor-vinho); text-align: center; margin-bottom: 10px; }
-.header {
-    background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px);
-    padding: 20px 0; border-bottom: 2px solid var(--cor-creme-fundo);
-    position: sticky; top: 0; z-index: 1000;
-}
+
 .header .container {
     display: flex;
     justify-content: space-between;
@@ -68,12 +64,12 @@ a:hover { opacity: 0.7; }
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--cor-branco);
+    color: var(--cor-vinho);
     text-align: center;
     position: relative;
     overflow: hidden;
 }
-.hero h1 { font-size: 56px; line-height: 1.2; color: var(--cor-branco); }
+.hero h1 { font-size: 56px; line-height: 1.2; color: var(--cor-vinho); }
 .hero p { font-size: 18px; max-width: 700px; margin: 20px auto 30px auto; opacity: 0.9; }
 .hero-background-logo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.15; pointer-events: none; object-fit: contain; }
 .hero .container { position: relative; z-index: 2; }
@@ -222,9 +218,17 @@ a:hover { opacity: 0.7; }
 .bg-light { background-color: var(--cor-branco); }
 .section-title { font-family: var(--fonte-titulo); font-size: 36px; color: var(--cor-vinho); text-align: center; margin-bottom: 10px; }
 .header {
-    background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px);
-    padding: 20px 0; border-bottom: 2px solid var(--cor-creme-fundo);
-    position: sticky; top: 0; z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.85);
+    background-image: url(../img/Logo_MR-removebg-preview.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    backdrop-filter: blur(5px);
+    padding: 20px 0;
+    border-bottom: 2px solid var(--cor-creme-fundo);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 .header .container {
     display: flex;
@@ -258,12 +262,12 @@ a:hover { opacity: 0.7; }
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--cor-branco);
+    color: var(--cor-vinho);
     text-align: center;
     position: relative;
     overflow: hidden;
 }
-.hero h1 { font-size: 56px; line-height: 1.2; color: var(--cor-branco); }
+.hero h1 { font-size: 56px; line-height: 1.2; color: var(--cor-vinho); }
 .hero p { font-size: 18px; max-width: 700px; margin: 20px auto 30px auto; opacity: 0.9; }
 .hero-background-logo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.15; pointer-events: none; }
 .hero .container { position: relative; z-index: 2; }
