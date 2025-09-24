@@ -1,0 +1,66 @@
+<header class="main-header">
+    <button class="hamburger-admin" id="hamburger-btn"><i class="fas fa-bars"></i></button>
+    <h1>Postagens e Avisos</h1>
+    <div class="header-actions">
+        <button class="btn-primary"><i class="fas fa-plus"></i> Criar Postagem</button>
+    </div>
+</header>
+
+<section class="content-panel">
+    <div class="filter-bar">
+        <select>
+            <option>Filtrar por Categoria</option>
+            <option>Avisos Gerais</option>
+            <option>Hodos</option>
+            <option>Ministério Infantil</option>
+        </select>
+        <input type="text" placeholder="Pesquisar postagens...">
+    </div>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Categoria</th>
+                <th>Data</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Campanha do Agasalho 2025</strong></td>
+                <td>Admin User</td>
+                <td>Avisos Gerais</td>
+                <td>15 de Maio, 2025</td>
+                <td><span class="badge badge-success">Publicado</span></td>
+                <td class="action-buttons">
+                    <button title="Editar"><i class="fas fa-pencil-alt"></i></button>
+                    <button title="Excluir"><i class="fas fa-trash-alt"></i></button>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Inscrições para Batismo</strong></td>
+                <td>Pr. Juliano</td>
+                <td>Avisos Gerais</td>
+                <td>10 de Maio, 2025</td>
+                <td><span class="badge badge-success">Publicado</span></td>
+                <td class="action-buttons">
+                    <button><i class="fas fa-pencil-alt"></i></button>
+                    <button><i class="fas fa-trash-alt"></i></button>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Resumo Hodos Camp [Rascunho]</strong></td>
+                <td>Admin User</td>
+                <td>Hodos</td>
+                <td>05 de Junho, 2025</td>
+                <td><span class="badge badge-warning">Rascunho</span></td>
+                <td class="action-buttons">
+                    <button><i class="fas fa-pencil-alt"></i></button>
+                    <button><i class="fas fa-trash-alt"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>

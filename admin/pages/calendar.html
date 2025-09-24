@@ -1,0 +1,64 @@
+<header class="main-header">
+    <button class="hamburger-admin" id="hamburger-btn"><i class="fas fa-bars"></i></button>
+    <h1>Calendário de Eventos</h1>
+    <div class="header-actions">
+        <button class="btn-primary"><i class="fas fa-plus"></i> Adicionar Evento</button>
+    </div>
+</header>
+
+<section class="calendar-section">
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <button class="calendar-nav"><i class="fas fa-chevron-left"></i></button>
+            <h2>Junho 2025</h2>
+            <button class="calendar-nav"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <table class="calendar-grid">
+            <thead>
+                <tr>
+                    <th>Dom</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Exemplo de Linha do Calendário -->
+                <tr>
+                    <td><span class="day-number">1</span><div class="event-tag ebd">EBD</div><div class="event-tag culto">Culto</div></td>
+                    <td><span class="day-number">2</span></td>
+                    <td><span class="day-number">3</span></td>
+                    <td><span class="day-number">4</span><div class="event-tag oracao">Oração</div></td>
+                    <td><span class="day-number">5</span></td>
+                    <td><span class="day-number">6</span><div class="event-tag pgm">PGM</div></td>
+                    <td><span class="day-number">7</span><div class="event-tag hodos">Hodos Meet</div></td>
+                </tr>
+                <tr>
+                    <td><span class="day-number">8</span><div class="event-tag ebd">EBD</div><div class="event-tag culto">Culto</div></td>
+                    <td><span class="day-number">9</span></td>
+                    <td><span class="day-number">10</span></td>
+                    <td><span class="day-number">11</span><div class="event-tag oracao">Oração</div></td>
+                    <td><span class="day-number">12</span></td>
+                    <td><span class="day-number">13</span><div class="event-tag pgm">PGM</div></td>
+                    <td><span class="day-number">14</span><div class="event-tag hodos">Hodos In Love</div></td>
+                </tr>
+                <!-- Adicione mais linhas para completar o mês -->
+            </tbody>
+        </table>
+    </div>
+    <div class="event-sidebar">
+        <h3>Eventos do Mês</h3>
+        <ul class="event-list-sidebar">
+            <li><strong>01/06:</strong> EBD (Filipenses)</li>
+            <li><strong>07/06:</strong> Hodos Meet</li>
+            <li><strong>14/06:</strong> Hodos In Love</li>
+            <li><strong>18/06:</strong> Evangelismo com CRU</li>
+            <li><strong>22/06:</strong> EBD (Revisão)</li>
+        </ul>
+        <div class="legend">
+            <h4>Legenda:</h4>
+            <span class="event-tag ebd">EBD</span>
+            <span class="event-tag culto">Culto</span>
+            <span class="event-tag oracao">Oração</span>
+            <span class="event-tag hodos">Hodos</span>
+            <span class="event-tag pgm">PGM</span>
+        </div>
+    </div>
+</section>
