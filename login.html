@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="css/home-style.css"> <!-- Reutiliza o estilo base -->
     <link rel="stylesheet" href="css/login-style.css"> <!-- Estilo específico da página -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <!-- Scripts do Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 </head>
 <body>
     <div class="login-container">
@@ -59,7 +64,9 @@
         </div>
     </div>
 
-    <script src="js/backend-simulado.js"></script>
+    <!-- Carrega a configuração primeiro -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/backend.js"></script>
     <script src="js/login-script.js"></script>
 </body>
 </html>

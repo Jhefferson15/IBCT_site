@@ -7,15 +7,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="css/home-style.css">
     <link rel="stylesheet" href="css/membros-style.css">
+
+    <!-- Scripts do Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 </head>
 <body>
     <!-- O script de guarda de rota e backend devem ser carregados antes de tudo -->
-    <script src="js/backend-simulado.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/backend.js"></script>
     <script>
-        // GUARDA DE ROTA: Verifica a sessão antes de carregar o resto
-        if (!IBCT_Backend.checkSession()) {
-            window.location.href = 'login.html';
-        }
+        // GUARDA DE ROTA: Verifica a sessão de forma assíncrona
+        IBCT_Backend.checkSession(user => {
+            if (!user) {
+                window.location.href = 'login.html';
+            }
+        });
     </script>
     
     <!-- O cabeçalho é injetado dinamicamente pelo membros-script.js -->

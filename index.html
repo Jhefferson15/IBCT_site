@@ -18,6 +18,11 @@
     <link rel="stylesheet" href="componentes/calendario/calendario.css">
     
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <!-- Scripts do Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 </head>
 <body>
 
@@ -228,7 +233,8 @@
     <a class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
     
     <!-- CARREGUE O BACKEND ANTES DO SCRIPT DA HOME -->
-    <script src="js/backend-simulado.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/backend.js"></script>
     <script src="js/home-script.js" defer></script>
     <script src="componentes/calendario/calendario.js" data-filter="igreja" defer></script>
 </body>

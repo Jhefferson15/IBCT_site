@@ -1,37 +1,49 @@
-
+// --- ARQUIVO: js/login-script.js (Atualizado para Promises) ---
 
 // Função de callback para o login com Google
-function handleGoogleLogin(response) {
-    console.log("Login com Google bem-sucedido. Recebido o token.");
-    const userObject = JSON.parse(atob(response.credential.split('.')[1]));
+async function handleGoogleLogin(response) {
+    console.log("Iniciando login com Google...");
     const rememberMe = document.getElementById('remember-me').checked;
 
-    const result = IBCT_Backend.loginWithGoogle(userObject, rememberMe);
+    // A função de backend agora retorna uma Promise
+    const result = await IBCT_Backend.loginWithGoogle(response, rememberMe);
 
     if (result.success) {
         window.location.href = 'membros.html';
+    } else {
+        // Exibe a mensagem de erro, caso exista uma
+        const errorMessage = document.getElementById('error-message');
+        errorMessage.textContent = result.message || "Falha no login com Google.";
+        errorMessage.style.display = 'block';
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Guarda de rota: se já estiver logado, redireciona para a área de membros
-    if (IBCT_Backend.checkSession()) {
-        window.location.href = 'membros.html';
-        return; // Impede a execução do resto do script
-    }
-
     const loginForm = document.getElementById('login-form');
     const errorMessage = document.getElementById('error-message');
 
-    loginForm.addEventListener('submit', (e) => {
+    // --- Guarda de Rota Assíncrona ---
+    // Verifica a sessão e redireciona se o usuário já estiver logado.
+    // A função checkSession agora usa um callback.
+    IBCT_Backend.checkSession(user => {
+        if (user) {
+            console.log("Usuário já logado. Redirecionando...");
+            window.location.href = 'membros.html';
+        }
+    });
+
+    // --- Manipulador de Formulário Assíncrono ---
+    loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        errorMessage.style.display = 'none'; // Esconde mensagens de erro antigas
+        errorMessage.textContent = ''; // Limpa mensagens de erro antigas
+        errorMessage.style.display = 'none';
 
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         const rememberMe = document.getElementById('remember-me').checked;
 
-        const result = IBCT_Backend.login(email, password, rememberMe);
+        // Chama a função de login e aguarda a resolução da Promise
+        const result = await IBCT_Backend.login(email, password, rememberMe);
 
         if (result.success) {
             window.location.href = 'membros.html';
@@ -40,4 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
             errorMessage.style.display = 'block';
         }
     });
+
+    // --- Lógica para o botão de Login com Google ---
+    // O Google Identity Services (GIS) carrega de forma assíncrona.
+    // A função handleGoogleLogin será chamada automaticamente pelo script do Google.
+    // Não é necessário adicionar um event listener manual para o botão do Google.
 });
