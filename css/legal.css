@@ -1,0 +1,105 @@
+/* Estilos específicos para páginas legais (Privacidade e Termos) */
+
+/* Hero Section Small (Reutilizado/Adaptado de sobre_ibct.css) */
+.hero.hero-small {
+    height: 40vh;
+    min-height: 300px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--cor-branco);
+    overflow: hidden;
+    background: linear-gradient(rgba(40, 0, 0, 0.7), rgba(40, 0, 0, 0.7)), #50222a;
+    margin-bottom: 50px;
+}
+
+.hero.hero-small .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-small h1 {
+    font-size: 42px;
+    color: var(--cor-branco);
+    font-family: var(--fonte-titulo);
+}
+
+.hero-small p {
+    font-size: 18px;
+    max-width: 600px;
+    margin: 10px auto 0;
+    color: var(--cor-branco);
+    opacity: 0.9;
+}
+
+/* Conteúdo Legal */
+.legal-content {
+    background-color: var(--cor-branco);
+    padding-bottom: 80px;
+}
+
+.legal-content .container {
+    max-width: 900px; /* Leitura mais confortável */
+}
+
+.legal-update-date {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 30px;
+    display: block;
+}
+
+.legal-section {
+    margin-bottom: 40px;
+}
+
+.legal-section h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-vinho);
+    font-size: 28px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--cor-creme-fundo);
+    padding-bottom: 10px;
+}
+
+.legal-section h3 {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-grafite-texto);
+    font-size: 20px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.legal-section p {
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: var(--cor-grafite-texto);
+    line-height: 1.8;
+}
+
+.legal-section ul {
+    margin-bottom: 15px;
+    padding-left: 20px;
+}
+
+.legal-section li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.legal-section strong {
+    color: var(--cor-vinho);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .hero-small h1 {
+        font-size: 32px;
+    }
+    .legal-content .container {
+        padding: 0 25px;
+    }
+}
