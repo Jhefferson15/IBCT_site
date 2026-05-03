@@ -5,19 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Área de Membros - IBCT</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="css/home-style.css">
-    <link rel="stylesheet" href="css/membros-style.css">
+    <link rel="stylesheet" href="src/core/styles/Variables.css">
+    <link rel="stylesheet" href="src/core/styles/Themes.css">
+    <link rel="stylesheet" href="src/features/home/presentation/HomeStyle.css">
+    <link rel="stylesheet" href="src/features/membros/presentation/MembrosStyle.css">
 </head>
 <body>
-    <!-- O script de guarda de rota e backend devem ser carregados antes de tudo -->
-    <script src="js/backend-simulado.js"></script>
-    <script>
-        // GUARDA DE ROTA: Verifica a sessão antes de carregar o resto
-        if (!IBCT_Backend.checkSession()) {
-            window.location.href = 'login.html';
-        }
-    </script>
-    
     <!-- O cabeçalho é injetado dinamicamente pelo membros-script.js -->
     <header class="header"></header>
 
@@ -64,6 +57,7 @@
         </div>
     </footer>
     
-    <script src="js/membros-script.js" defer></script>
+    <script type="module" src="src/features/membros/presentation/MembrosScript.js"></script>
 </body>
 </html>
+

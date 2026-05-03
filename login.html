@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Área de Membros IBCT</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="css/home-style.css"> <!-- Reutiliza o estilo base -->
-    <link rel="stylesheet" href="css/login-style.css"> <!-- Estilo específico da página -->
+    <link rel="stylesheet" href="src/core/styles/Variables.css">
+    <link rel="stylesheet" href="src/core/styles/Themes.css">
+    <link rel="stylesheet" href="src/features/home/presentation/HomeStyle.css"> <!-- Reutiliza o estilo base -->
+    <link rel="stylesheet" href="src/features/auth/presentation/LoginStyle.css"> <!-- Estilo específico da página -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
@@ -59,7 +61,7 @@
         </div>
     </div>
 
-    <script src="js/backend-simulado.js"></script>
-    <script src="js/login-script.js"></script>
+    <script type="module" src="src/features/auth/presentation/LoginScript.js"></script>
 </body>
 </html>
+

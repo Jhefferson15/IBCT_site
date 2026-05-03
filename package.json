@@ -1,0 +1,26 @@
+{
+  "name": "ibct_site",
+  "version": "1.0.0",
+  "description": "Este repositório contém o código-fonte e a documentação do portal web oficial da Igreja Batista Central em Taguatinga. O projeto visa fornecer uma plataforma digital centralizada para comunicação, engajamento e disponibilização de recursos para a comunidade.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jhefferson15/IBCT_site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Jhefferson15/IBCT_site/issues"
+  },
+  "homepage": "https://github.com/Jhefferson15/IBCT_site#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "http-server": "^14.1.1",
+    "playwright": "^1.59.1"
+  }
+}

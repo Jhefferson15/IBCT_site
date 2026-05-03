@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo Interativo: Atos 16 em Filipos</title>
+    <!-- Biblioteca de Mapa Interativo Leaflet.js -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <!-- Fontes e Ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="quiz/QuizStyle.css">
+</head>
+<body>
+
+    <div id="quiz-container">
+        <!-- Seleção de Dificuldade (Inicialmente Visível) -->
+        <div id="difficulty-selection">
+            <h3>Selecione a Dificuldade:</h3>
+            <button data-difficulty="Fácil">Fácil (Modo Estudo)</button>
+            <button data-difficulty="Normal">Normal (Modo Desafio)</button>
+            <button data-difficulty="Especialista">Especialista (Modo Teste)</button>
+        </div>
+
+        <!-- 1. Corpo do Quiz (Será atualizado dinamicamente) -->
+        <div id="quiz-body" class="hidden">
+            <!-- Cabeçalho da Questão (Trecho Bíblico e Cronômetro) -->
+            <div class="question-header">
+                <div id="timer-container" class="hidden">
+                    <i class="fa-solid fa-hourglass-half"></i>
+                    <span id="timer-text">30</span>
+                </div>
+                <h3 id="verse-ref-header"></h3>
+                <blockquote id="verse-text-header"></blockquote>
+            </div>
+
+            <!-- Mídia e Conteúdo da Questão -->
+            <div id="question-main-content">
+                <div id="media-container"></div>
+                <p id="question-prompt"></p>
+                <ul id="alternatives-list"></ul>
+            </div>
+
+            <!-- Ações e Feedback -->
+            <div class="quiz-actions">
+                <p id="feedback-text"></p>
+                <button id="next-btn" class="cta-button" disabled>Próxima</button>
+            </div>
+        </div>
+
+        <!-- 2. Tela de Resultados (Inicialmente Escondida) -->
+        <div id="quiz-results" class="hidden">
+            <h3>Estudo Concluído!</h3>
+            <i class="fas fa-award result-icon"></i>
+            <p>Você acertou <strong id="score-text">0 de 0</strong> perguntas!</p>
+            <p id="result-message">Continue estudando a Palavra. Cada passo é um crescimento!</p>
+            <button id="restart-btn" class="cta-button">Refazer Estudo</button>
+        </div>
+    </div>
+    
+    <!-- 3. Setas de Navegação Flutuantes -->
+    <button id="prev-q-btn" class="nav-arrow prev hidden"><i class="fas fa-chevron-left"></i></button>
+    <button id="next-q-btn" class="nav-arrow next hidden"><i class="fas fa-chevron-right"></i></button>
+
+    <!-- Scripts do Quiz -->
+    <script src="quiz/QuizAtos16Data.js"></script>
+    <script src="quiz/QuizLogic.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

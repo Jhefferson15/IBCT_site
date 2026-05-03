@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IBCT - Sobre a Igreja</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="css/home-style.css"> <!-- Estilo base -->
-    <link rel="stylesheet" href="css/sobre_ibct.css"> <!-- Estilo específico -->
+    <link rel="stylesheet" href="src/core/styles/Variables.css">
+    <link rel="stylesheet" href="src/core/styles/Themes.css">
+    <link rel="stylesheet" href="src/features/home/presentation/HomeStyle.css"> <!-- Estilo base -->
+    <link rel="stylesheet" href="src/features/home/presentation/SobreIbctStyle.css"> <!-- Estilo específico -->
 </head>
 
 <body>
@@ -23,10 +25,14 @@
             <nav class="nav-links">
                 <a href="index.html#inicio">Início</a>
                 <a href="index.html#ministerios">Ministérios</a>
-                <a href="missoes/missoes.html">Missões</a>
+                <a href="missoes.html">Missões</a>
                 <a href="ibct_tv.html">IBCT TV</a>
                 <a href="#introducao-ibct">Sobre</a>
                 <a href="index.html#contato">Contato</a>
+                <!-- Botão de Alternância de Tema -->
+                <button id="theme-toggle" title="Alternar Tema">
+                    <i class="fas fa-moon"></i>
+                </button>
             </nav>
             <div class="hamburger">
                 <div class="line1"></div>
@@ -196,7 +202,8 @@
     </div>
 
     <a class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
-    <script src="js/sobre_ibct.js" defer></script>
+    <script type="module" src="src/features/home/presentation/SobreIbctScript.js"></script>
 </body>
 
 </html>
+

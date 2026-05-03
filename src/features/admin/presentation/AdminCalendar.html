@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário - Painel Administrativo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../../../core/styles/Variables.css">
+    <link rel="stylesheet" href="../../../core/styles/Themes.css">
+    <link rel="stylesheet" href="AdminStyle.css">
+</head>
+<body class="admin-body">
+    <div class="admin-wrapper">
+        <!-- NAVEGAÇÃO LATERAL (Copie a mesma do AdminDashboard.html e mude o link ativo) -->
+        <aside class="sidebar">
+            <div class="sidebar-header"><img src="../../../../img/logo.png" alt="Logo IBCT"><span>IBCT Admin</span></div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-heading">Principal</li>
+                    <li><a href="AdminDashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Análises e Relatórios</a></li>
+                    <li class="nav-heading">Gerenciamento de Conteúdo</li>
+                    <li><a href="AdminCalendar.html" class="active"><i class="fas fa-calendar-alt"></i> Calendário de Eventos</a></li>
+                    <li><a href="AdminPosts.html"><i class="fas fa-bullhorn"></i> Postagens e Avisos</a></li>
+                    <li><a href="#"><i class="fas fa-file-alt"></i> Páginas</a></li>
+                    <li><a href="#"><i class="fas fa-images"></i> Biblioteca de Mídia</a></li>
+                    <li class="nav-heading">Administração</li>
+                    <li><a href="AdminUsers.html"><i class="fas fa-users"></i> Gerenciar Usuários</a></li>
+                    <li><a href="AdminSettings.html"><i class="fas fa-cogs"></i> Configurações Gerais</a></li>
+                    <li class="nav-heading">Avançado</li>
+                    <li><a href="AdminTerminal.html"><i class="fas fa-terminal"></i> Terminal do Servidor</a></li>
+                    <li><a href="#"><i class="fas fa-shield-alt"></i> Logs de Segurança</a></li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <img src="https://i.pravatar.cc/40?u=admin" alt="Foto do Admin">
+                <div class="user-info"><strong>Admin User</strong><span>administrador</span></div>
+                <a href="AdminLogin.html" class="logout-btn" title="Sair"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-content">
+            <header class="main-header">
+                <button class="hamburger-admin" id="hamburger-btn"><i class="fas fa-bars"></i></button>
+                <h1>Calendário de Eventos</h1>
+                <div class="header-actions">
+                    <button class="btn-primary"><i class="fas fa-plus"></i> Adicionar Evento</button>
+                </div>
+            </header>
+
+            <section class="calendar-section">
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button class="calendar-nav"><i class="fas fa-chevron-left"></i></button>
+                        <h2>Junho 2025</h2>
+                        <button class="calendar-nav"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <table class="calendar-grid">
+                        <thead>
+                            <tr>
+                                <th>Dom</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th>
+                            </tr>
+                        </thead>
+                        <tbody id="calendar-body">
+                            <!-- Gerado dinamicamente -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="event-sidebar">
+                    <h3>Eventos do Mês</h3>
+                    <ul id="month-event-list" class="event-list-sidebar">
+                        <!-- Gerado dinamicamente -->
+                    </ul>
+                    <div class="legend">
+                        <h4>Legenda:</h4>
+                        <span class="event-tag ebd">EBD</span>
+                        <span class="event-tag culto">Culto</span>
+                        <span class="event-tag oracao">Oração</span>
+                        <span class="event-tag hodos">Hodos</span>
+                        <span class="event-tag pgm">PGM</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODAL DE EVENTO -->
+    <div class="admin-modal-overlay" id="event-modal">
+        <div class="admin-modal-content">
+            <header class="modal-header">
+                <h2 id="modal-title">Adicionar Evento</h2>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </header>
+            <form id="event-form">
+                <input type="hidden" id="event-id">
+                <div class="form-group">
+                    <label for="event-title">Título do Evento</label>
+                    <input type="text" id="event-title" required placeholder="Ex: Hodos Meet">
+                </div>
+                <div class="form-group">
+                    <label for="event-date">Data</label>
+                    <input type="date" id="event-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-time">Horário (Opcional)</label>
+                    <input type="time" id="event-time">
+                </div>
+                <div class="form-group">
+                    <label for="event-department">Departamento</label>
+                    <select id="event-department">
+                        <option value="geral">Geral / Igreja</option>
+                        <option value="hodos">Hodos</option>
+                        <option value="infantil">Infantil</option>
+                        <option value="ebd">EBD</option>
+                        <option value="mulheres">Mulheres</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="event-location">Local (Opcional)</label>
+                    <input type="text" id="event-location" placeholder="Ex: Salão Social">
+                </div>
+                <footer class="modal-footer">
+                    <button type="button" class="btn-secondary close-modal">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar Evento</button>
+                </footer>
+            </form>
+        </div>
+    </div>
+
+    <div class="sidebar-overlay"></div>
+    <script src="AdminScript.js"></script>
+    <script type="module" src="AdminCalendarScript.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+

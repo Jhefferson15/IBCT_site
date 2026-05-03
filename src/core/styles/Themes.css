@@ -1,0 +1,23 @@
+/* css/base/themes.css */
+
+/* Para ativar o modo escuro manualmente, adicione a classe 'dark-theme' ao body */
+body.dark-theme {
+    --cor-creme-fundo: #1A1A1A;
+    --cor-grafite-texto: #F5EFE9;
+    --cor-branco: #121212;
+    --cor-vinho: hsl(var(--h-vinho), var(--s-vinho), 50%);
+    
+    --glass-bg: rgba(30, 30, 30, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    
+    --sombra-suave: 0 4px 15px rgba(0, 0, 0, 0.3);
+    --sombra-elevada: 0 10px 30px rgba(0, 0, 0, 0.5);
+    
+    /* Ajustes específicos para o tema escuro se necessário */
+    --logo-main-color: #F5EFE9;
+}
+
+/* Transição suave ao trocar de tema */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuários - Painel Administrativo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../../../core/styles/Variables.css">
+    <link rel="stylesheet" href="../../../core/styles/Themes.css">
+    <link rel="stylesheet" href="AdminStyle.css">
+</head>
+<body class="admin-body">
+    <div class="admin-wrapper">
+        <!-- NAVEGAÇÃO LATERAL (Copie e mude o link ativo) -->
+        <aside class="sidebar">
+            <div class="sidebar-header"><img src="../../../../img/logo.png" alt="Logo IBCT"><span>IBCT Admin</span></div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-heading">Principal</li>
+                    <li><a href="AdminDashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Análises e Relatórios</a></li>
+                    <li class="nav-heading">Gerenciamento de Conteúdo</li>
+                    <li><a href="AdminCalendar.html"><i class="fas fa-calendar-alt"></i> Calendário de Eventos</a></li>
+                    <li><a href="AdminPosts.html"><i class="fas fa-bullhorn"></i> Postagens e Avisos</a></li>
+                    <li><a href="#"><i class="fas fa-file-alt"></i> Páginas</a></li>
+                    <li><a href="#"><i class="fas fa-images"></i> Biblioteca de Mídia</a></li>
+                    <li class="nav-heading">Administração</li>
+                    <li><a href="AdminUsers.html" class="active"><i class="fas fa-users"></i> Gerenciar Usuários</a></li>
+                    <li><a href="AdminSettings.html"><i class="fas fa-cogs"></i> Configurações Gerais</a></li>
+                    <li class="nav-heading">Avançado</li>
+                    <li><a href="AdminTerminal.html"><i class="fas fa-terminal"></i> Terminal do Servidor</a></li>
+                    <li><a href="#"><i class="fas fa-shield-alt"></i> Logs de Segurança</a></li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <img src="#" alt="Foto do Admin">
+                <div class="user-info"><strong>Admin User</strong><span>administrador</span></div>
+                <a href="AdminLogin.html" class="logout-btn" title="Sair"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-content">
+            <header class="main-header">
+                <button class="hamburger-admin" id="hamburger-btn"><i class="fas fa-bars"></i></button>
+                <h1>Gerenciar Usuários</h1>
+                <div class="header-actions">
+                    <button class="btn-primary"><i class="fas fa-user-plus"></i> Adicionar Usuário</button>
+                </div>
+            </header>
+
+            <section class="content-panel">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Usuário</th>
+                            <th>Email</th>
+                            <th>Função</th>
+                            <th>Data de Cadastro</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table-body">
+                        <!-- Renderizado dinamicamente -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODAL DE USUÁRIO -->
+    <div class="admin-modal-overlay" id="user-modal">
+        <div class="admin-modal-content">
+            <header class="modal-header">
+                <h2 id="modal-title">Adicionar Usuário</h2>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </header>
+            <form id="user-form">
+                <input type="hidden" id="user-id">
+                <div class="form-group">
+                    <label for="user-name">Nome Completo</label>
+                    <input type="text" id="user-name" required placeholder="Ex: João Silva">
+                </div>
+                <div class="form-group">
+                    <label for="user-email">E-mail</label>
+                    <input type="email" id="user-email" required placeholder="Ex: joao@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="user-role">Função</label>
+                    <select id="user-role">
+                        <option value="membro">Membro</option>
+                        <option value="colaborador">Colaborador</option>
+                        <option value="editor">Editor</option>
+                        <option value="admin">Administrador</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="user-pgm">PGM</label>
+                    <input type="text" id="user-pgm" placeholder="Ex: PGM Esperança">
+                </div>
+                <footer class="modal-footer">
+                    <button type="button" class="btn-secondary close-modal">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar Usuário</button>
+                </footer>
+            </form>
+        </div>
+    </div>
+
+    <div class="sidebar-overlay"></div>
+    <script src="AdminScript.js"></script>
+    <script type="module" src="AdminUsersScript.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+

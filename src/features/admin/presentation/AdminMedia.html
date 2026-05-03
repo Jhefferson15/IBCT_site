@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca de Mídia - Painel Administrativo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../../../core/styles/Variables.css">
+    <link rel="stylesheet" href="../../../core/styles/Themes.css">
+    <link rel="stylesheet" href="AdminStyle.css">
+    <style>
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .media-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--sombra-suave);
+            transition: transform 0.2s;
+            position: relative;
+        }
+        .media-item:hover { transform: translateY(-5px); }
+        .media-preview {
+            height: 140px;
+            background-size: cover;
+            background-position: center;
+        }
+        .media-info {
+            padding: 10px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .media-actions {
+            position: absolute;
+            top: 5px; right: 5px;
+            display: flex; gap: 5px;
+        }
+        .media-actions button {
+            background: rgba(255,255,255,0.9);
+            border: none; border-radius: 4px;
+            width: 28px; height: 28px;
+            cursor: pointer; color: var(--cor-vinho);
+        }
+        .upload-zone {
+            border: 2px dashed var(--cor-cinza-borda);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        .upload-zone:hover { border-color: var(--cor-vinho); }
+        .upload-zone i { font-size: 40px; color: #ccc; margin-bottom: 10px; }
+    </style>
+</head>
+<body class="admin-body">
+    <div class="admin-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-header"><img src="../../../../img/logo.png" alt="Logo IBCT"><span>IBCT Admin</span></div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-heading">Principal</li>
+                    <li><a href="AdminDashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li class="nav-heading">Gerenciamento de Conteúdo</li>
+                    <li><a href="AdminCalendar.html"><i class="fas fa-calendar-alt"></i> Calendário</a></li>
+                    <li><a href="AdminPosts.html"><i class="fas fa-bullhorn"></i> Postagens</a></li>
+                    <li><a href="AdminMedia.html" class="active"><i class="fas fa-images"></i> Biblioteca de Mídia</a></li>
+                    <li class="nav-heading">Administração</li>
+                    <li><a href="AdminUsers.html"><i class="fas fa-users"></i> Usuários</a></li>
+                    <li><a href="AdminSettings.html"><i class="fas fa-cogs"></i> Configurações</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Biblioteca de Mídia</h1>
+            </header>
+
+            <div class="upload-zone" id="upload-zone">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Clique ou arraste arquivos aqui para fazer upload</p>
+                <input type="file" id="file-input" style="display: none;" multiple accept="image/*">
+            </div>
+
+            <div class="media-grid" id="media-grid">
+                <!-- Imagens carregadas dinamicamente -->
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="AdminMediaScript.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

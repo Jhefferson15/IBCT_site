@@ -1,0 +1,28 @@
+/* css/base/variables.css */
+:root {
+    /* Palette HSL - Facilita variações de brilho/opacidade */
+    --h-vinho: 349;
+    --s-vinho: 53%;
+    --l-vinho: 37%;
+    
+    --cor-vinho: hsl(var(--h-vinho), var(--s-vinho), var(--l-vinho));
+    --cor-rosa-suave: #F4A9A2;
+    --cor-creme-fundo: #F5EFE9;
+    --cor-grafite-texto: #333333;
+    --cor-branco: #FFFFFF;
+    
+    /* Sistema de Sombras Moderno */
+    --sombra-suave: 0 4px 15px rgba(0, 0, 0, 0.05);
+    --sombra-elevada: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --sombra-modal: 0 20px 50px rgba(0, 0, 0, 0.2);
+    
+    /* Glassmorphism Defaults */
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-blur: 12px;
+
+    --fonte-titulo: 'Playfair Display', serif;
+    --fonte-corpo: 'Montserrat', sans-serif;
+    --logo-main-color: #FFFFFF;
+    --loop-distance: 25px;
+}

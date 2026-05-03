@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IBCT TV - Igreja Batista Central em Taguatinga</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="css/home-style.css"> 
-    <link rel="stylesheet" href="css/ibct_tv.css">
+    <link rel="stylesheet" href="src/core/styles/Variables.css">
+    <link rel="stylesheet" href="src/core/styles/Themes.css">
+    <link rel="stylesheet" href="src/features/home/presentation/HomeStyle.css"> 
+    <link rel="stylesheet" href="src/features/tv/presentation/IbctTvStyle.css">
 </head>
 <body>
 
@@ -21,10 +23,14 @@
             <nav class="nav-links">
                 <a href="index.html">Início</a>
                 <a href="index.html#ministerios">Ministérios</a>
-                <a href="missoes/missoes.html">Missões</a>
+                <a href="missoes.html">Missões</a>
                 <a href="ibct_tv.html" class="active">IBCT TV</a>
                 <a href="sobre_ibct.html">Sobre</a>
                 <a href="index.html#contato">Contato</a>
+                <!-- Botão de Alternância de Tema -->
+                <button id="theme-toggle" title="Alternar Tema">
+                    <i class="fas fa-moon"></i>
+                </button>
             </nav>
             <div class="hamburger">
                 <div class="line1"></div><div class="line2"></div><div class="line3"></div>
@@ -92,6 +98,7 @@
     
     <a class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
     
-    <script src="js/ibct_tv.js" defer></script>
+    <script type="module" src="src/features/tv/presentation/IbctTvScript.js"></script>
 </body>
 </html>
+

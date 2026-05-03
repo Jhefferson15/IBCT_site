@@ -4,5 +4,19 @@
     "location": "southamerica-east1",
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "package.json",
+      "package-lock.json",
+      "playwright.config.js",
+      "integration_test/**",
+      "playwright-report/**",
+      "test-results/**"
+    ]
   }
 }
