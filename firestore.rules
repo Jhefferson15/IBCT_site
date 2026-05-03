@@ -36,6 +36,11 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    match /system_updates/{document=**} {
+      allow read: if true;
+      allow write: if false; // Apenas Functions (Admin SDK) podem escrever
+    }
+
     // Membros e Dados Restritos
     match /members/{memberId} {
       allow read: if request.auth != null;
